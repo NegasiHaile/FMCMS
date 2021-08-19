@@ -1,9 +1,9 @@
 {
-  "short_name": "CoreUI-React",
-  "name": "CoreUI-React sample",
+  "short_name": "Jupiter-Tading-FMCMS",
+  "name": "Jupiter trading fiscal machine controlling and managment system",
   "icons": [
     {
-      "src": "./assets/img/favicon.png",
+      "src": "./assets/img/smalllogo.png",
       "sizes": "100x100",
       "type": "image/png"
     }
