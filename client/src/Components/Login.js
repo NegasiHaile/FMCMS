@@ -59,7 +59,7 @@ const Login = () => {
             <CCol
               sm="11"
               md="9"
-              lg="6"
+              lg="7"
               className="shadow-lg p-3 mb-5 mx-3 bg-white rounded"
             >
               <CRow className="justify-content-center">
@@ -68,7 +68,7 @@ const Login = () => {
                     <img
                       style={{
                         borderRadius: "50%",
-                        height: "80px",
+                        height: "75px",
                         marginTop: "-50px",
                       }}
                       className="shadow-sm bg-white p-2"
@@ -78,9 +78,9 @@ const Login = () => {
                   </CRow>
                 </CCol>
                 <CCol md="11" className="mt-2">
-                  <h5 className="text-center text-muted">
-                    JuPiTeR Trading FMCMS
-                  </h5>
+                  <h6 className="text-center text-muted">
+                    JuPiTeR-Trading-FMCMS
+                  </h6>
                 </CCol>
                 <CCol md="11" className="my-4">
                   <CForm onSubmit={loginSubmit}>
@@ -103,7 +103,7 @@ const Login = () => {
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
                         <CInputGroupText>
-                          <CIcon name="cil-lock-locked" />
+                          <CIcon name="cil-lock-unlocked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
                       <CInput
@@ -121,15 +121,15 @@ const Login = () => {
                         <CButton
                           size="sm"
                           type="submit"
-                          color="dark"
+                          color="light"
                           className="px-4 w-100"
                         >
-                          <CIcon name="cil-scrubber" /> Login
+                          <CIcon name="cil-blind" /> Login
                         </CButton>
                       </CCol>
                       <CCol sm="12" md="6" className="text-right">
                         <CButton color="link" className="px-0" to="#">
-                          Forgot password?
+                          <span className="text-dark">Forgot password?</span>
                         </CButton>
                       </CCol>
                     </CRow>

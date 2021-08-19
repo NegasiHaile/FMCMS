@@ -53,25 +53,25 @@ const BranchList = () => {
 
   const sweetAlert = (type, text) => {
     Swal.fire({
-        position: "center",
-        background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
-        icon: type,
-        text: text,
-        confirmButtonColor: "#3C4B64",
-        showConfirmButton: true,
-        // timer: 1500,
-      });
-  }
+      position: "center",
+      background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+      icon: type,
+      text: text,
+      confirmButtonColor: "#3C4B64",
+      showConfirmButton: true,
+      // timer: 1500,
+    });
+  };
 
   const onSubmitOpenBranch = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post("/branch/open_new", { ...branch });
-      sweetAlert("success", res.data.msg)
+      sweetAlert("success", res.data.msg);
       setShowModal(!showModal);
       setCallback(!callback);
     } catch (error) {
-      sweetAlert("error", error.response.data.msg)
+      sweetAlert("error", error.response.data.msg);
     }
   };
 
@@ -85,11 +85,11 @@ const BranchList = () => {
           headers: { Authorization: token },
         }
       );
-      sweetAlert("success", res.data.msg)
+      sweetAlert("success", res.data.msg);
       setShowModal(!showModal);
       setCallback(!callback);
     } catch (error) {
-      sweetAlert("error", error.response.data.msg)
+      sweetAlert("error", error.response.data.msg);
     }
   };
 
@@ -113,7 +113,7 @@ const BranchList = () => {
         }
       });
     } catch (error) {
-      sweetAlert("error", error.response.data.msg)
+      sweetAlert("error", error.response.data.msg);
     }
   };
 
@@ -133,17 +133,19 @@ const BranchList = () => {
       <CCard className=" shadow-sm">
         <CCardHeader className="d-flex justify-content-between">
           <CLabel>Jupiter Branhcs</CLabel>
-          {user.userRole === "super-admin" && <CButton
-            size="sm"
-            color="secondary"
-            onClick={() => {
-              setBranch({ branch, ...branchDetail });
-              setActiveBranch("none");
-              setShowModal(!showModal);
-            }}
-          >
-            <CIcon name="cil-plus" /> Open branch
-          </CButton>}
+          {user.userRole === "super-admin" && (
+            <CButton
+              size="sm"
+              color="secondary"
+              onClick={() => {
+                setBranch({ branch, ...branchDetail });
+                setActiveBranch("none");
+                setShowModal(!showModal);
+              }}
+            >
+              <CIcon name="cil-plus" /> Open branch
+            </CButton>
+          )}
         </CCardHeader>
         <CCardBody>
           <CDataTable
@@ -159,35 +161,37 @@ const BranchList = () => {
             scopedSlots={{
               Actions: (branch) => (
                 <td className="d-flex justify-content-between">
-                  { user.userRole === "super-admin" && <> <CLink
-                    className="text-success"
-                    onClick={() => {
-                      setBranch({ branch, ...branch });
-                      setActiveBranch(branch._id);
-                      setShowModal(!showModal);
-                    }}
-                  >
-                    <CTooltip
-                      content={`Edit the  - ${branch.branchName}- branch detail.`}
-                    >
-                      <CIcon name="cil-pencil" />
-                    </CTooltip>
-                  </CLink>
-
-                  <span className="text-muted">|</span>
-
-                  <CLink
-                    className="text-danger"
-                    onClick={() => deleteBranch(branch._id)}
-                  >
-                    <CTooltip
-                      content={`Delete - ${branch.branchName}- branch.`}
-                    >
-                      <CIcon name="cil-trash" />
-                    </CTooltip>
-                  </CLink>
-
-                  <span className="text-muted">|</span> </>}
+                  {user.userRole === "super-admin" && (
+                    <>
+                      {" "}
+                      <CLink
+                        className="text-success"
+                        onClick={() => {
+                          setBranch({ branch, ...branch });
+                          setActiveBranch(branch._id);
+                          setShowModal(!showModal);
+                        }}
+                      >
+                        <CTooltip
+                          content={`Edit the  - ${branch.branchName}- branch detail.`}
+                        >
+                          <CIcon name="cil-pencil" />
+                        </CTooltip>
+                      </CLink>
+                      <span className="text-muted">|</span>
+                      <CLink
+                        className="text-danger"
+                        onClick={() => deleteBranch(branch._id)}
+                      >
+                        <CTooltip
+                          content={`Delete - ${branch.branchName}- branch.`}
+                        >
+                          <CIcon name="cil-trash" />
+                        </CTooltip>
+                      </CLink>
+                      <span className="text-muted">|</span>{" "}
+                    </>
+                  )}
 
                   <CLink
                     className="text-primary"
@@ -309,9 +313,12 @@ const BranchList = () => {
                   <CFormGroup>
                     Telephone
                     <CInput
+                      type="text"
                       id="telephone"
                       name="telephone"
                       placeholder="Enter branch telephone"
+                      pattern="[1-9]{1}[0-9]{9}"
+                      maxlength="13"
                       value={branch.telephone}
                       onChange={onChangeInput}
                       required

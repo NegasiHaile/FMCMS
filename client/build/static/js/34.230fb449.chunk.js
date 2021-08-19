@@ -1,0 +1,2 @@
+(this["webpackJsonpjupiter-trading-fmcms"]=this["webpackJsonpjupiter-trading-fmcms"]||[]).push([[34],{735:function(t,s,e){"use strict";e.r(s);e(684),e(1);var i=e(11);s.default=function(){return Object(i.jsx)("div",{children:Object(i.jsx)("h3",{children:"This is the system setting page"})})}}}]);
+//# sourceMappingURL=34.230fb449.chunk.js.map
