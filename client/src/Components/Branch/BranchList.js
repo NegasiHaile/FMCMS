@@ -136,14 +136,14 @@ const BranchList = () => {
           {user.userRole === "super-admin" && (
             <CButton
               size="sm"
-              color="secondary"
+              color="light"
               onClick={() => {
                 setBranch({ branch, ...branchDetail });
                 setActiveBranch("none");
                 setShowModal(!showModal);
               }}
             >
-              <CIcon name="cil-plus" /> Open branch
+              <CIcon name="cil-plus" /> Open New Branch
             </CButton>
           )}
         </CCardHeader>
@@ -215,7 +215,7 @@ const BranchList = () => {
           onClose={() => setShowModal(!showModal)}
         >
           <CModalHeader closeButton>
-            <CModalTitle>Open-New-Branch</CModalTitle>
+            <CModalTitle>Openning new branch form</CModalTitle>
           </CModalHeader>
           <CForm onSubmit={onSubmitOpenBranch}>
             <CModalBody>
