@@ -82,8 +82,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1> This despilays if Success!</h1>
-      {/* <BrowserRouter>
+      {/* <h1> This despilays if Success!</h1> */}
+      <BrowserRouter>
         <Suspense fallback={loading}>
           <Switch>
             {userLayout}
@@ -101,7 +101,7 @@ function App() {
             />
           </Switch>
         </Suspense>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </div>
   );
 }
