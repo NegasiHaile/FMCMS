@@ -28,7 +28,18 @@ import {
   CSelect,
 } from "@coreui/react";
 
+import { Viewer } from "@react-pdf-viewer/core"; // install this library
+// Plugins
+import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout"; // install this library
+// Import the styles
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+// Worker
+import { Worker } from "@react-pdf-viewer/core"; // install this library
+
 function BusinessDetail() {
+  const defaultLayoutPluginInstance = defaultLayoutPlugin();
+
   const state = useContext(GlobalState);
   const params = useParams();
   const [user] = state.UserAPI.User;
@@ -397,11 +408,19 @@ function BusinessDetail() {
                 </CRow>
               </CTabPane>
               <CTabPane>
-                <CImg
+                <div className="pdf-container">
+                  <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.9.359/build/pdf.worker.min.js">
+                    <Viewer
+                      fileUrl={business.TL_Image}
+                      plugins={[defaultLayoutPluginInstance]}
+                    />
+                  </Worker>
+                </div>
+                {/* <CImg
                   className="w-100"
                   src={business.TL_Image}
                   alt={business.businessName}
-                />
+                /> */}
               </CTabPane>
             </CTabContent>
           </CTabs>

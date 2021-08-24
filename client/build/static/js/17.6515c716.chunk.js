@@ -1,0 +1,2 @@
+(this["webpackJsonpjupiter-trading-fmcms"]=this["webpackJsonpjupiter-trading-fmcms"]||[]).push([[17],{791:function(t,e,i){"use strict";i.r(e);i(1);var s=i(11);e.default=function(){return Object(s.jsx)("div",{children:Object(s.jsx)("h3",{children:"This is the feedbacks from clients list apage"})})}}}]);
+//# sourceMappingURL=17.6515c716.chunk.js.map

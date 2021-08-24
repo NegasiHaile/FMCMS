@@ -1,2 +1,0 @@
-(this["webpackJsonpjupiter-trading-fmcms"]=this["webpackJsonpjupiter-trading-fmcms"]||[]).push([[32],{719:function(t,i,e){"use strict";e.r(i);e(1);var c=e(11);i.default=function(){return Object(c.jsx)("div",{children:Object(c.jsx)("h1",{children:"Mahcine details"})})}}}]);
-//# sourceMappingURL=32.da6f71e0.chunk.js.map

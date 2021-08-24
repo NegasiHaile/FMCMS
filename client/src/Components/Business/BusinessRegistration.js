@@ -50,29 +50,32 @@ const BusinessRegistration = () => {
     telephone: "",
     email: "",
     fax: "",
-    branch: "",
+    branch: user.branch,
     credentials: "Pending",
     sw_Tech: "",
   };
   const [businesses] = state.BusinessAPI.businesses;
   const [business, setBusiness] = useState(businessDetail);
-  const [active, setActive] = useState(1);
+
   const [branchs] = state.branchAPI.branchs;
   const [employees] = state.UsersAPI.users;
+
   const [callback, setCallback] = state.BusinessAPI.callback;
+
   const [onEdit, setOnEdit] = useState(false);
+
   console.log("upper" + JSON.stringify(business));
-  // console.log(business);
-  useEffect(() => {
-    if (user.userRole === "client") {
-      businessDetail.ownerID = user._id;
-      setBusiness(businessDetail);
-    } else if (params.clientId) {
-      businessDetail.ownerID = params.clientId;
-      // businessDetail.companyName = params.clientId;
-      setBusiness(businessDetail);
-    }
-  }, [user, params.clientId]);
+
+  // useEffect(() => {
+  //   if (user.userRole === "client") {
+  //     businessDetail.ownerID = user._id;
+  //     setBusiness(businessDetail);
+  //   } else if (params.clientId) {
+  //     businessDetail.ownerID = params.clientId;
+  //     // businessDetail.companyName = params.clientId;
+  //     setBusiness(businessDetail);
+  //   }
+  // }, [user, params.clientId]);
 
   useEffect(() => {
     if (params.businessId) {
@@ -117,8 +120,8 @@ const BusinessRegistration = () => {
     formData.append("ownerID", business.ownerID);
     formData.append("TIN", business.TIN);
     formData.append("VAT", business.VAT);
-    formData.append("companyName", business.companyName);
     formData.append("tradeName", business.tradeName);
+    formData.append("companyName", business.companyName);
     formData.append("TL_Image", business.TL_Image);
     formData.append("city", business.city);
     formData.append("subCity", business.subCity);
@@ -130,8 +133,8 @@ const BusinessRegistration = () => {
     formData.append("email", business.email);
     formData.append("fax", business.fax);
     formData.append("branch", business.branch);
-    formData.append("credentials", business.credentials);
     formData.append("sw_Tech", business.sw_Tech);
+    formData.append("credentials", business.credentials);
 
     try {
       // console.log("Onsubmit" + JSON.stringify(business));
@@ -381,26 +384,28 @@ const BusinessRegistration = () => {
                   </CTabPane>
                   <CTabPane>
                     <CRow>
-                      <CCol xs="12" md="6">
-                        <CFormGroup>
-                          <CLabel>To which jupter branch?</CLabel>
-                          <CSelect
-                            aria-label="Default select example"
-                            id="branch"
-                            name="branch"
-                            onChange={onChangeInput}
-                            value={business.branch}
-                            required
-                          >
-                            <option value="">Select branch...</option>
-                            {branchs.map((branch) => (
-                              <option value={branch._id} key={branch._id}>
-                                {branch.branchName}
-                              </option>
-                            ))}
-                          </CSelect>
-                        </CFormGroup>
-                      </CCol>
+                      {user.userRole === "client" && (
+                        <CCol xs="12" md="6">
+                          <CFormGroup>
+                            <CLabel>To which jupter branch?</CLabel>
+                            <CSelect
+                              aria-label="Default select example"
+                              id="branch"
+                              name="branch"
+                              onChange={onChangeInput}
+                              value={business.branch}
+                              required
+                            >
+                              <option value="">Select branch...</option>
+                              {branchs.map((branch) => (
+                                <option value={branch._id} key={branch._id}>
+                                  {branch.branchName}
+                                </option>
+                              ))}
+                            </CSelect>
+                          </CFormGroup>
+                        </CCol>
+                      )}
                       {onEdit && user.userRole === "branch-admin" && (
                         <CCol xs="12" md="6">
                           <CFormGroup>
@@ -437,18 +442,18 @@ const BusinessRegistration = () => {
                         </CCol>
                       )}
                       <CCol xs="12">
-                        Business trade license in image format
+                        Upload neccessary files of business
                         <hr />
                       </CCol>
                       <CCol sm="12" md="6">
                         <CFormGroup>
                           <CLabel htmlFor="formFile">
-                            Upload trade licens of the business
+                            File size not more than (5MB)
                           </CLabel>
                           <CInput
                             id="TL_Image"
                             type="file"
-                            accept=".png, .jpg, .jpeg"
+                            accept=".png, .jpg, .jpeg, .pdf, .docx"
                             name="TL_Image"
                             onChange={onChangeFileInput}
                           />

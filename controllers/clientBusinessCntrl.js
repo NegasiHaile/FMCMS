@@ -42,8 +42,8 @@ const clientBusinessCntrl = {
           ownerID,
           TIN,
           VAT,
-          companyName,
           tradeName,
+          companyName,
           TL_Image: "/uploads/" + req.file.filename,
           city,
           subCity,
@@ -55,15 +55,15 @@ const clientBusinessCntrl = {
           email,
           fax,
           branch,
-          credentials,
           sw_Tech,
+          credentials,
         });
 
         await newBusiness.save();
         res.json({ msg: "Business detail registered successfully!" });
       } else {
         return res.status(400).json({
-          msg: "The business cetificate is required, please upload it!",
+          msg: "The business file is required, please upload it!",
         });
       }
     } catch (error) {

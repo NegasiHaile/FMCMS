@@ -1,0 +1,2 @@
+(this["webpackJsonpjupiter-trading-fmcms"]=this["webpackJsonpjupiter-trading-fmcms"]||[]).push([[18],{792:function(e,i,t){"use strict";t.r(i);t(1);var n=t(11);i.default=function(){return Object(n.jsx)("div",{children:Object(n.jsx)("h3",{children:"THis is the overall machine inventory page."})})}}}]);
+//# sourceMappingURL=18.1d7505a5.chunk.js.map
