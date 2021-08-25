@@ -424,7 +424,6 @@ const BusinessRegistration = () => {
                               {employees
                                 .filter(
                                   (employee) =>
-                                    // employee.branch === "60f92d0bb529a5128419de93" &&
                                     employee.userRole === "technician"
                                 )
                                 .map((filteredEmployee) => (
@@ -453,7 +452,7 @@ const BusinessRegistration = () => {
                           <CInput
                             id="TL_Image"
                             type="file"
-                            accept=".png, .jpg, .jpeg, .pdf, .docx"
+                            accept=".pdf, .docx"
                             name="TL_Image"
                             onChange={onChangeFileInput}
                           />

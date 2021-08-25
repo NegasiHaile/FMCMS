@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   CForm,
   CRow,
@@ -24,17 +24,41 @@ function BusinessOverview(props) {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
   const business = props;
+
+  // for onchange event
+  // const [pdfFile, setPdfFile] = useState(business.TL_Image);
+  const [pdfFileError, setPdfFileError] = useState("");
+
+  // for submit event
+  const [viewPdf, setViewPdf] = useState(business.TL_Image);
+
+  // onchange event
+  useEffect(() => {
+    const fileType = ["application/pdf"];
+    if (business.TL_Image && fileType.includes(business.TL_Image.type)) {
+      let reader = new FileReader();
+      reader.readAsDataURL(business.TL_Image);
+      reader.onloadend = (e) => {
+        setViewPdf(e.target.result);
+        setPdfFileError("");
+      };
+    } else {
+      setViewPdf(business.TL_Image);
+      setPdfFileError("Please select valid pdf file");
+    }
+  });
+
   return (
     <>
       <CRow>
         <CCol sm="12" md="6" lg="4">
           <span className="d-flex justify-content-between">
-            <span>Business Name: </span>
-            <span>{business.tradeName}</span>
-          </span>
-          <span className="d-flex justify-content-between">
             <span>Campany Name: </span>
             <span>{business.companyName}</span>
+          </span>
+          <span className="d-flex justify-content-between">
+            <span>Trade Name: </span>
+            <span>{business.tradeName}</span>
           </span>
           <span className="d-flex justify-content-between">
             <span>Business TIN: </span>
@@ -103,11 +127,11 @@ function BusinessOverview(props) {
           <hr />
           <div className="pdf-container">
             {/* show pdf conditionally (if we have one)  */}
-            {business.TL_Image && (
+            {viewPdf && (
               <>
                 <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.9.359/build/pdf.worker.min.js">
                   <Viewer
-                    fileUrl={business.TL_Image}
+                    fileUrl={viewPdf}
                     plugins={[defaultLayoutPluginInstance]}
                   />
                 </Worker>
@@ -115,13 +139,8 @@ function BusinessOverview(props) {
             )}
 
             {/* if we dont have pdf or viewPdf state is null */}
-            {!business.TL_Image && <>No pdf file selected</>}
+            {!viewPdf && <h5>No pdf file selected</h5>}
           </div>
-          {/* <CImg
-            className="w-100"
-            src={business.TL_Image}
-            alt={business.tradeName}
-          /> */}
         </CCol>
       </CRow>
     </>

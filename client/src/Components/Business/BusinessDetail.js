@@ -247,7 +247,11 @@ function BusinessDetail() {
                   <CIcon name="cil-location-pin"></CIcon> Address
                 </CNavLink>
               </CNavItem>
-
+              <CNavItem>
+                <CNavLink>
+                  <CIcon name="cil-spreadsheet"></CIcon> Document
+                </CNavLink>
+              </CNavItem>
               <CNavItem>
                 <CNavLink>
                   <CIcon name="cil-options"></CIcon> References
@@ -255,12 +259,7 @@ function BusinessDetail() {
               </CNavItem>
               <CNavItem>
                 <CNavLink>
-                  <CIcon name="cil-spreadsheet"></CIcon> license
-                </CNavLink>
-              </CNavItem>
-              <CNavItem>
-                <CNavLink>
-                  <CIcon name="cil-memory"></CIcon> Certificates
+                  <CIcon name="cil-print"></CIcon> Machines
                 </CNavLink>
               </CNavItem>
             </CNav>
@@ -305,9 +304,25 @@ function BusinessDetail() {
                   </CCol>
                 </CRow>
               </CTabPane>
+
+              <CTabPane>
+                <div className="pdf-container">
+                  <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.9.359/build/pdf.worker.min.js">
+                    <Viewer
+                      fileUrl={business.TL_Image}
+                      plugins={[defaultLayoutPluginInstance]}
+                    />
+                  </Worker>
+                </div>
+                {/* <CImg
+                  className="w-100"
+                  src={business.TL_Image}
+                  alt={business.businessName}
+                /> */}
+              </CTabPane>
               <CTabPane>
                 <CRow>
-                  <CCol sm="12" md="4" lg="3" className="mt-1">
+                  <CCol sm="12" md="4" lg="4" className="mt-1">
                     <h6 className="text-muted">Business Owner</h6>
                     <hr></hr>
                     {users
@@ -334,7 +349,43 @@ function BusinessDetail() {
                         </div>
                       ))}
                   </CCol>
-                  <CCol sm="12" md="4" lg="3" className="mt-1">
+                  <CCol sm="12" md="4" lg="4" className="mt-1">
+                    <h6 className="text-muted">Technician Detail</h6>
+                    <hr></hr>
+                    <span className="d-flex justify-content-between">
+                      <strong>Technician:</strong> {business.sw_Tech}
+                    </span>
+                  </CCol>
+                  <CCol sm="12" md="4" lg="4" className="mt-1">
+                    <h6 className="text-muted">Branch</h6>
+                    <hr></hr>
+                    {branchs
+                      .filter(
+                        (filteredBranch) =>
+                          filteredBranch._id === business.branch
+                      )
+                      .map((branch) => (
+                        <div key={branch._id}>
+                          <span className="d-flex justify-content-between">
+                            <strong>Branch Name:</strong> {branch.branchName}
+                          </span>
+                          <span className="d-flex justify-content-between">
+                            <strong>City:</strong> {branch.city}
+                          </span>
+                          <span className="d-flex justify-content-between">
+                            <strong>Telephone:</strong> {branch.telephone}
+                          </span>
+                          <span className="d-flex justify-content-between">
+                            <strong>Email:</strong> {branch.email}
+                          </span>
+                        </div>
+                      ))}
+                  </CCol>
+                </CRow>
+              </CTabPane>
+              <CTabPane>
+                <CRow>
+                  <CCol sm="12" md="6" lg="6" className="mt-1">
                     <h6 className="text-muted">Machine Detail</h6>
                     <hr></hr>
                     <span className="d-flex justify-content-between">
@@ -373,54 +424,7 @@ function BusinessDetail() {
                       </>
                     )}
                   </CCol>
-                  <CCol sm="12" md="4" lg="3" className="mt-1">
-                    <h6 className="text-muted">Technician Detail</h6>
-                    <hr></hr>
-                    <span className="d-flex justify-content-between">
-                      <strong>Technician:</strong> {business.sw_Tech}
-                    </span>
-                  </CCol>
-                  <CCol sm="12" md="4" lg="3" className="mt-1">
-                    <h6 className="text-muted">Branch</h6>
-                    <hr></hr>
-                    {branchs
-                      .filter(
-                        (filteredBranch) =>
-                          filteredBranch._id === business.branch
-                      )
-                      .map((branch) => (
-                        <div key={branch._id}>
-                          <span className="d-flex justify-content-between">
-                            <strong>Branch Name:</strong> {branch.branchName}
-                          </span>
-                          <span className="d-flex justify-content-between">
-                            <strong>City:</strong> {branch.city}
-                          </span>
-                          <span className="d-flex justify-content-between">
-                            <strong>Telephone:</strong> {branch.telephone}
-                          </span>
-                          <span className="d-flex justify-content-between">
-                            <strong>Email:</strong> {branch.email}
-                          </span>
-                        </div>
-                      ))}
-                  </CCol>
                 </CRow>
-              </CTabPane>
-              <CTabPane>
-                <div className="pdf-container">
-                  <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.9.359/build/pdf.worker.min.js">
-                    <Viewer
-                      fileUrl={business.TL_Image}
-                      plugins={[defaultLayoutPluginInstance]}
-                    />
-                  </Worker>
-                </div>
-                {/* <CImg
-                  className="w-100"
-                  src={business.TL_Image}
-                  alt={business.businessName}
-                /> */}
               </CTabPane>
             </CTabContent>
           </CTabs>

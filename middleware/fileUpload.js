@@ -18,7 +18,7 @@ const fileFilter = (req, file, cb) => {
     cb(null, true);
   } else {
     return res.status(400).json({
-      msg: "Only pdf, docx and image file formats are allowed!",
+      msg: "Only pdf and docx file formats are allowed!",
     });
     cb(null, false);
   }
