@@ -16,7 +16,7 @@ const salesSchema = new mongoose.Schema(
       required: true,
     },
     status: {
-      type: String, //Value:-  new-order, confirmed-order , returned-order
+      type: String, //Value:-  new, unapproved , instore/rejected, fiscallizing, controlling, delivering, completed
     },
   },
   {

@@ -80,8 +80,8 @@ const clientBusinessSchema = new mongoose.Schema(
       default: "",
     },
     credentials: {
-      type: String, // values:- 1: Pending, 2: Accepted or Rejected,
-      // default: "Pending",
+      type: String, // values:- 1: New, 2: Pending, 2: Accepted or Rejected,
+      // default: "New",
     },
   },
   { timestamps: true }

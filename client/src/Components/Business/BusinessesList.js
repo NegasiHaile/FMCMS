@@ -83,8 +83,8 @@ const BusinessesList = () => {
     "TIN",
     "VAT",
     "telephone",
-    "credentials",
     "machine",
+    "credentials",
     "Actions",
   ];
   return (
@@ -119,39 +119,44 @@ const BusinessesList = () => {
             scopedSlots={{
               Actions: (business) => (
                 <td className="d-flex justify-content-between">
-                  {(user.userRole === "sales" || user.userRole === "client") &&
-                    business.machine === "unassigned" && (
-                      <>
-                        {" "}
-                        <CLink
-                          className="text-success"
-                          to={{
-                            pathname: `/business/edit/${business._id}`,
-                            state: business,
-                          }}
+                  {(user.userRole === "sales" ||
+                    user.userRole === "client") && (
+                    <>
+                      {" "}
+                      <CLink
+                        className="text-success"
+                        to={{
+                          pathname: `/business/edit/${business._id}`,
+                          state: business,
+                        }}
+                      >
+                        <CTooltip
+                          content={`Edit the  - ${business.TIN}- business detail.`}
                         >
-                          <CTooltip
-                            content={`Edit the  - ${business.TIN}- business detail.`}
+                          <CIcon name="cil-pencil" />
+                        </CTooltip>
+                      </CLink>
+                      <span className="text-muted">|</span>
+                      {(business.credentials === "New" ||
+                        business.credentials === "Pending") && (
+                        <>
+                          <CLink
+                            className="text-danger"
+                            onClick={() =>
+                              deleteBusiness(business._id, business.tradeName)
+                            }
                           >
-                            <CIcon name="cil-pencil" />
-                          </CTooltip>
-                        </CLink>
-                        <span className="text-muted">|</span>
-                        <CLink
-                          className="text-danger"
-                          onClick={() =>
-                            deleteBusiness(business._id, business.tradeName)
-                          }
-                        >
-                          <CTooltip
-                            content={`Delete - ${business.tradeName}- business.`}
-                          >
-                            <CIcon name="cil-trash" />
-                          </CTooltip>
-                        </CLink>
-                        <span className="text-muted">|</span>{" "}
-                      </>
-                    )}
+                            <CTooltip
+                              content={`Delete - ${business.tradeName}- business.`}
+                            >
+                              <CIcon name="cil-trash" />
+                            </CTooltip>
+                          </CLink>
+                          <span className="text-muted">|</span>
+                        </>
+                      )}
+                    </>
+                  )}
 
                   <CLink
                     className="text-primary"

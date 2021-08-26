@@ -37,6 +37,8 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 // Worker
 import { Worker } from "@react-pdf-viewer/core"; // install this library
 
+import BusinessMachines from "./components/BusinessMachines";
+
 function BusinessDetail() {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
@@ -65,12 +67,13 @@ function BusinessDetail() {
 
   const [showAssigneMachineModal, setShowAssigneMachineModal] = useState(false);
   const [assigneMachine, setAssigneMachine] = useState({
-    branch: user.branch,
+    branchId: user.branch,
     businessId: params.id,
     machineId: "",
-    status: "",
+    status: "New",
   });
 
+  console.log(assigneMachine);
   useEffect(() => {
     if (params.id) {
       var bsns = businesses.filter(
@@ -223,21 +226,13 @@ function BusinessDetail() {
                   )}
                 </>
               )}
-
-              {user.userRole === "sales" &&
-                business.credentials === "Accepted" &&
-                business.machine === "unassigned" && (
-                  <CButton
-                    onClick={() => {
-                      setShowAssigneMachineModal(!showAssigneMachineModal);
-                    }}
-                    color="dark"
-                    size="sm"
-                    className="w-100"
-                  >
-                    Assigne Machine
+              {user.userRole === "sales" && business.machine === "assigned" && (
+                <span className="d-flex justify-content-between">
+                  <CButton color="dark" size="sm" className="mr-1 w-100">
+                    <CIcon name="cil-check-circle" /> Request for approval
                   </CButton>
-                )}
+                </span>
+              )}
             </CCol>
           </CRow>
           <CTabs>
@@ -385,45 +380,31 @@ function BusinessDetail() {
               </CTabPane>
               <CTabPane>
                 <CRow>
-                  <CCol sm="12" md="6" lg="6" className="mt-1">
+                  <CCol sm="12" md="8" lg="10" className="mt-1">
                     <h6 className="text-muted">Machine Detail</h6>
                     <hr></hr>
-                    <span className="d-flex justify-content-between">
-                      <strong>Machine:</strong> {business.machine}
-                    </span>
-                    {sales.length !== 0 && (
-                      <>
-                        {sales.map((sale) => (
-                          <div key={sale.saleId}>
-                            {business.machine === "assigned" &&
-                              (user.userRole === "client" ||
-                                user.userRole === "sales") && (
-                                <CButton
-                                  variant="ghost"
-                                  color="danger"
-                                  size="sm"
-                                  className="w-100 mt-3"
-                                  to={`/business/return-machine/${sale.saleId}`}
-                                >
-                                  Request to return this machine
-                                </CButton>
-                              )}
-                            {business.machine === "returning" &&
-                              user.userRole === "branch-admin" && (
-                                <CButton
-                                  variant="ghost"
-                                  color="success"
-                                  size="sm"
-                                  className="w-100 mt-3"
-                                >
-                                  Confirm Return
-                                </CButton>
-                              )}
-                          </div>
-                        ))}{" "}
-                      </>
+                    {business.machine === "unassigned" ? (
+                      <span className="d-flex justify-content-between">
+                        <strong>Machine:</strong> {business.machine}
+                      </span>
+                    ) : (
+                      <BusinessMachines businessId={business._id} />
                     )}
                   </CCol>
+                  {user.userRole === "sales" && (
+                    <CCol sm="12" md="4" lg="2" className="mt-1">
+                      <CButton
+                        onClick={() => {
+                          setShowAssigneMachineModal(!showAssigneMachineModal);
+                        }}
+                        color="dark"
+                        size="sm"
+                        className="w-100"
+                      >
+                        Add Machine
+                      </CButton>
+                    </CCol>
+                  )}
                 </CRow>
               </CTabPane>
             </CTabContent>

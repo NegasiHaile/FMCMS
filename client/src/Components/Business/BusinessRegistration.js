@@ -51,7 +51,7 @@ const BusinessRegistration = () => {
     email: "",
     fax: "",
     branch: user.branch,
-    credentials: "Pending",
+    credentials: "New",
     sw_Tech: "",
   };
   const [businesses] = state.BusinessAPI.businesses;

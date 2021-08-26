@@ -18,14 +18,16 @@ import CIcon from "@coreui/icons-react";
 function SalesList() {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
-  const [allSales] = state.SalesAPI.Sales;
-  console.log(allSales);
+  const [Sales] = state.SalesAPI.Sales;
+
+  console.log("Inner " + JSON.stringify(Sales));
   const salesTableAttributes = [
     // "branchId",
     "tradeName",
     "machineSerialNumber",
     "machinePrice",
     "status",
+    "createdAt",
   ];
   return (
     <>
@@ -33,7 +35,7 @@ function SalesList() {
         <CCardBody>
           <CDataTable
             size="sm"
-            items={allSales}
+            items={Sales}
             fields={salesTableAttributes}
             tableFilter
             // columnFilter

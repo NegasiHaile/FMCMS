@@ -34,9 +34,11 @@ const salesCntrl = {
           businessId: sale.business[0]._id,
           tradeName: sale.business[0].tradeName,
           status: sale.status,
+          createdAt: sale.createdAt,
         });
         // console.log("Inner " + JSON.stringify(data));
       });
+      // console.log("Outer " + JSON.stringify(data));
       res.json(data);
     } catch (err) {
       return res.status(500).json({ msg: err.message });

@@ -71,65 +71,63 @@ const machineCntrl = {
 
   distributMachine: async (req, res) => {
     try {
-      const { machineId, businessId, branch, status } = req.body;
+      // const { branch, businessId, machineId, status } = req.body;
 
-      const business = await clientBusinesses.findOne({ _id: businessId });
+      // const business = await clientBusinesses.findOne({ _id: businessId });
 
-      if (business.credentials === "Pending")
-        return res.status(400).json({
-          msg: "The credentials of this document is not accepted yet!",
-        });
+      // if (business.machine === "unassigned")
+      //   return res.status(400).json({
+      //     msg: "Please Assigne machine to the business!",
+      //   });
 
-      const request = await Sales.findOne({ machineId: machineId });
+      //   await Sales.findOneAndUpdate(
+      //     { _id: machineId },
+      //     {
+      //       status: 1,
+      //     }
+      //   );
 
-      if (request && request.status == 0) {
-        await Sales.findOneAndUpdate(
-          { _id: machineId },
-          {
-            status: 1,
-          }
-        );
+      //   await Machines.findOneAndUpdate(
+      //     { _id: machineId },
+      //     {
+      //       salesStatus: "sold",
+      //     }
+      //   );
 
-        await Machines.findOneAndUpdate(
-          { _id: machineId },
-          {
-            salesStatus: "sold",
-          }
-        );
+      //   await clientBusinesses.findOneAndUpdate(
+      //     { _id: businessId },
+      //     {
+      //       machine: "assigned",
+      //     }
+      //   );
+      //   res.json({ msg: "Machine has been distributed successfully!" });
+      // }
+      // else {
 
-        await clientBusinesses.findOneAndUpdate(
-          { _id: businessId },
-          {
-            machine: "assigned",
-          }
-        );
-        res.json({ msg: "Machine has been distributed successfully!" });
-      } else {
-        const newSales = new Sales({
-          branchId: branch,
-          machineId: machineId,
-          businessId,
-          status: "confirmed",
-        });
+      const newSales = new Sales(
+        ({ branch, businessId, machineId, status } = req.body)
+      );
 
-        await newSales.save();
+      await newSales.save();
 
-        await Machines.findOneAndUpdate(
-          { _id: machineId },
-          {
-            salesStatus: "sold",
-          }
-        );
+      await Machines.findOneAndUpdate(
+        { _id: machineId },
+        {
+          salesStatus: "sold",
+        }
+      );
 
-        await clientBusinesses.findOneAndUpdate(
-          { _id: businessId },
-          {
-            machine: "assigned",
-          }
-        );
+      await clientBusinesses.findOneAndUpdate(
+        { _id: businessId },
+        {
+          machine: "assigned",
+        }
+      );
 
-        res.json({ msg: "Machine has been distributed successfully!" });
-      }
+      res.json({
+        msg: "Machine has been assined to the business successfully!",
+      });
+      // }
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }

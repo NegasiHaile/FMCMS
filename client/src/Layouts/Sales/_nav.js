@@ -23,7 +23,7 @@ const _nav = [
       },
       {
         _tag: "CSidebarNavItem",
-        name: "Distribute Machine",
+        name: "Sale Machine",
         to: "/machine/distribute",
       },
       {
