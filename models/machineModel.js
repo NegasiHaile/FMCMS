@@ -31,7 +31,7 @@ const machineSchema = new mongoose.Schema(
     },
     salesStatus: {
       type: String,
-      default: "unsold", // values, unsold, sold, returned
+      default: "unsold", // values, New, requested, sold, returned
     },
   },
   {

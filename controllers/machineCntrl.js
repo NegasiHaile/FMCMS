@@ -113,7 +113,7 @@ const machineCntrl = {
       await Machines.findOneAndUpdate(
         { _id: machineId },
         {
-          salesStatus: "sold",
+          salesStatus: "requested",
         }
       );
 

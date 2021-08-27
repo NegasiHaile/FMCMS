@@ -73,7 +73,6 @@ function BusinessDetail() {
     status: "New",
   });
 
-  console.log(assigneMachine);
   useEffect(() => {
     if (params.id) {
       var bsns = businesses.filter(
@@ -160,6 +159,32 @@ function BusinessDetail() {
       SweetAlert("error", error.response.data.msg);
     }
   };
+  const onSubmitRequestForApproval = async (e) => {
+    e.preventDefault();
+    try {
+      Swal.fire({
+        // title: "Accepte?",
+        text: "Are you sure you want to request this transaction for approval!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#1E263C",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Request it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const res = await axios.put(
+            `/sales/request_for_approval/${params.id}`
+          );
+          setCallback(!callback);
+          setCallbackBusiness(!callbackBusiness);
+          setCallbackSales(!callbackSales);
+          Swal.fire("", res.data.msg, "success");
+        }
+      });
+    } catch (error) {
+      SweetAlert("error", error.response.data.msg);
+    }
+  };
   // console.log(business)
   return (
     <>
@@ -228,7 +253,12 @@ function BusinessDetail() {
               )}
               {user.userRole === "sales" && business.machine === "assigned" && (
                 <span className="d-flex justify-content-between">
-                  <CButton color="dark" size="sm" className="mr-1 w-100">
+                  <CButton
+                    color="dark"
+                    size="sm"
+                    className="mr-1 w-100"
+                    onClick={onSubmitRequestForApproval}
+                  >
                     <CIcon name="cil-check-circle" /> Request for approval
                   </CButton>
                 </span>
