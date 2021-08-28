@@ -178,7 +178,7 @@ function BusinessDetail() {
           setCallback(!callback);
           setCallbackBusiness(!callbackBusiness);
           setCallbackSales(!callbackSales);
-          Swal.fire("", res.data.msg, "success");
+          Swal.fire("Sent!", res.data.msg, "success");
         }
       });
     } catch (error) {

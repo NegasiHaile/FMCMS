@@ -65,12 +65,12 @@ const salesCntrl = {
           );
           updateSalesStatusToUnapproved(newPurchasesOfBusiness);
           res.json({
-            msg: "The transaction is successfuly sent for approval, wait for operational departiment to approve it!",
+            msg: "Wait for operational departiment approvement!!",
           });
         } else {
           updateSalesStatusToUnapproved(newPurchasesOfBusiness);
           res.json({
-            msg: "The transaction is successfuly sent for approval, wait for operational departiment to approve it!",
+            msg: "Wait for operational departiment approvement!!",
           });
         }
       } else {
@@ -91,6 +91,13 @@ const salesCntrl = {
         businessId: salesDetail.businessId,
       });
 
+      await machines.findOneAndUpdate(
+        { _id: salesDetail.machineId },
+        {
+          salesStatus: "unsold",
+        }
+      );
+
       if (numberOfSalesOfThisBusiness.length == 1) {
         await clientBusinesses.findOneAndUpdate(
           { _id: salesDetail.businessId },
@@ -99,12 +106,6 @@ const salesCntrl = {
           }
         );
       }
-      await machines.findOneAndUpdate(
-        { _id: salesDetail.machineId },
-        {
-          salesStatus: "unsold",
-        }
-      );
 
       await Sales.findByIdAndDelete(req.params.salesId);
 
