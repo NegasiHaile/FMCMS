@@ -255,7 +255,15 @@ const RegisterEmployee = (props) => {
                     <option value="">Select employe task</option>
                     <option value="sales">sales</option>
                     <option value="technician">Technician</option>
+                    <option value="machine-controller">
+                      Machine Controller
+                    </option>
+                    <option value="branch-store">Branch Store</option>
+                    <option value="operational-manager">
+                      Operational Manager
+                    </option>
                     <option value="branch-admin">Branch Admin</option>
+                    <option value="main-store">Main Store</option>
                     <option value="super-admin">Super Admin</option>
                   </CSelect>
                 </CFormGroup>
@@ -269,9 +277,8 @@ const RegisterEmployee = (props) => {
                     name="branch"
                     onChange={onChangeInput}
                     value={user.branch}
-                    required
                   >
-                    <option value="">Select employee branch</option>
+                    <option value="none">Select employee branch</option>
                     {branchs.map((branch) => (
                       <option value={branch._id} key={branch._id}>
                         {branch.branchName}

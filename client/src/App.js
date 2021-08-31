@@ -13,6 +13,15 @@ const loading = (
 const ClientLayout = lazy(() => import("./Layouts/Client/Layout"));
 const SlaesLayout = lazy(() => import("./Layouts/Sales/Layout"));
 const TechnicianLayout = lazy(() => import("./Layouts/Technician/Layout"));
+
+const MachineControllerLayout = lazy(() =>
+  import("./Layouts/MachineController/Layout")
+);
+const BranchStoreLayout = lazy(() => import("./Layouts/BranchStore/Layout"));
+const MainStoreLayout = lazy(() => import("./Layouts/MainStore/Layout"));
+const OprationalManagerLayout = lazy(() =>
+  import("./Layouts/OprationalManager/Layout")
+);
 const BranchAdminLayout = lazy(() => import("./Layouts/BranchAdmin/Layout"));
 const SuperAdminLayout = lazy(() => import("./Layouts/SuperAdmin/Layout"));
 
@@ -54,6 +63,38 @@ function App() {
         render={(props) => <TechnicianLayout {...props} />}
       />
     ); // client Layout
+  } else if (isLogged && user.userRole === "machine-controller") {
+    userLayout = (
+      <Route
+        path="/"
+        name="Branch-Store"
+        render={(props) => <MachineControllerLayout {...props} />}
+      />
+    ); // Branch Admin Layout
+  } else if (isLogged && user.userRole === "branch-store") {
+    userLayout = (
+      <Route
+        path="/"
+        name="Branch-Store"
+        render={(props) => <BranchStoreLayout {...props} />}
+      />
+    ); // Branch Admin Layout
+  } else if (isLogged && user.userRole === "main-store") {
+    userLayout = (
+      <Route
+        path="/"
+        name="Main-Store"
+        render={(props) => <MainStoreLayout {...props} />}
+      />
+    ); // Branch Admin Layout
+  } else if (isLogged && user.userRole === "operational-manager") {
+    userLayout = (
+      <Route
+        path="/"
+        name="O-M"
+        render={(props) => <OprationalManagerLayout {...props} />}
+      />
+    ); // Branch Admin Layout
   } else if (isLogged && user.userRole === "branch-admin") {
     userLayout = (
       <Route

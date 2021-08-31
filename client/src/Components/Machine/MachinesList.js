@@ -55,11 +55,7 @@ const MachinesList = () => {
   const [machine, setMachine] = useState(machineDetail);
 
   useEffect(() => {
-    if (
-      user.userRole === "branch-admin" ||
-      user.userRole === "technician" ||
-      user.userRole === "sales"
-    ) {
+    if (user.userRole !== "super-admin" && user.userRole !== "main-store") {
       setMachines(
         allMachines.filter(
           (filteredMachine) => filteredMachine.branch == user.branch
