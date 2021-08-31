@@ -56,6 +56,7 @@ const MaintenanceAnnual = lazy(() =>
 );
 // Importing of Sales ralted pages
 const SalesList = lazy(() => import("../../Components/Sales/SalesList"));
+const SalesDetail = lazy(() => import("../../Components/Sales/SalesDetail"));
 
 // Others pages
 const FeedbacksList = lazy(() =>
@@ -171,6 +172,12 @@ const routes = [
     exact: true,
     name: "Sales-List",
     component: SalesList,
+  },
+  {
+    path: "/sales/detail/:id",
+    exact: true,
+    name: "Sales-Detail",
+    component: SalesDetail,
   },
 
   // User Accont

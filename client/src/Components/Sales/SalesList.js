@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -135,7 +135,7 @@ function SalesList() {
 
                     <CLink
                       className="text-info"
-                      to={`/sales/detail/${sales._id}`}
+                      to={`/sales/detail/${sales.saleId}`}
                     >
                       <CTooltip content={`See detail of this sales.`}>
                         <CIcon name="cil-notes" />
