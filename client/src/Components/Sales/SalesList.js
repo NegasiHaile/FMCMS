@@ -65,7 +65,6 @@ function SalesList() {
     "tradeName",
     "machineSerialNumber",
     "machinePrice",
-    "createdAt",
     "status",
     {
       key: "Actions",

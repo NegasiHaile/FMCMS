@@ -10,4 +10,9 @@ router.put("/request_for_approval/:businessId", salesCntrl.requestForApproval);
 
 router.put("/cancel_unapprove_sale/:salesId", salesCntrl.cancelUnapproveSale);
 
+router.put(
+  "/Approve_sales_Request/:salesId/:machineId/:businessId",
+  salesCntrl.ApproveSalesRequest
+);
+
 module.exports = router;

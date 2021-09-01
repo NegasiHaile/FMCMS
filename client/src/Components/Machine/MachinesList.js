@@ -312,11 +312,7 @@ const MachinesList = () => {
                     <>
                       <CLink
                         className="text-info"
-                        onClick={() => {
-                          // setMachine({ machine, ...machine });
-                          // setActivemachine(machine._id);
-                          // setShowModal(!showModal);
-                        }}
+                        to={`/machine/detail/${machine._id}`}
                       >
                         <CTooltip
                           content={`See detail of  - ${machine.serialNumber}- machine.`}

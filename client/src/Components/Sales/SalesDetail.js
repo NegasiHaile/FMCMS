@@ -2,10 +2,22 @@ import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { GlobalState } from "../../GlobalState";
 import BadRouting from "../Utils/routing/BadRouting";
+import axios from "axios";
+import Swal from "sweetalert2";
+import {
+  CButton,
+  CCard,
+  CCardBody,
+  CLink,
+  CTooltip,
+  CRow,
+  CCol,
+} from "@coreui/react";
 
 function SalesDetail() {
   const params = useParams();
   const state = useContext(GlobalState);
+  const [user] = state.UserAPI.User;
   const [Sales] = state.SalesAPI.Sales;
   const [salesDetail, setSalesDetail] = useState("");
 
@@ -14,9 +26,7 @@ function SalesDetail() {
   const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
 
   useEffect(() => {
-    console.log("what is going on inside useEffect");
     if (params.id && Sales) {
-      console.log("what is going on inside if");
       const sale = Sales.find(
         (filteredSale) => filteredSale.saleId === params.id
       );
@@ -25,16 +35,132 @@ function SalesDetail() {
     }
   }, [params.id, Sales]);
 
-  console.log(salesDetail);
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+  const SweetAlert = (type, text) => {
+    Swal.fire({
+      position: "center",
+      background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+      icon: type,
+      text: text,
+      confirmButtonColor: "#1E263C",
+      showConfirmButton: false,
+      // timer: 1500,
+    });
+  };
+  const approveSalesRequest = async (saleId, machineId, businessId) => {
+    try {
+      Swal.fire({
+        // title: "Accepte?",
+        text: "Are you sure you want to approve this sales transaction?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#1E263C",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Approve it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const res = await axios.put(
+            `/sales/Approve_sales_Request/${saleId}/${machineId}/${businessId}`
+          );
+          setCallbackMachines(callbackMachines);
+          setCallbackSales(!callbackSales);
+          setCallbackBusiness(!callbackBusiness);
+          Swal.fire("Approved!", res.data.msg, "success");
+        }
+      });
+    } catch (error) {
+      SweetAlert("error", error.response.data.msg);
+    }
+  };
   return (
     <div>
       {salesDetail ? (
-        <h4>This is The sales detail {params.id}</h4>
+        <CCard className="card">
+          <CCardBody className="card-body">
+            <CRow>
+              <CCol
+                sm="6"
+                md="4"
+                lg="3"
+                className="border shadow-sm rounded p-4"
+              >
+                <h6 className="text-center text-muted">Buyer Trade-Name</h6>
+                <CLink to={`/business/Detail/${salesDetail.businessId}`}>
+                  <h6 className="text-center text-primary">
+                    {salesDetail.tradeName}
+                  </h6>
+                </CLink>
+              </CCol>
+              <CCol
+                sm="6"
+                md="4"
+                lg="3"
+                className="border shadow-sm rounded p-4"
+              >
+                <h6 className="text-center text-muted">
+                  Machine serial number
+                </h6>
+                <CLink to={`/machine/Detail/${salesDetail.machineId}`}>
+                  <h6 className="text-center text-primary">
+                    {salesDetail.machineSerialNumber}
+                  </h6>
+                </CLink>
+              </CCol>
+              <CCol
+                sm="6"
+                md="4"
+                lg="3"
+                className="border shadow-sm rounded p-4"
+              >
+                <h6 className="text-center text-muted">Ordered Date</h6>
+                <span color="info">
+                  <h6 className="text-center text-info">
+                    {formatDate(salesDetail.createdAt)}
+                  </h6>
+                </span>
+              </CCol>
+              <CCol
+                sm="6"
+                md="4"
+                lg="3"
+                className="border shadow-sm rounded p-4"
+              >
+                <h6 className="text-center text-muted">
+                  Sales status:{" "}
+                  <span className="text-center text-danger">
+                    {salesDetail.status}
+                  </span>
+                </h6>
+
+                {salesDetail.status === "unapproved" &&
+                  user.userRole === "operational-manager" && (
+                    <div className="d-flex justify-content-center">
+                      <CButton
+                        className=""
+                        variant="outline"
+                        color="success"
+                        size="sm"
+                        onClick={() =>
+                          approveSalesRequest(
+                            salesDetail.saleId,
+                            salesDetail.machineId,
+                            salesDetail.businessId
+                          )
+                        }
+                      >
+                        Approve Request
+                      </CButton>
+                    </div>
+                  )}
+              </CCol>
+            </CRow>
+          </CCardBody>
+        </CCard>
       ) : (
-        <BadRouting
-          text="This is bad routing! No data to fetch, please go back to your
-                  home page and come again with correct routing!"
-        />
+        <BadRouting text="This is bad routing! No data to fetch, please go back to sales list page and click the see-detail button of the sales you need to see it's detail." />
       )}
     </div>
   );

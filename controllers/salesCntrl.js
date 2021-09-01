@@ -116,6 +116,34 @@ const salesCntrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+
+  ApproveSalesRequest: async (req, res) => {
+    try {
+      await Sales.findOneAndUpdate(
+        { _id: req.params.salesId },
+        {
+          status: "instore",
+        }
+      );
+      await machines.findOneAndUpdate(
+        { _id: req.params.machineId },
+        {
+          salesStatus: "sold",
+        }
+      );
+      await clientBusinesses.findOneAndUpdate(
+        { _id: req.params.businessId },
+        {
+          credentials: "Accepted",
+        }
+      );
+      res.json({
+        msg: "This sales request is successfully apprived, it is sent to the store issue!",
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
 };
 const updateSalesStatusToUnapproved = async (newPurchasesOfBusiness) => {
   newPurchasesOfBusiness.forEach(async (purchase) => {

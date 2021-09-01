@@ -38,11 +38,11 @@ const BusinessDetail = lazy(() =>
 );
 
 // Importing of machine related pages
-const MachineDistribute = lazy(() =>
-  import("../../Components/Machine/MachineDistribute")
-);
 const MachinesList = lazy(() =>
   import("../../Components/Machine/MachinesList")
+);
+const MachineDtail = lazy(() =>
+  import("../../Components/Machine/MachineDtail")
 );
 // Importing of maintenance ralted pages
 const MaintenanceAnnual = lazy(() =>
@@ -56,6 +56,7 @@ const MachineReturningLists = lazy(() =>
 
 // Importing of Sales ralted pages
 const SalesList = lazy(() => import("../../Components/Sales/SalesList"));
+const SalesDetail = lazy(() => import("../../Components/Sales/SalesDetail"));
 // Others pages
 const FeedbacksList = lazy(() =>
   import("../../Components/Feedback/FeedbacksList")
@@ -129,18 +130,18 @@ const routes = [
     name: "Register-Business",
     component: BusinessDetail,
   },
-  // Machine
-  // {
-  //   path: "/machine/distribute",
-  //   exact: true,
-  //   name: "Distribute-Machine",
-  //   component: MachineDistribute,
-  // },
+  // machine
   {
     path: "/machines/list",
     exact: true,
     name: "Machines-List",
     component: MachinesList,
+  },
+  {
+    path: "/machine/detail/:id",
+    exact: true,
+    name: "Machine-Detail",
+    component: MachineDtail,
   },
   // Maintenance
   {
@@ -162,6 +163,12 @@ const routes = [
     exact: true,
     name: "Sales-List",
     component: SalesList,
+  },
+  {
+    path: "/sales/detail/:id",
+    exact: true,
+    name: "Sales-Detail",
+    component: SalesDetail,
   },
   // User Accont
   {
