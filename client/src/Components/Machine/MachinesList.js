@@ -46,7 +46,7 @@ const MachinesList = () => {
     machineModel: "",
     brand: "",
     price: "",
-    branch: user.branch,
+    branch: null,
     problemStatus: "",
     // for distributing
     businessId: "",
@@ -88,7 +88,6 @@ const MachinesList = () => {
     try {
       const res = await axios.post("/machine/register", { ...machine });
       sweetAlert("success", res.data.msg);
-      setShowModal(!showModal);
       setCallback(!callback);
     } catch (error) {
       sweetAlert("error", error.response.data.msg);
@@ -202,7 +201,7 @@ const MachinesList = () => {
       <CCard className=" shadow-sm">
         <CCardHeader className="d-flex justify-content-between">
           <CLabel>Jupiter all machine list</CLabel>
-          {user.userRole === "branch-admin" && (
+          {user.userRole === "main-store" && (
             <CButton
               size="sm"
               color="dark"
@@ -218,6 +217,7 @@ const MachinesList = () => {
         </CCardHeader>
         <CCardBody>
           <CDataTable
+            size="sm"
             items={machines}
             fields={machineTablefields}
             tableFilter
@@ -273,7 +273,7 @@ const MachinesList = () => {
               ),
               Actions: (machine) => (
                 <td className="d-flex justify-content-between">
-                  {user.userRole === "branch-admin" && (
+                  {user.userRole === "main-store" && (
                     <>
                       <CLink
                         className="text-success"
@@ -502,9 +502,11 @@ const MachinesList = () => {
               <CButton
                 size="sm"
                 color="danger"
-                onClick={() =>
-                  setShowMachineDistributeModal(!showMachineDistributeModal)
-                }
+                onClick={() => {
+                  setActivemachine("none");
+                  setMachine({ machine, ...machineDetail });
+                  setShowMachineDistributeModal(!showMachineDistributeModal);
+                }}
               >
                 <CIcon name="cil-x" /> Close
               </CButton>

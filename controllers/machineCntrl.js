@@ -32,7 +32,7 @@ const machineCntrl = {
 
   getMachines: async (req, res) => {
     try {
-      res.json(await Machines.find());
+      res.json(await Machines.find({}).sort({ createdAt: -1 }));
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }

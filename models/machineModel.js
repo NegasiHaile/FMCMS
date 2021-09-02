@@ -21,13 +21,21 @@ const machineSchema = new mongoose.Schema(
     price: {
       type: Number,
     },
-    branch: {
-      type: ObjectID,
-      required: true,
-    },
     problemStatus: {
       type: String, // fine, with problem, in maintenance
       required: true,
+    },
+    MRC: {
+      type: ObjectID,
+      default: null,
+    },
+    SIM: {
+      type: Number,
+      default: null,
+    },
+    branch: {
+      type: ObjectID,
+      default: null,
     },
     salesStatus: {
       type: String,

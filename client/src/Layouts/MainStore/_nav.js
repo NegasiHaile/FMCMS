@@ -28,8 +28,8 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Distribute Machines",
-    to: "/sales/list",
+    name: "Distribute Machine",
+    to: "/machine/distribution",
     icon: "cil-control",
   },
 
@@ -42,13 +42,13 @@ const _nav = [
   {
     _tag: "CSidebarNavItem",
     name: "List of MRC",
-    to: "/machines/list",
+    to: "/mrc/list",
     icon: "cil-asterisk-circle",
   },
   {
     _tag: "CSidebarNavItem",
     name: "Distribute MRC",
-    to: "/sales/list",
+    to: "/mrc/distribution",
     icon: "cil-asterisk",
   },
 
