@@ -31,6 +31,7 @@ const MachinesList = () => {
   const [token] = state.token;
   const [allMachines] = state.MachineAPI.machines;
   const [machines, setMachines] = useState(allMachines);
+  const [allBranchs] = state.branchAPI.branchs;
   const [callback, setCallback] = state.MachineAPI.callback;
   const [callbackBusiness, setCallbackBusiness] = state.BusinessAPI.callback;
   const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
@@ -46,7 +47,7 @@ const MachinesList = () => {
     machineModel: "",
     brand: "",
     price: "",
-    branch: null,
+    branch: "null",
     problemStatus: "",
     // for distributing
     businessId: "",
@@ -179,12 +180,14 @@ const MachinesList = () => {
       sweetAlert("error", error.response.data.msg);
     }
   };
-
+  console.log(machine);
   const machineTablefields = [
     "serialNumber",
     "machineModel",
     "brand",
     "price",
+    "MRC",
+    "SIM",
     "salesStatus",
     "problemStatus",
     {
@@ -207,7 +210,7 @@ const MachinesList = () => {
               color="dark"
               onClick={() => {
                 setActivemachine("none");
-                setMachine({ machine, ...machineDetail });
+                setMachine({ ...machineDetail });
                 setShowModal(!showModal);
               }}
             >
@@ -278,7 +281,7 @@ const MachinesList = () => {
                       <CLink
                         className="text-success"
                         onClick={() => {
-                          setMachine({ machine, ...machine });
+                          setMachine({ ...machine });
                           setActivemachine(machine._id);
                           setShowModal(!showModal);
                         }}
@@ -409,6 +412,28 @@ const MachinesList = () => {
                     </CSelect>
                   </CFormGroup>
                 </CCol>
+                {activemachine !== "none" && (
+                  <CCol xs="12" md="4">
+                    <CFormGroup>
+                      <CLabel>Branch</CLabel>
+                      <CSelect
+                        aria-label="Default select example"
+                        id="branch"
+                        name="branch"
+                        onChange={onChangeInput}
+                        value={machine.branch}
+                        required
+                      >
+                        <option value="">Select branch...</option>
+                        {allBranchs.map((branch) => (
+                          <option value={branch._id} key={branch._id}>
+                            {branch.branchName}
+                          </option>
+                        ))}
+                      </CSelect>
+                    </CFormGroup>
+                  </CCol>
+                )}
               </CRow>
             </CModalBody>
             <CModalFooter>

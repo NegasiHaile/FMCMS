@@ -22,15 +22,19 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "List of Machines",
-    to: "/machines/list",
-    icon: "cil-print",
+    name: "New Arrivals",
+    to: "/machine/distribution",
+    icon: "cil-control",
+    badge: {
+      color: "danger",
+      text: 200,
+    },
   },
   {
     _tag: "CSidebarNavItem",
-    name: "New Machine Arrivals",
-    to: "/sales/list",
-    icon: "cil-control",
+    name: "List of all machines",
+    to: "/machines/list",
+    icon: "cil-print",
   },
 
   // MRC Managment and controlling
@@ -38,37 +42,54 @@ const _nav = [
     _tag: "CSidebarNavTitle",
     _children: ["MRC-Managment"],
   },
+  {
+    _tag: "CSidebarNavItem",
+    name: "New Arrivals",
+    to: "/mrc/distribution",
+    icon: "cil-asterisk",
+    badge: {
+      color: "danger",
+      text: 200,
+    },
+  },
 
   {
     _tag: "CSidebarNavItem",
-    name: "List of MRC",
-    to: "/machines/list",
+    name: "List of all MRC",
+    to: "/mrc/list",
     icon: "cil-asterisk-circle",
   },
   {
-    _tag: "CSidebarNavItem",
-    name: "New MRC Arrivals",
-    to: "/sales/list",
-    icon: "cil-asterisk",
-  },
-
-  // Spares Managment and controlling
-  {
     _tag: "CSidebarNavTitle",
-    _children: ["Spares-Managment"],
+    _children: ["Sales"],
   },
   {
     _tag: "CSidebarNavItem",
-    name: "SIM-Card List",
-    to: "/machines/list",
-    icon: "cil-file",
+    name: "Machine Sales",
+    to: "/sales/list",
+    icon: "cil-star",
+    badge: {
+      color: "danger",
+      text: 5,
+    },
   },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Other Spares",
-    to: "/machines/list",
-    icon: "cil-blur",
-  },
+  // Spares Managment and controlling
+  // {
+  //   _tag: "CSidebarNavTitle",
+  //   _children: ["Spares-Managment"],
+  // },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "SIM-Card List",
+  //   to: "/machines/list",
+  //   icon: "cil-file",
+  // },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Other Spares",
+  //   to: "/mrc/list",
+  //   icon: "cil-blur",
+  // },
 
   // others
   {

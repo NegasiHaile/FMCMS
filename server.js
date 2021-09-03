@@ -14,6 +14,7 @@ app.use(cors());
 app.use("/user", require("./routes/userRouter"));
 app.use("/branch", require("./routes/branchRouter"));
 app.use("/machine", require("./routes/machineRouter"));
+app.use("/mrc", require("./routes/mrcRouter"));
 app.use("/business", require("./routes/clientBusinessRouter"));
 app.use("/maintenance", require("./routes/maintenanceRouter"));
 app.use("/notification", require("./routes/notificationRouter"));

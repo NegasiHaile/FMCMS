@@ -26,16 +26,16 @@ const machineSchema = new mongoose.Schema(
       required: true,
     },
     MRC: {
-      type: ObjectID,
-      default: null,
+      type: String,
+      default: "none",
     },
     SIM: {
       type: Number,
       default: null,
     },
     branch: {
-      type: ObjectID,
-      default: null,
+      type: String,
+      default: "none",
     },
     salesStatus: {
       type: String,

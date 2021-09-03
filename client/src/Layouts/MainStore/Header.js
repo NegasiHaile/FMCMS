@@ -64,7 +64,7 @@ const Header = () => {
           <CHeaderNavLink to="/machines/list">Machines</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/client/register">MRC</CHeaderNavLink>
+          <CHeaderNavLink to="/mrc/list">MRC</CHeaderNavLink>
         </CHeaderNavItem>
       </CHeaderNav>
 

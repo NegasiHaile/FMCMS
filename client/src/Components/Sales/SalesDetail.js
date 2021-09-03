@@ -81,12 +81,7 @@ function SalesDetail() {
         <CCard className="card">
           <CCardBody className="card-body">
             <CRow>
-              <CCol
-                sm="6"
-                md="4"
-                lg="3"
-                className="border shadow-sm rounded p-4"
-              >
+              <CCol sm="6" md="4" lg="3" className="border shadow-sm p-4">
                 <h6 className="text-center text-muted">Buyer Trade-Name</h6>
                 <CLink to={`/business/Detail/${salesDetail.businessId}`}>
                   <h6 className="text-center text-primary">
@@ -94,12 +89,7 @@ function SalesDetail() {
                   </h6>
                 </CLink>
               </CCol>
-              <CCol
-                sm="6"
-                md="4"
-                lg="3"
-                className="border shadow-sm rounded p-4"
-              >
+              <CCol sm="6" md="4" lg="3" className="border shadow-sm p-4">
                 <h6 className="text-center text-muted">
                   Machine serial number
                 </h6>
@@ -109,12 +99,7 @@ function SalesDetail() {
                   </h6>
                 </CLink>
               </CCol>
-              <CCol
-                sm="6"
-                md="4"
-                lg="3"
-                className="border shadow-sm rounded p-4"
-              >
+              <CCol sm="6" md="4" lg="3" className="border shadow-sm p-4">
                 <h6 className="text-center text-muted">Ordered Date</h6>
                 <span color="info">
                   <h6 className="text-center text-info">
@@ -122,12 +107,7 @@ function SalesDetail() {
                   </h6>
                 </span>
               </CCol>
-              <CCol
-                sm="6"
-                md="4"
-                lg="3"
-                className="border shadow-sm rounded p-4"
-              >
+              <CCol sm="6" md="4" lg="3" className="border shadow-sm p-4">
                 <h6 className="text-center text-muted">
                   Sales status:{" "}
                   <span className="text-center text-danger">

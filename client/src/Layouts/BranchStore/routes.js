@@ -7,7 +7,6 @@ const ChangePassword = lazy(() =>
 );
 
 // Jupiter branchs
-const OpenNewBranch = lazy(() => import("../../Components/Branch/BranchList"));
 const BranchDetail = lazy(() => import("../../Components/Branch/BranchDetail"));
 
 // Dashboards
@@ -15,47 +14,32 @@ const branchDashboard = lazy(() =>
   import("../../Components/Dashboard/Dashboard")
 );
 
-// Employee frontend routing
-const EmployeesList = lazy(() =>
-  import("../../Components/Employee/EmployeesList")
+// Importing of machine related routes
+const MachinesList = lazy(() =>
+  import("../../Components/Machine/MachinesList")
 );
-
-// Client routes
-const RegisterClient = lazy(() =>
-  import("../../Components/Client/RegisterClient")
+const MachineDtail = lazy(() =>
+  import("../../Components/Machine/MachineDtail")
 );
-const ClientDetail = lazy(() => import("../../Components/Client/ClientDetail"));
-
+const MachineReturningLists = lazy(() =>
+  import("../../Components/MachineReturn/MachineReturningLists")
+);
 // Client business frontend routing
-const BusinessRegistration = lazy(() =>
-  import("../../Components/Business/BusinessRegistration")
-);
 const BusinessesList = lazy(() =>
   import("../../Components/Business/BusinessesList")
 );
 const BusinessDetail = lazy(() =>
   import("../../Components/Business/BusinessDetail")
 );
-
-// Importing of machine related pages
-const MachineDistribute = lazy(() =>
-  import("../../Components/Machine/MachineDistribute")
-);
-const MachinesList = lazy(() =>
-  import("../../Components/Machine/MachinesList")
-);
-// Importing of maintenance ralted pages
+// Importing MRC related routes
+const MRCList = lazy(() => import("../../Components/MRC/MRCList"));
+// Importing of maintenance ralted routes
 const MaintenanceAnnual = lazy(() =>
   import("../../Components/Maintenance/MaintenanceAnnual")
 );
-
-// Importing of Machine Returning ralted pages
-const MachineReturningLists = lazy(() =>
-  import("../../Components/MachineReturn/MachineReturningLists")
-);
-
 // Importing of Sales ralted pages
 const SalesList = lazy(() => import("../../Components/Sales/SalesList"));
+const SalesDetail = lazy(() => import("../../Components/Sales/SalesDetail"));
 // Others pages
 const FeedbacksList = lazy(() =>
   import("../../Components/Feedback/FeedbacksList")
@@ -73,50 +57,31 @@ const routes = [
   },
   // Branchs
   {
-    path: "/Branch/List",
-    exact: true,
-    name: "Jupter-Trading-Branchs",
-    component: OpenNewBranch,
-  },
-  {
     path: "/Branch/Detail/:id",
     exact: true,
     name: "Branch-Detail",
     component: BranchDetail,
   },
+  // Machine
   {
-    path: "/Employee/List",
+    path: "/machines/list",
     exact: true,
-    name: "Employee-List",
-    component: EmployeesList,
-  },
-  // Client
-  {
-    path: "/client/register",
-    exact: true,
-    name: "Register-Client",
-    component: RegisterClient,
+    name: "Machines-List",
+    component: MachinesList,
   },
   {
-    path: "/client/detail/:id",
+    path: "/machine/detail/:id",
     exact: true,
-    name: "Client-Detail",
-    component: ClientDetail,
-  },
-  // Client bussiness
-  {
-    path: "/business/register/:clientId",
-    exact: true,
-    name: "Update-Business",
-    component: BusinessRegistration,
+    name: "Machine-Detail",
+    component: MachineDtail,
   },
   {
-    path: "/business/edit/:businessId",
+    path: "/machine/returnlist",
     exact: true,
-    name: "Update-Business",
-    component: BusinessRegistration,
+    name: "Request-Return-Machine",
+    component: MachineReturningLists,
   },
-
+  // business
   {
     path: "/business/list",
     exact: true,
@@ -129,18 +94,24 @@ const routes = [
     name: "Register-Business",
     component: BusinessDetail,
   },
-  // Machine
-  // {
-  //   path: "/machine/distribute",
-  //   exact: true,
-  //   name: "Distribute-Machine",
-  //   component: MachineDistribute,
-  // },
+  // MRC
   {
-    path: "/machines/list",
+    path: "/mrc/list",
     exact: true,
-    name: "Machines-List",
-    component: MachinesList,
+    name: "MRC-List",
+    component: MRCList,
+  }, // Sales
+  {
+    path: "/sales/list",
+    exact: true,
+    name: "Sales-List",
+    component: SalesList,
+  },
+  {
+    path: "/sales/detail/:id",
+    exact: true,
+    name: "Sales-Detail",
+    component: SalesDetail,
   },
   // Maintenance
   {
@@ -148,13 +119,6 @@ const routes = [
     exact: true,
     name: "Annual-Maintenance",
     component: MaintenanceAnnual,
-  },
-  // Machine returning
-  {
-    path: "/machine/returnlist",
-    exact: true,
-    name: "Request-Return-Machine",
-    component: MachineReturningLists,
   },
   // Sales
   {

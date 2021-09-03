@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { GlobalState } from "../../../GlobalState";
 import BadRouting from "../../Utils/routing/BadRouting";
 import {
@@ -18,20 +17,27 @@ import {
   CLink,
   CModal,
   CModalBody,
+  CModalHeader,
+  CModalTitle,
+  CModalFooter,
   CForm,
   CFormGroup,
-  CLabel,
-  CTextarea,
   CSelect,
+  CTooltip,
+  CInput,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
 
 function MachineDetail({ id }) {
-  const params = useParams();
   const state = useContext(GlobalState);
+  const [user] = state.UserAPI.User;
   const [machines] = state.MachineAPI.machines;
+  const [mrcs] = state.MRCAPI.mrcs;
   const [machieneDetail, setMachieneDetail] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [onMRCEdit, setOnMRCEdit] = useState(false);
+  const [onSIMEdit, setOnSIMEdit] = useState(false);
 
   useEffect(() => {
     if (id && machines) {
@@ -42,7 +48,15 @@ function MachineDetail({ id }) {
     } else {
     }
   }, [id, machines]);
-
+  const formatDate = (dateString) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hours: "numeric",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
   return (
     <div>
       <>
@@ -98,22 +112,55 @@ function MachineDetail({ id }) {
                   <p className="d-flex justify-content-between">
                     <strong>* MRC:</strong>
                     <span>
-                      {" "}
-                      <CButton size="sm" color="info">
-                        {" "}
-                        Assigne MRC{" "}
-                      </CButton>{" "}
+                      {machieneDetail.MRC}
+                      {user.userRole === "branch-store" && (
+                        <>
+                          {" "}
+                          {" | "}
+                          <CLink
+                            className="text-success"
+                            onClick={() => {
+                              setOnMRCEdit(!onMRCEdit);
+                              setShowModal(!showModal);
+                            }}
+                          >
+                            <CTooltip content={`Edit MRC of this machine!`}>
+                              <CIcon name="cil-pen-alt" />
+                            </CTooltip>
+                          </CLink>
+                        </>
+                      )}
                     </span>
                   </p>
                   <p className="d-flex justify-content-between">
                     <strong>* SIM:</strong>
+
                     <span>
-                      {" "}
-                      <CButton size="sm" color="info">
-                        {" "}
-                        Assigne SIM{" "}
-                      </CButton>{" "}
+                      {machieneDetail.SIM}
+                      {user.userRole === "branch-store" && (
+                        <>
+                          {" "}
+                          {" | "}
+                          <CLink
+                            className="text-success"
+                            onClick={() => {
+                              setOnSIMEdit(!onSIMEdit);
+                              setShowModal(!showModal);
+                            }}
+                          >
+                            <CTooltip
+                              content={`Edit SIM card number of this machine!`}
+                            >
+                              <CIcon name="cil-pen-alt" />
+                            </CTooltip>
+                          </CLink>{" "}
+                        </>
+                      )}
                     </span>
+                  </p>
+                  <p className="d-flex justify-content-between">
+                    <strong>* Date:</strong>
+                    <span> {formatDate(machieneDetail.createdAt)}</span>
                   </p>
                 </CCol>
               </CRow>
@@ -147,6 +194,69 @@ function MachineDetail({ id }) {
           <BadRouting text="This is bad routing! No machine data to fetch, please go back to machines list page and click the see-detail button of the machine you need to see it's detail." />
         )}{" "}
       </>
+      <CModal show={showModal} onClose={() => setShowModal(!showModal)}>
+        <CModalHeader closeButton>
+          <CModalTitle className="text-muted">
+            Assign {onMRCEdit && "MRC"} {onSIMEdit && "SIM Card"} to this
+            Machine
+          </CModalTitle>
+        </CModalHeader>
+        <CForm onSubmit={"distributeMachine"}>
+          <CModalBody>
+            <CRow>
+              {onMRCEdit && (
+                <CCol sm="12">
+                  <CFormGroup>
+                    MRC
+                    <CSelect
+                      aria-label="Default select example"
+                      id="businessId"
+                      name="businessId"
+                      required
+                    >
+                      <option value="">Select MRC...</option>
+                      {mrcs
+                        .filter(
+                          (mrc) => mrc.status === "free"
+                          // && mrc.branch == user.branch
+                        )
+                        .map((filteredmrc) => (
+                          <option value={filteredmrc._id} key={filteredmrc._id}>
+                            {filteredmrc.MRC}
+                          </option>
+                        ))}
+                    </CSelect>
+                  </CFormGroup>
+                </CCol>
+              )}
+              {onSIMEdit && (
+                <CCol sm="12">
+                  <CFormGroup>
+                    Insert the 10 digit of SIM card number
+                    <CInput maxlength="10" minLength="10"></CInput>
+                  </CFormGroup>
+                </CCol>
+              )}
+            </CRow>
+          </CModalBody>
+          <CModalFooter>
+            <CButton type="submit" size="sm" color="dark">
+              <CIcon name="cil-save" /> SAVE
+            </CButton>
+            <CButton
+              size="sm"
+              color="danger"
+              onClick={() => {
+                setOnMRCEdit(false);
+                setOnSIMEdit(false);
+                setShowModal(!showModal);
+              }}
+            >
+              <CIcon name="cil-x" /> Close
+            </CButton>
+          </CModalFooter>
+        </CForm>
+      </CModal>
     </div>
   );
 }

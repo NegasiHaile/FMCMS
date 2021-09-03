@@ -3,6 +3,7 @@ import UserAPI from "./api/UserAPI";
 import UsersAPI from "./api/UsersAPI";
 import BranchAPI from "./api/BranchAPI";
 import MachineAPI from "./api/MachineAPI";
+import MRCAPI from "./api/MRCAPI";
 import BusinessAPI from "./api/BusinessAPI";
 import SalesAPI from "./api/SalesAPI";
 import NotificationAPI from "./api/NotificationAPI";
@@ -36,6 +37,7 @@ export const DataProvider = ({ children }) => {
     UsersAPI: UsersAPI(),
     branchAPI: BranchAPI(),
     MachineAPI: MachineAPI(),
+    MRCAPI: MRCAPI(),
     BusinessAPI: BusinessAPI(),
     SalesAPI: SalesAPI(),
     NotificationAPI: NotificationAPI(),
