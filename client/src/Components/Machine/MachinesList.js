@@ -199,6 +199,7 @@ const MachinesList = () => {
     },
   ];
 
+  console.log(allMachines);
   return (
     <>
       <CCard className=" shadow-sm">

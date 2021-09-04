@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { GlobalState } from "../../../GlobalState";
+import axios from "axios";
 import BadRouting from "../../Utils/routing/BadRouting";
 import {
   CButton,
@@ -33,21 +34,34 @@ function MachineDetail({ id }) {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [machines] = state.MachineAPI.machines;
+  const [machineCallback, setMachineCallback] = state.MachineAPI.callback;
   const [mrcs] = state.MRCAPI.mrcs;
   const [machieneDetail, setMachieneDetail] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [onMRCEdit, setOnMRCEdit] = useState(false);
   const [onSIMEdit, setOnSIMEdit] = useState(false);
 
+  const [assignementDetail, setAssignementDetail] = useState({
+    MRC: "",
+    SIM: "",
+  });
+
+  const onChangeInput = (e) => {
+    const { name, value } = e.target;
+    setAssignementDetail({ ...assignementDetail, [name]: value });
+  };
   useEffect(() => {
     if (id && machines) {
       const machine = machines.find(
         (filteredMachine) => filteredMachine._id === id
       );
+      assignementDetail.MRC = machine.MRC;
+      assignementDetail.SIM = machine.SIM;
       setMachieneDetail(machine);
     } else {
     }
   }, [id, machines]);
+  // console.log("Outside useEffect" + JSON.stringify(assignementDetail));
   const formatDate = (dateString) => {
     const options = {
       year: "numeric",
@@ -56,6 +70,22 @@ function MachineDetail({ id }) {
       hours: "numeric",
     };
     return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+  const assignMRCorSIM = async (e) => {
+    e.preventDefault();
+    if (onMRCEdit) {
+      const res = await axios.put(`/machine/assigne_mrc/${id}`, {
+        ...assignementDetail,
+      });
+      setMachineCallback(!machineCallback);
+      alert(JSON.stringify(res.data.msg));
+    } else if (onSIMEdit) {
+      const res = await axios.put(`/machine/assigne_sim/${id}`, {
+        ...assignementDetail,
+      });
+      setMachineCallback(!machineCallback);
+      alert(JSON.stringify(res.data.msg));
+    }
   };
   return (
     <div>
@@ -120,8 +150,9 @@ function MachineDetail({ id }) {
                           <CLink
                             className="text-success"
                             onClick={() => {
-                              setOnMRCEdit(!onMRCEdit);
-                              setShowModal(!showModal);
+                              setOnSIMEdit(false);
+                              setOnMRCEdit(true);
+                              setShowModal(true);
                             }}
                           >
                             <CTooltip content={`Edit MRC of this machine!`}>
@@ -144,8 +175,9 @@ function MachineDetail({ id }) {
                           <CLink
                             className="text-success"
                             onClick={() => {
-                              setOnSIMEdit(!onSIMEdit);
-                              setShowModal(!showModal);
+                              setOnMRCEdit(false);
+                              setOnSIMEdit(true);
+                              setShowModal(true);
                             }}
                           >
                             <CTooltip
@@ -194,14 +226,14 @@ function MachineDetail({ id }) {
           <BadRouting text="This is bad routing! No machine data to fetch, please go back to machines list page and click the see-detail button of the machine you need to see it's detail." />
         )}{" "}
       </>
-      <CModal show={showModal} onClose={() => setShowModal(!showModal)}>
+      <CModal show={showModal} onClose={() => setShowModal(false)}>
         <CModalHeader closeButton>
           <CModalTitle className="text-muted">
             Assign {onMRCEdit && "MRC"} {onSIMEdit && "SIM Card"} to this
             Machine
           </CModalTitle>
         </CModalHeader>
-        <CForm onSubmit={"distributeMachine"}>
+        <CForm onSubmit={assignMRCorSIM}>
           <CModalBody>
             <CRow>
               {onMRCEdit && (
@@ -210,15 +242,19 @@ function MachineDetail({ id }) {
                     MRC
                     <CSelect
                       aria-label="Default select example"
-                      id="businessId"
-                      name="businessId"
+                      id="MRC"
+                      name="MRC"
+                      value={assignementDetail.MRC}
+                      onChange={onChangeInput}
                       required
                     >
-                      <option value="">Select MRC...</option>
+                      <option value="none">Select MRC...</option>
                       {mrcs
                         .filter(
-                          (mrc) => mrc.status === "free"
-                          // && mrc.branch == user.branch
+                          (mrc) =>
+                            (mrc.status === "free" &&
+                              mrc.branch == user.branch) ||
+                            mrc._id == machieneDetail.MRC
                         )
                         .map((filteredmrc) => (
                           <option value={filteredmrc._id} key={filteredmrc._id}>
@@ -233,7 +269,16 @@ function MachineDetail({ id }) {
                 <CCol sm="12">
                   <CFormGroup>
                     Insert the 10 digit of SIM card number
-                    <CInput maxlength="10" minLength="10"></CInput>
+                    <CInput
+                      id="SIM"
+                      name="SIM"
+                      placeholder="Inser SIM card number."
+                      maxLength="10"
+                      minLength="10"
+                      value={assignementDetail.SIM}
+                      onChange={onChangeInput}
+                      required
+                    />
                   </CFormGroup>
                 </CCol>
               )}
@@ -249,7 +294,7 @@ function MachineDetail({ id }) {
               onClick={() => {
                 setOnMRCEdit(false);
                 setOnSIMEdit(false);
-                setShowModal(!showModal);
+                setShowModal(false);
               }}
             >
               <CIcon name="cil-x" /> Close

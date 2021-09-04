@@ -15,6 +15,9 @@ router.delete("/delete/:id", machineCntrl.deleteMachine); // if it's not distrib
 router.post("/distribute", machineCntrl.distributMachine);
 router.put("/undistribute/:machineId", machineCntrl.undistributMachine);
 
+router.put("/assigne_mrc/:id", machineCntrl.assineMRC);
+router.put("/assigne_sim/:id", machineCntrl.assineSIM);
+
 router.get("/inRequest_machines", machineCntrl.allMachinesInRequest);
 router.get("/sold_machines", machineCntrl.allSoldMachines);
 router.get("/unsold_machines", machineCntrl.allUnsoldMachines);

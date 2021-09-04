@@ -112,6 +112,7 @@ const ChangePassword = () => {
                   name="newPassword"
                   placeholder="New Password"
                   autoComplete="new-password"
+                  minLength="6"
                   onChange={onChangeInput}
                   value={Password.newPassword}
                   required
@@ -128,6 +129,7 @@ const ChangePassword = () => {
                   placeholder="Repeat new password"
                   autoComplete="new-password"
                   name="retypeNewPassword"
+                  minLength="6"
                   onChange={onChangeInput}
                   value={Password.retypeNewPassword}
                   required

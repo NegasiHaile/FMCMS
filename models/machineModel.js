@@ -30,8 +30,8 @@ const machineSchema = new mongoose.Schema(
       default: "none",
     },
     SIM: {
-      type: Number,
-      default: null,
+      type: String,
+      default: "0",
     },
     branch: {
       type: String,

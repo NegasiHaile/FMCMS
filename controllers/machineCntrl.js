@@ -213,6 +213,36 @@ const machineCntrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  assineMRC: async (req, res) => {
+    try {
+      if (req.params.id) {
+        await Machines.findOneAndUpdate(
+          { _id: req.params.id },
+          { MRC: req.body.MRC }
+        );
+        res.json({ msg: "MRC of this machine is updated successfully!!" });
+      } else {
+        return res.status(400).json({ msg: "Opration failed!" });
+      }
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+  assineSIM: async (req, res) => {
+    try {
+      if (req.params.id) {
+        await Machines.findOneAndUpdate(
+          { _id: req.params.id },
+          { SIM: req.body.SIM }
+        );
+        res.json({ msg: "SIM card of this machine is updated successfully!!" });
+      } else {
+        return res.status(400).json({ msg: "Opration failed!" });
+      }
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
 };
 
 module.exports = machineCntrl;
