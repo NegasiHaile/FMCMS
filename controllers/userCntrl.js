@@ -311,14 +311,14 @@ const sendMailToUser = (mailDetail) => {
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "willkinghi@gmail.com",
-      pass: "iam>thatiwas", // Thepassword of the mailer
+      user: "negasihaile19@gmail.com",
+      pass: "Negasi@DevelopmentEmail", // Thepassword of the mailer
     },
   });
 
   console.log(mailDetail);
   var mailOptions = {
-    from: "willkinghi@gmail.com",
+    from: "negasihaile19@gmail.com",
     to: mailDetail.emailToMail,
     subject: mailDetail.subject,
     text: mailDetail.text + mailDetail.passwordToMail,
