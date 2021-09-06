@@ -49,7 +49,7 @@ const salesCntrl = {
             { MRC: { $lte: req.body.endTo } },
           ],
         },
-        { $set: { branch: req.body.branch } }
+        { $set: { branch: req.body.branchId } }
       );
       res.json({
         msg:
