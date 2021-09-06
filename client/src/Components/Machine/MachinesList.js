@@ -47,7 +47,7 @@ const MachinesList = () => {
     machineModel: "",
     brand: "",
     price: "",
-    branch: "null",
+    branch: "none",
     problemStatus: "",
     // for distributing
     businessId: "",
@@ -425,7 +425,7 @@ const MachinesList = () => {
                         value={machine.branch}
                         required
                       >
-                        <option value="">Select branch...</option>
+                        <option value="none">Select branch...</option>
                         {allBranchs.map((branch) => (
                           <option value={branch._id} key={branch._id}>
                             {branch.branchName}

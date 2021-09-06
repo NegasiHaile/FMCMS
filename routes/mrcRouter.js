@@ -6,6 +6,7 @@ const auth = require("../middleware/auth");
 router.post("/register", mrcCntrl.registerMRCs);
 router.get("/list", mrcCntrl.getMRCs);
 router.delete("/delete/:id", mrcCntrl.deleteMRC);
+router.put("/distribution_by_range", mrcCntrl.MRCDistributionByrange);
 
 // router.put("/request_for_approval/:businessId", mrcCntrl.requestForApproval);
 

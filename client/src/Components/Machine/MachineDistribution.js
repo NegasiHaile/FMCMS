@@ -43,7 +43,6 @@ function MachineDistribution() {
     }
     setMachineBrands(removeDuplicates(allMachines, (machine) => machine.brand));
   }, [allMachines]);
-
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     setmachineDistribution({ ...machineDistribution, [name]: value });
@@ -62,10 +61,11 @@ function MachineDistribution() {
   const onSubmitMachineDistribution = async (e) => {
     e.preventDefault();
     try {
-      alert("Done");
-      // const res = await axios.post("/machine/distribute", {
-      //   ...machineDistribution,
-      // });
+      const res = await axios.post("/machine/distribution", {
+        ...machineDistribution,
+      });
+      console.log(machineDistribution);
+      sweetAlert("success", res.data.msg);
       // sweetAlert("success", res.data.msg);
       // setCallback(!callback);
       // setCallbackBusiness(!callbackBusiness);
@@ -96,8 +96,8 @@ function MachineDistribution() {
                   <option value="">Select machine brand...</option>
                   {machineBrands &&
                     machineBrands.map((machine) => (
-                      <option value={machine._id} key={machine._id}>
-                        {machine.brand}
+                      <option value={machine.brand} key={machine._id}>
+                        {machine.brand} {machine.length}
                       </option>
                     ))}
                 </CSelect>

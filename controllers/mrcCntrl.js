@@ -40,6 +40,29 @@ const salesCntrl = {
       res.status(500).json({ msg: error.message });
     }
   },
+  MRCDistributionByrange: async (req, res) => {
+    try {
+      await MRCs.updateMany(
+        {
+          $and: [
+            { MRC: { $gte: req.body.startingFrom } },
+            { MRC: { $lte: req.body.endTo } },
+          ],
+        },
+        { $set: { branch: req.body.branch } }
+      );
+      res.json({
+        msg:
+          " The MRC of range from " +
+          req.body.startingFrom +
+          " - " +
+          req.body.endTo +
+          " is successfully distributed to the branch!",
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
 };
 
 module.exports = salesCntrl;

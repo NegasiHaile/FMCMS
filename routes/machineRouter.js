@@ -12,6 +12,8 @@ router.put("/edit/:id", machineCntrl.editMachine); // if it's not distributed ye
 
 router.delete("/delete/:id", machineCntrl.deleteMachine); // if it's not distributed yet
 
+router.post("/distribution", machineCntrl.machineDistribution);
+
 router.post("/distribute", machineCntrl.distributMachine);
 router.put("/undistribute/:machineId", machineCntrl.undistributMachine);
 

@@ -113,11 +113,12 @@ const MRCList = () => {
         </CCardHeader>
         <CCardBody>
           <CDataTable
+            size="sm"
             items={mrcs}
             fields={mrcTableFields}
             tableFilter
             itemsPerPageSelect
-            itemsPerPage={5}
+            itemsPerPage={10}
             hover
             cleaner
             sorter

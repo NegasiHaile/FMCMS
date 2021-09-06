@@ -21,32 +21,21 @@ import Swal from "sweetalert2";
 function MRCDistribution() {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
-  const [allMachines] = state.MachineAPI.machines;
-  const [machineBrands, setMachineBrands] = useState("");
+  const [mrcs] = state.MRCAPI.mrcs;
   const [allBranchs] = state.branchAPI.branchs;
-  const [branchCallback, setBranchCallback] = state.branchAPI.callback;
+  const [mrcCallback, setMRCCallback] = state.MRCAPI.callback;
 
-  const distributingDetail = {
+  const mrcDistributionDetail = {
     branchId: user.branch,
-    brand: "",
-    quantity: "",
+    startingFrom: "",
+    endTo: "",
   };
 
-  const [machineDistribution, setmachineDistribution] =
-    useState(distributingDetail);
-
-  useEffect(() => {
-    function removeDuplicates(data, key) {
-      return [
-        ...new Map(data.map((machine) => [key(machine), machine])).values(),
-      ];
-    }
-    setMachineBrands(removeDuplicates(allMachines, (machine) => machine.brand));
-  }, [allMachines]);
+  const [mrcDistribution, setMRCDistribution] = useState(mrcDistributionDetail);
 
   const onChangeInput = (e) => {
     const { name, value } = e.target;
-    setmachineDistribution({ ...machineDistribution, [name]: value });
+    setMRCDistribution({ ...mrcDistribution, [name]: value });
   };
   const sweetAlert = (type, text) => {
     Swal.fire({
@@ -59,46 +48,77 @@ function MRCDistribution() {
       // timer: 1500,
     });
   };
-  const onSubmitMachineDistribution = async (e) => {
+  const onSubmitMRCDistribution = async (e) => {
     e.preventDefault();
     try {
-      alert("Done");
-      // const res = await axios.post("/machine/distribute", {
-      //   ...machineDistribution,
-      // });
-      // sweetAlert("success", res.data.msg);
-      // setCallback(!callback);
-      // setCallbackBusiness(!callbackBusiness);
-      // setCallbackSales(!callbackSales);
+      const res = await axios.put("/mrc/distribution_by_range", {
+        ...mrcDistribution,
+      });
+      sweetAlert("success", res.data.msg);
+      setMRCCallback(!mrcCallback);
     } catch (error) {
       sweetAlert("error", error.response.data.msg);
     }
   };
+
+  console.log(mrcDistribution);
   return (
     <CCard sm="12" md="10" lg="8">
       <CCardHeader>
-        <h6>Ditribut MRC to sub branchs</h6>
+        <h6>Ditribut MRC to sub branchs by range</h6>
       </CCardHeader>
-      <CForm onSubmit={onSubmitMachineDistribution}>
+      <CForm onSubmit={onSubmitMRCDistribution}>
         <CCardBody>
           <CRow>
-            <CCol md="6">
+            <CCol md="4">
               <CFormGroup>
-                <CLabel>MRC quantity</CLabel>
-                <CInput
-                  type="number"
-                  id="quantity"
-                  name="quantity"
-                  placeholder="Quantity"
+                <CLabel> Range starting point </CLabel>
+                <CSelect
+                  aria-label="Default select example"
+                  id="startingFrom"
+                  name="startingFrom"
                   onChange={onChangeInput}
-                  value={machineDistribution.quantity}
-                  min="1"
-                  max="200"
+                  value={mrcDistribution.startingFrom}
                   required
-                ></CInput>
+                >
+                  <option value="">Select starting range...</option>
+                  {mrcs
+                    .filter((filteredMRC) => filteredMRC.branch === "none")
+                    .map((mrc) => (
+                      <option value={mrc.MRC} key={mrc._id}>
+                        {mrc.MRC}
+                      </option>
+                    ))}
+                </CSelect>
               </CFormGroup>
             </CCol>
-            <CCol md="6">
+            <CCol md="4">
+              <CFormGroup>
+                <CLabel> Range end point </CLabel>
+                <CSelect
+                  aria-label="Default select example"
+                  id="endTo"
+                  name="endTo"
+                  onChange={onChangeInput}
+                  value={mrcDistribution.endTo}
+                  required
+                >
+                  <option value="">Select end range...</option>
+                  {mrcs
+                    .filter(
+                      (filteredMRC) =>
+                        filteredMRC.branch === "none" &&
+                        filteredMRC.MRC > mrcDistribution.startingFrom
+                    )
+                    .map((mrc) => (
+                      <option value={mrc.MRC} key={mrc._id}>
+                        {mrc.MRC}
+                      </option>
+                    ))}
+                </CSelect>
+              </CFormGroup>
+            </CCol>
+            <CCol md="4">
               <CFormGroup>
                 <CLabel>To which branch</CLabel>
                 <CSelect
@@ -106,7 +126,7 @@ function MRCDistribution() {
                   id="branchId"
                   name="branchId"
                   onChange={onChangeInput}
-                  value={machineDistribution.branchId}
+                  value={mrcDistribution.branchId}
                   required
                 >
                   <option value="">Select branch...</option>
@@ -140,7 +160,7 @@ function MRCDistribution() {
                     size="sm"
                     color="danger"
                     className="w-100"
-                    onClick={() => setmachineDistribution(distributingDetail)}
+                    onClick={() => setMRCDistribution(mrcDistributionDetail)}
                   >
                     <CIcon name="cil-x" /> Clear
                   </CButton>

@@ -1,6 +1,7 @@
 const Machines = require("../models/machineModel");
 const clientBusinesses = require("../models/clientBusinessModel");
 const Sales = require("../models/salesModel");
+const MRCs = require("../models/mrcModel");
 const returnmachines = require("../models/returnMachineModel");
 
 const machineCntrl = {
@@ -68,7 +69,45 @@ const machineCntrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  machineDistribution: async (req, res) => {
+    try {
+      const machinsOfSpesficBrand = await Machines.find({
+        $and: [{ brand: req.body.brand }, { branch: "none" }],
+      });
 
+      if (machinsOfSpesficBrand.length >= Number(req.body.quantity)) {
+        const ids = await Machines.find({
+          brand: req.body.brand,
+          branch: "none",
+        }).limit(Number(req.body.quantity));
+        await Machines.updateMany(
+          { _id: { $in: ids } },
+          { branch: req.body.branchId }
+        );
+        res.json({
+          msg:
+            req.body.quantity +
+            " Machines of " +
+            req.body.brand +
+            " brand have been successfully distributed to the branch!",
+        });
+        // res.json({ msg: machinsOfSpesficBrand.length });
+      } else {
+        return res.status(400).json({
+          msg:
+            "You have only " +
+            machinsOfSpesficBrand.length +
+            " undistributed machines with " +
+            req.body.brand +
+            " brand but you are requesting " +
+            req.body.quantity +
+            "  please add more machines first!",
+        });
+      }
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
   distributMachine: async (req, res) => {
     try {
       // const { branch, businessId, machineId, status } = req.body;
@@ -216,10 +255,13 @@ const machineCntrl = {
   assineMRC: async (req, res) => {
     try {
       if (req.params.id) {
+        // const machineDetail = await Machines.findById({ _id: req.params.id });
+
         await Machines.findOneAndUpdate(
           { _id: req.params.id },
           { MRC: req.body.MRC }
         );
+        await MRCs.findOneAndUpdate({ _id: req.body.MRC }, { status: "taken" });
         res.json({ msg: "MRC of this machine is updated successfully!!" });
       } else {
         return res.status(400).json({ msg: "Opration failed!" });

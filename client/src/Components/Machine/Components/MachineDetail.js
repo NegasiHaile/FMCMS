@@ -50,6 +50,7 @@ function MachineDetail({ id }) {
     const { name, value } = e.target;
     setAssignementDetail({ ...assignementDetail, [name]: value });
   };
+
   useEffect(() => {
     if (id && machines) {
       const machine = machines.find(
