@@ -9,6 +9,9 @@ const ChangePassword = lazy(() =>
 // Jupiter branchs
 const OpenNewBranch = lazy(() => import("../../Components/Branch/BranchList"));
 const BranchDetail = lazy(() => import("../../Components/Branch/BranchDetail"));
+const BranchDashboard = lazy(() =>
+  import("../../Components/Branch/BranchDashboard")
+);
 
 // Dashboards
 const jupiterDashboard = lazy(() =>
@@ -90,7 +93,7 @@ const routes = [
     path: "/Branch/Detail/:id",
     exact: true,
     name: "Branch-Detail",
-    component: BranchDetail,
+    component: BranchDashboard,
   },
   // Employee
   {
