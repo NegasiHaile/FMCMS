@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { GlobalState } from "../../GlobalState";
 import {
@@ -23,6 +23,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+import { json } from "body-parser";
 
 const mrcDetail = {
   MRC: "",
@@ -31,7 +32,7 @@ const mrcDetail = {
 const MRCList = () => {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
-  const [mrcs] = state.MRCAPI.mrcs;
+  const [mrcs, setMRCs] = state.MRCAPI.mrcs;
   const [mrcCallBack, setMRCCallBack] = state.MRCAPI.callback;
   const [token] = state.token;
 
@@ -43,7 +44,15 @@ const MRCList = () => {
     const { name, value } = e.target;
     setMRC({ ...mrc, [name]: value });
   };
-
+  useEffect(() => {
+    if (user.userRole !== "super-admin" && user.userRole !== "main-store") {
+      setMRCs(
+        mrcs.filter((filteredMRCs) => filteredMRCs.branch == user.branch)
+      );
+    } else {
+      setMRCs(mrcs);
+    }
+  }, [user, mrcs]);
   const sweetAlert = (type, text) => {
     Swal.fire({
       position: "center",
@@ -92,7 +101,6 @@ const MRCList = () => {
   };
 
   const mrcTableFields = ["MRC", "status", "createdAt", "Actions"];
-
   return (
     <>
       <CCard className=" shadow-sm">
@@ -151,7 +159,7 @@ const MRCList = () => {
         </CCardBody>
 
         <CModal
-          size="md"
+          size="sm"
           show={showModal}
           onClose={() => setShowModal(!showModal)}
         >
@@ -167,7 +175,7 @@ const MRCList = () => {
                     <CInput
                       id="MRC"
                       name="MRC"
-                      maxlength="10"
+                      maxLength="10"
                       minLength="10"
                       placeholder="Enter branch unique name."
                       value={mrc.MRC}
