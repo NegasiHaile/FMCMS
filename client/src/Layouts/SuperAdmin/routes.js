@@ -90,7 +90,7 @@ const routes = [
     component: OpenNewBranch,
   },
   {
-    path: "/Branch/Detail/:id",
+    path: "/branch/detail/:id",
     exact: true,
     name: "Branch-Detail",
     component: BranchDashboard,

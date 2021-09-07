@@ -195,7 +195,7 @@ function BranchList() {
 
                   <CLink
                     className="text-primary"
-                    to={`/Branch/Detail/${branch._id}`}
+                    to={`/branch/detail/${branch._id}`}
                   >
                     <CTooltip
                       content={`See detail of - ${branch.branchName}- branch.`}
@@ -318,7 +318,7 @@ function BranchList() {
                       name="telephone"
                       placeholder="Enter branch telephone"
                       pattern="[1-9]{1}[0-9]{9}"
-                      maxlength="13"
+                      maxLength="13"
                       value={branch.telephone}
                       onChange={onChangeInput}
                       required
