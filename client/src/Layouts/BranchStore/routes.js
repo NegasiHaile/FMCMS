@@ -65,6 +65,13 @@ const routes = [
   },
   // Machine
   {
+    path: "/machines/list",
+    exact: true,
+    name: "Machines-List",
+    component: MachinesList,
+  },
+
+  {
     path: "/machine/detail/:id",
     exact: true,
     name: "Machine-Detail",
@@ -102,7 +109,6 @@ const routes = [
     name: "Machines-List",
     component: MrcsList,
   },
-
   // Sales
   {
     path: "/sales/list",
