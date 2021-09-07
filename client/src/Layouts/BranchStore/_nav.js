@@ -36,7 +36,6 @@ const _nav = [
     to: "/machines/list",
     icon: "cil-print",
   },
-
   // MRC Managment and controlling
   {
     _tag: "CSidebarNavTitle",
@@ -58,6 +57,13 @@ const _nav = [
     name: "List of all MRC",
     to: "/mrc/list",
     icon: "cil-asterisk-circle",
+  },
+
+  {
+    _tag: "CSidebarNavItem",
+    name: "List of all Mrcs",
+    to: "/mrcs/list",
+    icon: "cil-asterisk",
   },
   {
     _tag: "CSidebarNavTitle",
