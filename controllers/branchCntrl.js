@@ -43,7 +43,7 @@ const branchsCntrl = {
   },
   getBranchDetail: async (req, res) => {
     try {
-      const branch = await Branchs.findById({ _id: rea.params.branchId });
+      const branch = await Branchs.findById({ _id: req.params.branchId });
       res.json(branch);
     } catch (error) {
       res.status(500).json({ msg: error.message });
