@@ -36,7 +36,7 @@ const branchDetail = {
   email: "",
 };
 
-const BranchList = () => {
+function BranchList() {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [token] = state.token;
@@ -363,6 +363,6 @@ const BranchList = () => {
       </CCard>
     </>
   );
-};
+}
 
 export default BranchList;
