@@ -121,6 +121,7 @@ const MRCList = () => {
         </CCardHeader>
         <CCardBody>
           <CDataTable
+            className="table table-striped table-dark"
             size="sm"
             items={mrcs}
             fields={mrcTableFields}
@@ -134,12 +135,20 @@ const MRCList = () => {
             scopedSlots={{
               Actions: (mrc) => (
                 <td className="d-flex justify-content-between">
-                  {/* <CLink className="text-primary" to={`/mrc/Detail/${mrc._id}`}>
-                    <CTooltip content={`See detail of - ${mrc.MRC}- branch.`}>
-                      <CIcon name="cil-fullscreen" />
-                    </CTooltip>
-                  </CLink> */}
                   {user.userRole === "main-store" && mrc.status === "free" && (
+                    <CLink
+                      className="text-success"
+                      onClick={() => {
+                        setActiveMRC("none");
+                        setShowModal(!showModal);
+                      }}
+                    >
+                      <CTooltip content={`See detail of - ${mrc.MRC}- branch.`}>
+                        <CIcon name="cil-pencil" />
+                      </CTooltip>
+                    </CLink>
+                  )}
+                  {user.userRole === "main-store" && mrc.branch === "none" && (
                     <>
                       <span className="text-muted">|</span>
                       <CLink
@@ -158,11 +167,7 @@ const MRCList = () => {
           />
         </CCardBody>
 
-        <CModal
-          size="sm"
-          show={showModal}
-          onClose={() => setShowModal(!showModal)}
-        >
+        <CModal show={showModal} onClose={() => setShowModal(!showModal)}>
           <CModalHeader closeButton>
             <CModalTitle>Add new MRC</CModalTitle>
           </CModalHeader>

@@ -22,6 +22,16 @@ const salesCntrl = {
             as: "business",
           },
         },
+        {
+          $match: {
+            "machine._id": {
+              $exists: true,
+            },
+            "business._id": {
+              $exists: true,
+            },
+          },
+        },
       ]);
       var data = [];
       allSales.forEach((sale) => {
