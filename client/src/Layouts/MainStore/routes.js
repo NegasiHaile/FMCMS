@@ -28,7 +28,7 @@ const MachineReturningLists = lazy(() =>
   import("../../Components/MachineReturn/MachineReturningLists")
 );
 // Importing MRC related routes
-const MRCList = lazy(() => import("../../Components/MRC/MRCList"));
+const MrcsList = lazy(() => import("../../Components/MRC/MrcsList"));
 const MRCDistribution = lazy(() =>
   import("../../Components/MRC/MRCDistribution")
 );
@@ -87,10 +87,10 @@ const routes = [
   },
   // MRC
   {
-    path: "/mrc/list",
+    path: "/mrcs/list",
     exact: true,
-    name: "MRC-List",
-    component: MRCList,
+    name: "Mrc-List",
+    component: MrcsList,
   },
   {
     path: "/mrc/distribution",

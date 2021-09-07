@@ -41,8 +41,8 @@ const _nav = [
 
   {
     _tag: "CSidebarNavItem",
-    name: "List of MRC",
-    to: "/mrc/list",
+    name: "List of all MRC",
+    to: "/mrcs/list",
     icon: "cil-asterisk-circle",
   },
   {

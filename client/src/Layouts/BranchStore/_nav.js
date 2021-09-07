@@ -55,15 +55,8 @@ const _nav = [
   {
     _tag: "CSidebarNavItem",
     name: "List of all MRC",
-    to: "/mrc/list",
-    icon: "cil-asterisk-circle",
-  },
-
-  {
-    _tag: "CSidebarNavItem",
-    name: "List of all Mrcs",
     to: "/mrcs/list",
-    icon: "cil-asterisk",
+    icon: "cil-asterisk-circle",
   },
   {
     _tag: "CSidebarNavTitle",

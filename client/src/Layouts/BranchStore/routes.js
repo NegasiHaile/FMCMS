@@ -18,7 +18,6 @@ const branchDashboard = lazy(() =>
 const MachinesList = lazy(() =>
   import("../../Components/Machine/MachinesList")
 );
-const MrcsList = lazy(() => import("../../Components/MRC/MrcsList"));
 const MachineDtail = lazy(() =>
   import("../../Components/Machine/MachineDtail")
 );
@@ -33,7 +32,7 @@ const BusinessDetail = lazy(() =>
   import("../../Components/Business/BusinessDetail")
 );
 // Importing MRC related routes
-const MRCList = lazy(() => import("../../Components/MRC/MRCList"));
+const MrcsList = lazy(() => import("../../Components/MRC/MrcsList"));
 // Importing of maintenance ralted routes
 const MaintenanceAnnual = lazy(() =>
   import("../../Components/Maintenance/MaintenanceAnnual")
@@ -98,15 +97,9 @@ const routes = [
   },
   // MRC
   {
-    path: "/mrc/list",
-    exact: true,
-    name: "MRC-List",
-    component: MRCList,
-  },
-  {
     path: "/mrcs/list",
     exact: true,
-    name: "Machines-List",
+    name: "Mrc-List",
     component: MrcsList,
   },
   // Sales
