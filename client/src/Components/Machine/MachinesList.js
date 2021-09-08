@@ -316,7 +316,7 @@ const MachinesList = () => {
                     <>
                       <CLink
                         className="text-info"
-                        to={`/machine/detail/${machine._id}`}
+                        to={`/machine/indetail/${machine._id}`}
                       >
                         <CTooltip
                           content={`See detail of  - ${machine.serialNumber}- machine.`}
