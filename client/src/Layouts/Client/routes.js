@@ -31,11 +31,11 @@ const BusinessDetail = lazy(() =>
 );
 
 // Importing of machine related pages
-const MachineDtail = lazy(() =>
-  import("../../Components/Machine/MachineDtail")
-);
 const MachinesList = lazy(() =>
   import("../../Components/Machine/MachinesList")
+);
+const MachineIndetail = lazy(() =>
+  import("../../Components/Machine/MachineIndetail")
 );
 // Importing of maintenance ralted pages
 const MaintenanceAnnual = lazy(() =>
@@ -92,16 +92,22 @@ const routes = [
   },
   // Machine
   {
-    path: "/available_machines",
-    exact: true,
-    name: "Available-Machines",
-    component: MachineDtail,
-  },
-  {
     path: "/machines/list",
     exact: true,
     name: "Machines-List",
     component: MachinesList,
+  },
+  {
+    path: "/machine/indetail/:id",
+    exact: true,
+    name: "Machine-Indetail",
+    component: MachineIndetail,
+  },
+  {
+    path: "/machine/indetail/:id",
+    exact: true,
+    name: "Machine-Indetail",
+    component: MachineIndetail,
   },
   // Maintenance
   {

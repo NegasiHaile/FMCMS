@@ -52,9 +52,6 @@ const MachineDistribute = lazy(() =>
 const MachinesList = lazy(() =>
   import("../../Components/Machine/MachinesList")
 );
-const MachineDtail = lazy(() =>
-  import("../../Components/Machine/MachineDtail")
-);
 const MachineIndetail = lazy(() =>
   import("../../Components/Machine/MachineIndetail")
 );

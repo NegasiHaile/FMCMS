@@ -21,11 +21,11 @@ const branchDashboard = lazy(() =>
 const MachinesList = lazy(() =>
   import("../../Components/Machine/MachinesList")
 );
+const MachineIndetail = lazy(() =>
+  import("../../Components/Machine/MachineIndetail")
+);
 const MachineDistribution = lazy(() =>
   import("../../Components/Machine/MachineDistribution")
-);
-const MachineDtail = lazy(() =>
-  import("../../Components/Machine/MachineDtail")
 );
 const MachineReturningLists = lazy(() =>
   import("../../Components/MachineReturn/MachineReturningLists")
@@ -77,16 +77,22 @@ const routes = [
     component: MachinesList,
   },
   {
+    path: "/machine/indetail/:id",
+    exact: true,
+    name: "Machine-Indetail",
+    component: MachineIndetail,
+  },
+  {
     path: "/machine/distribution",
     exact: true,
     name: "Machine-Distribution",
     component: MachineDistribution,
   },
   {
-    path: "/machine/detail/:id",
+    path: "/machine/indetail/:id",
     exact: true,
-    name: "Machine-Detail",
-    component: MachineDtail,
+    name: "Machine-Indetail",
+    component: MachineIndetail,
   },
   {
     path: "/machine/returnlist",

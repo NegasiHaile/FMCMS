@@ -41,8 +41,8 @@ const MachineDistribute = lazy(() =>
 const MachinesList = lazy(() =>
   import("../../Components/Machine/MachinesList")
 );
-const MachineDtail = lazy(() =>
-  import("../../Components/Machine/MachineDtail")
+const MachineIndetail = lazy(() =>
+  import("../../Components/Machine/MachineIndetail")
 );
 // Importing of maintenance ralted pages
 const MaintenanceAnnual = lazy(() =>
@@ -145,10 +145,10 @@ const routes = [
     component: MachinesList,
   },
   {
-    path: "/machine/detail/:id",
+    path: "/machine/indetail/:id",
     exact: true,
-    name: "Machine-Detail",
-    component: MachineDtail,
+    name: "Machine-Indetail",
+    component: MachineIndetail,
   },
   {
     path: "/machine/returnlist",
