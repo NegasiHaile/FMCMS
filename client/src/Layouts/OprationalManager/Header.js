@@ -91,7 +91,7 @@ const Header = () => {
             <CIcon name="cil-graph" alt="Branch Inventory" />
             &nbsp;Inventory
           </CLink>
-          <CLink className="c-subheader-nav-link" to="/Branch/List">
+          <CLink className="c-subheader-nav-link" to="/branchs/list">
             <CIcon name="cil-Building" alt="OM" />
             &nbsp;Jupiter-Branchs
           </CLink>
