@@ -1,9 +1,12 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import MachineDetail from "./Components/MachineDetail";
 
 function MachineIndetail() {
+  const params = useParams();
   return (
     <div>
-      <h3> This is machine in detail</h3>
+      <MachineDetail id={params.id} />
     </div>
   );
 }
