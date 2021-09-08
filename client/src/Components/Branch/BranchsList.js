@@ -129,9 +129,239 @@ function BranchsList() {
     "Actions",
   ];
   return (
-    <div>
-      <h3>This is branchs list</h3>
-    </div>
+    <>
+      <CCard className=" shadow-sm">
+        <CCardHeader className="d-flex justify-content-between">
+          <CLabel>Jupiter Branhcs</CLabel>
+          {user.userRole === "super-admin" && (
+            <CButton
+              size="sm"
+              color="light"
+              onClick={() => {
+                setBranch({ branch, ...branchDetail });
+                setActiveBranch("none");
+                setShowModal(!showModal);
+              }}
+            >
+              <CIcon name="cil-plus" /> Open New Branch
+            </CButton>
+          )}
+        </CCardHeader>
+        <CCardBody>
+          <CDataTable
+            items={branchs}
+            fields={branchTableFields}
+            tableFilter
+            itemsPerPageSelect
+            itemsPerPage={5}
+            hover
+            cleaner
+            sorter
+            pagination
+            scopedSlots={{
+              Actions: (branch) => (
+                <td className="d-flex justify-content-between">
+                  {user.userRole === "super-admin" && (
+                    <>
+                      {" "}
+                      <CLink
+                        className="text-success"
+                        onClick={() => {
+                          setBranch({ branch, ...branch });
+                          setActiveBranch(branch._id);
+                          setShowModal(!showModal);
+                        }}
+                      >
+                        <CTooltip
+                          content={`Edit the  - ${branch.branchName}- branch detail.`}
+                        >
+                          <CIcon name="cil-pencil" />
+                        </CTooltip>
+                      </CLink>
+                      <span className="text-muted">|</span>
+                      <CLink
+                        className="text-danger"
+                        onClick={() => deleteBranch(branch._id)}
+                      >
+                        <CTooltip
+                          content={`Delete - ${branch.branchName}- branch.`}
+                        >
+                          <CIcon name="cil-trash" />
+                        </CTooltip>
+                      </CLink>
+                      <span className="text-muted">|</span>{" "}
+                    </>
+                  )}
+
+                  <CLink
+                    className="text-primary"
+                    to={`/branch/detail/${branch._id}`}
+                  >
+                    <CTooltip
+                      content={`See detail of - ${branch.branchName}- branch.`}
+                    >
+                      <CIcon name="cil-fullscreen" />
+                    </CTooltip>
+                  </CLink>
+                </td>
+              ),
+            }}
+          />
+        </CCardBody>
+
+        <CModal
+          size="lg"
+          show={showModal}
+          onClose={() => setShowModal(!showModal)}
+        >
+          <CModalHeader closeButton>
+            <CModalTitle>Openning new branch form</CModalTitle>
+          </CModalHeader>
+          <CForm onSubmit={onSubmitOpenBranch}>
+            <CModalBody>
+              <CRow>
+                <CCol xs="12">
+                  <CFormGroup>
+                    Branch Name
+                    <CInput
+                      id="branchName"
+                      name="branchName"
+                      placeholder="Enter branch unique name."
+                      value={branch.branchName}
+                      onChange={onChangeInput}
+                      required
+                    />
+                  </CFormGroup>
+                </CCol>
+
+                <CCol xs="12" md="4">
+                  <CFormGroup>
+                    Address City
+                    <CInput
+                      id="city"
+                      name="city"
+                      placeholder="enter the branch city"
+                      value={branch.city}
+                      onChange={onChangeInput}
+                      required
+                    />
+                  </CFormGroup>
+                </CCol>
+                <CCol xs="12" md="4">
+                  <CFormGroup>
+                    Sub city
+                    <CInput
+                      id="subCity"
+                      name="subCity"
+                      placeholder="Enter sub city."
+                      value={branch.subCity}
+                      onChange={onChangeInput}
+                      required
+                    />
+                  </CFormGroup>
+                </CCol>
+
+                <CCol xs="12" md="4">
+                  <CFormGroup>
+                    Kebele
+                    <CInput
+                      id="kebele"
+                      name="kebele"
+                      placeholder="Enter kebele."
+                      value={branch.kebele}
+                      onChange={onChangeInput}
+                    />
+                  </CFormGroup>
+                </CCol>
+                <CCol xs="12" md="4">
+                  <CFormGroup>
+                    Woreda
+                    <CInput
+                      id="woreda"
+                      name="woreda"
+                      placeholder="Enter woreda."
+                      value={branch.woreda}
+                      onChange={onChangeInput}
+                    />
+                  </CFormGroup>
+                </CCol>
+                <CCol xs="12" md="4">
+                  <CFormGroup>
+                    Building Name
+                    <CInput
+                      id="buildingName"
+                      name="buildingName"
+                      placeholder="Enter building name."
+                      value={branch.buildingName}
+                      onChange={onChangeInput}
+                    />
+                  </CFormGroup>
+                </CCol>
+                <CCol xs="12" md="4">
+                  <CFormGroup>
+                    Office Number
+                    <CInput
+                      id="officeNumber"
+                      name="officeNumber"
+                      placeholder="Enter office number"
+                      value={branch.officeNumber}
+                      onChange={onChangeInput}
+                    />
+                  </CFormGroup>
+                </CCol>
+                <CCol xs="12" md="6">
+                  <CFormGroup>
+                    Telephone
+                    <CInput
+                      type="text"
+                      id="telephone"
+                      name="telephone"
+                      placeholder="Enter branch telephone"
+                      pattern="[1-9]{1}[0-9]{9}"
+                      maxLength="13"
+                      value={branch.telephone}
+                      onChange={onChangeInput}
+                      required
+                    />
+                  </CFormGroup>
+                </CCol>
+                <CCol xs="12" md="6">
+                  <CFormGroup>
+                    Email
+                    <CInput
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Enter branch email"
+                      value={branch.email}
+                      onChange={onChangeInput}
+                    />
+                  </CFormGroup>
+                </CCol>
+              </CRow>
+            </CModalBody>
+            <CModalFooter>
+              {activeBranch === "none" ? (
+                <CButton type="submit" size="sm" color="success">
+                  <CIcon name="cil-save" /> Open Branch
+                </CButton>
+              ) : (
+                <CButton size="sm" color="dark" onClick={editBranchDetail}>
+                  <CIcon name="cil-pencil" /> Save Changes
+                </CButton>
+              )}
+              <CButton
+                size="sm"
+                color="danger"
+                onClick={() => setShowModal(!showModal)}
+              >
+                <CIcon name="cil-x" /> Close
+              </CButton>
+            </CModalFooter>
+          </CForm>
+        </CModal>
+      </CCard>
+    </>
   );
 }
 
