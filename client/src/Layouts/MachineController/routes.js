@@ -58,6 +58,7 @@ const MachineReturningLists = lazy(() =>
 
 // Importing of Sales ralted pages
 const SalesList = lazy(() => import("../../Components/Sales/SalesList"));
+const SalesDetail = lazy(() => import("../../Components/Sales/SalesDetail"));
 // Others pages
 const FeedbacksList = lazy(() =>
   import("../../Components/Feedback/FeedbacksList")
@@ -160,10 +161,16 @@ const routes = [
   },
   // Sales
   {
-    path: "/sales/list",
+    path: "/sales/oflist",
     exact: true,
     name: "Sales-List",
     component: SalesList,
+  },
+  {
+    path: "/sales/detail/:id",
+    exact: true,
+    name: "Sales-Detail",
+    component: SalesDetail,
   },
   // User Accont
   {

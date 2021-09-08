@@ -122,7 +122,7 @@ const routes = [
   },
   // Sales
   {
-    path: "/sales/list",
+    path: "/sales/oflist",
     exact: true,
     name: "Sales-List",
     component: SalesList,

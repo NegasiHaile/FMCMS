@@ -65,7 +65,7 @@ const _nav = [
   {
     _tag: "CSidebarNavItem",
     name: "Machine Sales",
-    to: "/sales/list",
+    to: "/sales/oflist",
     icon: "cil-star",
     badge: {
       color: "danger",
