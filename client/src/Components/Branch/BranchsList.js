@@ -37,6 +37,14 @@ const branchDetail = {
 };
 
 function BranchsList() {
+  const state = useContext(GlobalState);
+  const [user] = state.UserAPI.User;
+  const [token] = state.token;
+  const [branch, setBranch] = useState(branchDetail);
+  const [branchs] = state.branchAPI.branchs;
+  const [callback, setCallback] = state.branchAPI.callback;
+  const [activeBranch, setActiveBranch] = useState("none");
+  const [showModal, setShowModal] = useState(false);
   return (
     <div>
       <h3>This is branchs list</h3>
