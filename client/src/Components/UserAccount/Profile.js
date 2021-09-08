@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { GlobalState } from "../../GlobalState";
+import UserInfo from "./Components/UserInfo";
 import BadRouting from "../Utils/routing/BadRouting";
 function Profile() {
   const state = useContext(GlobalState);
@@ -20,12 +21,7 @@ function Profile() {
     <div>
       {userDetail ? (
         <>
-          <h5>
-            Full Name:{" "}
-            {userDetail.fName + " " + userDetail.mName + " " + userDetail.lName}{" "}
-          </h5>
-          <h5>Contacts: {userDetail.phoneNumber + " " + userDetail.email}</h5>
-
+          <UserInfo id={params.id} />
           <div></div>
         </>
       ) : (
