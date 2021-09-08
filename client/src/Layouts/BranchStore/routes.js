@@ -27,13 +27,6 @@ const MachineIndetail = lazy(() =>
 const MachineReturningLists = lazy(() =>
   import("../../Components/MachineReturn/MachineReturningLists")
 );
-// Client business frontend routing
-const BusinessesList = lazy(() =>
-  import("../../Components/Business/BusinessesList")
-);
-const BusinessDetail = lazy(() =>
-  import("../../Components/Business/BusinessDetail")
-);
 // Importing MRC related routes
 const MrcsList = lazy(() => import("../../Components/MRC/MrcsList"));
 // Importing of maintenance ralted routes
@@ -90,19 +83,6 @@ const routes = [
     exact: true,
     name: "Request-Return-Machine",
     component: MachineReturningLists,
-  },
-  // business
-  {
-    path: "/business/list",
-    exact: true,
-    name: "Business-List",
-    component: BusinessesList,
-  },
-  {
-    path: "/business/detail/:id",
-    exact: true,
-    name: "Register-Business",
-    component: BusinessDetail,
   },
   // MRC
   {
