@@ -195,7 +195,7 @@ function BranchsList() {
 
                   <CLink
                     className="text-primary"
-                    to={`/branch/detail/${branch._id}`}
+                    to={`/branch/indetail/${branch._id}`}
                   >
                     <CTooltip
                       content={`See detail of - ${branch.branchName}- branch.`}
