@@ -93,7 +93,7 @@ function SalesDetail() {
                 <h6 className="text-center text-muted">
                   Machine serial number
                 </h6>
-                <CLink to={`/machine/Detail/${salesDetail.machineId}`}>
+                <CLink to={`/machine/indetail/${salesDetail.machineId}`}>
                   <h6 className="text-center text-primary">
                     {salesDetail.machineSerialNumber}
                   </h6>
