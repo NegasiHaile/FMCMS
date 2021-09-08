@@ -16,15 +16,9 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Jupiter Branchs",
-    to: "/Branch/List",
-    icon: "cil-bank",
-  },
-  {
-    _tag: "CSidebarNavItem",
     name: "Branchs-List",
     to: "/branchs/list",
-    icon: "cil-home",
+    icon: "cil-bank",
   },
   {
     _tag: "CSidebarNavTitle",
