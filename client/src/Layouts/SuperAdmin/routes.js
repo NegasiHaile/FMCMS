@@ -61,7 +61,8 @@ const MaintenanceAnnual = lazy(() =>
   import("../../Components/Maintenance/MaintenanceAnnual")
 );
 // Importing of Sales ralted pages
-const ListOfSales = lazy(() => import("../../Components/Sales/ListOfSales"));
+
+const SalesList = lazy(() => import("../../Components/Sales/SalesList"));
 const SalesDetail = lazy(() => import("../../Components/Sales/SalesDetail"));
 
 // Others pages
@@ -184,7 +185,7 @@ const routes = [
     path: "/sales/oflist",
     exact: true,
     name: "Sales-List",
-    component: ListOfSales,
+    component: SalesList,
   },
   {
     path: "/sales/detail/:id",
