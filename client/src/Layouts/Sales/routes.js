@@ -107,7 +107,7 @@ const routes = [
     component: BusinessRegistration,
   },
   {
-    path: "/business/list",
+    path: "/businesses/list",
     exact: true,
     name: "Business-List",
     component: BusinessesList,
