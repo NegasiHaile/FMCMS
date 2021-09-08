@@ -83,7 +83,7 @@ const _nav = [
   {
     _tag: "CSidebarNavItem",
     name: "Business-List",
-    to: "/business/list",
+    to: "/businesses/list",
     icon: "cil-building",
   },
   {

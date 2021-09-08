@@ -105,6 +105,7 @@ const BusinessesList = () => {
         </CCardHeader>
         <CCardBody>
           <CDataTable
+            size="sm"
             items={businesses}
             fields={businessTableFields}
             tableFilter
