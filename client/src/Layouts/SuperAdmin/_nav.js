@@ -49,7 +49,7 @@ const _nav = [
   {
     _tag: "CSidebarNavItem",
     name: "General Sales",
-    to: "/sales/list",
+    to: "/sales/oflist",
     icon: "cil-money",
   },
   {
