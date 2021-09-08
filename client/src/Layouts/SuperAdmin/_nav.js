@@ -21,6 +21,12 @@ const _nav = [
     icon: "cil-bank",
   },
   {
+    _tag: "CSidebarNavItem",
+    name: "Branchs-List",
+    to: "/branchs/list",
+    icon: "cil-home",
+  },
+  {
     _tag: "CSidebarNavTitle",
     _children: ["Employee's-Managment"],
   },
