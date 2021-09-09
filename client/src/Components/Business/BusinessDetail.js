@@ -194,75 +194,86 @@ function BusinessDetail() {
             <CCol sm="12" md="3" className="d-flex justify-content-center">
               <CImg
                 className="shadow-sm "
-                height="150"
+                height="172"
                 src="/Others/bsnsIcon1.png"
                 alt="Business Img"
               />
             </CCol>
-            <CCol sm="6" md="6" className="mt-1">
-              <h6></h6>
-              <p>
-                <strong>Businss Name:</strong> {business.businessName}
-              </p>
-              <p>
-                <strong>Company Name:</strong> {business.companyName}
-              </p>
-              <p>
-                <strong>TIN:</strong> {business.TIN}
-              </p>
-              <p>
-                <strong>VAT:</strong> {business.VAT}
-              </p>
-            </CCol>
-            <CCol sm="6" md="3" className="mt-1">
-              <h6></h6>
-              <p>
-                <strong>Machine:</strong> {business.machine}
-              </p>
-              <p>
-                <strong>Credentials:</strong> {business.credentials}
-              </p>
-              {user.userRole === "branch-admin" && (
-                <>
-                  {" "}
-                  {business.credentials === "Pending" && (
-                    <span className="d-flex justify-content-between">
-                      <CButton
-                        color="dark"
-                        size="sm"
-                        className="mr-1 w-50"
-                        onClick={() => {
-                          AccepteBusinessCredentials(business._id);
-                        }}
-                      >
-                        <CIcon name="cil-check-circle" /> Accept
-                      </CButton>
-                      <CButton
-                        onClick={() => {
-                          setShowRejectBusinessModal(!showRejectBusinessModal);
-                        }}
-                        color="danger"
-                        size="sm"
-                        className="ml-1 w-50"
-                      >
-                        <CIcon name="cil-x" /> Reject
-                      </CButton>
-                    </span>
+            <CCol sm="12" md="9">
+              <CRow>
+                <CCol lg="12" className="mt-1 border-bottom">
+                  <h6></h6>
+                  <p>
+                    <strong> * Trade Name:</strong> {business.tradeName}
+                  </p>
+                  <p>
+                    <strong> * Company Name:</strong> {business.companyName}
+                  </p>
+                </CCol>
+
+                <CCol sm="12" md="6" className="mt-1 border-bottom">
+                  <h6></h6>
+                  <p className="d-flex justify-content-between">
+                    <strong> * TIN:</strong> {business.TIN}
+                  </p>
+                  <p className="d-flex justify-content-between">
+                    <strong> * VAT:</strong> {business.VAT}
+                  </p>
+                </CCol>
+                <CCol sm="12" md="6" className="mt-1 border-bottom">
+                  <h6></h6>
+                  <p className="d-flex justify-content-between">
+                    <strong> * Machine:</strong> {business.machine}
+                  </p>
+                  <p className="d-flex justify-content-between">
+                    <strong> * Credentials:</strong> {business.credentials}
+                  </p>
+                  {user.userRole === "branch-admin" && (
+                    <>
+                      {" "}
+                      {business.credentials === "Pending" && (
+                        <span className="d-flex justify-content-between">
+                          <CButton
+                            color="dark"
+                            size="sm"
+                            className="mr-1 w-50"
+                            onClick={() => {
+                              AccepteBusinessCredentials(business._id);
+                            }}
+                          >
+                            <CIcon name="cil-check-circle" /> Accept
+                          </CButton>
+                          <CButton
+                            onClick={() => {
+                              setShowRejectBusinessModal(
+                                !showRejectBusinessModal
+                              );
+                            }}
+                            color="danger"
+                            size="sm"
+                            className="ml-1 w-50"
+                          >
+                            <CIcon name="cil-x" /> Reject
+                          </CButton>
+                        </span>
+                      )}
+                    </>
                   )}
-                </>
-              )}
-              {user.userRole === "sales" && business.machine === "assigned" && (
-                <span className="d-flex justify-content-between">
-                  <CButton
-                    color="dark"
-                    size="sm"
-                    className="mr-1 w-100"
-                    onClick={onSubmitRequestForApproval}
-                  >
-                    <CIcon name="cil-check-circle" /> Request for approval
-                  </CButton>
-                </span>
-              )}
+                  {user.userRole === "sales" &&
+                    business.machine === "assigned" && (
+                      <span className="d-flex justify-content-between">
+                        <CButton
+                          color="dark"
+                          size="sm"
+                          className="mr-1 w-100"
+                          onClick={onSubmitRequestForApproval}
+                        >
+                          <CIcon name="cil-check-circle" /> Request for approval
+                        </CButton>
+                      </span>
+                    )}
+                </CCol>
+              </CRow>
             </CCol>
           </CRow>
           <CTabs>
