@@ -134,10 +134,16 @@ const routes = [
   },
   // Account
   {
+    path: "/user/profile/:id",
+    exact: true,
+    name: "User-Profile",
+    component: UserProfile,
+  },
+  {
     path: "/change_password",
     exact: true,
     name: "Change-Password",
-    component: SendFeedback,
+    component: ChangePassword,
   },
 ];
 

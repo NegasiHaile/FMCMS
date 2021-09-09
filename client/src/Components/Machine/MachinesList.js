@@ -52,7 +52,6 @@ const MachinesList = () => {
     // for distributing
     businessId: "",
   };
-
   const [machine, setMachine] = useState(machineDetail);
 
   useEffect(() => {
@@ -236,7 +235,7 @@ const MachinesList = () => {
               salesStatus: (machine) => (
                 <td className="d-flex justify-content-between">
                   {machine.salesStatus}
-                  {user.userRole === "sales" && (
+                  {/* {user.userRole === "sales" && (
                     <>
                       {machine.salesStatus === "unsold" ? (
                         <CLink
@@ -249,7 +248,7 @@ const MachinesList = () => {
                           }}
                         >
                           <CTooltip
-                            content={`Distribut - ${machine.serialNumber}- machine.`}
+                            content={`Sale - ${machine.serialNumber}- machine.`}
                           >
                             <CIcon name="cil-control" />
                           </CTooltip>
@@ -272,7 +271,7 @@ const MachinesList = () => {
                         ""
                       )}
                     </>
-                  )}
+                  )} */}
                 </td>
               ),
               Actions: (machine) => (
@@ -458,7 +457,7 @@ const MachinesList = () => {
           </CForm>
         </CModal>
 
-        {/* Distribute machine modal */}
+        {/* Saling machine modal */}
         <CModal
           show={showMachineDistributeModal}
           onClose={() => setShowModal(!showMachineDistributeModal)}
@@ -500,8 +499,7 @@ const MachinesList = () => {
                       {businesses
                         .filter(
                           (bussiness) =>
-                            bussiness.machine === "unassigned" &&
-                            bussiness.credentials === "Accepted" &&
+                            bussiness.credentials === "New" &&
                             bussiness.branch == user.branch
                         )
                         .map((filteredBussiness) => (
@@ -509,7 +507,7 @@ const MachinesList = () => {
                             value={filteredBussiness._id}
                             key={filteredBussiness._id}
                           >
-                            {filteredBussiness.businessName}
+                            {filteredBussiness.tradeName}
                           </option>
                         ))}
                     </CSelect>
@@ -523,7 +521,7 @@ const MachinesList = () => {
             </CModalBody>
             <CModalFooter>
               <CButton type="submit" size="sm" color="dark">
-                <CIcon name="cil-control" /> Distribute
+                <CIcon name="cil-control" /> Sale this machine
               </CButton>
               <CButton
                 size="sm"

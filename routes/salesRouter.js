@@ -14,5 +14,9 @@ router.put(
   "/Approve_sales_Request/:salesId/:machineId/:businessId",
   salesCntrl.ApproveSalesRequest
 );
+router.put(
+  "/request_for_fiscalization/:salesId/:machineId",
+  salesCntrl.requestForFiscalization
+);
 
 module.exports = router;

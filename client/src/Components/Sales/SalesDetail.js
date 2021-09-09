@@ -75,6 +75,36 @@ function SalesDetail() {
       SweetAlert("error", error.response.data.msg);
     }
   };
+
+  const requestForFiscalization = async (saleId, machineId) => {
+    try {
+      Swal.fire({
+        // title: "Accepte?",
+        text: "Are you sure you want to send this sales for fiscalization?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#1E263C",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Request it!",
+      }).then(async (result) => {
+        try {
+          if (result.isConfirmed) {
+            const res = await axios.put(
+              `/sales/request_for_fiscalization/${saleId}/${machineId}`
+            );
+            setCallbackMachines(callbackMachines);
+            setCallbackSales(!callbackSales);
+            setCallbackBusiness(!callbackBusiness);
+            Swal.fire("Requested!", res.data.msg, "success");
+          }
+        } catch (error) {
+          SweetAlert("error", error.response.data.msg);
+        }
+      });
+    } catch (error) {
+      SweetAlert("error", error.response.data.msg);
+    }
+  };
   return (
     <div>
       {salesDetail ? (
@@ -132,6 +162,25 @@ function SalesDetail() {
                         }
                       >
                         Approve Request
+                      </CButton>
+                    </div>
+                  )}
+                {salesDetail.status === "instore" &&
+                  user.userRole === "branch-store" && (
+                    <div className="d-flex justify-content-center">
+                      <CButton
+                        className=""
+                        variant="outline"
+                        color="success"
+                        size="sm"
+                        onClick={() =>
+                          requestForFiscalization(
+                            salesDetail.saleId,
+                            salesDetail.machineId
+                          )
+                        }
+                      >
+                        Request for fiscalization
                       </CButton>
                     </div>
                   )}

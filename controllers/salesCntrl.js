@@ -113,6 +113,7 @@ const salesCntrl = {
           { _id: salesDetail.businessId },
           {
             machine: "unassigned",
+            credentials: "New",
           }
         );
       }
@@ -149,6 +150,34 @@ const salesCntrl = {
       );
       res.json({
         msg: "This sales request is successfully apprived, it is sent to the store issue!",
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+  requestForFiscalization: async (req, res) => {
+    try {
+      const machine = await machines.findById({ _id: req.params.machineId });
+
+      if (machine.MRC === "none")
+        return res.status(400).json({
+          msg: "The machine haven't MRC, Please assigne it first!",
+        });
+
+      if (machine.SIM === "0" || machine.SIM === "")
+        return res.status(400).json({
+          msg: "The machine haven't SIM card number, Please assigne it first!",
+        });
+
+      await Sales.findOneAndUpdate(
+        { _id: req.params.salesId },
+        {
+          status: "fiscalization",
+        }
+      );
+
+      res.json({
+        msg: "This sales is successfully sent for fiscalization!",
       });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
