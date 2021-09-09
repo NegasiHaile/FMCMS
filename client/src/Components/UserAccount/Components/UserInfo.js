@@ -22,6 +22,10 @@ function UserInfo({ id }) {
     }
   }, [id, users]);
 
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
   return (
     <CRow>
       <CCol md="12" lg="8">
@@ -29,7 +33,7 @@ function UserInfo({ id }) {
           <CCardHeader>User Info</CCardHeader>
           <CCardBody>
             <CRow>
-              <CCol sm="12" md="6" className="my-1">
+              <CCol sm="12" md="6" className="my-1 border-bottom pb-1">
                 <span className="d-flex justify-content-between">
                   <span> * First Name: </span>
                   <span>{userDetail.fName}</span>
@@ -43,7 +47,7 @@ function UserInfo({ id }) {
                   <span>{userDetail.lName}</span>
                 </span>
               </CCol>
-              <CCol sm="12" md="6" className="my-1">
+              <CCol sm="12" md="6" className="my-1  border-bottom pb-1">
                 <span className="d-flex justify-content-between">
                   <span> * Gender: </span>
                   <span>{userDetail.gender}</span>
@@ -53,7 +57,7 @@ function UserInfo({ id }) {
                   <span>{userDetail.userRole}</span>
                 </span>
               </CCol>
-              <CCol sm="12" md="6" className="my-1">
+              <CCol sm="12" md="6" className="my-1  border-bottom pb-1">
                 <span className="d-flex justify-content-between">
                   <span> * Phone Number: </span>
                   <span>{userDetail.phoneNumber}</span>
@@ -62,11 +66,19 @@ function UserInfo({ id }) {
                   <span> * Email: </span>
                   <span>{userDetail.email}</span>
                 </span>
+                <span className="d-flex justify-content-between">
+                  <span> * Account Status: </span>
+                  <span>{userDetail.status}</span>
+                </span>
               </CCol>
-              <CCol sm="12" md="6" className="my-1">
+              <CCol sm="12" md="6" className="my-1  border-bottom pb-1">
                 <span className="d-flex justify-content-between">
                   <span> * City: </span>
                   <span>{userDetail.city}</span>
+                </span>
+                <span className="d-flex justify-content-between">
+                  <span> * Sub City: </span>
+                  <span>{userDetail.subCity}</span>
                 </span>
                 <span className="d-flex justify-content-between">
                   <span> * Wored: </span>
@@ -76,6 +88,12 @@ function UserInfo({ id }) {
                 <span className="d-flex justify-content-between">
                   <span> * Kebele: </span>
                   <span>{userDetail.kebele}</span>
+                </span>
+              </CCol>
+              <CCol sm="12" md="6" className="my-1  border-bottom pb-1">
+                <span className="d-flex justify-content-between">
+                  <span> * Registration Date: </span>
+                  <span>{formatDate(userDetail.createdAt)}</span>
                 </span>
               </CCol>
             </CRow>
