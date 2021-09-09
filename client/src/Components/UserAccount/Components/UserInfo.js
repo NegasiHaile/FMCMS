@@ -53,6 +53,10 @@ function UserInfo({ id }) {
                   <span>{userDetail.gender}</span>
                 </span>
                 <span className="d-flex justify-content-between">
+                  <span> * Branch: </span>
+                  <span>{userDetail.branch}</span>
+                </span>
+                <span className="d-flex justify-content-between">
                   <span> * User Role: </span>
                   <span>{userDetail.userRole}</span>
                 </span>
