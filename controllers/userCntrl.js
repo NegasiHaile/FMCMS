@@ -128,7 +128,7 @@ const userCntrl = {
 
   getUsers: async (req, res) => {
     try {
-      res.json(await Users.find());
+      res.json(await Users.find().sort({ createdAt: -1 }));
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }

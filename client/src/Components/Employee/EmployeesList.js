@@ -85,7 +85,13 @@ const EmployeeList = () => {
     "branch",
     "userRole",
     "status",
-    "Actions",
+    {
+      key: "Actions",
+      label: "Actions",
+      // _style: { width: "1%" },
+      sorter: false,
+      filter: false,
+    },
   ];
   return (
     <>
@@ -112,7 +118,7 @@ const EmployeeList = () => {
             )}
             fields={employeeTableFields}
             tableFilter
-            // columnFilter
+            columnFilter
             itemsPerPageSelect
             itemsPerPage={10}
             hover

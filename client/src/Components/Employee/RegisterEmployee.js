@@ -189,6 +189,8 @@ const RegisterEmployee = (props) => {
                   <CInput
                     id="phoneNumber"
                     name="phoneNumber"
+                    minLength="10"
+                    maxLength="10"
                     onChange={onChangeInput}
                     value={user.phoneNumber}
                     required

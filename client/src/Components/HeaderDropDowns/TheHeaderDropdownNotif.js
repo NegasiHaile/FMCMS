@@ -31,12 +31,11 @@ const TheHeaderDropdownNotif = () => {
   return (
     <CDropdown inNav className="c-header-nav-item mx-2">
       <CDropdownToggle className="c-header-nav-link" caret={false}>
-        <CIcon name="cil-bell" />
-        {itemsCount !== 0 && (
-          <CBadge shape="pill" color="danger">
-            {itemsCount}
-          </CBadge>
-        )}
+        <CIcon name="cil-memory" />
+
+        <CBadge shape="pill" color="danger">
+          {itemsCount}
+        </CBadge>
       </CDropdownToggle>
       {itemsCount !== 0 && (
         <CDropdownMenu placement="bottom-end" className="pt-0">
