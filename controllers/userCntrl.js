@@ -137,7 +137,8 @@ const userCntrl = {
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
-      const user = await Users.findOne({ email });
+      const user = await Users.findOne({ "email" : {
+        $regex : new RegExp(email, "i") } });
 
       if (!user) return res.status(400).json({ msg: "User does not exist." });
 
