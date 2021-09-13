@@ -32,7 +32,7 @@ const salesCntrl = {
             },
           },
         },
-      ]);
+      ]).sort({ updatedAt: -1 });
       var data = [];
       allSales.forEach((sale) => {
         data.push({

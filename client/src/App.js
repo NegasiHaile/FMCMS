@@ -34,7 +34,7 @@ function App() {
   const state = useContext(GlobalState);
   const [isLogged] = state.UserAPI.isLogged;
   const [user] = state.UserAPI.User;
-  console.log({ user: user, isLogged: isLogged });
+  // console.log({ user: user, isLogged: isLogged });
 
   // setTimeout(() => {}, 5000)
 

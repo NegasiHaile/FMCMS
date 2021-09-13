@@ -8,6 +8,7 @@ import {
   CDropdownToggle,
   CProgress,
   CLink,
+  CImg,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
@@ -16,6 +17,7 @@ function TheHeaderDropdownSales() {
   const [user] = state.UserAPI.User;
   const [Sales] = state.SalesAPI.Sales;
   const [salesAlert, setSalesAlert] = useState("");
+  const [alertLable, setAlertLable] = useState("");
 
   useEffect(() => {
     if (user.userRole === "operational-manager") {
@@ -26,6 +28,8 @@ function TheHeaderDropdownSales() {
             filteredSale.branchId == user.branch
         )
       );
+
+      setAlertLable(" sales approvment ");
     } else if (user.userRole === "branch-store") {
       setSalesAlert(
         Sales.filter(
@@ -34,6 +38,7 @@ function TheHeaderDropdownSales() {
             filteredSale.branchId == user.branch
         )
       );
+      setAlertLable(" machine prepare ");
     } else if (user.userRole === "technician") {
       setSalesAlert(
         Sales.filter(
@@ -42,10 +47,11 @@ function TheHeaderDropdownSales() {
             filteredSale.branchId == user.branch
         )
       );
+      setAlertLable(" fiscalization ");
     }
   }, [Sales, user]);
 
-  console.log(salesAlert);
+  // console.log(salesAlert);
   const itemsCount = salesAlert.length;
 
   return (
@@ -57,27 +63,30 @@ function TheHeaderDropdownSales() {
         </CBadge>
       </CDropdownToggle>
       <CDropdownMenu placement="bottom-end" className="pt-0">
-        <CDropdownItem header tag="div" className="text-center" color="light">
-          <strong>You have {itemsCount} requests</strong>
+        <CDropdownItem header tag="div" color="light">
+          <strong>
+            You have {itemsCount} {alertLable} requests
+          </strong>
         </CDropdownItem>
 
         {itemsCount && (
           <>
             {salesAlert.map((sale) => (
-              <CDropdownItem className="d-block" key={sale._id}>
-                <CLink
-                  className="small mb-1"
-                  to={`/sales/detail/${sale.saleId}`}
-                >
-                  {sale.tradeName} {sale.machineSerialNumber}
-                </CLink>
-                <CProgress size="xs" color="info" value={0} />
+              <CDropdownItem
+                className="d-block border-bottom"
+                key={sale._id}
+                to={`/sales/detail/${sale.saleId}`}
+              >
+                <small> {sale.tradeName} </small>
+                <small className="text-info">{" || "}</small>
+                <small> {sale.machineSerialNumber} </small>
+                {/* <CProgress size="xs" color="info" value={0} /> */}
               </CDropdownItem>
             ))}
           </>
         )}
 
-        <CDropdownItem className="text-center border-top">
+        <CDropdownItem className="text-center border-top" to={`/sales/oflist`}>
           <strong>View all requests</strong>
         </CDropdownItem>
       </CDropdownMenu>
