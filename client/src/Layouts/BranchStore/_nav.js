@@ -67,10 +67,10 @@ const _nav = [
     name: "Machine Sales",
     to: "/sales/oflist",
     icon: "cil-star",
-    badge: {
-      color: "danger",
-      text: 5,
-    },
+    // badge: {
+    //   color: "danger",
+    //   text: 5,
+    // },
   },
   // Spares Managment and controlling
   {

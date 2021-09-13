@@ -16,7 +16,15 @@ const BranchIndetail = lazy(() =>
 const branchDashboard = lazy(() =>
   import("../../Components/Dashboard/Dashboard")
 );
+const ClientDetail = lazy(() => import("../../Components/Client/ClientDetail"));
 
+// Client business frontend routing
+const BusinessesList = lazy(() =>
+  import("../../Components/Business/BusinessesList")
+);
+const BusinessDetail = lazy(() =>
+  import("../../Components/Business/BusinessDetail")
+);
 // Importing of machine related routes
 const MachinesList = lazy(() =>
   import("../../Components/Machine/MachinesList")
@@ -63,6 +71,24 @@ const routes = [
     exact: true,
     name: "Branch-Indetail",
     component: BranchIndetail,
+  },
+  {
+    path: "/client/detail/:id",
+    exact: true,
+    name: "Client-Detail",
+    component: ClientDetail,
+  },
+  {
+    path: "/businesses/list",
+    exact: true,
+    name: "Business-List",
+    component: BusinessesList,
+  },
+  {
+    path: "/business/detail/:id",
+    exact: true,
+    name: "Business-Detail",
+    component: BusinessDetail,
   },
   // Machine
   {

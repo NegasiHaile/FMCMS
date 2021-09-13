@@ -144,7 +144,7 @@ const routes = [
   {
     path: "/business/detail/:id",
     exact: true,
-    name: "Register-Business",
+    name: "Business-Detail",
     component: BusinessDetail,
   },
   // Machine
