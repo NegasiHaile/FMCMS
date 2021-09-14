@@ -74,7 +74,7 @@ function TheHeaderDropdownSales() {
             {salesAlert.map((sale) => (
               <CDropdownItem
                 className="d-block border-bottom"
-                key={sale._id}
+                key={sale.saleId}
                 to={`/sales/detail/${sale.saleId}`}
               >
                 <small> {sale.tradeName} </small>
