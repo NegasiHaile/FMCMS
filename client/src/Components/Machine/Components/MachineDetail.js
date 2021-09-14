@@ -29,7 +29,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
-
+import FiscalizationForm from "../../Fiscalization/FiscalizationForm";
 function MachineDetail({ id }) {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
@@ -206,6 +206,11 @@ function MachineDetail({ id }) {
                   </CNavItem>
                   <CNavItem>
                     <CNavLink>
+                      <CIcon name="cil-list"></CIcon> Fiscalization
+                    </CNavLink>
+                  </CNavItem>
+                  <CNavItem>
+                    <CNavLink>
                       <CIcon name="cil-options"></CIcon> Maintenance
                     </CNavLink>
                   </CNavItem>
@@ -216,9 +221,13 @@ function MachineDetail({ id }) {
                   </CNavItem>
                 </CNav>
                 <CTabContent className="my-3">
-                  <CTabPane></CTabPane>
-                  <CTabPane></CTabPane>
-                  <CTabPane></CTabPane>
+                  <CTabPane>OWNER dETAIL</CTabPane>
+                  <CTabPane>
+                    {" "}
+                    <FiscalizationForm />
+                  </CTabPane>
+                  <CTabPane>Maintenance</CTabPane>
+                  <CTabPane>Returning</CTabPane>
                 </CTabContent>
               </CTabs>
             </CCardBody>
