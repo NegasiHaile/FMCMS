@@ -223,8 +223,9 @@ function MachineDetail({ id }) {
                 <CTabContent className="my-3">
                   <CTabPane>OWNER dETAIL</CTabPane>
                   <CTabPane>
-                    {" "}
-                    <FiscalizationForm />
+                    <div style={{ overflowX: "scroll" }}>
+                      <FiscalizationForm />
+                    </div>
                   </CTabPane>
                   <CTabPane>Maintenance</CTabPane>
                   <CTabPane>Returning</CTabPane>

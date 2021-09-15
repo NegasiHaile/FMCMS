@@ -24,17 +24,19 @@ import { useReactToPrint } from "react-to-print";
 class ComponentToPrint extends React.Component {
   render() {
     return (
-      <div style={{ overflowX: "scroll" }}>
-        <CCard className="mt-6 w-100" style={{ minWidth: "1000px" }}>
+      <div>
+        <br />
+        <CCard className="mt-5 w-100" style={{ minWidth: "900px" }}>
           <CCardBody>
             <CRow>
               <CCol className="d-flex justify-content-center" lg="12">
                 <CImg height="60px" src="/logo/fulllogo.png" />
               </CCol>
-              <CCol lg="12" className="mt-4  border-bottom">
+              <CCol className="col-12 mt-4  border-bottom">
                 <h2 className="text-center bold">Machine Fiscalization Form</h2>
               </CCol>
-              <CCol lg="12" className="mt-3 d-flex justify-content-end">
+
+              <CCol className="col-12 mt-4 d-flex justify-content-end">
                 <p>
                   <span className="">Date : </span>{" "}
                   <span className="border-bottom"> 12/06/2021</span>
@@ -43,7 +45,8 @@ class ComponentToPrint extends React.Component {
                   <b className="border-bottom"> Gerji-Branch</b>
                 </p>
               </CCol>
-              <CCol lg="12" className="mt-3">
+
+              <CCol className="col-12 mt-4">
                 <CRow>
                   <CCol>
                     <h4 className="text-decoration-underline">
@@ -137,7 +140,8 @@ class ComponentToPrint extends React.Component {
                   </CCol>
                 </CRow>
               </CCol>
-              <CCol lg="12" className="mt-2">
+
+              <CCol className="col-12 mt-4">
                 <h6 className="text-decoration-underline">
                   <h4> Fiscalization Summery</h4>
                 </h6>
@@ -159,26 +163,138 @@ class ComponentToPrint extends React.Component {
                   </b>
                   and SIM <b> 0987664321 </b> in <b> Branch Name </b>{" "}
                 </h6>{" "}
+              </CCol>
+
+              <CCol className="col-12 mt-4">
+                <h4 className="text-center">
+                  {" "}
+                  Machine materials checkup during fiscalization
+                </h4>
+                <CRow className="mt-3">
+                  <CCol>
+                    <CRow className="mb-2">
+                      <CCol className="col-8">
+                        <h6>Memory Key :</h6>
+                      </CCol>
+                      <CCol className="col-3 border rounded">
+                        <h6>544</h6>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2">
+                      <CCol className="col-8">
+                        <h6>Drawer :</h6>
+                      </CCol>
+                      <CCol className="col-3 border rounded">
+                        <h6>898</h6>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2">
+                      <CCol className="col-8">
+                        <h6> Paper :</h6>
+                      </CCol>
+                      <CCol className="col-3  border rounded centered">
+                        <h6>789</h6>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2">
+                      <CCol className="col-8">
+                        <h6> Terminal :</h6>
+                      </CCol>
+                      <CCol className="col-3  border rounded centered">
+                        <h6>789</h6>
+                      </CCol>
+                    </CRow>
+                  </CCol>
+                  <CCol>
+                    <CRow className="mb-2">
+                      <CCol className="col-8">
+                        <h6>Terminal Adapter :</h6>
+                      </CCol>
+                      <CCol className="col-3 border rounded">
+                        <h6>544</h6>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2">
+                      <CCol className="col-8">
+                        <h6>Machine :</h6>
+                      </CCol>
+                      <CCol className="col-3 border rounded">
+                        <h6>898</h6>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2">
+                      <CCol className="col-8">
+                        <h6> S. Book Terminal :</h6>
+                      </CCol>
+                      <CCol className="col-3  border rounded centered">
+                        <h6>789</h6>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2">
+                      <CCol className="col-8">
+                        <h6> S. Book Machine :</h6>
+                      </CCol>
+                      <CCol className="col-3  border rounded centered">
+                        <h6>789</h6>
+                      </CCol>
+                    </CRow>
+                  </CCol>
+                  <CCol>
+                    <CRow className="mb-2">
+                      <CCol className="col-8">
+                        <h6> Paper Roller :</h6>
+                      </CCol>
+                      <CCol className="col-3 border rounded">
+                        <h6>544</h6>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2">
+                      <CCol className="col-8">
+                        <h6> Paper Cover :</h6>
+                      </CCol>
+                      <CCol className="col-3 border rounded">
+                        <h6>898</h6>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2">
+                      <CCol className="col-8">
+                        <h6> Machine Adapter :</h6>
+                      </CCol>
+                      <CCol className="col-3  border rounded centered">
+                        <h6>789</h6>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2">
+                      <CCol className="col-8">
+                        <h6> FD Form :</h6>
+                      </CCol>
+                      <CCol className="col-3  border rounded centered">
+                        <h6>789</h6>
+                      </CCol>
+                    </CRow>
+                  </CCol>
+                </CRow>
+              </CCol>
+
+              <CCol className="col-12 mt-4">
                 <CRow className="mt-4 border rounded mx-1 py-4">
                   <CCol>
-                    <CCol>
-                      <CRow className="mb-2">
-                        <CCol className="col-3">
-                          <h6>Campany :</h6>
-                        </CCol>
-                        <CCol className="col-8 border-bottom">
-                          <h6>Edna Mall Private limited compony</h6>
-                        </CCol>
-                      </CRow>
-                      <CRow className="mb-2">
-                        <CCol className="col-3">
-                          <h6>TIN :</h6>
-                        </CCol>
-                        <CCol className="col-8 border-bottom">
-                          <h6>1000987664</h6>
-                        </CCol>
-                      </CRow>
-                    </CCol>
+                    <CRow className="mb-2">
+                      <CCol className="col-3">
+                        <h6>Campany :</h6>
+                      </CCol>
+                      <CCol className="col-8 border-bottom">
+                        <h6>Edna Mall Private limited compony</h6>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2">
+                      <CCol className="col-3">
+                        <h6>TIN :</h6>
+                      </CCol>
+                      <CCol className="col-8 border-bottom">
+                        <h6>1000987664</h6>
+                      </CCol>
+                    </CRow>
                   </CCol>
                   <CCol>
                     <div className="input-group mb-3">
@@ -191,34 +307,54 @@ class ComponentToPrint extends React.Component {
                   </CCol>
                 </CRow>
                 <CRow className="mt-4 border rounded mx-1 py-4">
-                  <CCol>
-                    <CCol>
-                      <CRow className="mb-2">
-                        <CCol className="col-3">
-                          <h6>Campany :</h6>
-                        </CCol>
-                        <CCol className="col-8 border-bottom">
-                          <h6>Edna Mall Private limited compony</h6>
-                        </CCol>
-                      </CRow>
-                      <CRow className="mb-2">
-                        <CCol className="col-3">
-                          <h6>TIN :</h6>
-                        </CCol>
-                        <CCol className="col-8 border-bottom">
-                          <h6>1000987664</h6>
-                        </CCol>
-                      </CRow>
-                    </CCol>
+                  <CCol className="col-12">
+                    <h5>Internal Use</h5>
                   </CCol>
                   <CCol>
-                    <div className="input-group mb-3">
-                      <div className="input-group-prepend">Company : </div>
-                      <p className="border-bottom">
-                        {" "}
-                        dhfsa jhkjdsfj oieurqwn jsduff hjasdfore fjf kodas
-                      </p>
-                    </div>
+                    <CRow className="mb-2">
+                      <CCol className="col-4">
+                        <h6>Technician :</h6>
+                      </CCol>
+                      <CCol className="col-7 border-bottom">
+                        <h6>Negasi Haile</h6>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2">
+                      <CCol className="col-4">
+                        <h6>Signature :</h6>
+                      </CCol>
+                      <CCol className="col-7 border-bottom">
+                        <h6>----- </h6>
+                      </CCol>
+                    </CRow>
+                  </CCol>
+                  <CCol>
+                    <CRow className="mb-2">
+                      <CCol className="col-4">
+                        <h6>Fiscalization Date :</h6>
+                      </CCol>
+                      <CCol className="col-7 border-bottom">
+                        <h6>Monday 12/20/2021</h6>
+                      </CCol>
+                    </CRow>
+                  </CCol>
+                  <CCol className="col-12 mt-3">
+                    <CRow className="mb-2 col-6">
+                      <CCol className="col-4">
+                        <h6>Confirmed by :</h6>
+                      </CCol>
+                      <CCol className="col-7 border-bottom">
+                        <h6>Negasi Haile</h6>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2 col-6">
+                      <CCol className="col-4">
+                        <h6>Signature :</h6>
+                      </CCol>
+                      <CCol className="col-7 border-bottom">
+                        <h6>----- </h6>
+                      </CCol>
+                    </CRow>
                   </CCol>
                 </CRow>
               </CCol>
@@ -239,7 +375,7 @@ const FiscalizationForm = () => {
   return (
     <div>
       <ComponentToPrint ref={componentRef} />
-      <CButton color="danger" onClick={handlePrint}>
+      <CButton size="sm" color="danger" onClick={handlePrint}>
         Print this out!
       </CButton>
     </div>
