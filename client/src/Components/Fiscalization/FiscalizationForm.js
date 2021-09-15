@@ -94,9 +94,9 @@ class ComponentToPrint extends React.Component {
                     </CRow>
                   </CCol>
                   <CCol>
-                    <h6 className="text-decoration-underline">
-                      <h4> Machine Detail</h4>
-                    </h6>
+                    <h4 className="text-decoration-underline">
+                      Machine Detail
+                    </h4>
                     <CRow className="mb-2">
                       <CCol className="col-3">
                         <h6> Brand : </h6>
@@ -142,25 +142,14 @@ class ComponentToPrint extends React.Component {
               </CCol>
 
               <CCol className="col-12 mt-4">
-                <h6 className="text-decoration-underline">
-                  <h4> Fiscalization Summery</h4>
-                </h6>
+                <h4 className="text-decoration-underline">
+                  Fiscalization Summery
+                </h4>
                 <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
-                  The machine with{" "}
-                  <b>
-                    {" "}
-                    <u>1000949382773</u>
-                  </b>{" "}
-                  serial number is assigned to the company{" "}
-                  <b>
-                    {" "}
-                    <u>Edna Mall privated Limited Company</u>
-                  </b>{" "}
-                  and fiscalized with MRC of{" "}
-                  <b>
-                    {" "}
-                    <u>CLC10008768</u>{" "}
-                  </b>
+                  The machine with <b> 1000949382773</b> serial number is
+                  assigned to the company{" "}
+                  <b> Edna Mall privated Limited Company</b> and fiscalized with
+                  MRC of <b> CLC10008768 </b>
                   and SIM <b> 0987664321 </b> in <b> Branch Name </b>{" "}
                 </h6>{" "}
               </CCol>
@@ -176,32 +165,32 @@ class ComponentToPrint extends React.Component {
                       <CCol className="col-8">
                         <h6>Memory Key :</h6>
                       </CCol>
-                      <CCol className="col-3 border rounded">
-                        <h6>544</h6>
+                      <CCol className="col-3 text-center border rounded">
+                        YES
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
                       <CCol className="col-8">
                         <h6>Drawer :</h6>
                       </CCol>
-                      <CCol className="col-3 border rounded">
-                        <h6>898</h6>
+                      <CCol className="col-3 text-center border rounded">
+                        YES
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
                       <CCol className="col-8">
                         <h6> Paper :</h6>
                       </CCol>
-                      <CCol className="col-3  border rounded centered">
-                        <h6>789</h6>
+                      <CCol className="col-3 text-center border rounded">
+                        YES
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
                       <CCol className="col-8">
                         <h6> Terminal :</h6>
                       </CCol>
-                      <CCol className="col-3  border rounded centered">
-                        <h6>789</h6>
+                      <CCol className="col-3 text-center border rounded">
+                        YES
                       </CCol>
                     </CRow>
                   </CCol>
@@ -210,32 +199,32 @@ class ComponentToPrint extends React.Component {
                       <CCol className="col-8">
                         <h6>Terminal Adapter :</h6>
                       </CCol>
-                      <CCol className="col-3 border rounded">
-                        <h6>544</h6>
+                      <CCol className="col-3 text-center border rounded">
+                        YES
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
                       <CCol className="col-8">
                         <h6>Machine :</h6>
                       </CCol>
-                      <CCol className="col-3 border rounded">
-                        <h6>898</h6>
+                      <CCol className="col-3 text-center border rounded">
+                        YES
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
                       <CCol className="col-8">
                         <h6> S. Book Terminal :</h6>
                       </CCol>
-                      <CCol className="col-3  border rounded centered">
-                        <h6>789</h6>
+                      <CCol className="col-3 text-center border rounded">
+                        YES
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
                       <CCol className="col-8">
                         <h6> S. Book Machine :</h6>
                       </CCol>
-                      <CCol className="col-3  border rounded centered">
-                        <h6>789</h6>
+                      <CCol className="col-3 text-center border rounded">
+                        YES
                       </CCol>
                     </CRow>
                   </CCol>
@@ -244,32 +233,32 @@ class ComponentToPrint extends React.Component {
                       <CCol className="col-8">
                         <h6> Paper Roller :</h6>
                       </CCol>
-                      <CCol className="col-3 border rounded">
-                        <h6>544</h6>
+                      <CCol className="col-3 text-center border rounded">
+                        YES
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
                       <CCol className="col-8">
                         <h6> Paper Cover :</h6>
                       </CCol>
-                      <CCol className="col-3 border rounded">
-                        <h6>898</h6>
+                      <CCol className="col-3 text-center border rounded">
+                        YES
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
                       <CCol className="col-8">
                         <h6> Machine Adapter :</h6>
                       </CCol>
-                      <CCol className="col-3  border rounded centered">
-                        <h6>789</h6>
+                      <CCol className="col-3 text-center border rounded">
+                        YES
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
                       <CCol className="col-8">
                         <h6> FD Form :</h6>
                       </CCol>
-                      <CCol className="col-3  border rounded centered">
-                        <h6>789</h6>
+                      <CCol className="col-3 text-center border rounded">
+                        YES
                       </CCol>
                     </CRow>
                   </CCol>
