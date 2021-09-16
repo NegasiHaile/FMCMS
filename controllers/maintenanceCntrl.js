@@ -2,6 +2,13 @@ const Tickets = require("../models/ticketModel");
 const Maintenances = require("../models/maintenanceModel");
 
 const maintenanceCntrl = {
+  getMaintenanceList: async (req, res) => {
+    try {
+      res.json(await Maintenances.find());
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
   openNewThicket: async (req, res) => {
     try {
       res.json({ msg: "Thicket opened successfully!" });

@@ -3,18 +3,41 @@ const ObjectID = mongoose.Schema.Types.ObjectID;
 
 const maintenanceModel = new mongoose.Schema(
   {
-    ticketId: {
+    salesID: {
       type: ObjectID,
       required: true,
     },
-    problemDescription: {
+    businessId: {
+      type: ObjectID,
+      required: true,
+    },
+    machineID: {
+      type: ObjectID,
+      required: true,
+    },
+    catagory: {
+      type: String, // annual/incident
+    },
+    type: {
+      type: String, // osite/onfron/inside
+    },
+    clientReportedIssue: {
       type: String,
     },
-    swStatus: {
+    technicianReportedIssue: {
       type: String,
     },
-    HwStatus: {
+    maintainedBy: {
       type: String,
+    },
+    maintenanceDate: {
+      type: Date,
+    },
+    nextMaintenanceDate: {
+      type: Date,
+    },
+    maintenanceStatus: {
+      type: Date,
     },
   },
   {
