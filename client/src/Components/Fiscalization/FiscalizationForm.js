@@ -25,15 +25,16 @@ class ComponentToPrint extends React.Component {
   render() {
     return (
       <div>
-        <br />
-        <CCard className="mt-5 w-100" style={{ minWidth: "900px" }}>
+        <CCard className="mt-5 w-100">
           <CCardBody>
             <CRow>
               <CCol className="d-flex justify-content-center" lg="12">
                 <CImg height="60px" src="/logo/fulllogo.png" />
               </CCol>
               <CCol className="col-12 mt-4  border-bottom">
-                <h2 className="text-center bold">Machine Fiscalization Form</h2>
+                <h2 className="text-center text-muted bold">
+                  Machine Fiscalization Form
+                </h2>
               </CCol>
 
               <CCol className="col-12 mt-4 d-flex justify-content-end">
@@ -363,10 +364,32 @@ const FiscalizationForm = () => {
 
   return (
     <div>
-      <ComponentToPrint ref={componentRef} />
-      <CButton size="sm" color="danger" onClick={handlePrint}>
-        Print this out!
-      </CButton>
+      <div className="d-flex justify-content-end">
+        <div>
+          <CButton
+            className="my-1 mr-1"
+            size="sm"
+            color="secondary"
+            onClick={handlePrint}
+          >
+            <CIcon name="cil-save"></CIcon> Save as pdf!
+          </CButton>
+          <CButton
+            className="my-1"
+            size="sm"
+            color="secondary"
+            onClick={handlePrint}
+          >
+            <CIcon name="cil-print"></CIcon> Print this out!
+          </CButton>
+        </div>
+      </div>
+      <div
+        className="rounded px-3"
+        style={{ minWidth: "900px", border: "solid 10px #D8DBE0" }} // 3C4B64: sidebar-color, EBEDEF: Background-color
+      >
+        <ComponentToPrint ref={componentRef} />
+      </div>
     </div>
   );
 };
