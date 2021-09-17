@@ -1,6 +1,7 @@
 const Sales = require("../models/salesModel");
 const machines = require("../models/machineModel");
 const clientBusinesses = require("../models/clientBusinessModel");
+const branchs = require("../models/branchModel");
 
 const salesCntrl = {
   getSales: async (req, res) => {
@@ -23,6 +24,14 @@ const salesCntrl = {
           },
         },
         {
+          $lookup: {
+            from: "branchs",
+            localField: "branchId",
+            foreignField: "_id",
+            as: "branch",
+          },
+        },
+        {
           $match: {
             "machine._id": {
               $exists: true,
@@ -38,9 +47,10 @@ const salesCntrl = {
         data.push({
           saleId: sale._id,
           branchId: sale.branchId,
+          branchName: sale.branch[0].branchName,
           machineId: sale.machine[0]._id,
           machineSerialNumber: sale.machine[0].serialNumber,
-          machineModel: sale.machine[0].model,
+          machineModel: sale.machine[0].machineModel,
           machineBrand: sale.machine[0].brand,
           machineMRC: sale.machine[0].MRC,
           machineSIM: sale.machine[0].SIM,

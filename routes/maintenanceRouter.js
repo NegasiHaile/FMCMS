@@ -5,5 +5,6 @@ const auth = require("../middleware/auth");
 // router.post("/register", upload.single("file"), userCntrl.register);
 
 router.get("/list", maintenanceCntrl.getMaintenanceList);
+router.put("/pickup", maintenanceCntrl.pickupMachine);
 
 module.exports = router;

@@ -15,6 +15,10 @@ const maintenanceModel = new mongoose.Schema(
       type: ObjectID,
       required: true,
     },
+    branchID: {
+      type: ObjectID,
+      required: true,
+    },
     catagory: {
       type: String, // annual/incident
     },

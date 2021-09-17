@@ -9,9 +9,9 @@ const maintenanceCntrl = {
       res.status(500).json({ msg: error.message });
     }
   },
-  openNewThicket: async (req, res) => {
+  pickupMachine: async (req, res) => {
     try {
-      res.json({ msg: "Thicket opened successfully!" });
+      res.json({ msg: "New maintenance opened successfully!" });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }

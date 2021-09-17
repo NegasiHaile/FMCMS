@@ -6,6 +6,7 @@ import MachineAPI from "./api/MachineAPI";
 import MRCAPI from "./api/MRCAPI";
 import BusinessAPI from "./api/BusinessAPI";
 import SalesAPI from "./api/SalesAPI";
+import MaintenanceAPI from "./api/MaintenanceAPI";
 import NotificationAPI from "./api/NotificationAPI";
 import ReturnMachineAPI from "./api/ReturnMachineAPI";
 // import MachineAPI from "./api/MachineAPI";
@@ -40,6 +41,7 @@ export const DataProvider = ({ children }) => {
     MRCAPI: MRCAPI(),
     BusinessAPI: BusinessAPI(),
     SalesAPI: SalesAPI(),
+    MaintenanceAPI: MaintenanceAPI(),
     NotificationAPI: NotificationAPI(),
     ReturnMachineAPI: ReturnMachineAPI(),
     // categoriesAPI: MachineAPI(),

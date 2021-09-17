@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { GlobalState } from "../../../GlobalState";
 import axios from "axios";
 import BadRouting from "../../Utils/routing/BadRouting";
+import MaintenanceListPerMachine from "../../Maintenance/Components/MaintenanceListPerMachine";
 import {
   CButton,
   CCard,
@@ -231,7 +232,9 @@ function MachineDetail({ id }) {
                       )}
                     </div>
                   </CTabPane>
-                  <CTabPane>Maintenance</CTabPane>
+                  <CTabPane>
+                    <MaintenanceListPerMachine machineId={machieneDetail._id} />
+                  </CTabPane>
                   <CTabPane>Returning</CTabPane>
                 </CTabContent>
               </CTabs>
