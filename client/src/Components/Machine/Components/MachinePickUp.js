@@ -17,7 +17,45 @@ import {
   CInput,
 } from "@coreui/react";
 function MachinePickUp({ salesDetail, pickupType }) {
-  console.log(JSON.stringify(salesDetail));
+  const pickupDetail = {
+    memoryKey: false,
+    drawer: false,
+    paper: false,
+    terminal: false,
+    terminalAdapte: false,
+    machine: false,
+    SBookTerminal: false,
+    SbookMachine: false,
+    paperRoller: false,
+    paperCover: false,
+    machineAdapter: false,
+    FDForm: false,
+    clientReportedProblems: "",
+    TechnicianReportedProblems: "",
+  };
+  const [pickup, setPickup] = useState(pickupDetail);
+
+  console.log("Initial " + JSON.stringify(pickup));
+  // const [checked, setChecked] = useState(false);
+  const handleCheckboxChange = (e) => {
+    const { name, value } = e.target;
+
+    // setPickup({ ...pickup, [name]: value });
+    console.log("ouside if " + value);
+    if (value === "false" || value === false) {
+      console.log("inside if");
+      setPickup({ ...pickup, [name]: true });
+    } else if (value === "true" || value === true) {
+      console.log("inside else if");
+      setPickup({ ...pickup, [name]: false });
+    }
+    console.log("Onclick " + JSON.stringify(pickup));
+  };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setPickup({ ...pickup, [name]: value });
+  };
+  // console.log(JSON.stringify(salesDetail));
   return (
     <div
       className="rounded "
@@ -147,38 +185,74 @@ function MachinePickUp({ salesDetail, pickupType }) {
                     <CCol className="col-8">
                       <h6>Memory Key :</h6>
                     </CCol>
-                    <CCol className="col-3 text-center border rounded">
-                      YES
-                      {/* <input
+                    <CCol className="col-3 text-center ">
+                      <input
+                        // style={{
+                        //   position: "absolute",
+                        //   top: 0,
+                        //   left: 0,
+                        //   height: "30px",
+                        //   width: "100px",
+                        //   backgroundColor: "#eee",
+                        //   paddingX: "5px",
+                        // }}
+                        id="memoryKey"
+                        name="memoryKey"
+                        value={pickup.memoryKey}
                         className="p-3"
                         type="checkbox"
-                        checked={"checked"}
-                        onChange={"handleChange"}
-                      /> */}
+                        checked={pickup.memoryKey}
+                        onChange={handleCheckboxChange}
+                        // disabled
+                      />
                     </CCol>
                   </CRow>
                   <CRow className="mb-2">
                     <CCol className="col-8">
                       <h6>Drawer :</h6>
                     </CCol>
-                    <CCol className="col-3 text-center border rounded">
-                      YES
+                    <CCol className="col-3 text-center">
+                      <input
+                        id="drawer"
+                        name="drawer"
+                        value={pickup.drawer}
+                        className="p-3"
+                        type="checkbox"
+                        checked={pickup.drawer}
+                        onChange={handleCheckboxChange}
+                      />
                     </CCol>
                   </CRow>
                   <CRow className="mb-2">
                     <CCol className="col-8">
                       <h6> Paper :</h6>
                     </CCol>
-                    <CCol className="col-3 text-center border rounded">
-                      YES
+                    <CCol className="col-3 text-center">
+                      <input
+                        id="paper"
+                        name="paper"
+                        value={pickup.paper}
+                        className="p-3"
+                        type="checkbox"
+                        checked={pickup.paper}
+                        onChange={handleCheckboxChange}
+                      />
                     </CCol>
                   </CRow>
                   <CRow className="mb-2">
                     <CCol className="col-8">
                       <h6> Terminal :</h6>
                     </CCol>
-                    <CCol className="col-3 text-center border rounded">
-                      YES
+                    <CCol className="col-3 text-center">
+                      <input
+                        id="terminal"
+                        name="terminal"
+                        value={pickup.terminal}
+                        className="p-3"
+                        type="checkbox"
+                        checked={pickup.terminal}
+                        onChange={handleCheckboxChange}
+                      />
                     </CCol>
                   </CRow>
                 </CCol>
@@ -187,32 +261,64 @@ function MachinePickUp({ salesDetail, pickupType }) {
                     <CCol className="col-8">
                       <h6>Terminal Adapter :</h6>
                     </CCol>
-                    <CCol className="col-3 text-center border rounded">
-                      YES
+                    <CCol className="col-3 text-center">
+                      <input
+                        id="terminalAdapte"
+                        name="terminalAdapte"
+                        value={pickup.terminalAdapte}
+                        className="p-3"
+                        type="checkbox"
+                        checked={pickup.terminalAdapte}
+                        onChange={handleCheckboxChange}
+                      />
                     </CCol>
                   </CRow>
                   <CRow className="mb-2">
                     <CCol className="col-8">
                       <h6>Machine :</h6>
                     </CCol>
-                    <CCol className="col-3 text-center border rounded">
-                      YES
+                    <CCol className="col-3 text-center">
+                      <input
+                        id="machine"
+                        name="machine"
+                        value={pickup.machine}
+                        className="p-3"
+                        type="checkbox"
+                        checked={pickup.machine}
+                        onChange={handleCheckboxChange}
+                      />
                     </CCol>
                   </CRow>
                   <CRow className="mb-2">
                     <CCol className="col-8">
                       <h6> S. Book Terminal :</h6>
                     </CCol>
-                    <CCol className="col-3 text-center border rounded">
-                      YES
+                    <CCol className="col-3 text-center">
+                      <input
+                        id="SBookTerminal"
+                        name="SBookTerminal"
+                        value={pickup.SBookTerminal}
+                        className="p-3"
+                        type="checkbox"
+                        checked={pickup.SBookTerminal}
+                        onChange={handleCheckboxChange}
+                      />
                     </CCol>
                   </CRow>
                   <CRow className="mb-2">
                     <CCol className="col-8">
                       <h6> S. Book Machine :</h6>
                     </CCol>
-                    <CCol className="col-3 text-center border rounded">
-                      YES
+                    <CCol className="col-3 text-center">
+                      <input
+                        id="SbookMachine"
+                        name="SbookMachine"
+                        value={pickup.SbookMachine}
+                        className="p-3"
+                        type="checkbox"
+                        checked={pickup.SbookMachine}
+                        onChange={handleCheckboxChange}
+                      />
                     </CCol>
                   </CRow>
                 </CCol>
@@ -221,81 +327,126 @@ function MachinePickUp({ salesDetail, pickupType }) {
                     <CCol className="col-8">
                       <h6> Paper Roller :</h6>
                     </CCol>
-                    <CCol className="col-3 text-center border rounded">
-                      YES
+                    <CCol className="col-3 text-center">
+                      <input
+                        id="paperRoller"
+                        name="paperRoller"
+                        value={pickup.paperRoller}
+                        className="p-3"
+                        type="checkbox"
+                        checked={pickup.paperRoller}
+                        onChange={handleCheckboxChange}
+                      />
                     </CCol>
                   </CRow>
                   <CRow className="mb-2">
                     <CCol className="col-8">
                       <h6> Paper Cover :</h6>
                     </CCol>
-                    <CCol className="col-3 text-center border rounded">
-                      YES
+                    <CCol className="col-3 text-center">
+                      <input
+                        id="paperCover"
+                        name="paperCover"
+                        value={pickup.paperCover}
+                        className="p-3"
+                        type="checkbox"
+                        checked={pickup.paperCover}
+                        onChange={handleCheckboxChange}
+                      />
                     </CCol>
                   </CRow>
                   <CRow className="mb-2">
                     <CCol className="col-8">
                       <h6> Machine Adapter :</h6>
                     </CCol>
-                    <CCol className="col-3 text-center border rounded">
-                      YES
+                    <CCol className="col-3 text-center">
+                      <input
+                        id="machineAdapter"
+                        name="machineAdapter"
+                        value={pickup.machineAdapter}
+                        className="p-3"
+                        type="checkbox"
+                        checked={pickup.machineAdapter}
+                        onChange={handleCheckboxChange}
+                      />
                     </CCol>
                   </CRow>
                   <CRow className="mb-2">
                     <CCol className="col-8">
                       <h6> FD Form :</h6>
                     </CCol>
-                    <CCol className="col-3 text-center border rounded">
-                      YES
+                    <CCol className="col-3 text-center">
+                      <input
+                        id="FDForm"
+                        name="FDForm"
+                        value={pickup.FDForm}
+                        className="p-3"
+                        type="checkbox"
+                        checked={pickup.FDForm}
+                        onChange={handleCheckboxChange}
+                      />
                     </CCol>
                   </CRow>
                 </CCol>
               </CRow>
             </CCol>
-
+            <CCol className="col-12 mt-4">
+              <CRow className="border rounded mx-1 py-4">
+                <CCol>
+                  <CRow className="mb-2">
+                    <CCol className="col-2">
+                      <h6>Client reported problems</h6>
+                    </CCol>
+                    <CCol className="col-10">
+                      <textarea
+                        className="w-100 form-control"
+                        style={{
+                          border: "0px",
+                          borderBottom: "solid 1px #D8DBE0",
+                        }}
+                        id="clientReportedProblems"
+                        name="clientReportedProblems"
+                        value={pickup.clientReportedProblems}
+                        onChange={handleInputChange}
+                        rows="1"
+                        required
+                      />
+                    </CCol>
+                  </CRow>
+                  <CRow className="mb-2">
+                    <CCol className="col-2">
+                      <h6>Technician reported problems</h6>
+                    </CCol>
+                    <CCol className="col-10">
+                      <textarea
+                        className="w-100 form-control"
+                        style={{
+                          border: "0px",
+                          borderBottom: "solid 1px #D8DBE0",
+                        }}
+                        id="TechnicianReportedProblems"
+                        name="TechnicianReportedProblems"
+                        value={pickup.TechnicianReportedProblems}
+                        onChange={handleInputChange}
+                        rows="1"
+                        required
+                      />
+                    </CCol>
+                  </CRow>
+                </CCol>
+              </CRow>
+            </CCol>
             <CCol className="col-12 mt-4">
               <h4 className="text-decoration-underline">Pick up Summery</h4>
               <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
                 The machine with <b> 1000949382773</b> serial number is assigned
                 to the company <b> Edna Mall privated Limited Company</b> and
                 fiscalized with MRC of <b> CLC10008768 </b>
-                and SIM <b> 0987664321 </b> in{" "}
-                <b>
-                  {" "}
-                  {salesDetail.branchName} for {pickupType}
-                </b>{" "}
+                and SIM <b> 0987664321 </b> in <b> {salesDetail.branchName} </b>
+                picked up for {pickupType}
               </h6>{" "}
             </CCol>
             <CCol className="col-12 mt-4">
-              <CRow className="mt-4 border rounded mx-1 py-4">
-                <CCol>
-                  <CRow className="mb-2">
-                    <CCol className="col-3">
-                      <h6>Campany :</h6>
-                    </CCol>
-                    <CCol className="col-8 border-bottom">
-                      <h6>Edna Mall Private limited compony</h6>
-                    </CCol>
-                  </CRow>
-                  <CRow className="mb-2">
-                    <CCol className="col-3">
-                      <h6>TIN :</h6>
-                    </CCol>
-                    <CCol className="col-8 border-bottom">
-                      <h6>1000987664</h6>
-                    </CCol>
-                  </CRow>
-                </CCol>
-                <CCol>
-                  <div className="input-group mb-3">
-                    <div className="input-group-prepend">Company : </div>
-                    <p className="border-bottom">
-                      {" "}
-                      dhfsa jhkjdsfj oieurqwn jsduff hjasdfore fjf kodas
-                    </p>
-                  </div>
-                </CCol>
-              </CRow>
               <CRow className="mt-4 border rounded mx-1 py-4">
                 <CCol className="col-12">
                   <h5>Internal Use</h5>
