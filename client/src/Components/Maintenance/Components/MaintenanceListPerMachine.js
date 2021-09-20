@@ -54,7 +54,7 @@ function MaintenanceListPerMachine({ machineId }) {
             color="dark"
             to={`/maintenance/pickup/${machineId}`}
           >
-            <CIcon name="cil-plus" /> Pickup for mainenance
+            <CIcon name="cil-plus" /> Pickup this machine
           </CButton>
         )}
       </CCardHeader>

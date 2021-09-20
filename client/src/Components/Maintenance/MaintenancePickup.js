@@ -24,7 +24,11 @@ function MaintenancePickup() {
   return (
     <div style={{ overflowX: "scroll" }}>
       {salesDetail.length ? (
-        <MachinePickUp salesDetail={salesDetail[0]} pickupType="Maintenance" />
+        <MachinePickUp
+          user={user}
+          salesDetail={salesDetail[0]}
+          pickupType="Maintenance"
+        />
       ) : (
         <BadRouting text="This machine is already in store, you can only pick up machine in the hand of client (sold machine)!" />
       )}
