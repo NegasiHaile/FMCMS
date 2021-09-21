@@ -24,6 +24,4 @@ router.get("/inRequest_machines", machineCntrl.allMachinesInRequest);
 router.get("/sold_machines", machineCntrl.allSoldMachines);
 router.get("/unsold_machines", machineCntrl.allUnsoldMachines);
 
-router.get("/return_machines", machineCntrl.returnMachinesList);
-
 module.exports = router;

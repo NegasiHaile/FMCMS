@@ -1,4 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
+import { GlobalState } from "../../../GlobalState";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
 import {
@@ -9,19 +11,14 @@ import {
   CImg,
   CRow,
   CCol,
-  CLabel,
-  CLink,
-  CFormGroup,
   CSelect,
-  CTooltip,
-  CInput,
 } from "@coreui/react";
 function MachinePickUp({ user, salesDetail, pickupType }) {
   const pickupDetail = {
-    branchID: user.branch,
-    salesID: salesDetail.saleId,
+    branchId: user.branch,
+    salesId: salesDetail.saleId,
     businessId: salesDetail.businessId,
-    machineID: salesDetail.machineId,
+    machineId: salesDetail.machineId,
     memoryKey: false,
     drawer: false,
     paper: false,
@@ -46,39 +43,53 @@ function MachinePickUp({ user, salesDetail, pickupType }) {
     waitingCostPerMonth: "",
     pickedupBy: user._id,
   };
+  const state = useContext(GlobalState);
   const [pickup, setPickup] = useState(pickupDetail);
+  const [callbackMachinePickup, setCallbackMachinePickup] =
+    state.MachinePickUpAPI.callback;
 
-  console.log("Initial " + JSON.stringify(pickup));
-  // const [checked, setChecked] = useState(false);
   const handleCheckboxChange = (e) => {
     const { name, value } = e.target;
-
-    // setPickup({ ...pickup, [name]: value });
-    console.log("ouside if " + value);
     if (value === "false" || value === false) {
-      console.log("inside if");
       setPickup({ ...pickup, [name]: true });
     } else if (value === "true" || value === true) {
-      console.log("inside else if");
       setPickup({ ...pickup, [name]: false });
     }
-    console.log("Onclick " + JSON.stringify(pickup));
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPickup({ ...pickup, [name]: value });
   };
 
-  const onSubmitSavePickupDetail = (e) => {
+  const sweetAlert = (type, text) => {
+    Swal.fire({
+      position: "center",
+      background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+      icon: type,
+      text: text,
+      confirmButtonColor: "#3C4B64",
+      showConfirmButton: true,
+      // timer: 1500,
+    });
+  };
+  const onSubmitSavePickupDetail = async (e) => {
     e.preventDefault();
-    alert("if(0){re}");
+    try {
+      const res = await axios.post("/pickup/machine", {
+        ...pickup,
+      });
+      setCallbackMachinePickup(!callbackMachinePickup);
+      sweetAlert("success", res.data.msg);
+    } catch (error) {
+      sweetAlert("error", error.response.data.msg);
+    }
   };
 
   const cleaeAllTheDetail = (e) => {
     e.preventDefault();
     setPickup(pickupDetail);
   };
-  // console.log(JSON.stringify(salesDetail));
+
   return (
     <div
       className="rounded "
@@ -662,9 +673,7 @@ function MachinePickUp({ user, salesDetail, pickupType }) {
                       <CCol className="col-3">
                         <h6>Signature :</h6>
                       </CCol>
-                      <CCol className="col-8 border-bottom">
-                        <h6>----- </h6>
-                      </CCol>
+                      <CCol className="col-8 border-bottom"></CCol>
                     </CRow>
                   </CCol>
                   <CCol>
@@ -694,7 +703,7 @@ function MachinePickUp({ user, salesDetail, pickupType }) {
               color="danger"
               onClick={cleaeAllTheDetail}
             >
-              <CIcon name="cil-x"></CIcon> Clear this all detail!
+              <CIcon name="cil-x"></CIcon> Clear this pickup detail!
             </CButton>
           </div>
         </div>

@@ -46,6 +46,11 @@ const MachinesList = lazy(() =>
 const MachineIndetail = lazy(() =>
   import("../../Components/Machine/MachineIndetail")
 );
+// Importing of machine pickup ralted pages
+const MachinePickupDetail = lazy(() =>
+  import("../../Components/Machine/Components/MachinePickupDetail")
+);
+
 // Importing of maintenance ralted pages
 const MaintenanceAnnual = lazy(() =>
   import("../../Components/Maintenance/MaintenanceAnnual")
@@ -142,6 +147,13 @@ const routes = [
     name: "Machine-Indetail",
     component: MachineIndetail,
   },
+  // Machine pickup detail
+  {
+    path: "/pickup/detail/:id",
+    exact: true,
+    name: "Pickup-Detail",
+    component: MachinePickupDetail,
+  },
   // Maintenance
   {
     path: "/maintenance/annual",
@@ -150,7 +162,7 @@ const routes = [
     component: MaintenanceAnnual,
   },
   {
-    path: "/maintenance/pickup/:id",
+    path: "/pickup/machine/:id/:action",
     exact: true,
     name: "Maintenance-Pickup",
     component: MaintenancePickup,

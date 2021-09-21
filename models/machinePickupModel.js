@@ -3,11 +3,11 @@ const ObjectID = mongoose.Schema.Types.ObjectID;
 
 const machinePickupModel = new mongoose.Schema(
   {
-    branchID: {
+    branchId: {
       type: ObjectID,
       required: true,
     },
-    salesID: {
+    salesId: {
       type: ObjectID,
       required: true,
     },
@@ -15,7 +15,7 @@ const machinePickupModel = new mongoose.Schema(
       type: ObjectID,
       required: true,
     },
-    machineID: {
+    machineId: {
       type: ObjectID,
       required: true,
     },
@@ -96,7 +96,7 @@ const machinePickupModel = new mongoose.Schema(
       type: String,
     },
     status: {
-      type: Date,
+      type: String,
       default: "New",
     },
   },

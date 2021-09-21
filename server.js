@@ -16,9 +16,9 @@ app.use("/branch", require("./routes/branchRouter"));
 app.use("/machine", require("./routes/machineRouter"));
 app.use("/mrc", require("./routes/mrcRouter"));
 app.use("/business", require("./routes/clientBusinessRouter"));
-app.use("/maintenance", require("./routes/maintenanceRouter"));
 app.use("/notification", require("./routes/notificationRouter"));
 app.use("/sales", require("./routes/salesRouter"));
+app.use("/pickup", require("./routes/machinePickupRouter"));
 
 // Connect to mongodb
 const URI = process.env.MONGODB_URL;

@@ -2,7 +2,6 @@ const Machines = require("../models/machineModel");
 const clientBusinesses = require("../models/clientBusinessModel");
 const Sales = require("../models/salesModel");
 const MRCs = require("../models/mrcModel");
-const returnmachines = require("../models/returnMachineModel");
 
 const machineCntrl = {
   register: async (req, res) => {
@@ -217,39 +216,6 @@ const machineCntrl = {
       res.json(await Machines.find({ salesStatus: "unsold" }));
     } catch (error) {
       res.status(500).json({ msg: error.message });
-    }
-  },
-
-  returnMachinesList: async (req, res) => {
-    try {
-      const allReturns = await returnmachines.aggregate([
-        {
-          $lookup: {
-            from: "sales",
-            localField: "salesId",
-            foreignField: "_id",
-            as: "sales",
-          },
-        },
-      ]);
-      var data = [];
-      allReturns.forEach((returning) => {
-        data.push({
-          id: returning._id,
-          returnReason: returning.returnReason,
-          acceptanceFile: returning.acceptanceFile,
-          status: returning.status,
-          salesId: returning.sales[0]._id,
-          branchId: returning.sales[0].branchId,
-          machineId: returning.sales[0].machineId,
-          businessId: returning.sales[0].businessId,
-        });
-        // console.log("Inner " + JSON.stringify(data));
-      });
-      res.json(data);
-      console.log(JSON.stringify(data));
-    } catch (err) {
-      return res.status(500).json({ msg: err.message });
     }
   },
   assineMRC: async (req, res) => {
