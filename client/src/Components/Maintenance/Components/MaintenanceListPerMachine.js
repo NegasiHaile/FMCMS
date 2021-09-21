@@ -91,11 +91,7 @@ function MaintenanceListPerMachine({ machineId }) {
       <CCardHeader className="d-flex justify-content-between">
         <CLabel> All maintenances done to this machine</CLabel>
         {user.userRole === "technician" && (
-          <CButton
-            size="sm"
-            color="dark"
-            to={`/pickup/machine/${machineId}/:create`}
-          >
+          <CButton size="sm" color="dark" to={`/pickup/machine/${machineId}`}>
             <CIcon name="cil-plus" /> Pickup this machine!
           </CButton>
         )}
@@ -111,13 +107,13 @@ function MaintenanceListPerMachine({ machineId }) {
             cleaner
             pagination
             scopedSlots={{
-              Actions: (machine) => (
+              Actions: (pickup) => (
                 <td className="d-flex justify-content-between">
                   {user.userRole === "technician" && (
                     <>
                       <CLink
                         className="text-success"
-                        to={`/pickup/machine/${machineId}/:edit`}
+                        to={`/pickup/edit/${pickup.machineId}/${pickup._id}`}
                       >
                         <CTooltip content={`Edit this pickup detail.`}>
                           <CIcon name="cil-pencil" />
@@ -126,7 +122,7 @@ function MaintenanceListPerMachine({ machineId }) {
                       <span className="text-muted">|</span>
                       <CLink
                         className="text-danger"
-                        onClick={() => deletePickupDetail(machine._id)}
+                        onClick={() => deletePickupDetail(pickup._id)}
                       >
                         <CTooltip content={`Delete this operation!.`}>
                           <CIcon name="cil-trash" />
@@ -140,7 +136,7 @@ function MaintenanceListPerMachine({ machineId }) {
                     <>
                       <CLink
                         className="text-info"
-                        to={`/pickup/detail/:id${machine._id}`}
+                        to={`/pickup/detail/:id${pickup._id}`}
                       >
                         <CTooltip
                           content={`See detail of machine machine pickup!`}

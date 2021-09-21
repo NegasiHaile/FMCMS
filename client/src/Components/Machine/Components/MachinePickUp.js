@@ -13,7 +13,7 @@ import {
   CCol,
   CSelect,
 } from "@coreui/react";
-function MachinePickUp({ user, salesDetail, pickupType }) {
+function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
   const pickupDetail = {
     branchId: user.branch,
     salesId: salesDetail.saleId,
@@ -44,9 +44,25 @@ function MachinePickUp({ user, salesDetail, pickupType }) {
     pickedupBy: user._id,
   };
   const state = useContext(GlobalState);
+  const [maintenances] = state.MachinePickUpAPI.machinePickups;
+  const [onEdit, setOnEdit] = useState(false);
   const [pickup, setPickup] = useState(pickupDetail);
   const [callbackMachinePickup, setCallbackMachinePickup] =
     state.MachinePickUpAPI.callback;
+
+  useEffect(() => {
+    if (pickupId != "undefined") {
+      maintenances.forEach((pickupItem) => {
+        if (pickupItem._id === pickupId) {
+          setPickup(pickupItem);
+          setOnEdit(true);
+        }
+      });
+    } else {
+      setOnEdit(false);
+      setPickup(pickupDetail);
+    }
+  }, [pickupId, maintenances]);
 
   const handleCheckboxChange = (e) => {
     const { name, value } = e.target;
@@ -59,6 +75,7 @@ function MachinePickUp({ user, salesDetail, pickupType }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPickup({ ...pickup, [name]: value });
+    console.log(pickup);
   };
 
   const sweetAlert = (type, text) => {
@@ -72,14 +89,21 @@ function MachinePickUp({ user, salesDetail, pickupType }) {
       // timer: 1500,
     });
   };
+
   const onSubmitSavePickupDetail = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/pickup/machine", {
-        ...pickup,
-      });
-      setCallbackMachinePickup(!callbackMachinePickup);
-      sweetAlert("success", res.data.msg);
+      if (onEdit) {
+        const res = await axios.put(`/pickup/edit/${pickupId}`, { ...pickup });
+        sweetAlert("success", res.data.msg);
+        setCallbackMachinePickup(!callbackMachinePickup);
+      } else {
+        const res = await axios.post("/pickup/machine", {
+          ...pickup,
+        });
+        setCallbackMachinePickup(!callbackMachinePickup);
+        sweetAlert("success", res.data.msg);
+      }
     } catch (error) {
       sweetAlert("error", error.response.data.msg);
     }
@@ -695,16 +719,19 @@ function MachinePickUp({ user, salesDetail, pickupType }) {
         <div className="d-flex justify-content-end">
           <div>
             <CButton type="submit" className="my-1 mr-1" size="sm" color="dark">
-              <CIcon name="cil-save"></CIcon> Save this pickup detail!
+              <CIcon name="cil-save"></CIcon> Save{" "}
+              {onEdit ? " all changes" : " this pickup detail"}!
             </CButton>
-            <CButton
-              className="my-1"
-              size="sm"
-              color="danger"
-              onClick={cleaeAllTheDetail}
-            >
-              <CIcon name="cil-x"></CIcon> Clear this pickup detail!
-            </CButton>
+            {!onEdit && (
+              <CButton
+                className="my-1"
+                size="sm"
+                color="danger"
+                onClick={cleaeAllTheDetail}
+              >
+                <CIcon name="cil-x"></CIcon> Clear this pickup detail!
+              </CButton>
+            )}
           </div>
         </div>
       </CForm>

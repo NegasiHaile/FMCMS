@@ -28,6 +28,7 @@ function MaintenancePickup() {
           user={user}
           salesDetail={salesDetail[0]}
           pickupType="Maintenance"
+          pickupId={params.pickupId}
         />
       ) : (
         <BadRouting text="This machine is already in store, you can only pick up machine in the hand of client (sold machine)!" />

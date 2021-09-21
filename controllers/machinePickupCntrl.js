@@ -72,5 +72,51 @@ const machinePickupCntrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
+
+  eidtPickup: async (req, res) => {
+    try {
+      const pickupEditingDetail = new MachinePickups(
+        ({
+          branchId,
+          salesId,
+          businessId,
+          machineId,
+          memoryKey,
+          drawer,
+          paper,
+          terminal,
+          terminalAdapte,
+          machine,
+          SBookTerminal,
+          SbookMachine,
+          paperRoller,
+          paperCover,
+          machineAdapter,
+          FDForm,
+          sealNumber,
+          MRCNumber,
+          category,
+          subCategory,
+          clientReportedProblems,
+          TechnicianReportedProblems,
+          returnReason,
+          returnCertificate,
+          waitingDuration,
+          waitingCostPerMonth,
+          pickedupBy,
+        } = req.body)
+      );
+      await MachinePickups.findOneAndUpdate(
+        { _id: req.params.id },
+        pickupEditingDetail
+      );
+
+      res.json({
+        msg: "Pickup detail eidited successfuly!",
+      });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
 };
 module.exports = machinePickupCntrl;

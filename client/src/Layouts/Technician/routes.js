@@ -162,9 +162,15 @@ const routes = [
     component: MaintenanceAnnual,
   },
   {
-    path: "/pickup/machine/:id/:action",
+    path: "/pickup/machine/:id",
     exact: true,
-    name: "Maintenance-Pickup",
+    name: "Pickup-Machine",
+    component: MaintenancePickup,
+  },
+  {
+    path: "/pickup/edit/:id/:pickupId",
+    exact: true,
+    name: "Pickup-edit",
     component: MaintenancePickup,
   },
   // Machine returning
