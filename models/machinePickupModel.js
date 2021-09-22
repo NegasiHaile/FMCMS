@@ -34,7 +34,7 @@ const machinePickupModel = new mongoose.Schema(
     terminalAdapte: {
       type: Boolean,
     },
-    machine: {
+    machineMaterial: {
       type: Boolean,
     },
     SBookTerminal: {
@@ -68,10 +68,10 @@ const machinePickupModel = new mongoose.Schema(
     subCategory: {
       type: String, // osite/onfron/inside/
     },
-    clientReportedIssue: {
+    clientReportedProblems: {
       type: String,
     },
-    technicianReportedIssue: {
+    TechnicianReportedProblems: {
       type: String,
     },
     returnReason: {

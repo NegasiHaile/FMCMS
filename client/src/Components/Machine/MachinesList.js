@@ -179,7 +179,7 @@ const MachinesList = () => {
       sweetAlert("error", error.response.data.msg);
     }
   };
-  console.log(machine);
+  // console.log(machine);
   const machineTablefields = [
     "serialNumber",
     "machineModel",

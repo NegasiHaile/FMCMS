@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { GlobalState } from "../../GlobalState";
 import axios from "axios";
+import MachinePickupDetail from "../Machine/Components/MachinePickupDetail";
 import {
   CButton,
   CCard,

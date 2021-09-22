@@ -47,8 +47,8 @@ const MachineIndetail = lazy(() =>
   import("../../Components/Machine/MachineIndetail")
 );
 // Importing of machine pickup ralted pages
-const MachinePickupDetail = lazy(() =>
-  import("../../Components/Machine/Components/MachinePickupDetail")
+const PickupDetail = lazy(() =>
+  import("../../Components/Machine/PickupDetail")
 );
 
 // Importing of maintenance ralted pages
@@ -152,7 +152,7 @@ const routes = [
     path: "/pickup/detail/:id",
     exact: true,
     name: "Pickup-Detail",
-    component: MachinePickupDetail,
+    component: PickupDetail,
   },
   // Maintenance
   {

@@ -1,4 +1,8 @@
 const MachinePickups = require("../models/machinePickupModel");
+const Sales = require("../models/salesModel");
+const machines = require("../models/machineModel");
+const clientBusinesses = require("../models/clientBusinessModel");
+const branchs = require("../models/branchModel");
 
 const machinePickupCntrl = {
   addPickup: async (req, res) => {
@@ -14,7 +18,7 @@ const machinePickupCntrl = {
           paper,
           terminal,
           terminalAdapte,
-          machine,
+          machineMaterial,
           SBookTerminal,
           SbookMachine,
           paperRoller,
@@ -35,11 +39,6 @@ const machinePickupCntrl = {
         } = req.body)
       );
 
-      // const machine = await Machines.findOne({ serialNumber: serialNumber });
-
-      // if (machine)
-      //   return res.status(400).json({ msg: "Serial number is token!" });
-
       await newPickup.save();
       res.json({ msg: "Machine pickedup successfuly!" });
     } catch (error) {
@@ -48,7 +47,95 @@ const machinePickupCntrl = {
   },
   getList: async (req, res) => {
     try {
-      res.json(await MachinePickups.find().sort({ createdAt: -1 }));
+      const allPickups = await MachinePickups.aggregate([
+        {
+          $lookup: {
+            from: "machines",
+            localField: "machineId",
+            foreignField: "_id",
+            as: "machine",
+          },
+        },
+        {
+          $lookup: {
+            from: "clientbusinesses",
+            localField: "businessId",
+            foreignField: "_id",
+            as: "business",
+          },
+        },
+        {
+          $lookup: {
+            from: "branchs",
+            localField: "branchId",
+            foreignField: "_id",
+            as: "branch",
+          },
+        },
+        {
+          $match: {
+            "machine._id": {
+              $exists: true,
+            },
+            "business._id": {
+              $exists: true,
+            },
+          },
+        },
+      ]).sort({ updatedAt: -1 });
+
+      var data = [];
+      allPickups.forEach((pickup) => {
+        data.push({
+          _id: pickup._id,
+          branchId: pickup.branchId,
+          branchName: pickup.branch[0].branchName,
+          salesId: pickup._id,
+          machineId: pickup.machine[0]._id,
+          serialNumber: pickup.machine[0].serialNumber,
+          machineModel: pickup.machine[0].machineModel,
+          machineBrand: pickup.machine[0].brand,
+          machineMRC: pickup.machine[0].MRC,
+          machineSIM: pickup.machine[0].SIM,
+          machinePrice: pickup.machine[0].price,
+          businessId: pickup.business[0]._id,
+          tradeName: pickup.business[0].tradeName,
+          companyName: pickup.business[0].companyName,
+          TIN: pickup.business[0].TIN,
+          VAT: pickup.business[0].VAT,
+          telephone: pickup.business[0].telephone,
+          status: pickup.status,
+          createdAt: pickup.createdAt,
+
+          memoryKey: pickup.memoryKey,
+          drawer: pickup.drawer,
+          paper: pickup.paper,
+          terminal: pickup.terminal,
+          terminalAdapte: pickup.terminalAdapte,
+          machineMaterial: pickup.machineMaterial,
+          SBookTerminal: pickup.SBookTerminal,
+          SbookMachine: pickup.SbookMachine,
+          paperRoller: pickup.paperRoller,
+          paperCover: pickup.paperCover,
+          machineAdapter: pickup.machineAdapter,
+          FDForm: pickup.FDForm,
+          sealNumber: pickup.sealNumber,
+          MRCNumber: pickup.MRCNumber,
+          category: pickup.category,
+          subCategory: pickup.subCategory,
+          clientReportedProblems: pickup.clientReportedProblems,
+          TechnicianReportedProblems: pickup.TechnicianReportedProblems,
+          returnReason: pickup.returnReason,
+          returnCertificate: pickup.returnCertificate,
+          waitingDuration: pickup.waitingDuration,
+          waitingCostPerMonth: pickup.waitingCostPerMonth,
+          pickedupBy: pickup.pickedupBy,
+        });
+      });
+      // console.log("Outer " + JSON.stringify(data));
+      res.json(data);
+      // console.log(JSON.stringify(allPickups));
+      // res.json(allPickups);
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -86,7 +173,7 @@ const machinePickupCntrl = {
           paper,
           terminal,
           terminalAdapte,
-          machine,
+          machineMaterial,
           SBookTerminal,
           SbookMachine,
           paperRoller,

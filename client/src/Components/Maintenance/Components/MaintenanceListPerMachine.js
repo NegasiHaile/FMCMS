@@ -75,9 +75,9 @@ function MaintenanceListPerMachine({ machineId }) {
     // alert("go");
   };
   const MaintenanceFields = [
-    "machineId",
     "category",
     "status",
+    "createdAt",
     {
       key: "Actions",
       label: "Actions",
@@ -136,7 +136,7 @@ function MaintenanceListPerMachine({ machineId }) {
                     <>
                       <CLink
                         className="text-info"
-                        to={`/pickup/detail/:id${pickup._id}`}
+                        to={`/pickup/detail/${pickup._id}`}
                       >
                         <CTooltip
                           content={`See detail of machine machine pickup!`}

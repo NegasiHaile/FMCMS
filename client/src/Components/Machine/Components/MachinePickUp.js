@@ -24,7 +24,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     paper: false,
     terminal: false,
     terminalAdapte: false,
-    machine: false,
+    machineMaterial: false,
     SBookTerminal: false,
     SbookMachine: false,
     paperRoller: false,
@@ -78,6 +78,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     console.log(pickup);
   };
 
+  // console.log(pickup)
   const sweetAlert = (type, text) => {
     Swal.fire({
       position: "center",
@@ -345,12 +346,12 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                       </CCol>
                       <CCol className="col-3 text-center">
                         <input
-                          id="machine"
-                          name="machine"
-                          value={pickup.machine}
+                          id="machineMaterial"
+                          name="machineMaterial"
+                          value={pickup.machineMaterial}
                           className="p-3"
                           type="checkbox"
-                          checked={pickup.machine}
+                          checked={pickup.machineMaterial}
                           onChange={handleCheckboxChange}
                         />
                       </CCol>
