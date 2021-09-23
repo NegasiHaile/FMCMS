@@ -37,6 +37,10 @@ const machineSchema = new mongoose.Schema(
       type: String,
       default: "none",
     },
+    fiscalization: {
+      type: Number,
+      default: 0,
+    },
     salesStatus: {
       type: String,
       default: "unsold", // values, New, requested, sold, returned
