@@ -37,7 +37,7 @@ const machineSchema = new mongoose.Schema(
       type: String,
       default: "none",
     },
-    fiscalization: {
+    fiscalizationTimes: {
       type: Number,
       default: 0,
     },
