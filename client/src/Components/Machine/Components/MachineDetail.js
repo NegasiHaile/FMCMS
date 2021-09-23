@@ -4,6 +4,7 @@ import axios from "axios";
 import BadRouting from "../../Utils/routing/BadRouting";
 import MaintenanceListPerMachine from "../../Maintenance/Components/MaintenanceListPerMachine";
 import ReturnListPerMachine from "./ReturnListPerMachine";
+import FiscalizationsPerMachine from "./FiscalizationsPerMachine";
 import {
   CButton,
   CCard,
@@ -219,6 +220,7 @@ function MachineDetail({ id }) {
                 <CTabContent className="my-3">
                   <CTabPane>OWNER dETAIL</CTabPane>
                   <CTabPane>
+                    <FiscalizationsPerMachine machineId={machieneDetail._id} />
                     <div style={{ overflowX: "scroll" }}>
                       {machieneDetail.salesStatus === "sold" ? (
                         <FiscalizationForm />

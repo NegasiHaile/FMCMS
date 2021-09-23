@@ -55,12 +55,14 @@ const salesCntrl = {
           machineMRC: sale.machine[0].MRC,
           machineSIM: sale.machine[0].SIM,
           machinePrice: sale.machine[0].price,
+          fiscalizationTimes: sale.machine[0].fiscalizationTimes,
           businessId: sale.business[0]._id,
           tradeName: sale.business[0].tradeName,
           companyName: sale.business[0].companyName,
           TIN: sale.business[0].TIN,
           VAT: sale.business[0].VAT,
           telephone: sale.business[0].telephone,
+          fiscalization: sale.fiscalization,
           status: sale.status,
           createdAt: sale.createdAt,
         });
@@ -191,6 +193,7 @@ const salesCntrl = {
         { _id: req.params.salesId },
         {
           status: "fiscalization",
+          fiscalization: "ready",
         }
       );
 
