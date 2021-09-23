@@ -9,32 +9,30 @@ import {
   CCardHeader,
   CCardBody,
   CLabel,
-  CDataTable,
   CLink,
   CTooltip,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-
-function MaintenanceListPerMachine({ machineId }) {
+function ReturnListPerMachine({ machineId }) {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
-  const [maintenances] = state.MachinePickUpAPI.machinePickups;
-  const [maint_Per_Machine, setMaint_Per_Machine] = useState([]);
+  const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
+  const [returns_Per_Machine, setReturns_Per_Machine] = useState([]);
   const [callbackMachinePickup, setCallbackMachinePickup] =
     state.MachinePickUpAPI.callback;
 
   useEffect(() => {
-    if (maintenances.length > 0) {
-      setMaint_Per_Machine(
-        maintenances.filter(
-          (maintenance) =>
-            maintenance.machineId == machineId &&
-            (maintenance.category === "annual" ||
-              maintenance.category === "incident")
-        )
+    if (pickupMachines.length > 0) {
+      const value = pickupMachines.filter(
+        (pickup) =>
+          pickup.machineId == machineId &&
+          (pickup.category === "withdrawal" ||
+            pickup.category === "temporarly_store")
       );
+      setReturns_Per_Machine(value);
     }
-  }, [maintenances, machineId, setMaint_Per_Machine]);
+  }, [pickupMachines, machineId, setReturns_Per_Machine]);
+
   const sweetAlert = (type, text) => {
     Swal.fire({
       position: "center",
@@ -46,7 +44,6 @@ function MaintenanceListPerMachine({ machineId }) {
       // timer: 1500,
     });
   };
-  // console.log(JSON.stringify(machineId));
   const deletePickupDetail = async (itmeId) => {
     try {
       Swal.fire({
@@ -71,24 +68,24 @@ function MaintenanceListPerMachine({ machineId }) {
     } catch (error) {
       sweetAlert("error", error.response.data.msg);
     }
+    // <Swal />;
+    // alert("go");
   };
-
   const formatingDate = (dateString) => {
     return new Date(dateString).toLocaleString();
   };
-
   return (
     <CCard>
       <CCardHeader className="d-flex justify-content-between">
-        <CLabel> Maintenance history of this machine</CLabel>
+        <CLabel>Returning history of this machine</CLabel>
         {user.userRole === "technician" && (
           <CButton size="sm" color="dark" to={`/pickup/machine/${machineId}`}>
             <CIcon name="cil-plus" /> Pickup this machine!
           </CButton>
         )}
       </CCardHeader>
-      <CCardBody>
-        {maint_Per_Machine.length > 0 ? (
+      <CCardBody className="table-responsive">
+        {returns_Per_Machine.length >= 1 ? (
           <table className="table table-sm">
             <thead>
               <tr>
@@ -100,21 +97,21 @@ function MaintenanceListPerMachine({ machineId }) {
               </tr>
             </thead>
             <tbody>
-              {maint_Per_Machine.map((maintenance, index) => (
-                <tr key={maintenance._id}>
+              {returns_Per_Machine.map((rtrn, index) => (
+                <tr key={rtrn._id}>
                   <th scope="row">{index + 1}</th>
-                  <td>{maintenance.category}</td>
-                  <td>{maintenance.status}</td>
-                  <td>{formatingDate(maintenance.createdAt)}</td>
+                  <td>{rtrn.category}</td>
+                  <td>{rtrn.status}</td>
+                  <td>{formatingDate(rtrn.createdAt)}</td>
                   <td className="d-flex justify-content-between">
                     {user.userRole === "technician" &&
-                      (maintenance.status === "New" ||
-                        maintenance.status === "unapproved" ||
-                        maintenance.status === "rejected") && (
+                      (rtrn.status === "New" ||
+                        rtrn.status === "unapproved" ||
+                        rtrn.status === "rejected") && (
                         <>
                           <CLink
                             className="text-success"
-                            to={`/pickup/edit/${maintenance.machineId}/${maintenance._id}`}
+                            to={`/pickup/edit/${rtrn.machineId}/${rtrn._id}`}
                           >
                             <CTooltip content={`Edit this pickup detail.`}>
                               <CIcon name="cil-pencil" />
@@ -123,7 +120,7 @@ function MaintenanceListPerMachine({ machineId }) {
                           <span className="text-muted">|</span>
                           <CLink
                             className="text-danger"
-                            onClick={() => deletePickupDetail(maintenance._id)}
+                            onClick={() => deletePickupDetail(rtrn._id)}
                           >
                             <CTooltip content={`Delete this operation!.`}>
                               <CIcon name="cil-trash" />
@@ -137,7 +134,7 @@ function MaintenanceListPerMachine({ machineId }) {
                       <>
                         <CLink
                           className="text-info"
-                          to={`/pickup/detail/${maintenance._id}`}
+                          to={`/pickup/detail/${rtrn._id}`}
                         >
                           <CTooltip content={`See detail of machine pickup!`}>
                             <CIcon name="cil-align-center" />
@@ -151,11 +148,11 @@ function MaintenanceListPerMachine({ machineId }) {
             </tbody>
           </table>
         ) : (
-          <BadRouting text="This machine haven't any maintenance history yet!" />
+          <BadRouting text="This machine haven't any return history yet!" />
         )}
       </CCardBody>
     </CCard>
   );
 }
 
-export default MaintenanceListPerMachine;
+export default ReturnListPerMachine;

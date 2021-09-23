@@ -32,7 +32,6 @@ function MachinePickupDetail() {
         return setPickup([pickupItem]);
       }
     });
-    console.log(pickup);
   }, [params.id, machinePikups]);
 
   // console.log("Outside useEffect :" + JSON.stringify(pickup));
@@ -49,7 +48,7 @@ function MachinePickupDetail() {
     }
   };
   const formatingDate = (stringdate) => {
-    return new Date(stringdate).toLocaleDateString();
+    return new Date(stringdate).toLocaleString();
   };
 
   return (
@@ -71,7 +70,7 @@ function MachinePickupDetail() {
                 <p>
                   <span className="">Date : </span>{" "}
                   <span className="border-bottom">
-                    {new Date().toLocaleDateString()}
+                    {new Date().toLocaleString()}
                   </span>
                   <br />
                   <span className="">Branch :</span>{" "}
@@ -318,7 +317,7 @@ function MachinePickupDetail() {
                           </option>
                           <option value="annual">Annual Maintenance</option>
                           <option value="incident">Incident Maintenance</option>
-                          <option value="return">Returing Machine</option>
+                          <option value="withdrawal">Withdrawal Machine</option>
                           <option value="temporarly_store">
                             Temporarly Store
                           </option>
@@ -438,13 +437,13 @@ function MachinePickupDetail() {
                 </CCol>
               )}
 
-              {pickup[0].category === "return" && (
+              {pickup[0].category === "withdrawal" && (
                 <CCol className="col-12 mt-4">
                   <CRow className="border rounded mx-1 py-4">
                     <CCol>
                       <CRow className="mb-2">
                         <CCol className="col-2">
-                          <h6>Machine return reason </h6>
+                          <h6>Machine withdrawal reason </h6>
                         </CCol>
                         <CCol className="col-10">
                           <textarea
@@ -466,7 +465,7 @@ function MachinePickupDetail() {
                       </CRow>
                       <CRow className="mb-2">
                         <CCol className="col-2">
-                          <h6>Return reason cetificate </h6>
+                          <h6>Withdrawal reason cetificate </h6>
                         </CCol>
                         <CCol className="col-10">
                           <input

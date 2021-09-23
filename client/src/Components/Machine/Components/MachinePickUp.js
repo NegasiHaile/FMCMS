@@ -501,7 +501,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           </option>
                           <option value="annual">Annual Maintenance</option>
                           <option value="incident">Incident Maintenance</option>
-                          <option value="return">Returing Machine</option>
+                          <option value="withdrawal">Withdrawal Machine</option>
                           <option value="temporarly_store">
                             Temporarly Store
                           </option>
@@ -559,13 +559,13 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                   </CRow>
                 </CCol>
               )}
-              {pickup.category === "return" && (
+              {pickup.category === "withdrawal" && (
                 <CCol className="col-12 mt-4">
                   <CRow className="border rounded mx-1 py-4">
                     <CCol>
                       <CRow className="mb-2">
                         <CCol className="col-2">
-                          <h6>Machine return reason </h6>
+                          <h6>Machine withdrawal reason </h6>
                         </CCol>
                         <CCol className="col-10">
                           <textarea
@@ -585,7 +585,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                       </CRow>
                       <CRow className="mb-2">
                         <CCol className="col-2">
-                          <h6>Return reason cetificate </h6>
+                          <h6>Withdrawal reason cetificate </h6>
                         </CCol>
                         <CCol className="col-10">
                           <input
@@ -672,7 +672,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                   {pickup.category === "annual" ||
                   pickup.category === "incident"
                     ? " maintenance "
-                    : pickup.category === "return"
+                    : pickup.category === "withdrawal"
                     ? " machine "
                     : pickup.category === ""
                     ? " _______ "

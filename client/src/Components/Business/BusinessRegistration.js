@@ -137,7 +137,6 @@ const BusinessRegistration = () => {
     formData.append("credentials", business.credentials);
 
     try {
-      // console.log("Onsubmit" + JSON.stringify(business));
       if (onEdit) {
         const res = await axios.put(
           `/business/edit/${params.businessId}`,

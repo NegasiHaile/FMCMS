@@ -3,6 +3,7 @@ import { GlobalState } from "../../../GlobalState";
 import axios from "axios";
 import BadRouting from "../../Utils/routing/BadRouting";
 import MaintenanceListPerMachine from "../../Maintenance/Components/MaintenanceListPerMachine";
+import ReturnListPerMachine from "./ReturnListPerMachine";
 import {
   CButton,
   CCard,
@@ -64,14 +65,8 @@ function MachineDetail({ id }) {
     }
   }, [id, machines]);
   // console.log("Outside useEffect" + JSON.stringify(assignementDetail));
-  const formatDate = (dateString) => {
-    const options = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hours: "numeric",
-    };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+  const formatingDate = (dateString) => {
+    return new Date(dateString).toLocaleString();
   };
   const assignMRCorSIM = async (e) => {
     e.preventDefault();
@@ -194,7 +189,7 @@ function MachineDetail({ id }) {
                   </p>
                   <p className="d-flex justify-content-between">
                     <strong>* Date:</strong>
-                    <span> {formatDate(machieneDetail.createdAt)}</span>
+                    <span> {formatingDate(machieneDetail.createdAt)}</span>
                   </p>
                 </CCol>
               </CRow>
@@ -235,7 +230,9 @@ function MachineDetail({ id }) {
                   <CTabPane>
                     <MaintenanceListPerMachine machineId={machieneDetail._id} />
                   </CTabPane>
-                  <CTabPane>Returning</CTabPane>
+                  <CTabPane>
+                    <ReturnListPerMachine machineId={machieneDetail._id} />
+                  </CTabPane>
                 </CTabContent>
               </CTabs>
             </CCardBody>
