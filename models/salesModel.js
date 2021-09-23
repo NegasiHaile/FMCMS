@@ -15,6 +15,10 @@ const salesSchema = new mongoose.Schema(
       type: ObjectID,
       required: true,
     },
+    fiscalization: {
+      type: String, //Value:-  none, ready, done, canceled
+      default: "none",
+    },
     status: {
       type: String, //Value:-  new, unapproved , instore/rejected, fiscallizing, controlling, delivering, completed
     },
