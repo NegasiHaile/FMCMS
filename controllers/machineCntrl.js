@@ -221,8 +221,13 @@ const machineCntrl = {
   assineMRC: async (req, res) => {
     try {
       if (req.params.id) {
-        // const machineDetail = await Machines.findById({ _id: req.params.id });
+        const machineDetail = await Machines.findById({ _id: req.params.id });
 
+        if (machineDetail.MRC !== "none")
+          await MRCs.findOneAndUpdate(
+            { _id: machineDetail.MRC },
+            { status: "free" }
+          );
         await Machines.findOneAndUpdate(
           { _id: req.params.id },
           { MRC: req.body.MRC }
