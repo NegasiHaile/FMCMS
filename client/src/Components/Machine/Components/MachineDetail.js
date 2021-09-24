@@ -198,11 +198,6 @@ function MachineDetail({ id }) {
                 <CNav variant="tabs">
                   <CNavItem>
                     <CNavLink>
-                      <CIcon name="cil-spreadsheet"></CIcon> Owner
-                    </CNavLink>
-                  </CNavItem>
-                  <CNavItem>
-                    <CNavLink>
                       <CIcon name="cil-list"></CIcon> Fiscalization
                     </CNavLink>
                   </CNavItem>
@@ -218,7 +213,6 @@ function MachineDetail({ id }) {
                   </CNavItem>
                 </CNav>
                 <CTabContent className="my-3">
-                  <CTabPane>OWNER dETAIL</CTabPane>
                   <CTabPane>
                     <FiscalizationsPerMachine machineId={machieneDetail._id} />
                     <div style={{ overflowX: "scroll" }}>

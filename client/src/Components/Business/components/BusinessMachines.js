@@ -67,7 +67,8 @@ function BusinessMachines({ businessId }) {
 
   const salesTableAttributes = [
     "machineSerialNumber",
-    "machinePrice",
+    "machineSIM",
+    "fiscalization",
     "status",
     "createdAt",
     {
@@ -124,37 +125,6 @@ function BusinessMachines({ businessId }) {
           This business haven't a machine yet!
         </h5>
       )}
-      {/* {sales.length !== 0 && (
-        <>
-          {sales.map((sale) => (
-            <div key={sale.saleId}>
-              {business.machine === "assigned" &&
-                (user.userRole === "client" || user.userRole === "sales") && (
-                  <CButton
-                    variant="ghost"
-                    color="danger"
-                    size="sm"
-                    className="w-100 mt-3"
-                    to={`/business/return-machine/${sale.saleId}`}
-                  >
-                    Request to return this machine
-                  </CButton>
-                )}
-              {business.machine === "returning" &&
-                user.userRole === "branch-admin" && (
-                  <CButton
-                    variant="ghost"
-                    color="success"
-                    size="sm"
-                    className="w-100 mt-3"
-                  >
-                    Confirm Return
-                  </CButton>
-                )}
-            </div>
-          ))}{" "}
-        </>
-      )} */}
     </div>
   );
 }

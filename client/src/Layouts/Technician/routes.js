@@ -67,6 +67,11 @@ const MachineReturningLists = lazy(() =>
 // Importing of Sales ralted pages
 const SalesList = lazy(() => import("../../Components/Sales/SalesList"));
 const SalesDetail = lazy(() => import("../../Components/Sales/SalesDetail"));
+
+// Importing of fiscalization ralted pages
+const FiscalizationDetail = lazy(() =>
+  import("../../Components/Fiscalization/FiscalizationDetail")
+);
 // Others pages
 const FeedbacksList = lazy(() =>
   import("../../Components/Feedback/FeedbacksList")
@@ -192,6 +197,13 @@ const routes = [
     exact: true,
     name: "Sales-Detail",
     component: SalesDetail,
+  },
+  //Fiscalization
+  {
+    path: "/fiscalization/detail/:id",
+    exact: true,
+    name: "Fiscalization-Detail",
+    component: FiscalizationDetail,
   },
   // User Accont
   {

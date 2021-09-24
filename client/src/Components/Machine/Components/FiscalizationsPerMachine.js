@@ -23,9 +23,8 @@ function FiscalizationsPerMachine({ machineId }) {
     if (Sales.length > 0) {
       setFsclz_per_machine(
         Sales.filter(
-          (filteredSale) =>
-            filteredSale.machineId == machineId &&
-            filteredSale.fiscalization != "none"
+          (filteredSale) => filteredSale.machineId == machineId
+          // && filteredSale.fiscalization != "none"
         )
       );
       console.log("Inside if :" + JSON.stringify(fsclz_per_machine));
@@ -58,49 +57,26 @@ function FiscalizationsPerMachine({ machineId }) {
               {fsclz_per_machine.map((sale, index) => (
                 <tr key={sale._id}>
                   <th scope="row">{index + 1}</th>
-                  <td>{sale.tradeName}</td>
+                  <td>
+                    <CLink
+                      className="text-info"
+                      to={`/business/detail/${sale.businessId}`}
+                    >
+                      {sale.tradeName}
+                    </CLink>
+                  </td>
                   <td>{sale.fiscalization}</td>
                   <td>{formatingDate(sale.createdAt)}</td>
                   <td>{sale.status}</td>
                   <td className="d-flex justify-content-between">
-                    {user.userRole === "technician" &&
-                      (sale.status === "New" ||
-                        sale.status === "unapproved" ||
-                        sale.status === "rejected") && (
-                        <>
-                          <CLink
-                            className="text-success"
-                            to={`/pickup/edit/${sale.machineId}/${sale._id}`}
-                          >
-                            <CTooltip content={`Edit this pickup detail.`}>
-                              <CIcon name="cil-pencil" />
-                            </CTooltip>
-                          </CLink>
-                          <span className="text-muted">|</span>
-                          <CLink
-                            className="text-danger"
-                            //onClick={() => deletePickupDetail(sale._id)}
-                          >
-                            <CTooltip content={`Delete this operation!.`}>
-                              <CIcon name="cil-trash" />
-                            </CTooltip>
-                          </CLink>
-                          <span className="text-muted">|</span>
-                        </>
-                      )}
-
-                    {
-                      <>
-                        <CLink
-                          className="text-info"
-                          to={`/pickup/detail/${sale._id}`}
-                        >
-                          <CTooltip content={`See detail of machine pickup!`}>
-                            <CIcon name="cil-align-center" />
-                          </CTooltip>
-                        </CLink>
-                      </>
-                    }
+                    <CLink
+                      className="text-info"
+                      to={`/fiscalization/detail/${sale.saleId}`}
+                    >
+                      <CTooltip content={`See detail fiscalization detail!`}>
+                        <small> See More</small>
+                      </CTooltip>
+                    </CLink>
                   </td>
                 </tr>
               ))}
