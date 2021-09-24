@@ -34,7 +34,15 @@ const FiscalizationDetail = () => {
       <div className="d-flex justify-content-end">
         <div>
           <CButton
-            className="my-1"
+            className="mr-2"
+            size="sm"
+            color="dark"
+            onClick={handlePrint}
+          >
+            <CIcon name="cil-memory"></CIcon> Confirm fiscalization!
+          </CButton>
+          <CButton
+            className="mr-2"
             size="sm"
             color="primary"
             onClick={handlePrint}

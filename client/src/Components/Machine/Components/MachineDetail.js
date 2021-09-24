@@ -215,13 +215,13 @@ function MachineDetail({ id }) {
                 <CTabContent className="my-3">
                   <CTabPane>
                     <FiscalizationsPerMachine machineId={machieneDetail._id} />
-                    <div style={{ overflowX: "scroll" }}>
+                    {/* <div style={{ overflowX: "scroll" }}>
                       {machieneDetail.salesStatus === "sold" ? (
                         <FiscalizationForm />
                       ) : (
                         <BadRouting text="Fiscalization not available yet!" />
                       )}
-                    </div>
+                    </div> */}
                   </CTabPane>
                   <CTabPane>
                     <MaintenanceListPerMachine machineId={machieneDetail._id} />
