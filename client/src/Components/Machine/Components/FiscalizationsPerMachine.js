@@ -83,7 +83,7 @@ function FiscalizationsPerMachine({ machineId }) {
             </tbody>
           </table>
         ) : (
-          <BadRouting text="This machine haven't any ficalization history yet!" />
+          <BadRouting text="This machine is not prepared for fiscalization yet!" />
         )}
       </CCardBody>
     </CCard>

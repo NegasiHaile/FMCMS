@@ -19,4 +19,9 @@ router.put(
   salesCntrl.requestForFiscalization
 );
 
+router.put(
+  "/fiscalization/:salesId/:machineId",
+  salesCntrl.fiscalizeAndSendForControlling
+);
+
 module.exports = router;

@@ -204,6 +204,31 @@ const salesCntrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  fiscalizeAndSendForControlling: async (req, res) => {
+    try {
+      const machine = await machines.findById({ _id: req.params.machineId });
+
+      await machines.findOneAndUpdate(
+        { _id: req.params.machineId },
+        {
+          fiscalizationTimes: machine.fiscalizationTimes + 1,
+        }
+      );
+      await Sales.findOneAndUpdate(
+        { _id: req.params.salesId },
+        {
+          status: "controlling",
+          fiscalization: "done",
+        }
+      );
+
+      return res.json({
+        msg: "The machine is requested for controlling.",
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
 };
 const updateSalesStatusToUnapproved = async (newPurchasesOfBusiness) => {
   newPurchasesOfBusiness.forEach(async (purchase) => {

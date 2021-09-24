@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
 import { GlobalState } from "../../../GlobalState";
 import { useParams } from "react-router-dom";
 import { CButton, CCard, CCardBody, CImg, CRow, CCol } from "@coreui/react";
@@ -34,7 +35,9 @@ function FiscalizationItem() {
   const handleMRCNumberById = (mrcId) => {
     if (mrcId != "undefined" || mrcId != "none") {
       const mrcDetail = mrcs.filter((fltrdMRC) => fltrdMRC._id == mrcId);
-      return mrcDetail[0].MRC;
+      console.log(JSON.stringify(mrcDetail));
+      if (mrcDetail.length === 1) return mrcDetail[0].MRC;
+      return " ";
     }
   };
   return (
@@ -179,30 +182,23 @@ function FiscalizationItem() {
                 <CRow className="mt-4 border rounded mx-1 py-4">
                   <CCol>
                     <CRow className="mb-2">
-                      <CCol className="col-3">
-                        <h6>Campany :</h6>
+                      <CCol className="col-4">
+                        <h6>Fiscalization Status:</h6>
                       </CCol>
-                      <CCol className="col-8 border-bottom">
-                        <h6>Edna Mall Private limited compony</h6>
-                      </CCol>
-                    </CRow>
-                    <CRow className="mb-2">
-                      <CCol className="col-3">
-                        <h6>TIN :</h6>
-                      </CCol>
-                      <CCol className="col-8 border-bottom">
-                        <h6>1000987664</h6>
+                      <CCol className="col-7 border-bottom">
+                        <h6>{salesDetail[0].fiscalization}</h6>
                       </CCol>
                     </CRow>
                   </CCol>
                   <CCol>
-                    <div className="input-group mb-3">
-                      <div className="input-group-prepend">Company : </div>
-                      <p className="border-bottom">
-                        {" "}
-                        dhfsa jhkjdsfj oieurqwn jsduff hjasdfore fjf kodas
-                      </p>
-                    </div>
+                    <CRow className="mb-2">
+                      <CCol className="col-4">
+                        <h6>Fiscalized By :</h6>
+                      </CCol>
+                      <CCol className="col-7 border-bottom">
+                        <h6>{user.fName + " " + user.mName}</h6>
+                      </CCol>
+                    </CRow>
                   </CCol>
                 </CRow>
               </CCol>
@@ -216,4 +212,84 @@ function FiscalizationItem() {
   );
 }
 
-export default FiscalizationItem;
+function FiscalizationOperations() {
+  const params = useParams();
+  const state = useContext(GlobalState);
+  const [user] = state.UserAPI.User;
+  const [Sales] = state.SalesAPI.Sales;
+  const [salesDetail, setSalesDetail] = useState("");
+  const [mrcs] = state.MRCAPI.mrcs;
+  const [callbackMachines, setCallbackMachines] = state.MachineAPI.callback;
+  const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
+
+  const sweetAlert = (type, text) => {
+    Swal.fire({
+      position: "center",
+      background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+      icon: type,
+      text: text,
+      confirmButtonColor: "#3C4B64",
+      showConfirmButton: true,
+      // timer: 1500,
+    });
+  };
+
+  useEffect(() => {
+    if (Sales.length > 0) {
+      setSalesDetail(
+        Sales.filter(
+          (filteredSale) =>
+            filteredSale.saleId === params.id &&
+            filteredSale.fiscalization === "ready"
+        )
+      );
+    }
+  }, [Sales, setSalesDetail]);
+
+  const onSubmitFiscalizationDone = async (saleId, machineId) => {
+    try {
+      Swal.fire({
+        title: "",
+        text: "Are you sure this fiscalization is completed and it's ready to pass to controller?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3C4B64",
+        cancelButtonColor: "#d33",
+        confirmButtonSize: "sm",
+        confirmButtonText: "Yes, Completed!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const res = await axios.put(
+            `/sales/fiscalization/${saleId}/${machineId}`
+          );
+          Swal.fire("Done!", res.data.msg, "success");
+          setCallbackSales(!callbackSales);
+          setCallbackMachines(!callbackMachines);
+        }
+      });
+    } catch (error) {
+      sweetAlert("error", error.response.data.msg);
+    }
+  };
+  return (
+    <>
+      {user.userRole === "technician" && salesDetail.length > 0 && (
+        <CButton
+          className="mr-2"
+          size="sm"
+          color="dark"
+          onClick={() =>
+            onSubmitFiscalizationDone(
+              salesDetail[0].saleId,
+              salesDetail[0].machineId
+            )
+          }
+        >
+          <CIcon name="cil-memory"></CIcon> Confirm fiscalization!
+        </CButton>
+      )}
+    </>
+  );
+}
+
+export { FiscalizationItem, FiscalizationOperations };

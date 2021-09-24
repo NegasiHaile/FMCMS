@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
 
-import FiscalizationItem from "./Components/FiscalizationItem";
+import {
+  FiscalizationItem,
+  FiscalizationOperations,
+} from "./Components/FiscalizationItem";
 import { CButton } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { render } from "react-dom";
@@ -33,14 +36,7 @@ const FiscalizationDetail = () => {
       </div>
       <div className="d-flex justify-content-end">
         <div>
-          <CButton
-            className="mr-2"
-            size="sm"
-            color="dark"
-            onClick={handlePrint}
-          >
-            <CIcon name="cil-memory"></CIcon> Confirm fiscalization!
-          </CButton>
+          <FiscalizationOperations />
           <CButton
             className="mr-2"
             size="sm"
