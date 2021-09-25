@@ -25,22 +25,16 @@ const _nav = [
     icon: "cil-print",
   },
   {
-    _tag: "CSidebarNavDropdown",
-    name: "Maintenance",
-    route: "/maintenance",
+    _tag: "CSidebarNavItem",
+    name: "Maintenance List",
+    to: "/maintenance/annual",
     icon: "cil-memory",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "Annual",
-        to: "/maintenance/annual",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Incident",
-        to: "/maintenance/incident",
-      },
-    ],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Returning List",
+    to: "/businesses/list",
+    icon: "cil-recycle",
   },
   {
     _tag: "CSidebarNavTitle",
