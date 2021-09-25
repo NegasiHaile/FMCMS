@@ -1,8 +1,6 @@
 import React from "react";
 import CIcon from "@coreui/icons-react";
 
-// const NEW = "10";
-
 const _nav = [
   // Machines Managment and controlling
   {
@@ -17,9 +15,21 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "New Machine Arrivals",
-    to: "/sales/list",
+    name: "Sales List",
+    to: "/sales/oflist",
     icon: "cil-control",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Maintenance List",
+    to: "/sales/oflist",
+    icon: "cil-memory",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Returning List",
+    to: "/sales/oflist",
+    icon: "cil-recycle",
   },
 
   // others

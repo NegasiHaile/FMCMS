@@ -34,15 +34,15 @@ const BusinessDetail = lazy(() =>
 );
 
 // Importing of machine related pages
-const MachineDistribute = lazy(() =>
-  import("../../Components/Machine/MachineDistribute")
-);
 const MachinesList = lazy(() =>
   import("../../Components/Machine/MachinesList")
 );
-// Importing of maintenance ralted pages
-const MaintenanceAnnual = lazy(() =>
-  import("../../Components/Maintenance/MaintenanceAnnual")
+const MachineIndetail = lazy(() =>
+  import("../../Components/Machine/MachineIndetail")
+);
+// Importing of machine pickup ralted pages
+const PickupDetail = lazy(() =>
+  import("../../Components/Machine/PickupDetail")
 );
 
 // Importing of Machine Returning ralted pages
@@ -53,6 +53,10 @@ const MachineReturningLists = lazy(() =>
 // Importing of Sales ralted pages
 const SalesList = lazy(() => import("../../Components/Sales/SalesList"));
 const SalesDetail = lazy(() => import("../../Components/Sales/SalesDetail"));
+// Importing of fiscalization ralted pages
+const FiscalizationDetail = lazy(() =>
+  import("../../Components/Fiscalization/FiscalizationDetail")
+);
 // Others pages
 const FeedbacksList = lazy(() =>
   import("../../Components/Feedback/FeedbacksList")
@@ -107,27 +111,26 @@ const routes = [
     name: "Business-Detail",
     component: BusinessDetail,
   },
-  // Machine
-  // {
-  //   path: "/machine/distribute",
-  //   exact: true,
-  //   name: "Distribute-Machine",
-  //   component: MachineDistribute,
-  // },
+  // machine
   {
     path: "/machines/list",
     exact: true,
     name: "Machines-List",
     component: MachinesList,
   },
-  // Maintenance
   {
-    path: "/maintenance/annual",
+    path: "/machine/indetail/:id",
     exact: true,
-    name: "Annual-Maintenance",
-    component: MaintenanceAnnual,
+    name: "Machine-Indetail",
+    component: MachineIndetail,
   },
-  // Machine returning
+  // Machine pickup detail
+  {
+    path: "/pickup/detail/:id",
+    exact: true,
+    name: "Pickup-Detail",
+    component: PickupDetail,
+  },
   {
     path: "/machine/returnlist",
     exact: true,
@@ -146,6 +149,13 @@ const routes = [
     exact: true,
     name: "Sales-Detail",
     component: SalesDetail,
+  },
+  //Fiscalization
+  {
+    path: "/fiscalization/detail/:id",
+    exact: true,
+    name: "Fiscalization-Detail",
+    component: FiscalizationDetail,
   },
   // User Accont
   {

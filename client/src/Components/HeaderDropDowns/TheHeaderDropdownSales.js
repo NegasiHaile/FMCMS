@@ -48,6 +48,15 @@ function TheHeaderDropdownSales() {
         )
       );
       setAlertLable(" fiscalization ");
+    } else if (user.userRole === "machine-controller") {
+      setSalesAlert(
+        Sales.filter(
+          (filteredSale) =>
+            filteredSale.status === "controlling" &&
+            filteredSale.branchId == user.branch
+        )
+      );
+      setAlertLable(" controlling ");
     }
   }, [Sales, user]);
 
