@@ -501,6 +501,9 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           </option>
                           <option value="annual">Annual Maintenance</option>
                           <option value="incident">Incident Maintenance</option>
+                          <option value="info_change">
+                            Information Change
+                          </option>
                           <option value="withdrawal">Withdrawal Machine</option>
                           <option value="temporarly_store">
                             Temporarly Store
