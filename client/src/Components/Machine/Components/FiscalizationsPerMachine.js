@@ -55,7 +55,7 @@ function FiscalizationsPerMachine({ machineId }) {
             </thead>
             <tbody>
               {fsclz_per_machine.map((sale, index) => (
-                <tr key={sale._id}>
+                <tr key={sale.saleId}>
                   <th scope="row">{index + 1}</th>
                   <td>
                     <CLink
