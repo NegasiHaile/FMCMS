@@ -29,9 +29,6 @@ const RegisterClient = lazy(() =>
 const ClientDetail = lazy(() => import("../../Components/Client/ClientDetail"));
 
 // Client business frontend routing
-const BusinessRegistration = lazy(() =>
-  import("../../Components/Business/BusinessRegistration")
-);
 const BusinessesList = lazy(() =>
   import("../../Components/Business/BusinessesList")
 );
@@ -52,6 +49,9 @@ const PickupDetail = lazy(() =>
 );
 
 // Importing of maintenance ralted pages
+const MaintenanceList = lazy(() =>
+  import("../../Components/Maintenance/MaintenanceList")
+);
 const MaintenanceAnnual = lazy(() =>
   import("../../Components/Maintenance/MaintenanceAnnual")
 );
@@ -60,6 +60,9 @@ const MaintenancePickup = lazy(() =>
 );
 
 // Importing of Machine Returning ralted pages
+const ReturningList = lazy(() =>
+  import("../../Components/Machine/ReturningList/ReturningList")
+);
 const MachineReturningLists = lazy(() =>
   import("../../Components/MachineReturn/MachineReturningLists")
 );
@@ -120,12 +123,6 @@ const routes = [
     component: ClientDetail,
   },
   // Client bussiness
-  {
-    path: "/business/edit/:businessId",
-    exact: true,
-    name: "Update-Business",
-    component: BusinessRegistration,
-  },
 
   {
     path: "/businesses/list",
@@ -161,6 +158,12 @@ const routes = [
   },
   // Maintenance
   {
+    path: "/maintenance/list",
+    exact: true,
+    name: "Maintenance-List",
+    component: MaintenanceList,
+  },
+  {
     path: "/maintenance/annual",
     exact: true,
     name: "Annual-Maintenance",
@@ -179,6 +182,12 @@ const routes = [
     component: MaintenancePickup,
   },
   // Machine returning
+  {
+    path: "/machine/return/list",
+    exact: true,
+    name: "Machine-Returning-List",
+    component: ReturningList,
+  },
   {
     path: "/machine/returnlist",
     exact: true,
