@@ -24,4 +24,6 @@ router.put(
   salesCntrl.fiscalizeAndSendForControlling
 );
 
+router.put("/delivery_completing/:salesId", salesCntrl.completingSalesDelivery);
+
 module.exports = router;

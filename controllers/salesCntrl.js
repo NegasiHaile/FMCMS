@@ -229,6 +229,22 @@ const salesCntrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  completingSalesDelivery: async (req, res) => {
+    try {
+      await Sales.findOneAndUpdate(
+        { _id: req.params.salesId },
+        {
+          status: "completed",
+        }
+      );
+
+      return res.json({
+        msg: "Sales status changed to completed.",
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
 };
 const updateSalesStatusToUnapproved = async (newPurchasesOfBusiness) => {
   newPurchasesOfBusiness.forEach(async (purchase) => {

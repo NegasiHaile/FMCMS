@@ -202,6 +202,65 @@ function FiscalizationItem() {
                   </CCol>
                 </CRow>
               </CCol>
+
+              {user.userRole === "machine-controller" &&
+                salesDetail[0].fiscalization === "done" && (
+                  <CCol className="col-12 mt-4">
+                    <CRow className=" border rounded mx-1 py-4">
+                      <CCol className="col-12 border-bottom">
+                        <h4>Delivery Detail</h4>
+                      </CCol>
+                      <CCol className="col-6 mt-3">
+                        <CRow className="mb-2">
+                          <CCol className="col-4">
+                            <h6>Technician Name :</h6>
+                          </CCol>
+                          <CCol className="col-7 border-bottom">
+                            <h6> </h6>
+                          </CCol>
+                        </CRow>
+                        <CRow className="mb-2">
+                          <CCol className="col-4">
+                            <h6>Signature :</h6>
+                          </CCol>
+                          <CCol className="col-7 border-bottom">
+                            <h6> </h6>
+                          </CCol>
+                        </CRow>
+                      </CCol>
+                      <CCol className="col-6 mt-5">
+                        <CRow className="mb-2">
+                          <CCol className="col-4">
+                            <h6>Delivery Date :</h6>
+                          </CCol>
+                          <CCol className="col-7 border-bottom">
+                            <h6> </h6>
+                          </CCol>
+                        </CRow>
+                      </CCol>
+                      <CCol className="col-6 mt-4">
+                        <CRow className="mb-2">
+                          <CCol className="col-4">
+                            <h6>Contact Person Name:</h6>
+                          </CCol>
+                          <CCol className="col-7 border-bottom">
+                            <h6></h6>
+                          </CCol>
+                        </CRow>
+                      </CCol>
+                      <CCol className="col-6 mt-4">
+                        <CRow className="mb-2">
+                          <CCol className="col-4">
+                            <h6>Contact Person Signature :</h6>
+                          </CCol>
+                          <CCol className="col-7 border-bottom">
+                            <h6> </h6>
+                          </CCol>
+                        </CRow>
+                      </CCol>
+                    </CRow>
+                  </CCol>
+                )}
             </CRow>
           </CCardBody>
         </CCard>
@@ -240,7 +299,7 @@ function FiscalizationOperations() {
         Sales.filter(
           (filteredSale) =>
             filteredSale.saleId === params.id &&
-            filteredSale.fiscalization === "ready"
+            filteredSale.fiscalization !== "none"
         )
       );
     }
@@ -271,9 +330,34 @@ function FiscalizationOperations() {
       sweetAlert("error", error.response.data.msg);
     }
   };
+
+  const onclickComplateDelivery = async (saleId) => {
+    try {
+      Swal.fire({
+        title: "",
+        text: "Are you the machine is delivered to the client?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3C4B64",
+        cancelButtonColor: "#d33",
+        confirmButtonSize: "sm",
+        confirmButtonText: "Yes, it's delivered!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const res = await axios.put(`/sales/delivery_completing/${saleId}`);
+          Swal.fire("Done!", res.data.msg, "success");
+          setCallbackSales(!callbackSales);
+        }
+      });
+    } catch (error) {
+      sweetAlert("error", error.response.data.msg);
+    }
+  };
   return (
     <>
-      {user.userRole === "technician" && salesDetail.length > 0 && (
+      {user.userRole === "technician" &&
+      salesDetail.length > 0 &&
+      salesDetail[0].fiscalization === "ready" ? (
         <CButton
           className="mr-2"
           size="sm"
@@ -287,7 +371,27 @@ function FiscalizationOperations() {
         >
           <CIcon name="cil-memory"></CIcon> Confirm fiscalization!
         </CButton>
+      ) : (
+        ""
       )}
+      {salesDetail.length > 0 &&
+        user.userRole === "machine-controller" &&
+        salesDetail[0].fiscalization === "done" &&
+        salesDetail[0].status === "controlling" && (
+          <CButton
+            className="mr-2"
+            size="sm"
+            color="danger"
+            onClick={() =>
+              onclickComplateDelivery(
+                salesDetail[0].saleId,
+                salesDetail[0].machineId
+              )
+            }
+          >
+            <CIcon name="cil-memory"></CIcon> Delivery completed?
+          </CButton>
+        )}
     </>
   );
 }
