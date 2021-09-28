@@ -28,7 +28,7 @@ const TheHeaderDropdownMssg = () => {
             <div className="pt-3 mr-3 float-left">
               <div className="c-avatar">
                 <CImg
-                  src={"avatars/admin.png"}
+                  src={"/avatars/admin.png"}
                   className="c-avatar-img"
                   alt="admin@bootstrapmaster.com"
                 />
@@ -55,7 +55,7 @@ const TheHeaderDropdownMssg = () => {
             <div className="pt-3 mr-3 float-left">
               <div className="c-avatar">
                 <CImg
-                  src={"avatars/admin.png"}
+                  src={"/avatars/admin.png"}
                   className="c-avatar-img"
                   alt="admin@bootstrapmaster.com"
                 />
