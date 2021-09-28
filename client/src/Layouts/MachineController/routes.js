@@ -45,6 +45,14 @@ const PickupDetail = lazy(() =>
   import("../../Components/Machine/PickupDetail")
 );
 
+// Importing of maintenance ralted pages
+const MaintenanceList = lazy(() =>
+  import("../../Components/Maintenance/MaintenanceList")
+);
+// Importing of Machine Returning ralted pages
+const ReturningList = lazy(() =>
+  import("../../Components/Machine/ReturningList/ReturningList")
+);
 // Importing of Machine Returning ralted pages
 const MachineReturningLists = lazy(() =>
   import("../../Components/MachineReturn/MachineReturningLists")
@@ -131,11 +139,19 @@ const routes = [
     name: "Pickup-Detail",
     component: PickupDetail,
   },
+  // Machine returning list
   {
-    path: "/machine/returnlist",
+    path: "/machine/return/list",
     exact: true,
-    name: "Request-Return-Machine",
-    component: MachineReturningLists,
+    name: "Machine-Returning-List",
+    component: ReturningList,
+  },
+  // Maintenance
+  {
+    path: "/maintenance/list",
+    exact: true,
+    name: "Maintenance-List",
+    component: MaintenanceList,
   },
   // Sales
   {

@@ -22,13 +22,13 @@ const _nav = [
   {
     _tag: "CSidebarNavItem",
     name: "Maintenance List",
-    to: "/sales/oflist",
+    to: "/maintenance/list",
     icon: "cil-memory",
   },
   {
     _tag: "CSidebarNavItem",
     name: "Returning List",
-    to: "/sales/oflist",
+    to: "/machine/return/list",
     icon: "cil-recycle",
   },
 
