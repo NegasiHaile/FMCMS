@@ -9,26 +9,25 @@ function UserAPI(token) {
   useEffect(() => {
     if (token) {
       const getUser = async () => {
-        try {
-          const res = await axios.get("/user/profile", {
-            headers: { Authorization: token },
-          });
+        // try {
+        const res = await axios.get("/user/profile", {
+          headers: { Authorization: token },
+        });
 
-          setUser(res.data);
-          setIsLogged(true);
-          // res.data.role === "super-admin" ? setUser(true) : setUser(false)
-          // console.log(res.data)
-        } catch (error) {
-          Swal.fire({
-            position: "center",
-            background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
-            icon: "error",
-            text: error.response.data.msg,
-            confirmButtonColor: "#1E263C",
-            showConfirmButton: false,
-            // timer: 1500,
-          });
-        }
+        setUser(res.data);
+        setIsLogged(true);
+
+        // } catch (error) {
+        //   Swal.fire({
+        //     position: "center",
+        //     background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+        //     icon: "error",
+        //     text: "Check your connection OR refresh your page!", //error.response.data.msg,
+        //     confirmButtonColor: "#1E263C",
+        //     showConfirmButton: false,
+        //     // timer: 1500,
+        //   });
+        // }
       };
 
       getUser();

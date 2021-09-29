@@ -32,8 +32,8 @@ router.post("/change_password/:id", auth, userCntrl.changePassword);
 
 router.put("/forgot_Password", userCntrl.forgotPassword);
 
-router.post("/block_account/:id", auth, userCntrl.blockAccount);
+router.put("/block_account/:id", userCntrl.blockAccount);
 
-router.post("/activate_account/:id", auth, userCntrl.activateAccount);
+router.put("/activate_account/:id", userCntrl.activateAccount);
 
 module.exports = router;

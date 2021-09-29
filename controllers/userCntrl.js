@@ -137,8 +137,11 @@ const userCntrl = {
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
-      const user = await Users.findOne({ "email" : {
-        $regex : new RegExp(email, "i") } });
+      const user = await Users.findOne({
+        email: {
+          $regex: new RegExp(email, "i"),
+        },
+      });
 
       if (!user) return res.status(400).json({ msg: "User does not exist." });
 
@@ -147,7 +150,7 @@ const userCntrl = {
 
       if (user.status !== "ON")
         return res.status(400).json({
-          msg: "This account is deactivated, please contact the owner of this site!",
+          msg: "Your account is disabled, please contact the admin!",
         });
 
       // If login success , create access token and refresh token
@@ -253,7 +256,7 @@ const userCntrl = {
           status: "OFF",
         }
       );
-      res.json({ msg: "User account has been blocked successfuly!" });
+      res.json({ msg: "User account has been disabled successfuly!" });
     } catch (error) {
       res.status(500).json({ meg: error.message });
     }

@@ -12,6 +12,7 @@ import {
   CDataTable,
   CLink,
   CTooltip,
+  CSwitch,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
@@ -36,7 +37,17 @@ const EmployeeList = () => {
       setEmployees(allUsers);
     }
   }, [user, allUsers]);
-
+  const sweetAlert = (type, text) => {
+    Swal.fire({
+      position: "center",
+      background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+      icon: type,
+      text: text,
+      confirmButtonColor: "#3C4B64",
+      showConfirmButton: true,
+      // timer: 1500,
+    });
+  };
   const deleteEmloyee = async (_id, fName, mName) => {
     // e.preventDefault();
     try {
@@ -67,20 +78,45 @@ const EmployeeList = () => {
     }
   };
 
-  // const filterEmployeeBranch = async (_id) => {
-  //     branchs.filter((branch) => branch._id == _id)
-  //       .map((filteredBranch) => <li>{filteredBranch.branchName}</li>);
-  // }
-
-  //  to={{ pathname: `/cards/${id}`, state: id }} // sending data to another page
-  //             className={`card-wrapper restore-${id}`}
+  const switchUserAccount = async (text, fName, mName, status, _id) => {
+    try {
+      Swal.fire({
+        text:
+          "Are you sure you want to " +
+          text +
+          " " +
+          fName +
+          " " +
+          mName +
+          "'s account?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3C4B64",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, " + text + " it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          if (status === "ON") {
+            const res = await axios.put(`/user/block_account/${_id}`);
+            sweetAlert("success", res.data.msg);
+          } else if (status === "OFF") {
+            const res = await axios.put(`/user/activate_account/${_id}`);
+            sweetAlert("success", res.data.msg);
+          } else {
+            sweetAlert("error", "Nothing to change");
+          }
+          setCallback(!callback);
+        }
+      });
+    } catch (error) {
+      sweetAlert("error", error.response.data.msg);
+    }
+  };
 
   const employeeTableFields = [
     "fName",
     "mName",
-    "lName",
     "gender",
-    "email",
     "phoneNumber",
     "branch",
     "userRole",
@@ -127,6 +163,37 @@ const EmployeeList = () => {
             sorter
             pagination
             scopedSlots={{
+              status: (employee) => (
+                <td className="justify-content-between">
+                  <CButton
+                    size="sm"
+                    variant="ghost"
+                    color={employee.status === "ON" ? "danger" : "primary"}
+                    onClick={() => {
+                      if (employee.status === "ON") {
+                        switchUserAccount(
+                          "disable",
+                          employee.fName,
+                          employee.mName,
+                          employee.status,
+                          employee._id
+                        );
+                      } else {
+                        switchUserAccount(
+                          "activate",
+                          employee.fName,
+                          employee.mName,
+                          employee.status,
+                          employee._id
+                        );
+                      }
+                    }}
+                  >
+                    {" "}
+                    {employee.status}{" "}
+                  </CButton>
+                </td>
+              ),
               branch: (employee) => (
                 <td>
                   {branchs
