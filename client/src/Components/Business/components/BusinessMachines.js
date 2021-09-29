@@ -89,33 +89,48 @@ function BusinessMachines({ businessId }) {
           scopedSlots={{
             Actions: (salesPerBusiness) => (
               <>
-                {(user.userRole === "sales" || user.userRole === "client") && (
-                  <td className="d-flex justify-content-center">
-                    {salesPerBusiness.status === "New" ||
-                    salesPerBusiness.status === "unapproved" ? (
-                      <CLink
-                        className="text-danger"
-                        onClick={() =>
-                          cancelUnapprovedSales(salesPerBusiness.saleId)
-                        }
-                      >
-                        <CTooltip
-                          content={`Remove machine from this business.`}
+                <td className="d-flex justify-content-center">
+                  {(user.userRole === "sales" ||
+                    user.userRole === "client") && (
+                    <>
+                      {" "}
+                      {salesPerBusiness.status === "New" ||
+                      salesPerBusiness.status === "unapproved" ? (
+                        <CLink
+                          className="text-danger"
+                          onClick={() =>
+                            cancelUnapprovedSales(salesPerBusiness.saleId)
+                          }
                         >
-                          <CIcon name="cil-trash" />
-                        </CTooltip>
-                      </CLink>
-                    ) : (
-                      <CLink className="text-success" to={`/business/Detail/`}>
-                        <CTooltip
-                          content={`Make requet of return this machine.`}
+                          <CTooltip
+                            content={`Remove machine from this business.`}
+                          >
+                            <CIcon name="cil-trash" />
+                          </CTooltip>
+                        </CLink>
+                      ) : (
+                        <CLink
+                          className="text-success"
+                          to={`/business/Detail/`}
                         >
-                          <CIcon name="cil-recycle" />
-                        </CTooltip>
-                      </CLink>
-                    )}
-                  </td>
-                )}
+                          <CTooltip
+                            content={`Make requet of return this machine.`}
+                          >
+                            <CIcon name="cil-recycle" />
+                          </CTooltip>
+                        </CLink>
+                      )}{" "}
+                    </>
+                  )}
+                  <CLink
+                    className="text-info"
+                    to={`/machine/indetail/${salesPerBusiness.machineId}`}
+                  >
+                    <CTooltip content={`See more about this machine.`}>
+                      <CIcon name="cil-align-center" />
+                    </CTooltip>
+                  </CLink>
+                </td>
               </>
             ),
           }}
