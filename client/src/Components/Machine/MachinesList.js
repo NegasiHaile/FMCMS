@@ -187,6 +187,7 @@ const MachinesList = () => {
     "price",
     "MRC",
     "SIM",
+    "fiscalizationTimes",
     "salesStatus",
     "problemStatus",
     {
