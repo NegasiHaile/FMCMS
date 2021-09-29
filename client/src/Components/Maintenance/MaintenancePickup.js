@@ -16,7 +16,7 @@ function MaintenancePickup() {
   useEffect(() => {
     setSalesDetail(
       Sales.filter(
-        (sale) => sale.machineId == params.id && sale.status === "fiscalization"
+        (sale) => sale.machineId == params.id && sale.status === "completed"
       )
     );
   }, [params.id, Sales]);
@@ -31,7 +31,7 @@ function MaintenancePickup() {
           pickupId={params.pickupId}
         />
       ) : (
-        <BadRouting text="This machine is already in store, you can only pick up machine in the hand of client (sold machine)!" />
+        <BadRouting text="This machine is already in store, you can only recieve machine in the hand of client (sold machine)!" />
       )}
     </div>
   );
