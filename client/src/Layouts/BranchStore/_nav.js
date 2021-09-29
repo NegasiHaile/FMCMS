@@ -9,12 +9,14 @@ const _nav = [
     name: "Dashboard",
     to: "/dashboard",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
-    // badge: {
-    //   color: "success",
-    //   text: NEW,
-    // },
   },
 
+  {
+    _tag: "CSidebarNavItem",
+    name: "Branch Sales",
+    to: "/sales/oflist",
+    icon: "cil-star",
+  },
   // Machines Managment and controlling
   {
     _tag: "CSidebarNavTitle",
@@ -61,16 +63,6 @@ const _nav = [
   {
     _tag: "CSidebarNavTitle",
     _children: ["Sales"],
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Machine Sales",
-    to: "/sales/oflist",
-    icon: "cil-star",
-    // badge: {
-    //   color: "danger",
-    //   text: 5,
-    // },
   },
   // Spares Managment and controlling
   {

@@ -32,14 +32,30 @@ const MachinesList = lazy(() =>
 const MachineIndetail = lazy(() =>
   import("../../Components/Machine/MachineIndetail")
 );
-const MachineReturningLists = lazy(() =>
-  import("../../Components/MachineReturn/MachineReturningLists")
-);
 // Importing MRC related routes
 const MrcsList = lazy(() => import("../../Components/MRC/MrcsList"));
 // Importing of maintenance ralted routes
-const MaintenanceAnnual = lazy(() =>
-  import("../../Components/Maintenance/MaintenanceAnnual")
+
+// Importing of machine pickup ralted pages
+const PickupDetail = lazy(() =>
+  import("../../Components/Machine/PickupDetail")
+);
+// Importing of maintenance ralted pages
+const MaintenanceList = lazy(() =>
+  import("../../Components/Maintenance/MaintenanceList")
+);
+// Importing of Machine Returning ralted pages
+const ReturningList = lazy(() =>
+  import("../../Components/Machine/ReturningList/ReturningList")
+);
+// Importing of Machine Returning ralted pages
+const MachineReturningLists = lazy(() =>
+  import("../../Components/MachineReturn/MachineReturningLists")
+);
+
+// Importing of fiscalization ralted pages
+const FiscalizationDetail = lazy(() =>
+  import("../../Components/Fiscalization/FiscalizationDetail")
 );
 // Importing of Sales ralted pages
 const SalesList = lazy(() => import("../../Components/Sales/SalesList"));
@@ -116,6 +132,35 @@ const routes = [
     exact: true,
     name: "Mrc-List",
     component: MrcsList,
+  }, // Machine pickup detail
+  {
+    path: "/pickup/detail/:id",
+    exact: true,
+    name: "Pickup-Detail",
+    component: PickupDetail,
+  },
+
+  // Maintenance
+  {
+    path: "/maintenance/list",
+    exact: true,
+    name: "Maintenance-List",
+    component: MaintenanceList,
+  },
+
+  // Machine returning
+  {
+    path: "/machine/return/list",
+    exact: true,
+    name: "Machine-Returning-List",
+    component: ReturningList,
+  },
+  //Fiscalization
+  {
+    path: "/fiscalization/detail/:id",
+    exact: true,
+    name: "Fiscalization-Detail",
+    component: FiscalizationDetail,
   },
   // Sales
   {
@@ -129,13 +174,6 @@ const routes = [
     exact: true,
     name: "Sales-Detail",
     component: SalesDetail,
-  },
-  // Maintenance
-  {
-    path: "/maintenance/annual",
-    exact: true,
-    name: "Annual-Maintenance",
-    component: MaintenanceAnnual,
   },
   // Sales
   {
