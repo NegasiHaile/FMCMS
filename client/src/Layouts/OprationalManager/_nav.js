@@ -21,6 +21,31 @@ const _nav = [
     to: "/sales/oflist",
     icon: "cil-star",
   },
+
+  // Machine-Managment
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Machine-Managment"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Machines List",
+    to: "/machines/list",
+    icon: "cil-print",
+  },
+
+  {
+    _tag: "CSidebarNavItem",
+    name: "Maintenance List",
+    to: "/maintenance/list",
+    icon: "cil-memory",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Withdrawal List",
+    to: "/machine/return/list",
+    icon: "cil-recycle",
+  },
   // Client-Managment
   {
     _tag: "CSidebarNavTitle",
@@ -38,42 +63,6 @@ const _nav = [
     name: "Business List",
     to: "/businesses/list",
     icon: "cil-building",
-  },
-
-  // Machine-Managment
-  {
-    _tag: "CSidebarNavTitle",
-    _children: ["Machine-Managment"],
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Machines List",
-    to: "/machines/list",
-    icon: "cil-print",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Machine Returns",
-    to: "/machine/returnlist",
-    icon: "cil-recycle",
-  },
-
-  // Maintenance Managment
-  {
-    _tag: "CSidebarNavTitle",
-    _children: ["Maintenance Managment"],
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Annual",
-    to: "/maintenance/annual",
-    icon: "cil-at",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Incident",
-    to: "/maintenance/incident",
-    icon: "cil-camera-roll",
   },
 
   // others

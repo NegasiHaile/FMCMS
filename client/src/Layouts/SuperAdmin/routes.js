@@ -63,18 +63,9 @@ const PickupDetail = lazy(() =>
 const MaintenanceList = lazy(() =>
   import("../../Components/Maintenance/MaintenanceList")
 );
-const MaintenanceAnnual = lazy(() =>
-  import("../../Components/Maintenance/MaintenanceAnnual")
-);
-const MaintenancePickup = lazy(() =>
-  import("../../Components/Maintenance/MaintenancePickup")
-);
 // Importing of Machine Returning ralted pages
 const ReturningList = lazy(() =>
   import("../../Components/Machine/ReturningList/ReturningList")
-);
-const MachineReturningLists = lazy(() =>
-  import("../../Components/MachineReturn/MachineReturningLists")
 );
 
 // Importing of Sales ralted pages
@@ -214,6 +205,13 @@ const routes = [
     exact: true,
     name: "Machine-Returning-List",
     component: ReturningList,
+  },
+  //Fiscalization
+  {
+    path: "/fiscalization/detail/:id",
+    exact: true,
+    name: "Fiscalization-Detail",
+    component: FiscalizationDetail,
   },
   // Sales
   {

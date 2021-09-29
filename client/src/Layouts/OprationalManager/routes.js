@@ -46,19 +46,28 @@ const MachinesList = lazy(() =>
 const MachineIndetail = lazy(() =>
   import("../../Components/Machine/MachineIndetail")
 );
+// Importing of machine pickup ralted pages
+const PickupDetail = lazy(() =>
+  import("../../Components/Machine/PickupDetail")
+);
 // Importing of maintenance ralted pages
-const MaintenanceAnnual = lazy(() =>
-  import("../../Components/Maintenance/MaintenanceAnnual")
+const MaintenanceList = lazy(() =>
+  import("../../Components/Maintenance/MaintenanceList")
+);
+// Importing of Machine Returning ralted pages
+const ReturningList = lazy(() =>
+  import("../../Components/Machine/ReturningList/ReturningList")
 );
 
-// Importing of Machine Returning ralted pages
-const MachineReturningLists = lazy(() =>
-  import("../../Components/MachineReturn/MachineReturningLists")
+// Importing of fiscalization ralted pages
+const FiscalizationDetail = lazy(() =>
+  import("../../Components/Fiscalization/FiscalizationDetail")
 );
 
 // Importing of Sales ralted pages
 const SalesList = lazy(() => import("../../Components/Sales/SalesList"));
 const SalesDetail = lazy(() => import("../../Components/Sales/SalesDetail"));
+
 // Others pages
 const FeedbacksList = lazy(() =>
   import("../../Components/Feedback/FeedbacksList")
@@ -145,19 +154,35 @@ const routes = [
     name: "Machine-Indetail",
     component: MachineIndetail,
   },
+  // Machine pickup detail
+  {
+    path: "/pickup/detail/:id",
+    exact: true,
+    name: "Pickup-Detail",
+    component: PickupDetail,
+  },
+
   // Maintenance
   {
-    path: "/maintenance/annual",
+    path: "/maintenance/list",
     exact: true,
-    name: "Annual-Maintenance",
-    component: MaintenanceAnnual,
+    name: "Maintenance-List",
+    component: MaintenanceList,
   },
+
   // Machine returning
   {
-    path: "/machine/returnlist",
+    path: "/machine/return/list",
     exact: true,
-    name: "Request-Return-Machine",
-    component: MachineReturningLists,
+    name: "Machine-Returning-List",
+    component: ReturningList,
+  },
+  //Fiscalization
+  {
+    path: "/fiscalization/detail/:id",
+    exact: true,
+    name: "Fiscalization-Detail",
+    component: FiscalizationDetail,
   },
   // Sales
   {
