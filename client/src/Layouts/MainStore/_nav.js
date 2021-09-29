@@ -14,7 +14,12 @@ const _nav = [
     //   text: NEW,
     // },
   },
-
+  {
+    _tag: "CSidebarNavItem",
+    name: "General Sales",
+    to: "/sales/oflist",
+    icon: "cil-star",
+  },
   // Machines Managment and controlling
   {
     _tag: "CSidebarNavTitle",

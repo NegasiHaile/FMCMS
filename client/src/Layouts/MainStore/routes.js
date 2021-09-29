@@ -35,12 +35,26 @@ const MrcsList = lazy(() => import("../../Components/MRC/MrcsList"));
 const MRCDistribution = lazy(() =>
   import("../../Components/MRC/MRCDistribution")
 );
-// Importing of maintenance ralted routes
-const MaintenanceAnnual = lazy(() =>
-  import("../../Components/Maintenance/MaintenanceAnnual")
+// Importing of machine pickup ralted pages
+const PickupDetail = lazy(() =>
+  import("../../Components/Machine/PickupDetail")
+);
+// Importing of maintenance ralted pages
+const MaintenanceList = lazy(() =>
+  import("../../Components/Maintenance/MaintenanceList")
+);
+// Importing of Machine Returning ralted pages
+const ReturningList = lazy(() =>
+  import("../../Components/Machine/ReturningList/ReturningList")
+);
+
+// Importing of fiscalization ralted pages
+const FiscalizationDetail = lazy(() =>
+  import("../../Components/Fiscalization/FiscalizationDetail")
 );
 // Importing of Sales ralted pages
 const SalesList = lazy(() => import("../../Components/Sales/SalesList"));
+const SalesDetail = lazy(() => import("../../Components/Sales/SalesDetail"));
 // Others pages
 const FeedbacksList = lazy(() =>
   import("../../Components/Feedback/FeedbacksList")
@@ -113,12 +127,35 @@ const routes = [
     name: "MRC-Distribution",
     component: MRCDistribution,
   },
+  // Machine pickup detail
+  {
+    path: "/pickup/detail/:id",
+    exact: true,
+    name: "Pickup-Detail",
+    component: PickupDetail,
+  },
+
   // Maintenance
   {
-    path: "/maintenance/annual",
+    path: "/maintenance/list",
     exact: true,
-    name: "Annual-Maintenance",
-    component: MaintenanceAnnual,
+    name: "Maintenance-List",
+    component: MaintenanceList,
+  },
+
+  // Machine returning
+  {
+    path: "/machine/return/list",
+    exact: true,
+    name: "Machine-Returning-List",
+    component: ReturningList,
+  },
+  //Fiscalization
+  {
+    path: "/fiscalization/detail/:id",
+    exact: true,
+    name: "Fiscalization-Detail",
+    component: FiscalizationDetail,
   },
   // Sales
   {
@@ -126,6 +163,12 @@ const routes = [
     exact: true,
     name: "Sales-List",
     component: SalesList,
+  },
+  {
+    path: "/sales/detail/:id",
+    exact: true,
+    name: "Sales-Detail",
+    component: SalesDetail,
   },
   // User Accont
   {
