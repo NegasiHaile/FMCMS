@@ -25,51 +25,28 @@ const _nav = [
     _children: ["Machines-Managment"],
   },
   {
-    _tag: "CSidebarNavDropdown",
-    name: "Machine Controlling",
-    route: "/Machine",
+    _tag: "CSidebarNavItem",
+    name: "All Machines",
+    to: "/machines/list",
     icon: "cil-print",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "Machines List",
-        to: "/machines/list",
-      },
-      // {
-      //   _tag: "CSidebarNavItem",
-      //   name: "Distribute Machine",
-      //   to: "/machine/distribute",
-      // },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Machine Returns",
-        to: "/machine/returnlist",
-      },
-    ],
-  },
-  {
-    _tag: "CSidebarNavDropdown",
-    name: "Maintenance",
-    route: "/maintenance",
-    icon: "cil-memory",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "Annual",
-        to: "/maintenance/annual",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Incident",
-        to: "/maintenance/incident",
-      },
-    ],
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Machine Sales",
+    name: "Branch Sales",
     to: "/sales/oflist",
-    icon: "cil-star",
+    icon: "cil-money",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Maintenance List",
+    to: "/maintenance/list",
+    icon: "cil-memory",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Withdrawal List",
+    to: "/machine/return/list",
+    icon: "cil-recycle",
   },
   {
     _tag: "CSidebarNavTitle",

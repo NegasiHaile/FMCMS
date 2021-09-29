@@ -40,20 +40,24 @@ const BusinessDetail = lazy(() =>
 );
 
 // Importing of machine related pages
-const MachineDistribute = lazy(() =>
-  import("../../Components/Machine/MachineDistribute")
-);
 const MachinesList = lazy(() =>
   import("../../Components/Machine/MachinesList")
 );
 const MachineIndetail = lazy(() =>
   import("../../Components/Machine/MachineIndetail")
 );
-// Importing of maintenance ralted pages
-const MaintenanceAnnual = lazy(() =>
-  import("../../Components/Maintenance/MaintenanceAnnual")
+// Importing of machine pickup ralted pages
+const PickupDetail = lazy(() =>
+  import("../../Components/Machine/PickupDetail")
 );
-
+// Importing of maintenance ralted pages
+const MaintenanceList = lazy(() =>
+  import("../../Components/Maintenance/MaintenanceList")
+);
+// Importing of Machine Returning ralted pages
+const ReturningList = lazy(() =>
+  import("../../Components/Machine/ReturningList/ReturningList")
+);
 // Importing of Machine Returning ralted pages
 const MachineReturningLists = lazy(() =>
   import("../../Components/MachineReturn/MachineReturningLists")
@@ -134,13 +138,6 @@ const routes = [
     name: "Register-Business",
     component: BusinessDetail,
   },
-  // Machine
-  // {
-  //   path: "/machine/distribute",
-  //   exact: true,
-  //   name: "Distribute-Machine",
-  //   component: MachineDistribute,
-  // },
   {
     path: "/machines/list",
     exact: true,
@@ -153,12 +150,28 @@ const routes = [
     name: "Machine-Indetail",
     component: MachineIndetail,
   },
+  // Machine pickup detail
+  {
+    path: "/pickup/detail/:id",
+    exact: true,
+    name: "Pickup-Detail",
+    component: PickupDetail,
+  },
+
   // Maintenance
   {
-    path: "/maintenance/annual",
+    path: "/maintenance/list",
     exact: true,
-    name: "Annual-Maintenance",
-    component: MaintenanceAnnual,
+    name: "Maintenance-List",
+    component: MaintenanceList,
+  },
+
+  // Machine returning
+  {
+    path: "/machine/return/list",
+    exact: true,
+    name: "Machine-Returning-List",
+    component: ReturningList,
   },
   // Machine returning
   {
