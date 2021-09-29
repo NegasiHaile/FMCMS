@@ -55,16 +55,35 @@ const MachinesList = lazy(() =>
 const MachineIndetail = lazy(() =>
   import("../../Components/Machine/MachineIndetail")
 );
-
+// Importing of machine pickup ralted pages
+const PickupDetail = lazy(() =>
+  import("../../Components/Machine/PickupDetail")
+);
 // Importing of maintenance ralted pages
+const MaintenanceList = lazy(() =>
+  import("../../Components/Maintenance/MaintenanceList")
+);
 const MaintenanceAnnual = lazy(() =>
   import("../../Components/Maintenance/MaintenanceAnnual")
 );
-// Importing of Sales ralted pages
+const MaintenancePickup = lazy(() =>
+  import("../../Components/Maintenance/MaintenancePickup")
+);
+// Importing of Machine Returning ralted pages
+const ReturningList = lazy(() =>
+  import("../../Components/Machine/ReturningList/ReturningList")
+);
+const MachineReturningLists = lazy(() =>
+  import("../../Components/MachineReturn/MachineReturningLists")
+);
 
+// Importing of Sales ralted pages
 const SalesList = lazy(() => import("../../Components/Sales/SalesList"));
 const SalesDetail = lazy(() => import("../../Components/Sales/SalesDetail"));
-
+// Importing of fiscalization ralted pages
+const FiscalizationDetail = lazy(() =>
+  import("../../Components/Fiscalization/FiscalizationDetail")
+);
 // Others pages
 const FeedbacksList = lazy(() =>
   import("../../Components/Feedback/FeedbacksList")
@@ -173,12 +192,28 @@ const routes = [
     component: MachineIndetail,
   },
 
+  // Machine pickup detail
+  {
+    path: "/pickup/detail/:id",
+    exact: true,
+    name: "Pickup-Detail",
+    component: PickupDetail,
+  },
+
   // Maintenance
   {
-    path: "/maintenance/annual",
+    path: "/maintenance/list",
     exact: true,
-    name: "Annual-Maintenance",
-    component: MaintenanceAnnual,
+    name: "Maintenance-List",
+    component: MaintenanceList,
+  },
+
+  // Machine returning
+  {
+    path: "/machine/return/list",
+    exact: true,
+    name: "Machine-Returning-List",
+    component: ReturningList,
   },
   // Sales
   {
@@ -194,6 +229,13 @@ const routes = [
     component: SalesDetail,
   },
 
+  //Fiscalization
+  {
+    path: "/fiscalization/detail/:id",
+    exact: true,
+    name: "Fiscalization-Detail",
+    component: FiscalizationDetail,
+  },
   // User Accont
   {
     path: "/user/profile/:id",

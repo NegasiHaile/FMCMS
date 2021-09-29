@@ -53,22 +53,16 @@ const _nav = [
     icon: "cil-money",
   },
   {
-    _tag: "CSidebarNavDropdown",
-    name: "Maintenance",
-    route: "/maintenance",
+    _tag: "CSidebarNavItem",
+    name: "Maintenance List",
+    to: "/maintenance/list",
     icon: "cil-memory",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "Annual",
-        to: "/maintenance/annual",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Incident",
-        to: "/maintenance/incident",
-      },
-    ],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Returning List",
+    to: "/machine/return/list",
+    icon: "cil-recycle",
   },
   {
     _tag: "CSidebarNavTitle",

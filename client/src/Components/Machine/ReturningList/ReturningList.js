@@ -38,14 +38,24 @@ function ReturningList() {
 
   useEffect(() => {
     if (pickupMachines.length > 0) {
-      setReturns(
-        pickupMachines.filter(
-          (filteredPickUp) =>
-            (filteredPickUp.category === "withdrawal" ||
-              filteredPickUp.category === "temporarly_store") &&
-            filteredPickUp.branchId === user.branch
-        )
-      );
+      if (user.userRole === "super-admin" || user.userRole === "main-store") {
+        setReturns(
+          pickupMachines.filter(
+            (filteredPickUp) =>
+              filteredPickUp.category === "withdrawal" ||
+              filteredPickUp.category === "temporarly_store"
+          )
+        );
+      } else {
+        setReturns(
+          pickupMachines.filter(
+            (filteredPickUp) =>
+              (filteredPickUp.category === "withdrawal" ||
+                filteredPickUp.category === "temporarly_store") &&
+              filteredPickUp.branchId === user.branch
+          )
+        );
+      }
     }
   }, [user, pickupMachines, setReturns]);
   return (

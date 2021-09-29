@@ -32,30 +32,41 @@ function MaintenanceList() {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
-  const [returns, setReturns] = useState([]);
+  const [maintenances, setMaintenances] = useState([]);
   const [callbackMachinePickup, setCallbackMachinePickup] =
     state.MachinePickUpAPI.callback;
 
   useEffect(() => {
     if (pickupMachines.length > 0) {
-      setReturns(
-        pickupMachines.filter(
-          (filteredPickUp) =>
-            (filteredPickUp.category === "annual" ||
+      if (user.userRole === "super-admin" || user.userRole === "main-store") {
+        setMaintenances(
+          pickupMachines.filter(
+            (filteredPickUp) =>
+              filteredPickUp.category === "annual" ||
               filteredPickUp.category === "incident" ||
-              filteredPickUp.category === "information_change") &&
-            filteredPickUp.branchId === user.branch
-        )
-      );
+              filteredPickUp.category === "information_change"
+          )
+        );
+      } else {
+        setMaintenances(
+          pickupMachines.filter(
+            (filteredPickUp) =>
+              (filteredPickUp.category === "annual" ||
+                filteredPickUp.category === "incident" ||
+                filteredPickUp.category === "information_change") &&
+              filteredPickUp.branchId === user.branch
+          )
+        );
+      }
     }
-  }, [user, pickupMachines, setReturns]);
+  }, [user, pickupMachines, setMaintenances]);
   return (
     <>
       <CCard className=" shadow-sm">
         <CCardBody>
           <CDataTable
             size="sm"
-            items={returns}
+            items={maintenances}
             fields={machinePickupsFields}
             tableFilter
             columnFilter
