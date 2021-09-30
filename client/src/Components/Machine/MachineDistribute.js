@@ -118,12 +118,7 @@ const MachineDistribute = () => {
                   >
                     <option value="">Select business identity...</option>
                     {allBusinesses
-                      .filter(
-                        (bussiness) =>
-                          bussiness.machine === "unassigned" &&
-                          bussiness.credentials === "Accepted" &&
-                          bussiness.branch == user.branch
-                      )
+                      .filter((bussiness) => bussiness.branch == user.branch)
                       .map((filteredBussiness) => (
                         <option
                           value={filteredBussiness._id}
@@ -152,7 +147,7 @@ const MachineDistribute = () => {
                       color="dark"
                       className="w-100"
                     >
-                      <CIcon name="cil-control" /> Distribute
+                      <CIcon name="cil-control" /> Assign machine
                     </CButton>
                   </CCol>
 

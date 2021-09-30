@@ -11,6 +11,12 @@ const _nav = [
     icon: <CIcon name="cil-applications" customClasses="c-sidebar-nav-icon" />,
   },
   {
+    _tag: "CSidebarNavItem",
+    name: "Sales List",
+    to: "/sales/oflist",
+    icon: "cil-star",
+  },
+  {
     _tag: "CSidebarNavDropdown",
     name: "Machine Controlling",
     route: "/Machine",
@@ -21,11 +27,11 @@ const _nav = [
         name: "Machines List",
         to: "/machines/list",
       },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Distribute Machine",
-        to: "/machine/distribute",
-      },
+      // {
+      //   _tag: "CSidebarNavItem",
+      //   name: "Assigne Machine",
+      //   to: "/machine/distribute",
+      // },
       {
         _tag: "CSidebarNavItem",
         name: "Maintenance List",
@@ -40,25 +46,19 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Business Owners",
+    name: "Clients List",
     to: "/client/register",
     icon: "cil-contact",
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Businesses",
+    name: "Businesses List",
     to: "/businesses/list",
     icon: "cil-building",
   },
   {
     _tag: "CSidebarNavTitle",
     _children: ["Others"],
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Machine Sales",
-    to: "/sales/oflist",
-    icon: "cil-star",
   },
   {
     _tag: "CSidebarNavItem",
