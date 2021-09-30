@@ -110,14 +110,18 @@ function SalesList() {
                             </CTooltip>
                           </CLink>
                         ) : (
-                          <CLink
-                            className="text-danger"
-                            to={`/pickup/machine/${sales.machineId}`}
-                          >
-                            <CTooltip content={`Pickup machine of this sales.`}>
-                              <CIcon name="cil-recycle" />
-                            </CTooltip>
-                          </CLink>
+                          <>
+                            <CLink
+                              className="text-danger"
+                              to={`/pickup/machine/${sales.machineId}`}
+                            >
+                              <CTooltip
+                                content={`Pickup machine of this sales.`}
+                              >
+                                <CIcon name="cil-recycle" />
+                              </CTooltip>
+                            </CLink>
+                          </>
                         )}
                       </>
                     )}

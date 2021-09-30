@@ -72,7 +72,7 @@ const clientBusinessCntrl = {
   getAllBusinesses: async (req, res) => {
     // this fetchs all the businesses in the collection
     try {
-      res.json(await clientBusinesses.find());
+      res.json(await clientBusinesses.find().sort({ createdAt: -1 }));
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
