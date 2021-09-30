@@ -74,14 +74,6 @@ function SalesList() {
       filter: false,
     },
   ];
-  // const formatter = new Intl.DateTimeFormat("en-GB", {
-  //   year: "numeric",
-  //   month: "long",
-  //   day: "2-digit",
-  // });
-  // {
-  //   formatter.format(Date.parse(dateString));
-  // }
   return (
     <>
       <CCard className=" shadow-sm">
@@ -119,12 +111,10 @@ function SalesList() {
                           </CLink>
                         ) : (
                           <CLink
-                            className="text-success"
-                            to={`/business/Detail/`}
+                            className="text-danger"
+                            to={`/pickup/machine/${sales.machineId}`}
                           >
-                            <CTooltip
-                              content={`Make requet of canceling this sales.`}
-                            >
+                            <CTooltip content={`Pickup machine of this sales.`}>
                               <CIcon name="cil-recycle" />
                             </CTooltip>
                           </CLink>

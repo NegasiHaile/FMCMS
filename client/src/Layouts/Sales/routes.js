@@ -44,14 +44,26 @@ const MachinesList = lazy(() =>
 const MachineIndetail = lazy(() =>
   import("../../Components/Machine/MachineIndetail")
 );
+
+// Importing of machine pickup ralted pages
+const PickupDetail = lazy(() =>
+  import("../../Components/Machine/PickupDetail")
+);
+const MaintenancePickup = lazy(() =>
+  import("../../Components/Maintenance/MaintenancePickup")
+);
 // Importing of maintenance ralted pages
-const MaintenanceAnnual = lazy(() =>
-  import("../../Components/Maintenance/MaintenanceAnnual")
+const MaintenanceList = lazy(() =>
+  import("../../Components/Maintenance/MaintenanceList")
+);
+// Importing of Machine Returning ralted pages
+const ReturningList = lazy(() =>
+  import("../../Components/Machine/ReturningList/ReturningList")
 );
 
-// Importing of Machine Returning ralted pages
-const MachineReturningLists = lazy(() =>
-  import("../../Components/MachineReturn/MachineReturningLists")
+// Importing of fiscalization ralted pages
+const FiscalizationDetail = lazy(() =>
+  import("../../Components/Fiscalization/FiscalizationDetail")
 );
 // Importing of maintenance ralted pages
 const RequestMachineReturn = lazy(() =>
@@ -150,11 +162,47 @@ const routes = [
     name: "Machine-Indetail",
     component: MachineIndetail,
   },
+  // Machine pickup detail
   {
-    path: "/machine/returnlist",
+    path: "/pickup/detail/:id",
     exact: true,
-    name: "Request-Return-Machine",
-    component: MachineReturningLists,
+    name: "Pickup-Detail",
+    component: PickupDetail,
+  },
+
+  {
+    path: "/pickup/machine/:id",
+    exact: true,
+    name: "Pickup-Machine",
+    component: MaintenancePickup,
+  },
+  {
+    path: "/pickup/edit/:id/:pickupId",
+    exact: true,
+    name: "Pickup-edit",
+    component: MaintenancePickup,
+  },
+  // Maintenance
+  {
+    path: "/maintenance/list",
+    exact: true,
+    name: "Maintenance-List",
+    component: MaintenanceList,
+  },
+
+  // Machine returning
+  {
+    path: "/machine/return/list",
+    exact: true,
+    name: "Machine-Returning-List",
+    component: ReturningList,
+  },
+  //Fiscalization
+  {
+    path: "/fiscalization/detail/:id",
+    exact: true,
+    name: "Fiscalization-Detail",
+    component: FiscalizationDetail,
   },
   {
     path: "/business/return-machine/:salesId",
@@ -162,13 +210,7 @@ const routes = [
     name: "Request-Return-Machine",
     component: RequestMachineReturn,
   },
-  // Maintenance
-  {
-    path: "/maintenance/annual",
-    exact: true,
-    name: "Annual-Maintenance",
-    component: MaintenanceAnnual,
-  },
+
   // Sales
   {
     path: "/sales/oflist",

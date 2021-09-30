@@ -23,13 +23,18 @@ const _nav = [
       },
       {
         _tag: "CSidebarNavItem",
-        name: "Sale Machine",
+        name: "Distribute Machine",
         to: "/machine/distribute",
       },
       {
         _tag: "CSidebarNavItem",
-        name: "Machine Returns",
-        to: "/machine/returnlist",
+        name: "Maintenance List",
+        to: "/maintenance/list",
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Withdrawal List",
+        to: "/machine/return/list",
       },
     ],
   },

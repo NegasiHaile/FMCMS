@@ -4,6 +4,7 @@ import { GlobalState } from "../../GlobalState";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
+import BusinessesPerClient from "./Components/BusinessesPerClient";
 import {
   CButton,
   CCard,
@@ -63,7 +64,6 @@ function ClientDetail() {
         <CCardBody>
           {client.length > 0 && (
             <>
-              {" "}
               <CRow className="border-bottom">
                 <CCol sm="12" md="6" lg="3">
                   <p>
@@ -75,12 +75,13 @@ function ClientDetail() {
                   <p>Gender: {client[0].gender}</p>
                 </CCol>
                 <CCol sm="12" md="6" lg="3">
-                  <p>Phone Number: {client[0].gender}</p>
+                  <p>Phone Number: {client[0].phoneNumber}</p>
                 </CCol>
                 <CCol sm="12" md="6" lg="3">
                   <p>Email: {client[0].email}</p>
                 </CCol>
-              </CRow>{" "}
+              </CRow>
+              <BusinessesPerClient clientId={client[0]._id} />
             </>
           )}
         </CCardBody>
