@@ -45,10 +45,10 @@ const machineSchema = new mongoose.Schema(
       type: String,
       default: "unsold", // values, New, requested, sold, returned
     },
-    // storeStatus: {
-    //   type: String,
-    //   default: "main-store", // values, main-store, store, technical-store, machine-controller, delivered
-    // },
+    availableIn: {
+      type: String,
+      default: "main-store", // values, main-store, branch-store, technical-store, machine-controller, delivered
+    },
   },
   {
     timestamps: true,

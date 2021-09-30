@@ -97,7 +97,14 @@ function MachineDistribution() {
                   {machineBrands &&
                     machineBrands.map((machine) => (
                       <option value={machine.brand} key={machine._id}>
-                        {machine.brand} {machine.length}
+                        {machine.brand} {" / available: "}{" "}
+                        {
+                          allMachines.filter(
+                            (item) =>
+                              item.brand === machine.brand &&
+                              item.branch === "none"
+                          ).length
+                        }
                       </option>
                     ))}
                 </CSelect>

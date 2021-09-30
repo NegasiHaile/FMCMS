@@ -48,12 +48,36 @@ const machineCntrl = {
 
   editMachine: async (req, res) => {
     try {
+      var machineAvailableIn = "";
+      if (req.body.branch !== "none") {
+        machineAvailableIn = "branch-store";
+      } else {
+        machineAvailableIn = "main-store";
+      }
+      const {
+        serialNumber,
+        machineModel,
+        brand,
+        price,
+        branch,
+        problemStatus,
+      } = req.body;
       await Machines.findOneAndUpdate(
         { _id: req.params.id },
-        ({ serialNumber, machineModel, brand, price, branch, problemStatus } =
-          req.body)
+        {
+          serialNumber,
+          machineModel,
+          brand,
+          price,
+          branch,
+          problemStatus,
+          availableIn: machineAvailableIn,
+        }
       );
-      res.json({ msg: "Machine has been edited successfully!" });
+
+      res.json({
+        msg: "Machine has been edited successfully! ",
+      });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
@@ -81,7 +105,7 @@ const machineCntrl = {
         }).limit(Number(req.body.quantity));
         await Machines.updateMany(
           { _id: { $in: ids } },
-          { branch: req.body.branchId }
+          { branch: req.body.branchId, availableIn: "branch-store" }
         );
         res.json({
           msg:
