@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -19,6 +19,7 @@ function SalesList() {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [Sales] = state.SalesAPI.Sales;
+  const [salesToDisplay, setSalesToDisplay] = useState([]);
 
   const [callbackMachines, setCallbackMachines] = state.MachineAPI.callback;
   const [callbackBusiness, setCallbackBusiness] = state.BusinessAPI.callback;
@@ -35,7 +36,17 @@ function SalesList() {
       // timer: 1500,
     });
   };
-
+  useEffect(() => {
+    if (Sales.length > 0) {
+      if (user.userRole !== "super-admin" && user.userRole !== "main-store") {
+        setSalesToDisplay(
+          Sales.filter((filteredSale) => filteredSale.branchId == user.branch)
+        );
+      } else {
+        setSalesToDisplay(Sales);
+      }
+    }
+  }, [user, Sales]);
   const cancelUnapprovedSales = async (saleId) => {
     try {
       Swal.fire({
@@ -80,7 +91,7 @@ function SalesList() {
         <CCardBody>
           <CDataTable
             size="sm"
-            items={Sales}
+            items={salesToDisplay}
             fields={salesTableAttributes}
             tableFilter
             // columnFilter
