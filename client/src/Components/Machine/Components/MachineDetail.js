@@ -32,13 +32,13 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
-import FiscalizationForm from "../../Fiscalization/FiscalizationForm";
 function MachineDetail({ id }) {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [machines] = state.MachineAPI.machines;
   const [machineCallback, setMachineCallback] = state.MachineAPI.callback;
   const [mrcs] = state.MRCAPI.mrcs;
+  const [mrcCallback, setMRCCallback] = state.MRCAPI.callback;
   const [machieneDetail, setMachieneDetail] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [onMRCEdit, setOnMRCEdit] = useState(false);
@@ -65,7 +65,19 @@ function MachineDetail({ id }) {
     } else {
     }
   }, [id, machines]);
-  // console.log("Outside useEffect" + JSON.stringify(assignementDetail));
+
+  const sweetAlert = (type, text) => {
+    Swal.fire({
+      position: "center",
+      background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+      icon: type,
+      text: text,
+      confirmButtonColor: "#3C4B64",
+      showConfirmButton: true,
+      // timer: 1500,
+    });
+  };
+
   const formatingDate = (dateString) => {
     return new Date(dateString).toLocaleString();
   };
@@ -75,14 +87,24 @@ function MachineDetail({ id }) {
       const res = await axios.put(`/machine/assigne_mrc/${id}`, {
         ...assignementDetail,
       });
+      setMRCCallback(!mrcCallback);
       setMachineCallback(!machineCallback);
-      alert(JSON.stringify(res.data.msg));
+      sweetAlert("success", res.data.msg);
     } else if (onSIMEdit) {
       const res = await axios.put(`/machine/assigne_sim/${id}`, {
         ...assignementDetail,
       });
+      setMRCCallback(!mrcCallback);
       setMachineCallback(!machineCallback);
-      alert(JSON.stringify(res.data.msg));
+      sweetAlert("success", res.data.msg);
+    }
+  };
+  const filterMRCusing_id = (id) => {
+    const activeMRC = mrcs.filter((filteredMRC) => filteredMRC._id === id);
+    if (activeMRC.length > 0) {
+      return activeMRC[0].MRC;
+    } else {
+      return "none";
     }
   };
   return (
@@ -140,7 +162,7 @@ function MachineDetail({ id }) {
                   <p className="d-flex justify-content-between">
                     <strong>* MRC:</strong>
                     <span>
-                      {machieneDetail.MRC}
+                      {filterMRCusing_id(machieneDetail.MRC)}
                       {user.userRole === "branch-store" && (
                         <>
                           {" "}
