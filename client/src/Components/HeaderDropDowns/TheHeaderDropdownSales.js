@@ -81,22 +81,61 @@ function TheHeaderDropdownSales() {
         {itemsCount && (
           <>
             {salesAlert.map((sale) => (
-              <CDropdownItem
-                className="d-block border-bottom"
-                key={sale.saleId}
-                to={`/sales/detail/${sale.saleId}`}
-              >
-                <small> {sale.tradeName} </small>
-                <small className="text-info">{" || "}</small>
-                <small> {sale.machineSerialNumber} </small>
-                {/* <CProgress size="xs" color="info" value={0} /> */}
-              </CDropdownItem>
+              <>
+                <CDropdownItem
+                  key={sale.saleId}
+                  to={`/sales/detail/${sale.saleId}`}
+                >
+                  <div className="message">
+                    <div className="pt-3 mr-3 float-left">
+                      <div className="c-avatar">
+                        <CImg
+                          src={"/Others/bsnsIcon1.png"}
+                          className="c-avatar-img"
+                          alt="admin@bootstrapmaster.com"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <small className="text-muted"> {sale.status}</small>
+                      <small className="text-muted float-right mt-1">
+                        Just now
+                      </small>
+                    </div>
+                    <div
+                      className="text-truncate font-weight-bold"
+                      style={{ maxWidth: "300px" }}
+                    >
+                      <span className="fa fa-exclamation text-danger"></span>{" "}
+                      {sale.machineSerialNumber}, {sale.machineBrand},{" "}
+                      {sale.machineModel}
+                    </div>
+                    <div
+                      className="small text-muted text-truncate"
+                      style={{ maxWidth: "400px" }}
+                    >
+                      {sale.tradeName}, TIN :{sale.TIN} , VAT: {sale.VAT},{" "}
+                      {sale.updatedAt}
+                    </div>
+                  </div>
+                </CDropdownItem>
+                {/* <CDropdownItem
+                  className="d-block border-bottom"
+                  key={sale.saleId}
+                  to={`/sales/detail/${sale.saleId}`}
+                >
+                  <small> {sale.tradeName} </small>
+                  <small className="text-info">{" || "}</small>
+                  <small> {sale.machineSerialNumber} </small>
+                  <CProgress size="xs" color="info" value={0} />
+                </CDropdownItem> */}
+              </>
             ))}
           </>
         )}
 
         <CDropdownItem className="text-center border-top" to={`/sales/oflist`}>
-          <strong>View all requests</strong>
+          <strong>View all {alertLable}</strong>
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>

@@ -54,5 +54,5 @@ const machineSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
+// a machine have to be a status of sold, unsold, fine, dameged, in maintenance ...
 module.exports = mongoose.model("Machines", machineSchema);

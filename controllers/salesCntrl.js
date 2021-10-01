@@ -65,6 +65,7 @@ const salesCntrl = {
           fiscalization: sale.fiscalization,
           status: sale.status,
           createdAt: sale.createdAt,
+          updatedAt: sale.updatedAt,
         });
         // console.log("Inner " + JSON.stringify(data));
       });

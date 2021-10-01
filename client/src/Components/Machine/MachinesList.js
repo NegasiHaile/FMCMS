@@ -279,22 +279,23 @@ const MachinesList = () => {
                 <td className="d-flex justify-content-between">
                   {user.userRole === "main-store" && (
                     <>
-                      <CLink
-                        className="text-success"
-                        onClick={() => {
-                          setMachine({ ...machine });
-                          setActivemachine(machine._id);
-                          setShowModal(!showModal);
-                        }}
-                      >
-                        <CTooltip
-                          content={`Edit the  - ${machine.serialNumber}- machine detail.`}
-                        >
-                          <CIcon name="cil-pencil" />
-                        </CTooltip>
-                      </CLink>
                       {machine.salesStatus !== "sold" && (
                         <>
+                          <CLink
+                            className="text-success"
+                            onClick={() => {
+                              setMachine({ ...machine });
+                              setActivemachine(machine._id);
+                              setShowModal(!showModal);
+                            }}
+                          >
+                            <CTooltip
+                              content={`Edit the  - ${machine.serialNumber}- machine detail.`}
+                            >
+                              <CIcon name="cil-pencil" />
+                            </CTooltip>
+                          </CLink>
+
                           <span className="text-muted">|</span>
                           <CLink
                             className="text-danger"
