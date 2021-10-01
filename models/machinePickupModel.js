@@ -81,10 +81,10 @@ const machinePickupModel = new mongoose.Schema(
       type: String,
     },
     operationDate: {
-      type: Date, //  the operation complated date
+      type: String, //  the operation complated date
     },
     annualNextMaintenanceDate: {
-      type: Date,
+      type: String,
     },
     waitingDuration: {
       type: String,

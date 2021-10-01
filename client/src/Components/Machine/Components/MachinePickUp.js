@@ -37,6 +37,8 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     subCategory: "",
     clientReportedProblems: "",
     TechnicianReportedProblems: "",
+    operationDate: "",
+    annualNextMaintenanceDate: "",
     returnReason: "",
     returnCertificate: "",
     waitingDuration: "",
@@ -514,6 +516,56 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                   </CCol>
                 </CRow>
               </CCol>
+              {pickup.category === "annual" && (
+                <CCol className="col-12 mt-4">
+                  <CRow className="border rounded mx-1 py-4">
+                    <CCol className="col-6">
+                      <CRow className="mb-2">
+                        <CCol className="col-4">
+                          <h6>Current annual service issued date: </h6>
+                        </CCol>
+                        <CCol className="col-8">
+                          <input
+                            className="w-100 form-control"
+                            style={{
+                              border: "0px",
+                              borderBottom: "solid 1px #D8DBE0",
+                            }}
+                            id="operationDate"
+                            name="operationDate"
+                            value={pickup.operationDate}
+                            onChange={handleInputChange}
+                            type="date"
+                            required
+                          />
+                        </CCol>
+                      </CRow>
+                    </CCol>
+                    <CCol className="col-6">
+                      <CRow className="mb-2">
+                        <CCol className="col-4">
+                          <h6>Next annual service issue date: </h6>
+                        </CCol>
+                        <CCol className="col-8">
+                          <input
+                            className="w-100 form-control"
+                            style={{
+                              border: "0px",
+                              borderBottom: "solid 1px #D8DBE0",
+                            }}
+                            id="annualNextMaintenanceDate"
+                            name="annualNextMaintenanceDate"
+                            value={pickup.annualNextMaintenanceDate}
+                            onChange={handleInputChange}
+                            type="date"
+                            required
+                          />
+                        </CCol>
+                      </CRow>
+                    </CCol>
+                  </CRow>
+                </CCol>
+              )}
               {pickup.category === "incident" && (
                 <CCol className="col-12 mt-4">
                   <CRow className="border rounded mx-1 py-4">

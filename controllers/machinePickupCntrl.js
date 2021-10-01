@@ -127,6 +127,8 @@ const machinePickupCntrl = {
           TechnicianReportedProblems: pickup.TechnicianReportedProblems,
           returnReason: pickup.returnReason,
           returnCertificate: pickup.returnCertificate,
+          operationDate: pickup.operationDate,
+          annualNextMaintenanceDate: pickup.annualNextMaintenanceDate,
           waitingDuration: pickup.waitingDuration,
           waitingCostPerMonth: pickup.waitingCostPerMonth,
           pickedupBy: pickup.pickedupBy,

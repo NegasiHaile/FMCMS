@@ -327,7 +327,60 @@ function MachinePickupDetail() {
                   </CCol>
                 </CRow>
               </CCol>
-
+              {pickup[0].category === "annual" && (
+                <CCol className="col-12 mt-4">
+                  <CRow className="border rounded mx-1 py-4">
+                    <CCol className="col-6">
+                      <CRow className="mb-2">
+                        <CCol className="col-4">
+                          <h6>Current annual service issued date </h6>
+                        </CCol>
+                        <CCol className="col-8">
+                          <input
+                            className="w-100 form-control"
+                            id="operationDate"
+                            name="operationDate"
+                            value={pickup[0].operationDate}
+                            type="date"
+                            required
+                            disabled
+                            style={{
+                              border: "0px",
+                              borderBottom: "solid 1px #D8DBE0",
+                              background: "white",
+                              resize: "none",
+                            }}
+                          />
+                        </CCol>
+                      </CRow>
+                    </CCol>
+                    <CCol className="col-6">
+                      <CRow className="mb-2">
+                        <CCol className="col-4">
+                          <h6>Next annual service issue date: </h6>
+                        </CCol>
+                        <CCol className="col-8">
+                          <input
+                            className="w-100 form-control"
+                            id="annualNextMaintenanceDate"
+                            name="annualNextMaintenanceDate"
+                            value={pickup[0].annualNextMaintenanceDate}
+                            type="date"
+                            required
+                            disabled
+                            style={{
+                              border: "0px",
+                              borderBottom: "solid 1px #D8DBE0",
+                              background: "white",
+                              resize: "none",
+                            }}
+                          />
+                        </CCol>
+                      </CRow>
+                    </CCol>
+                  </CRow>
+                </CCol>
+              )}
               {pickup[0].category === "incident" && (
                 <CCol className="col-12 mt-4">
                   <CRow className="border rounded mx-1 py-4">
