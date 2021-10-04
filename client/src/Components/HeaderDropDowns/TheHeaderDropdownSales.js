@@ -97,10 +97,8 @@ function TheHeaderDropdownSales() {
                       </div>
                     </div>
                     <div>
-                      <small className="text-muted"> {sale.status}</small>
-                      <small className="text-muted float-right mt-1">
-                        Just now
-                      </small>
+                      <small> {sale.status}</small>
+                      <small className=" float-right mt-1">Just now</small>
                     </div>
                     <div
                       className="text-truncate font-weight-bold"
@@ -111,7 +109,7 @@ function TheHeaderDropdownSales() {
                       {sale.machineModel}
                     </div>
                     <div
-                      className="small text-muted text-truncate"
+                      className="small text-truncate"
                       style={{ maxWidth: "400px" }}
                     >
                       {sale.tradeName}, TIN :{sale.TIN} , VAT: {sale.VAT},{" "}
