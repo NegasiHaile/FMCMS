@@ -30,7 +30,8 @@ function MaintenanceListPerMachine({ machineId }) {
           (maintenance) =>
             maintenance.machineId == machineId &&
             (maintenance.category === "annual" ||
-              maintenance.category === "incident")
+              maintenance.category === "incident" ||
+              maintenance.category === "information_change")
         )
       );
     }

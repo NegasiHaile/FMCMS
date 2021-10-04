@@ -12,6 +12,8 @@ import {
   CRow,
   CCol,
   CSelect,
+  CFormGroup,
+  CInput,
 } from "@coreui/react";
 function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
   const pickupDetail = {
@@ -36,8 +38,9 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     category: "",
     subCategory: "",
     clientReportedProblems: "",
-    TechnicianReportedProblems: "",
-    operationDate: "",
+    technicianReportedProblems: "",
+    infoChange: [],
+    issueDate: "",
     annualNextMaintenanceDate: "",
     returnReason: "",
     returnCertificate: "",
@@ -45,10 +48,19 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     waitingCostPerMonth: "",
     pickedupBy: user._id,
   };
+  const InfoChangeItemFields = {
+    description: "",
+    partNo: "",
+    price: 0.0,
+    quantity: 0,
+    unitPrice: 0.0,
+  };
+
   const state = useContext(GlobalState);
   const [maintenances] = state.MachinePickUpAPI.machinePickups;
   const [onEdit, setOnEdit] = useState(false);
   const [pickup, setPickup] = useState(pickupDetail);
+  const [infoChangeItem, setInfoChangeItem] = useState(InfoChangeItemFields);
   const [callbackMachinePickup, setCallbackMachinePickup] =
     state.MachinePickUpAPI.callback;
 
@@ -77,9 +89,18 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPickup({ ...pickup, [name]: value });
+    // console.log(pickup);
+  };
+  const handleInfoChangeItem = (e) => {
+    const { name, value } = e.target;
+    setInfoChangeItem({ ...infoChangeItem, [name]: value });
+    // console.log(infoChangeItem);
+  };
+  const pushInfoChangeitem = () => {
+    pickup.infoChange.push(infoChangeItem);
+    setInfoChangeItem(pickup);
     console.log(pickup);
   };
-
   // console.log(pickup)
   const sweetAlert = (type, text) => {
     Swal.fire({
@@ -123,7 +144,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
       style={{ minWidth: "900px", border: "solid 10px #D8DBE0" }}
     >
       <CForm onSubmit={onSubmitSavePickupDetail}>
-        <CCard className="w-100">
+        <CCard className="w-100 border-0">
           <CCardBody>
             <CRow>
               <CCol className="d-flex justify-content-center" lg="12">
@@ -137,13 +158,12 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
 
               <CCol className="col-12 mt-4 d-flex justify-content-end">
                 <p>
-                  <span className="">Date : </span>{" "}
+                  <span className="">Date : </span>
                   <span className="border-bottom">
-                    {" "}
                     {new Date().toLocaleDateString()}
                   </span>
                   <br />
-                  <span className="">Branch :</span>{" "}
+                  <span className="">Branch :</span>
                   <b className="border-bottom"> {salesDetail.branchName}</b>
                 </p>
               </CCol>
@@ -245,7 +265,6 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
 
               <CCol className="col-12 mt-4">
                 <h4 className="text-center">
-                  {" "}
                   Machine materials checkup during pickup
                 </h4>
                 <CRow className="mt-3">
@@ -503,7 +522,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           </option>
                           <option value="annual">Annual Maintenance</option>
                           <option value="incident">Incident Maintenance</option>
-                          <option value="info_change">
+                          <option value="information_change">
                             Information Change
                           </option>
                           <option value="withdrawal">Withdrawal Machine</option>
@@ -531,12 +550,11 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                               border: "0px",
                               borderBottom: "solid 1px #D8DBE0",
                             }}
-                            id="operationDate"
-                            name="operationDate"
-                            value={pickup.operationDate}
+                            id="issueDate"
+                            name="issueDate"
+                            value={pickup.issueDate}
                             onChange={handleInputChange}
                             type="date"
-                            required
                           />
                         </CCol>
                       </CRow>
@@ -558,7 +576,6 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             value={pickup.annualNextMaintenanceDate}
                             onChange={handleInputChange}
                             type="date"
-                            required
                           />
                         </CCol>
                       </CRow>
@@ -601,9 +618,9 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                               border: "0px",
                               borderBottom: "solid 1px #D8DBE0",
                             }}
-                            id="TechnicianReportedProblems"
-                            name="TechnicianReportedProblems"
-                            value={pickup.TechnicianReportedProblems}
+                            id="technicianReportedProblems"
+                            name="technicianReportedProblems"
+                            value={pickup.technicianReportedProblems}
                             onChange={handleInputChange}
                             rows="1"
                             required
@@ -614,13 +631,179 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                   </CRow>
                 </CCol>
               )}
+              {pickup.category === "information_change" && (
+                <CCol className="col-12 mt-4">
+                  <CRow className="border rounded mx-1 py-4">
+                    <CCol className="col-3">
+                      <CFormGroup>
+                        * Description
+                        <CInput
+                          size="sm"
+                          style={{
+                            border: "0px",
+                            borderBottom: "solid 1px #D8DBE0",
+                          }}
+                          id="description"
+                          name="description"
+                          placeholder="Enter detail of change"
+                          value={infoChangeItem.description}
+                          onChange={handleInfoChangeItem}
+                        />
+                      </CFormGroup>
+                    </CCol>
+                    <CCol className="col-3">
+                      <CFormGroup>
+                        * Part No
+                        <CInput
+                          size="sm"
+                          style={{
+                            border: "0px",
+                            borderBottom: "solid 1px #D8DBE0",
+                          }}
+                          id="partNo"
+                          name="partNo"
+                          placeholder="Enter part number"
+                          value={infoChangeItem.partNo}
+                          onChange={handleInfoChangeItem}
+                        />
+                      </CFormGroup>
+                    </CCol>
+                    <CCol className="col-2">
+                      <CFormGroup>
+                        * Item price
+                        <CInput
+                          type="number"
+                          min="1"
+                          size="sm"
+                          style={{
+                            border: "0px",
+                            borderBottom: "solid 1px #D8DBE0",
+                          }}
+                          id="price"
+                          name="price"
+                          placeholder="Enter needed quanitity"
+                          value={infoChangeItem.price}
+                          onChange={handleInfoChangeItem}
+                        />
+                      </CFormGroup>
+                    </CCol>
+                    <CCol className="col-2">
+                      <CFormGroup>
+                        * Quantity
+                        <CInput
+                          type="number"
+                          min="1"
+                          size="sm"
+                          style={{
+                            border: "0px",
+                            borderBottom: "solid 1px #D8DBE0",
+                          }}
+                          id="quantity"
+                          name="quantity"
+                          placeholder="Enter needed quantity"
+                          value={infoChangeItem.quantity}
+                          onChange={handleInfoChangeItem}
+                        />
+                      </CFormGroup>
+                    </CCol>
+
+                    <CCol className="col-2" className="pt-3">
+                      <CButton
+                        size="sm"
+                        color="dark"
+                        className="w-100"
+                        onClick={() => pushInfoChangeitem()}
+                      >
+                        <CIcon name="cil-plus" /> Add
+                      </CButton>
+                    </CCol>
+
+                    <CCol className="col-12">
+                      {pickup.infoChange.length > 0 && (
+                        <>
+                          <h5> List of part(s) required</h5>
+                          <table className="table table-sm border-bottom-0 border-left-0">
+                            <thead>
+                              <tr className="border">
+                                <th scope="col" className="border">
+                                  Order
+                                </th>
+                                <th scope="col" className="border">
+                                  Description
+                                </th>
+                                <th scope="col" className="border">
+                                  Part No
+                                </th>
+                                <th scope="col" className="border">
+                                  Item price
+                                </th>
+                                <th scope="col" className="border">
+                                  Quantity
+                                </th>
+                                <th scope="col" className="border text-right">
+                                  Unit Price
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {pickup.infoChange.map((item, index) => (
+                                <tr className="border" key={index}>
+                                  <th scope="row" className="border">
+                                    {index + 1}
+                                  </th>
+                                  <td className="border">{item.description}</td>
+                                  <td className="border">{item.partNo}</td>
+                                  <td className="border">{item.price}</td>
+                                  <td className="border">{item.quantity}</td>
+                                  <td className="border text-right">
+                                    {item.price * item.quantity}
+                                  </td>
+                                </tr>
+                              ))}
+
+                              <tr>
+                                <th
+                                  colSpan="5"
+                                  scope="row"
+                                  className="text-right border-0"
+                                >
+                                  Labor
+                                </th>
+                                <td className="border text-right">610.88</td>
+                              </tr>
+                              <tr>
+                                <th colSpan="5" className="text-right border-0">
+                                  Total
+                                </th>
+                                <td className="border text-right">42.76</td>
+                              </tr>
+                              <tr>
+                                <th colSpan="5" className="text-right border-0">
+                                  VAT
+                                </th>
+                                <td className="border text-right">42.76</td>
+                              </tr>
+                              <tr>
+                                <th colSpan="5" className="text-right border-0">
+                                  G. Total
+                                </th>
+                                <td className="border text-right">42.76</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </>
+                      )}
+                    </CCol>
+                  </CRow>
+                </CCol>
+              )}
               {pickup.category === "withdrawal" && (
                 <CCol className="col-12 mt-4">
                   <CRow className="border rounded mx-1 py-4">
                     <CCol>
                       <CRow className="mb-2">
                         <CCol className="col-2">
-                          <h6>Machine withdrawal reason </h6>
+                          <h6>Machine Withdrawal reason </h6>
                         </CCol>
                         <CCol className="col-10">
                           <textarea
@@ -640,7 +823,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                       </CRow>
                       <CRow className="mb-2">
                         <CCol className="col-2">
-                          <h6>Withdrawal reason cetificate </h6>
+                          <h6>Upload withdrawal cetificate </h6>
                         </CCol>
                         <CCol className="col-10">
                           <input
@@ -664,7 +847,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                 </CCol>
               )}
               {pickup.category === "temporarly_store" && (
-                <CCol className="col-12 mt-4">
+                <CCol className="col-12">
                   <CRow className="border rounded mx-1 py-4">
                     <CCol className="col-6">
                       <CRow className="mb-2">
@@ -718,12 +901,12 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                 <h4 className="text-decoration-underline">Pick up Summery</h4>
                 <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
                   The machine with <b> 1000949382773</b> serial number is
-                  assigned to the company{" "}
+                  assigned to the company
                   <b> Edna Mall privated Limited Company</b> and fiscalized with
                   MRC of <b> CLC10008768 </b>
-                  and SIM <b> 0987664321 </b> in{" "}
-                  <b> {salesDetail.branchName}</b>, and picked up for{" "}
-                  {pickup.category}{" "}
+                  and SIM <b> 0987664321 </b> in
+                  <b> {salesDetail.branchName}</b>, and picked up for
+                  {pickup.category}
                   {pickup.category === "annual" ||
                   pickup.category === "incident"
                     ? " maintenance "
@@ -735,8 +918,8 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                   on {new Date().toLocaleString()}.
                 </h6>
               </CCol>
-              <CCol className="col-12 mt-4">
-                <CRow className="mt-4 border rounded mx-1 py-4">
+              <CCol className="col-12">
+                <CRow className="border rounded mx-1 py-4">
                   <CCol className="col-12">
                     <h5>Internal Use</h5>
                   </CCol>
@@ -775,7 +958,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
         <div className="d-flex justify-content-end">
           <div>
             <CButton type="submit" className="my-1 mr-1" size="sm" color="dark">
-              <CIcon name="cil-save"></CIcon> Save{" "}
+              <CIcon name="cil-save"></CIcon> Save
               {onEdit ? " all changes" : " this pickup detail"}!
             </CButton>
             {!onEdit && (

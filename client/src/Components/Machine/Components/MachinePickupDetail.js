@@ -54,7 +54,7 @@ function MachinePickupDetail() {
   return (
     <div style={{ minWidth: "900px", border: "solid 0px #D8DBE0" }}>
       {pickup.length > 0 ? (
-        <CCard className="mt-5 w-100">
+        <CCard className="mt-4 w-100 border-0">
           <CCardBody>
             <CRow>
               <CCol className="d-flex justify-content-center" lg="12">
@@ -317,6 +317,9 @@ function MachinePickupDetail() {
                           </option>
                           <option value="annual">Annual Maintenance</option>
                           <option value="incident">Incident Maintenance</option>
+                          <option value="information_change">
+                            Information Change
+                          </option>
                           <option value="withdrawal">Withdrawal Machine</option>
                           <option value="temporarly_store">
                             Temporarly Store
@@ -338,9 +341,9 @@ function MachinePickupDetail() {
                         <CCol className="col-8">
                           <input
                             className="w-100 form-control"
-                            id="operationDate"
-                            name="operationDate"
-                            value={pickup[0].operationDate}
+                            id="issueDate"
+                            name="issueDate"
+                            value={pickup[0].issueDate}
                             type="date"
                             required
                             disabled
@@ -414,9 +417,9 @@ function MachinePickupDetail() {
                         <CCol className="col-10">
                           <textarea
                             className="w-100 form-control"
-                            id="TechnicianReportedProblems"
-                            name="TechnicianReportedProblems"
-                            value={pickup[0].TechnicianReportedProblems}
+                            id="technicianReportedProblems"
+                            name="technicianReportedProblems"
+                            value={pickup[0].technicianReportedProblems}
                             rows="1"
                             required
                             disabled
@@ -431,6 +434,85 @@ function MachinePickupDetail() {
                       </CRow>
                     </CCol>
                   </CRow>
+                </CCol>
+              )}
+              {pickup[0].category === "information_change" && (
+                <CCol className="col-12">
+                  {pickup[0].infoChange.length > 0 && (
+                    <>
+                      {" "}
+                      <h5> List of part(s) required</h5>
+                      <table className="table table-sm border-bottom-0 border-left-0">
+                        <thead>
+                          <tr>
+                            <th scope="col" className="border">
+                              Order
+                            </th>
+                            <th scope="col" className="border">
+                              Description
+                            </th>
+                            <th scope="col" className="border">
+                              Part No
+                            </th>
+                            <th scope="col" className="border">
+                              Item price
+                            </th>
+                            <th scope="col" className="border">
+                              Quantity
+                            </th>
+                            <th scope="col" className="border text-right">
+                              Unit Price
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {pickup[0].infoChange.map((item, index) => (
+                            <tr className="border" key={index}>
+                              <th scope="row" className="border">
+                                {index + 1}
+                              </th>
+                              <td className="border">{item.description}</td>
+                              <td className="border">{item.partNo}</td>
+                              <td className="border">{item.price}</td>
+                              <td className="border">{item.quantity}</td>
+                              <td className="border text-right">
+                                {item.price * item.quantity}
+                              </td>
+                            </tr>
+                          ))}
+
+                          <tr>
+                            <th
+                              colSpan="5"
+                              scope="row"
+                              className="text-right border-0"
+                            >
+                              Labor
+                            </th>{" "}
+                            <td className="border text-right">610.88</td>{" "}
+                          </tr>
+                          <tr>
+                            <th colSpan="5" className="text-right border-0">
+                              Total
+                            </th>{" "}
+                            <td className="border text-right">42.76</td>{" "}
+                          </tr>
+                          <tr>
+                            <th colSpan="5" className="text-right border-0">
+                              VAT
+                            </th>{" "}
+                            <td className="border text-right">42.76</td>{" "}
+                          </tr>
+                          <tr>
+                            <th colSpan="5" className="text-right border-0">
+                              G. Total
+                            </th>{" "}
+                            <td className="border text-right">42.76</td>{" "}
+                          </tr>
+                        </tbody>
+                      </table>
+                    </>
+                  )}
                 </CCol>
               )}
 

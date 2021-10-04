@@ -71,8 +71,11 @@ const machinePickupModel = new mongoose.Schema(
     clientReportedProblems: {
       type: String,
     },
-    TechnicianReportedProblems: {
+    technicianReportedProblems: {
       type: String,
+    },
+    infoChange: {
+      type: Array,
     },
     returnReason: {
       type: String,
@@ -80,7 +83,7 @@ const machinePickupModel = new mongoose.Schema(
     returnCertificate: {
       type: String,
     },
-    operationDate: {
+    issueDate: {
       type: String, //  the operation complated date
     },
     annualNextMaintenanceDate: {
