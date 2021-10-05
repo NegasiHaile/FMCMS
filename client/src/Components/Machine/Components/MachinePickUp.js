@@ -176,7 +176,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
               </CCol>
               <CCol className="col-12 mt-4  border-bottom">
                 <h3 className="text-center text-muted bold">
-                  Machine recieving form
+                  Machine receiving form
                 </h3>
               </CCol>
 
@@ -289,7 +289,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
 
               <CCol className="col-12 mt-4">
                 <h4 className="text-center">
-                  Materials checkup during recieving
+                  Materials checkup during receiving
                 </h4>
                 <CRow className="mt-3">
                   <CCol>
@@ -528,7 +528,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                         />
                       </CCol>
                       <CCol className="d-flex justify-content-between">
-                        <h6> Recieving Reason </h6>
+                        <h6> receiving Reason </h6>
                         <CSelect
                           aria-label="Default select example"
                           id="category"
@@ -542,7 +542,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           }}
                         >
                           <option value="">
-                            Select machine recieving reason...
+                            Select machine receiving reason...
                           </option>
                           <option value="annual">Annual Maintenance</option>
                           <option value="incident">Incident Maintenance</option>
@@ -565,7 +565,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                     <CCol className="col-6">
                       <CRow className="mb-2">
                         <CCol className="col-4">
-                          <h6>Current annual service issued date: </h6>
+                          <h6>Annual service issued date: </h6>
                         </CCol>
                         <CCol className="col-8">
                           <input
@@ -942,14 +942,14 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                 </CCol>
               )}
               <CCol className="col-12 mt-4">
-                <h4 className="text-decoration-underline">Recieving Summery</h4>
+                <h4 className="text-decoration-underline">receiving Summery</h4>
                 <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
                   The machine with <b> 1000949382773</b> serial number is
                   assigned to the company
                   <b> Edna Mall privated Limited Company</b> and fiscalized with
                   MRC of <b> CLC10008768 </b>
                   and SIM <b> 0987664321 </b> in
-                  <b> {salesDetail.branchName}</b>, and recieving for{" "}
+                  <b> {salesDetail.branchName}</b>, and receiving for{" "}
                   {pickup.category}
                   {pickup.category === "annual" ||
                   pickup.category === "incident"

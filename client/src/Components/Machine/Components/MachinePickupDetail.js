@@ -92,7 +92,7 @@ function MachinePickupDetail() {
               </CCol>
               <CCol className="col-12 mt-4  border-bottom">
                 <h3 className="text-center text-muted">
-                  Machine recieving voucher
+                  Machine receiving voucher
                 </h3>
               </CCol>
 
@@ -206,7 +206,7 @@ function MachinePickupDetail() {
               <CCol className="col-12 mt-4">
                 <h4 className="text-center">
                   {" "}
-                  Materials collected during recieving
+                  Materials collected during receiving
                 </h4>
                 <CRow className="mt-3">
                   <CCol>
@@ -327,7 +327,7 @@ function MachinePickupDetail() {
                         </p>
                       </CCol>
                       <CCol className="d-flex justify-content-between">
-                        <h6> Recieving Reason </h6>
+                        <h6> Receiving Reason </h6>
                         <CSelect
                           aria-label="Default select example"
                           id="category"
@@ -343,7 +343,7 @@ function MachinePickupDetail() {
                           }}
                         >
                           <option value="">
-                            Select machine pickup reason...
+                            Select machine receiving reason...
                           </option>
                           <option value="annual">Annual Maintenance</option>
                           <option value="incident">Incident Maintenance</option>
@@ -665,7 +665,7 @@ function MachinePickupDetail() {
               )}
 
               <CCol className="col-12 mt-3">
-                <h4 className="text-decoration-underline">Recieving Summery</h4>
+                <h4 className="text-decoration-underline">receiving Summery</h4>
                 <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
                   The machine with <b> 1000949382773</b> serial number is
                   assigned to the company{" "}

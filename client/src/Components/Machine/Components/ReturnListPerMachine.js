@@ -80,7 +80,7 @@ function ReturnListPerMachine({ machineId }) {
         <CLabel>Returning history of this machine</CLabel>
         {user.userRole === "technician" && (
           <CButton size="sm" color="dark" to={`/pickup/machine/${machineId}`}>
-            <CIcon name="cil-plus" /> Pickup this machine!
+            <CIcon name="cil-plus" /> Receive this machine!
           </CButton>
         )}
       </CCardHeader>
