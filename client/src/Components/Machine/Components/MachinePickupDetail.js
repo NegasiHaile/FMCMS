@@ -84,13 +84,13 @@ function MachinePickupDetail() {
   return (
     <div style={{ minWidth: "900px", border: "solid 0px #D8DBE0" }}>
       {pickup.length > 0 ? (
-        <CCard className="mt-4 w-100 border-0">
+        <CCard className="w-100 border-0">
           <CCardBody>
-            <CRow>
+            <CRow className="mt-3 p-4">
               <CCol className="d-flex justify-content-center" lg="12">
                 <CImg height="60px" src="/logo/fulllogo.png" />
               </CCol>
-              <CCol className="col-12 mt-4  border-bottom">
+              <CCol className="col-12 mt-3  border-bottom">
                 <h3 className="text-center text-muted">
                   Machine receiving voucher
                 </h3>
