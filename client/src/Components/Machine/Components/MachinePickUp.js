@@ -14,6 +14,8 @@ import {
   CSelect,
   CFormGroup,
   CInput,
+  CLink,
+  CTooltip,
 } from "@coreui/react";
 function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
   const pickupDetail = {
@@ -51,8 +53,8 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
   const InfoChangeItemFields = {
     description: "",
     partNo: "",
-    price: 0.0,
-    quantity: 0,
+    price: 1,
+    quantity: 1,
     unitPrice: 0.0,
   };
 
@@ -97,9 +99,11 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     // console.log(infoChangeItem);
   };
   const pushInfoChangeitem = () => {
-    pickup.infoChange.push(infoChangeItem);
+    pickup.infoChange.unshift(infoChangeItem);
+    // pickup.infoChange.push(infoChangeItem);
     setInfoChangeItem(pickup);
-    console.log(pickup);
+    setInfoChangeItem(InfoChangeItemFields);
+    // console.log(pickup);
   };
   // console.log(pickup)
   const sweetAlert = (type, text) => {
@@ -136,8 +140,28 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
   const cleaeAllTheDetail = (e) => {
     e.preventDefault();
     setPickup(pickupDetail);
+    setInfoChangeItem(InfoChangeItemFields);
   };
-
+  const removeInfoChangeItem = (index) => {
+    pickup.infoChange.splice(index, 1);
+    setInfoChangeItem(pickup);
+    setInfoChangeItem(InfoChangeItemFields);
+    console.log(pickup);
+  };
+  const findTotalPrice = (infoChange) => {
+    var total = 0.0;
+    infoChange.forEach((item) => {
+      const price = item.price * item.quantity;
+      total = total + price;
+    });
+    return total;
+  };
+  const findVAT = (infoChange) => {
+    return (findTotalPrice(infoChange) * 1.5) / 100;
+  };
+  const findGTotal = (infoChange) => {
+    return (findVAT(infoChange) + findTotalPrice(infoChange) + 0.0).toFixed(1);
+  };
   return (
     <div
       className="rounded "
@@ -152,7 +176,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
               </CCol>
               <CCol className="col-12 mt-4  border-bottom">
                 <h3 className="text-center text-muted bold">
-                  Machine Pickup Form
+                  Machine recieving form
                 </h3>
               </CCol>
 
@@ -265,7 +289,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
 
               <CCol className="col-12 mt-4">
                 <h4 className="text-center">
-                  Machine materials checkup during pickup
+                  Materials checkup during recieving
                 </h4>
                 <CRow className="mt-3">
                   <CCol>
@@ -504,7 +528,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                         />
                       </CCol>
                       <CCol className="d-flex justify-content-between">
-                        <h6>* Pickup Reason </h6>
+                        <h6> Recieving Reason </h6>
                         <CSelect
                           aria-label="Default select example"
                           id="category"
@@ -518,7 +542,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           }}
                         >
                           <option value="">
-                            Select machine pickup reason...
+                            Select machine recieving reason...
                           </option>
                           <option value="annual">Annual Maintenance</option>
                           <option value="incident">Incident Maintenance</option>
@@ -755,8 +779,18 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                                   <td className="border">{item.partNo}</td>
                                   <td className="border">{item.price}</td>
                                   <td className="border">{item.quantity}</td>
-                                  <td className="border text-right">
-                                    {item.price * item.quantity}
+                                  <td className="border text-right ">
+                                    {item.price * item.quantity} {" ETB "}
+                                    <CLink
+                                      className="text-danger"
+                                      onClick={() =>
+                                        removeInfoChangeItem(index)
+                                      }
+                                    >
+                                      <CTooltip content={`Remove this item.`}>
+                                        <CIcon name="cil-x" />
+                                      </CTooltip>
+                                    </CLink>
                                   </td>
                                 </tr>
                               ))}
@@ -768,26 +802,36 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                                   className="text-right border-0"
                                 >
                                   Labor
-                                </th>
-                                <td className="border text-right">610.88</td>
+                                </th>{" "}
+                                <td className="border text-right">
+                                  0.00{" ETB"}
+                                </td>{" "}
                               </tr>
                               <tr>
                                 <th colSpan="5" className="text-right border-0">
                                   Total
-                                </th>
-                                <td className="border text-right">42.76</td>
+                                </th>{" "}
+                                <td className="border text-right">
+                                  {findTotalPrice(pickup.infoChange)} {" ETB"}
+                                </td>{" "}
                               </tr>
                               <tr>
                                 <th colSpan="5" className="text-right border-0">
                                   VAT
-                                </th>
-                                <td className="border text-right">42.76</td>
+                                </th>{" "}
+                                <td className="border text-right">
+                                  {findVAT(pickup.infoChange)}
+                                  {" ETB"}
+                                </td>{" "}
                               </tr>
                               <tr>
                                 <th colSpan="5" className="text-right border-0">
                                   G. Total
-                                </th>
-                                <td className="border text-right">42.76</td>
+                                </th>{" "}
+                                <td className="border text-right">
+                                  {findGTotal(pickup.infoChange)}
+                                  {" ETB"}
+                                </td>{" "}
                               </tr>
                             </tbody>
                           </table>
@@ -898,14 +942,14 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                 </CCol>
               )}
               <CCol className="col-12 mt-4">
-                <h4 className="text-decoration-underline">Pick up Summery</h4>
+                <h4 className="text-decoration-underline">Recieving Summery</h4>
                 <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
                   The machine with <b> 1000949382773</b> serial number is
                   assigned to the company
                   <b> Edna Mall privated Limited Company</b> and fiscalized with
                   MRC of <b> CLC10008768 </b>
                   and SIM <b> 0987664321 </b> in
-                  <b> {salesDetail.branchName}</b>, and picked up for
+                  <b> {salesDetail.branchName}</b>, and recieving for{" "}
                   {pickup.category}
                   {pickup.category === "annual" ||
                   pickup.category === "incident"
@@ -914,7 +958,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                     ? " machine "
                     : pickup.category === ""
                     ? " _______ "
-                    : ""}
+                    : ""}{" "}
                   on {new Date().toLocaleString()}.
                 </h6>
               </CCol>

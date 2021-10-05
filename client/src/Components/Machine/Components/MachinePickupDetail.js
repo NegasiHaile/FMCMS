@@ -22,6 +22,7 @@ import Swal from "sweetalert2";
 function MachinePickupDetail() {
   const params = useParams();
   const state = useContext(GlobalState);
+  const [users] = state.UsersAPI.users;
   const [user] = state.UserAPI.User;
   const [machinePikups] = state.MachinePickUpAPI.machinePickups;
   const [pickup, setPickup] = useState([]);
@@ -47,6 +48,35 @@ function MachinePickupDetail() {
       return " ";
     }
   };
+  const findUserFullName = (id) => {
+    const userDetail = users.filter((user) => user._id === id);
+    if (userDetail.length > 0) {
+      return (
+        userDetail[0].fName +
+        " " +
+        userDetail[0].mName +
+        " " +
+        userDetail[0].lName
+      );
+    } else {
+      return "Undifined";
+    }
+  };
+  const findTotalPrice = (infoChange) => {
+    var total = 0.0;
+    infoChange.forEach((item) => {
+      const price = item.price * item.quantity;
+      total = total + price;
+    });
+    return total;
+  };
+  const findVAT = (infoChange) => {
+    return (findTotalPrice(infoChange) * 1.5) / 100;
+  };
+  const findGTotal = (infoChange) => {
+    return (findVAT(infoChange) + findTotalPrice(infoChange) + 0.0).toFixed(1);
+  };
+
   const formatingDate = (stringdate) => {
     return new Date(stringdate).toLocaleString();
   };
@@ -61,9 +91,9 @@ function MachinePickupDetail() {
                 <CImg height="60px" src="/logo/fulllogo.png" />
               </CCol>
               <CCol className="col-12 mt-4  border-bottom">
-                <h2 className="text-center text-muted bold">
-                  Machine pickup detail
-                </h2>
+                <h3 className="text-center text-muted">
+                  Machine recieving voucher
+                </h3>
               </CCol>
 
               <CCol className="col-12 mt-4 d-flex justify-content-end">
@@ -176,7 +206,7 @@ function MachinePickupDetail() {
               <CCol className="col-12 mt-4">
                 <h4 className="text-center">
                   {" "}
-                  Machine materials checkup during pickup
+                  Materials collected during recieving
                 </h4>
                 <CRow className="mt-3">
                   <CCol>
@@ -297,7 +327,7 @@ function MachinePickupDetail() {
                         </p>
                       </CCol>
                       <CCol className="d-flex justify-content-between">
-                        <h6>* Pickup Reason </h6>
+                        <h6> Recieving Reason </h6>
                         <CSelect
                           aria-label="Default select example"
                           id="category"
@@ -477,6 +507,7 @@ function MachinePickupDetail() {
                               <td className="border">{item.quantity}</td>
                               <td className="border text-right">
                                 {item.price * item.quantity}
+                                {" ETB"}
                               </td>
                             </tr>
                           ))}
@@ -489,25 +520,33 @@ function MachinePickupDetail() {
                             >
                               Labor
                             </th>{" "}
-                            <td className="border text-right">610.88</td>{" "}
+                            <td className="border text-right">0.00{" ETB"}</td>{" "}
                           </tr>
                           <tr>
                             <th colSpan="5" className="text-right border-0">
                               Total
                             </th>{" "}
-                            <td className="border text-right">42.76</td>{" "}
+                            <td className="border text-right">
+                              {findTotalPrice(pickup[0].infoChange)} {" ETB"}
+                            </td>{" "}
                           </tr>
                           <tr>
                             <th colSpan="5" className="text-right border-0">
                               VAT
                             </th>{" "}
-                            <td className="border text-right">42.76</td>{" "}
+                            <td className="border text-right">
+                              {findVAT(pickup[0].infoChange)}
+                              {" ETB"}
+                            </td>{" "}
                           </tr>
                           <tr>
                             <th colSpan="5" className="text-right border-0">
                               G. Total
                             </th>{" "}
-                            <td className="border text-right">42.76</td>{" "}
+                            <td className="border text-right">
+                              {findGTotal(pickup[0].infoChange)}
+                              {" ETB"}
+                            </td>{" "}
                           </tr>
                         </tbody>
                       </table>
@@ -626,14 +665,14 @@ function MachinePickupDetail() {
               )}
 
               <CCol className="col-12 mt-3">
-                <h4 className="text-decoration-underline">Pickup Summery</h4>
+                <h4 className="text-decoration-underline">Recieving Summery</h4>
                 <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
                   The machine with <b> 1000949382773</b> serial number is
                   assigned to the company{" "}
                   <b> Edna Mall privated Limited Company</b> and fiscalized with
                   MRC of <b> CLC10008768 </b>
                   and SIM <b> 0987664321 </b> in <b> {pickup[0].branchName}</b>,
-                  and picked up for {pickup[0].category}{" "}
+                  and recieved for {pickup[0].category}{" "}
                   {pickup[0].category === "annual" ||
                   pickup[0].category === "incident"
                     ? " maintenance "
@@ -650,13 +689,13 @@ function MachinePickupDetail() {
                   <CCol className="col-12">
                     <h5>Internal Use</h5>
                   </CCol>
-                  <CCol className="col-7">
+                  <CCol className="col-6">
                     <CRow className="mb-2">
                       <CCol className="col-4">
                         <h6>* Pickup By :</h6>
                       </CCol>
                       <CCol className="col-7 border-bottom">
-                        <h6>{pickup[0].pickedupBy}</h6>
+                        <h6>{findUserFullName(pickup[0].pickedupBy)}</h6>
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
@@ -666,9 +705,9 @@ function MachinePickupDetail() {
                       <CCol className="col-7 border-bottom"></CCol>
                     </CRow>
                   </CCol>
-                  <CCol className="col-5">
+                  <CCol className="col-6">
                     <CRow className="mb-2">
-                      <CCol className="col-5">
+                      <CCol className="col-4">
                         <h6>* Pickup Date :</h6>
                       </CCol>
                       <CCol className="col-6 border-bottom">
@@ -677,7 +716,7 @@ function MachinePickupDetail() {
                     </CRow>
                   </CCol>
 
-                  <CCol className="col-7 mt-4">
+                  <CCol className="col-6 mt-4">
                     <CRow className="mb-2">
                       <CCol className="col-4">
                         <h6>* Technician :</h6>
@@ -693,18 +732,7 @@ function MachinePickupDetail() {
                       <CCol className="col-7 border-bottom"></CCol>
                     </CRow>
                   </CCol>
-                  <CCol className="col-5 mt-4">
-                    <CRow className="mb-2">
-                      <CCol className="col-5">
-                        <h6>* Technical date :</h6>
-                      </CCol>
-                      <CCol className="col-6 border-bottom">
-                        <h6> </h6>
-                      </CCol>
-                    </CRow>
-                  </CCol>
-
-                  <CCol className="col-7 mt-4">
+                  <CCol className="col-6 mt-4">
                     <CRow className="mb-2">
                       <CCol className="col-4">
                         <h6>* Confirmed by :</h6>
@@ -718,16 +746,6 @@ function MachinePickupDetail() {
                         <h6>* Signature :</h6>
                       </CCol>
                       <CCol className="col-7 border-bottom"></CCol>
-                    </CRow>
-                  </CCol>
-                  <CCol className="col-5 mt-4">
-                    <CRow className="mb-2">
-                      <CCol className="col-5">
-                        <h6>* Confirmed date :</h6>
-                      </CCol>
-                      <CCol className="col-6 border-bottom">
-                        <h6> </h6>
-                      </CCol>
                     </CRow>
                   </CCol>
                 </CRow>
