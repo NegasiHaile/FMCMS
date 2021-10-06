@@ -32,6 +32,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+
 function MachineDetail({ id }) {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
@@ -59,9 +60,13 @@ function MachineDetail({ id }) {
       const machine = machines.find(
         (filteredMachine) => filteredMachine._id === id
       );
-      assignementDetail.MRC = machine.MRC;
-      assignementDetail.SIM = machine.SIM;
-      setMachieneDetail(machine);
+      if (machine) {
+        assignementDetail.MRC = machine.MRC;
+        assignementDetail.SIM = machine.SIM;
+        setMachieneDetail(machine);
+      } else {
+        setMachieneDetail("");
+      }
     } else {
     }
   }, [id, machines]);
@@ -256,7 +261,7 @@ function MachineDetail({ id }) {
             </CCardBody>
           </CCard>
         ) : (
-          <BadRouting text="This is bad routing! No machine data to fetch, please go back to machines list page and click the see-detail button of the machine you need to see it's detail." />
+          <BadRouting text="Bad routing! Please go back to machines list page and click the see-detail button of you need to see it's detail." />
         )}{" "}
       </>
       <CModal show={showModal} onClose={() => setShowModal(false)}>

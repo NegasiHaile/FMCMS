@@ -189,7 +189,7 @@ function SalesDetail() {
           </CCardBody>
         </CCard>
       ) : (
-        <BadRouting text="This is bad routing! No data to fetch, please go back to sales list page and click the see-detail button of the sales you need to see it's detail." />
+        <BadRouting text="Bad routing! Please go back to sales list page and click the see-detail button of you need to see it's detail." />
       )}
     </div>
   );

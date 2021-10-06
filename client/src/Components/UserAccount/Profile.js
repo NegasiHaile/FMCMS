@@ -25,7 +25,7 @@ function Profile() {
           <div></div>
         </>
       ) : (
-        <BadRouting text="This is bad routing! No data to fetch, please go back to users list you need to see it's detail and click the see detail button." />
+        <BadRouting text="Bad routing! Please go back to users list and click the DETAIL button of you need to see it's detail." />
       )}
     </div>
   );

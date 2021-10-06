@@ -776,7 +776,7 @@ function MachinePickupDetail() {
         </CCard>
       ) : (
         <div className="mt-3">
-          <BadRouting text="Bad routing, go back to the machine pickup list and come with correct route!" />
+          <BadRouting text="Bad routing, Please go back to maintenance list page and click the detail button of you need to see it's detail!" />
         </div>
       )}
     </div>

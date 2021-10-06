@@ -24,16 +24,8 @@ const BusinessesList = () => {
   const [callback, setCallback] = state.BusinessAPI.callback;
 
   useEffect(() => {
-    if (
-      user.userRole === "branch-admin" ||
-      user.userRole === "technician" ||
-      user.userRole === "sales"
-    ) {
-      setBusinesses(
-        allAusinesses.filter(
-          (filteredBussiness) => filteredBussiness.branch == user.branch
-        )
-      );
+    if (user.userRole === "super-admin" || user.userRole === "main-store") {
+      setBusinesses(allAusinesses);
     } else if (user.userRole === "client") {
       setBusinesses(
         allAusinesses.filter(
@@ -41,7 +33,11 @@ const BusinessesList = () => {
         )
       );
     } else {
-      setBusinesses(allAusinesses);
+      setBusinesses(
+        allAusinesses.filter(
+          (filteredBussiness) => filteredBussiness.branch == user.branch
+        )
+      );
     }
   }, [user, allAusinesses]);
   const sweetAlert = (type, text) => {

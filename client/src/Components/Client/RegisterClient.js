@@ -59,13 +59,19 @@ function RegisterClient() {
   const [client, setClient] = useState(clientDetail);
 
   useEffect(() => {
-    setClients(
-      users.filter(
-        (filteredClient) =>
-          filteredClient.userRole === "client" &&
-          filteredClient.branch === user.branch
-      )
-    );
+    if (user.userRole === "super-admin" || user.userRole === "main-store") {
+      setClients(
+        users.filter((filteredClient) => filteredClient.userRole === "client")
+      );
+    } else {
+      setClients(
+        users.filter(
+          (filteredClient) =>
+            filteredClient.userRole === "client" &&
+            filteredClient.branch === user.branch
+        )
+      );
+    }
   }, [users]);
 
   const onChangeInput = (e) => {
