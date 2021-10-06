@@ -18,6 +18,7 @@ import CIcon from "@coreui/icons-react";
 // routes config
 import routes from "./routes";
 
+import TheHeaderDropdownSales from "../../Components/HeaderDropDowns/TheHeaderDropdownSales";
 import TheHeaderDropdown from "../../Components/HeaderDropDowns/TheHeaderDropdown";
 import TheHeaderDropdownMssg from "../../Components/HeaderDropDowns/TheHeaderDropdownMssg";
 import TheHeaderDropdownNotif from "../../Components/HeaderDropDowns/TheHeaderDropdownNotif";
@@ -69,6 +70,7 @@ const SuperAdminHeader = () => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
+        <TheHeaderDropdownSales />
         <TheHeaderDropdownNotif />
         <TheHeaderDropdownMssg />
         <TheHeaderDropdown />

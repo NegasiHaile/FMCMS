@@ -57,6 +57,23 @@ function TheHeaderDropdownSales() {
         )
       );
       setAlertLable(" controlling ");
+    } else if (
+      user.userRole === "super-admin" ||
+      user.userRole === "main-store"
+    ) {
+      setSalesAlert(
+        Sales.filter((filteredSale) => filteredSale.status !== "completed")
+      );
+      setAlertLable(" sales ");
+    } else if (user.userRole === "branch-admin") {
+      setSalesAlert(
+        Sales.filter(
+          (filteredSale) =>
+            filteredSale.status !== "completed" &&
+            filteredSale.branchId == user.branch
+        )
+      );
+      setAlertLable(" sales ");
     }
   }, [Sales, user]);
 
