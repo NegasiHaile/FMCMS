@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import {
   CBadge,
   CButton,
@@ -13,10 +13,14 @@ import {
   CCallout,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import MainChartExample from "../charts/MainChartExample";
 
+const WidgetsDropdown = lazy(() => import("../widgets/WidgetsDropdown.js"));
+const WidgetsBrand = lazy(() => import("../widgets/WidgetsBrand.js"));
 const BranchAdminDashboard = () => {
   return (
     <>
+      <WidgetsDropdown />
       <CCard>
         <CCardBody>
           <CRow>
@@ -44,6 +48,7 @@ const BranchAdminDashboard = () => {
               </CButtonGroup>
             </CCol>
           </CRow>
+          <MainChartExample style={{ height: "300px", marginTop: "40px" }} />
         </CCardBody>
         <CCardFooter>
           <CRow className="text-center">
@@ -99,6 +104,8 @@ const BranchAdminDashboard = () => {
           </CRow>
         </CCardFooter>
       </CCard>
+
+      <WidgetsBrand withCharts />
 
       <CRow>
         <CCol>
