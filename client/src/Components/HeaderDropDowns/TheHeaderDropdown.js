@@ -49,7 +49,8 @@ const TheHeaderDropdown = () => {
           </CBadge>
         </CDropdownItem> */}
         <CDropdownItem header tag="div" color="light" className="text-center">
-          <strong>Settings</strong>
+          {/* <strong>Settings</strong> */}
+          <strong>Account</strong>
         </CDropdownItem>
         <CDropdownItem to={`/user/profile/${user._id}`}>
           <CIcon name="cil-user" className="mfe-2" />
