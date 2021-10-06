@@ -89,7 +89,7 @@ function BusinessMachines({ businessId }) {
           scopedSlots={{
             Actions: (salesPerBusiness) => (
               <>
-                <td className="d-flex justify-content-center">
+                <td className="d-flex justify-content-between">
                   {(user.userRole === "sales" ||
                     user.userRole === "client") && (
                     <>
@@ -110,12 +110,10 @@ function BusinessMachines({ businessId }) {
                         </CLink>
                       ) : (
                         <CLink
-                          className="text-success"
-                          to={`/business/Detail/`}
+                          className="text-primary"
+                          to={`/pickup/machine/${salesPerBusiness.machineId}`}
                         >
-                          <CTooltip
-                            content={`Make requet of return this machine.`}
-                          >
+                          <CTooltip content={`Receive this machine.`}>
                             <CIcon name="cil-recycle" />
                           </CTooltip>
                         </CLink>
