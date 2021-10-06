@@ -19,7 +19,7 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-primary"
-          header="9.823"
+          header="9,823"
           text="Branchs"
           footerSlot={
             <ChartLineSimple
@@ -38,10 +38,8 @@ const WidgetsDropdown = () => {
               <CIcon name="cil-settings" />
             </CDropdownToggle>
             <CDropdownMenu className="pt-0" placement="bottom-end">
-              <CDropdownItem>Action</CDropdownItem>
-              <CDropdownItem>Another action</CDropdownItem>
-              <CDropdownItem>Something else here...</CDropdownItem>
-              <CDropdownItem disabled>Disabled action</CDropdownItem>
+              <CDropdownItem>Open Branch</CDropdownItem>
+              <CDropdownItem>Branchs List</CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
         </CWidgetDropdown>
@@ -50,7 +48,7 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-info"
-          header="9.823"
+          header="9,823"
           text="Employees"
           footerSlot={
             <ChartLineSimple
@@ -66,14 +64,12 @@ const WidgetsDropdown = () => {
           }
         >
           <CDropdown>
-            <CDropdownToggle caret={false} color="transparent">
-              <CIcon name="cil-location-pin" />
+            <CDropdownToggle color="transparent">
+              <CIcon name="cil-settings" />
             </CDropdownToggle>
             <CDropdownMenu className="pt-0" placement="bottom-end">
-              <CDropdownItem>Action</CDropdownItem>
-              <CDropdownItem>Another action</CDropdownItem>
-              <CDropdownItem>Something else here...</CDropdownItem>
-              <CDropdownItem disabled>Disabled action</CDropdownItem>
+              <CDropdownItem>Add Employee</CDropdownItem>
+              <CDropdownItem>Employee List</CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
         </CWidgetDropdown>
@@ -82,7 +78,7 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-warning"
-          header="9.823"
+          header="9,823"
           text="Clients"
           footerSlot={
             <ChartLineSimple
@@ -102,10 +98,9 @@ const WidgetsDropdown = () => {
               <CIcon name="cil-settings" />
             </CDropdownToggle>
             <CDropdownMenu className="pt-0" placement="bottom-end">
-              <CDropdownItem>Action</CDropdownItem>
-              <CDropdownItem>Another action</CDropdownItem>
-              <CDropdownItem>Something else here...</CDropdownItem>
-              <CDropdownItem disabled>Disabled action</CDropdownItem>
+              <CDropdownItem>Add Client</CDropdownItem>
+              <CDropdownItem>Clients List</CDropdownItem>
+              <CDropdownItem disabled>Quantity: 4567</CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
         </CWidgetDropdown>
@@ -114,7 +109,7 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-danger"
-          header="9.823"
+          header="9,823"
           text="Businesses"
           footerSlot={
             <ChartBarSimple
@@ -131,10 +126,8 @@ const WidgetsDropdown = () => {
               <CIcon name="cil-settings" />
             </CDropdownToggle>
             <CDropdownMenu className="pt-0" placement="bottom-end">
-              <CDropdownItem>Action</CDropdownItem>
-              <CDropdownItem>Another action</CDropdownItem>
-              <CDropdownItem>Something else here...</CDropdownItem>
-              <CDropdownItem disabled>Disabled action</CDropdownItem>
+              <CDropdownItem>Business List</CDropdownItem>
+              <CDropdownItem disabled>Quantity: 4567</CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
         </CWidgetDropdown>
