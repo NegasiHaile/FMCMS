@@ -26,7 +26,7 @@ const BranchAdminDashboard = () => {
           <CRow>
             <CCol sm="5">
               <h4 id="traffic" className="card-title mb-0">
-                Traffic
+                Machines
               </h4>
               <div className="small text-muted">November 2017</div>
             </CCol>
