@@ -692,7 +692,7 @@ function MachinePickupDetail() {
                   <CCol className="col-6">
                     <CRow className="mb-2">
                       <CCol className="col-4">
-                        <h6>* Pickup By :</h6>
+                        <h6>* Received By :</h6>
                       </CCol>
                       <CCol className="col-7 border-bottom">
                         <h6>{findUserFullName(pickup[0].pickedupBy)}</h6>

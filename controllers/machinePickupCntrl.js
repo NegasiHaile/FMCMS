@@ -42,7 +42,7 @@ const machinePickupCntrl = {
       );
 
       await newPickup.save();
-      res.json({ msg: "Machine pickedup successfuly!" });
+      res.json({ msg: "Machine receiving detail saved successfuly!" });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -155,7 +155,7 @@ const machinePickupCntrl = {
 
       if (pickup.status === "New" || pickup.status === "unapproved") {
         await MachinePickups.findOneAndDelete(req.params.id);
-        res.json({ msg: "Pickup item deleted successfuly!" });
+        res.json({ msg: "Receiving item deleted successfuly!" });
       }
       return res
         .status(400)
@@ -206,7 +206,7 @@ const machinePickupCntrl = {
       );
 
       res.json({
-        msg: "Pickup detail eidited successfuly!",
+        msg: "Receiving detail eidited successfuly!",
       });
     } catch (error) {
       res.status(500).json({ msg: error.message });

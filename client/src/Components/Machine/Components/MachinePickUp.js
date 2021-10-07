@@ -528,7 +528,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                         />
                       </CCol>
                       <CCol className="d-flex justify-content-between">
-                        <h6> receiving Reason </h6>
+                        <h6> Receiving Reason </h6>
                         <CSelect
                           aria-label="Default select example"
                           id="category"
@@ -970,7 +970,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                   <CCol>
                     <CRow className="mb-2">
                       <CCol className="col-3">
-                        <h6>Pickup by :</h6>
+                        <h6>Received by :</h6>
                       </CCol>
                       <CCol className="col-8 border-bottom">
                         <h6>{user.fName + " " + user.mName}</h6>
@@ -1003,7 +1003,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
           <div>
             <CButton type="submit" className="my-1 mr-1" size="sm" color="dark">
               <CIcon name="cil-save"></CIcon> Save
-              {onEdit ? " all changes" : " this pickup detail"}!
+              {onEdit ? " all changes" : " this receiving detail"}!
             </CButton>
             {!onEdit && (
               <CButton
@@ -1012,7 +1012,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                 color="danger"
                 onClick={cleaeAllTheDetail}
               >
-                <CIcon name="cil-x"></CIcon> Clear this pickup detail!
+                <CIcon name="cil-x"></CIcon> Clear this receiving detail!
               </CButton>
             )}
           </div>
