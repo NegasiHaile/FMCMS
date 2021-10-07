@@ -4,9 +4,6 @@ import axios from "axios";
 
 import {
   CButton,
-  CCard,
-  CCardBody,
-  CCardGroup,
   CCol,
   CContainer,
   CForm,
@@ -128,7 +125,11 @@ const Login = () => {
                         </CButton>
                       </CCol>
                       <CCol sm="12" md="6" className="text-right">
-                        <CButton color="link" className="px-0" to="#">
+                        <CButton
+                          color="link"
+                          className="px-0"
+                          to="/account-forgot-password"
+                        >
                           <span className="text-dark">Forgot password?</span>
                         </CButton>
                       </CCol>
