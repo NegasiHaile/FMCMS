@@ -87,7 +87,7 @@ const Login = () => {
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
-                          <CIcon name="cil-user" />
+                          <CIcon name="cil-envelope-closed" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
                       <CInput

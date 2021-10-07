@@ -84,6 +84,8 @@ const SystemBackup = lazy(() => import("../../Components/System/SystemBackup"));
 const SystemSetting = lazy(() =>
   import("../../Components/System/SystemSetting")
 );
+// Pricing
+const Pricing = lazy(() => import("../../Components/Pricing/Pricing"));
 
 const routes = [
   { path: "/", exact: true, name: "S-A" },
@@ -248,6 +250,12 @@ const routes = [
     component: ChangePassword,
   },
   // others
+  {
+    path: "/pricing",
+    exact: true,
+    name: "System-Setting",
+    component: Pricing,
+  },
   {
     path: "/feedbacks",
     exact: true,
