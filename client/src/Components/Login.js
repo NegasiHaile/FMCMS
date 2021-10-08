@@ -132,16 +132,19 @@ const Login = () => {
                       </CCol>
                       <CCol className="col-12 mt-1">
                         <p class="mb-0 text-center mt-4">
-                          <a
-                            href="http://jupiter-tradingeth.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-info"
-                          >
-                            Jupiter-Trading
-                          </a>
                           <br />
-                          <small>Copy right &copy; 2021.</small>
+                          <small>
+                            Copyright &copy; 2021{" "}
+                            <a
+                              href="http://jupiter-tradingeth.com/"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-info"
+                            >
+                              Jupiter-Trading
+                            </a>
+                            . All rights reserved.
+                          </small>
                         </p>
                       </CCol>
                     </CRow>
