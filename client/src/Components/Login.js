@@ -54,32 +54,31 @@ const Login = () => {
         <CContainer>
           <CRow className="justify-content-center">
             <CCol
-              sm="11"
-              md="9"
-              lg="7"
+              md="6"
+              lg="4"
               className="shadow-lg p-3 mb-5 mx-3 bg-white rounded"
             >
-              <CRow className="justify-content-center">
+              <CRow className="justify-content-center my-5">
                 <CCol md="11">
                   <CRow className="justify-content-center">
                     <img
                       style={{
                         borderRadius: "50%",
                         height: "75px",
-                        marginTop: "-50px",
                       }}
-                      className="shadow-sm bg-white p-2"
+                      className=" bg-white p-2"
                       alt="Logo"
                       src="/logo/smalllogo.png"
                     />
                   </CRow>
                 </CCol>
                 <CCol md="11" className="mt-2">
-                  <h6 className="text-center text-muted">
-                    JuPiTeR-Trading-FMCMS
-                  </h6>
+                  <h5 className="text-center text-muted">WELCOME</h5>
+                  <p class="text-center  text-muted">
+                    Jupiter tading FMCMS signin!
+                  </p>
                 </CCol>
-                <CCol md="11" className="my-4">
+                <CCol md="11" className="my-3">
                   <CForm onSubmit={loginSubmit}>
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
@@ -97,7 +96,7 @@ const Login = () => {
                         required
                       />
                     </CInputGroup>
-                    <CInputGroup className="mb-4">
+                    <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
                           <CIcon name="cil-lock-unlocked" />
@@ -113,10 +112,17 @@ const Login = () => {
                         required
                       />
                     </CInputGroup>
-                    <CRow className="mt-3">
-                      <CCol sm="12" md="6">
+                    <CCol className="col-12 mt-1 d-flex justify-content-end">
+                      <a
+                        href="http://jupiter-tradingeth.com/"
+                        className="text-info"
+                      >
+                        Forgot password
+                      </a>
+                    </CCol>
+                    <CRow className="mt-2">
+                      <CCol sm="12" md="12">
                         <CButton
-                          size="sm"
                           type="submit"
                           color="light"
                           className="px-4 w-100"
@@ -124,14 +130,19 @@ const Login = () => {
                           <CIcon name="cil-blind" /> Login
                         </CButton>
                       </CCol>
-                      <CCol sm="12" md="6" className="text-right">
-                        <CButton
-                          color="link"
-                          className="px-0"
-                          to="/account-forgot-password"
-                        >
-                          <span className="text-dark">Forgot password?</span>
-                        </CButton>
+                      <CCol className="col-12 mt-1">
+                        <p class="mb-0 text-center mt-4">
+                          <a
+                            href="http://jupiter-tradingeth.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-info"
+                          >
+                            Jupiter-Trading
+                          </a>
+                          <br />
+                          <small>Copy right &copy; 2021.</small>
+                        </p>
                       </CCol>
                     </CRow>
                   </CForm>
