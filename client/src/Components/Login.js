@@ -66,7 +66,7 @@ const Login = () => {
                         borderRadius: "50%",
                         height: "75px",
                       }}
-                      className=" bg-white p-2"
+                      className=" bg-white p-2 border"
                       alt="Logo"
                       src="/logo/smalllogo.png"
                     />
@@ -78,9 +78,9 @@ const Login = () => {
                     Jupiter tading FMCMS signin!
                   </p>
                 </CCol>
-                <CCol md="11" className="my-3">
+                <CCol md="11" className="my-4">
                   <CForm onSubmit={loginSubmit}>
-                    <CInputGroup className="mb-3">
+                    <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
                         <CInputGroupText>
                           <CIcon name="cil-envelope-closed" />
@@ -96,7 +96,7 @@ const Login = () => {
                         required
                       />
                     </CInputGroup>
-                    <CInputGroup className="mb-3">
+                    <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
                         <CInputGroupText>
                           <CIcon name="cil-lock-unlocked" />
