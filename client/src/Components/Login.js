@@ -58,14 +58,13 @@ const Login = () => {
               lg="5"
               className="shadow-lg p-3 mb-5 mx-3 bg-white rounded"
             >
-              <CRow className="justify-content-center mb-5">
+              <CRow className="justify-content-center mt-3 mb-5">
                 <CCol md="11">
                   <CRow className="justify-content-center">
                     <img
                       style={{
                         borderRadius: "50%",
                         height: "75px",
-                        marginTop: "-50px",
                       }}
                       className=" bg-white p-2"
                       alt="Logo"
