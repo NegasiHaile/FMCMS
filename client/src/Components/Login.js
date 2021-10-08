@@ -51,7 +51,7 @@ const Login = () => {
   return (
     <>
       <div className="c-app c-default-layout flex-row align-items-center">
-        <CContainer>
+        <CContainer className="mt-5">
           <CRow className="justify-content-center">
             <CCol
               md="6"
