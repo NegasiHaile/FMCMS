@@ -773,6 +773,10 @@ function MachinePickupDetail() {
               </CCol>
             </CRow>
           </CCardBody>
+          <CButton color="success" className="d-print-none">
+            {" "}
+            d-print-none{" "}
+          </CButton>
         </CCard>
       ) : (
         <div className="mt-3">
