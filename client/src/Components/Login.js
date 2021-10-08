@@ -58,7 +58,7 @@ const Login = () => {
               lg="5"
               className="shadow-lg p-3 mb-5 mx-3 bg-white rounded"
             >
-              <CRow className="justify-content-center mt-3 mb-5">
+              <CRow className="justify-content-center mt-3 mb-4">
                 <CCol md="11">
                   <CRow className="justify-content-center">
                     <img
@@ -75,7 +75,7 @@ const Login = () => {
                 <CCol md="11" className="mt-2">
                   <h5 className="text-center text-muted">WELCOME</h5>
                   <p class="text-center  text-muted">
-                    Jupiter tading FMCMS signin!
+                    Jupiter-Trading-FMCMS Sign in!
                   </p>
                 </CCol>
                 <CCol md="11" className="my-4">
@@ -130,11 +130,11 @@ const Login = () => {
                           <CIcon name="cil-blind" /> Login
                         </CButton>
                       </CCol>
-                      <CCol className="col-12 mt-1">
-                        <p class="mb-0 text-center mt-4">
+                      <CCol className="col-12 mt-3">
+                        <p class="mb-0 text-center">
                           <br />
                           <small>
-                            Copyright &copy; 2021{" "}
+                            &copy; Copyright 2021{" "}
                             <a
                               href="http://jupiter-tradingeth.com/"
                               target="_blank"
@@ -143,7 +143,8 @@ const Login = () => {
                             >
                               Jupiter-Trading
                             </a>
-                            . All rights reserved.
+                            .
+                            <br /> All rights reserved.
                           </small>
                         </p>
                       </CCol>
