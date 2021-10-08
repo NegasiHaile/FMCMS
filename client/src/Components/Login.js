@@ -117,7 +117,7 @@ const Login = () => {
                         href="http://jupiter-tradingeth.com/"
                         className="text-info"
                       >
-                        Forgot password
+                        Forgot password?
                       </a>
                     </CCol>
                     <CRow className="mt-2">
