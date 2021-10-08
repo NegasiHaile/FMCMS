@@ -9,6 +9,7 @@ import SalesAPI from "./api/SalesAPI";
 import MaintenanceAPI from "./api/MaintenanceAPI";
 import NotificationAPI from "./api/NotificationAPI";
 import MachinePickUpAPI from "./api/MachinePickupAPI";
+import PricingAPI from "./api/PricingAPI";
 // import MachineAPI from "./api/MachineAPI";
 
 import axios from "axios";
@@ -44,6 +45,7 @@ export const DataProvider = ({ children }) => {
     MaintenanceAPI: MaintenanceAPI(),
     NotificationAPI: NotificationAPI(),
     MachinePickUpAPI: MachinePickUpAPI(),
+    PricingAPI: PricingAPI(),
     // categoriesAPI: MachineAPI(),
   };
 
