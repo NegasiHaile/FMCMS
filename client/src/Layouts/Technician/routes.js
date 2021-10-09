@@ -85,9 +85,9 @@ const SystemBackup = lazy(() => import("../../Components/System/SystemBackup"));
 const routes = [
   { path: "/", exact: true, name: "Technician" },
   {
-    path: "/",
+    path: "/dashboard",
     exact: true,
-    name: "Home",
+    name: "Dashboard",
     component: branchDashboard,
   },
   // Branchs
