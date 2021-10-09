@@ -699,10 +699,10 @@ function MachineReturnigPickup({ user, salesDetail, pickupType, pickupId }) {
                   <CCol>
                     <CRow className="mb-2">
                       <CCol className="col-4">
-                        <h6>Fiscalization Date :</h6>
+                        <h6>Receiving Date :</h6>
                       </CCol>
                       <CCol className="col-7 border-bottom">
-                        <h6>Monday 12/20/2021</h6>
+                        <h6>{new Date().toLocaleDateString()}</h6>
                       </CCol>
                     </CRow>
                   </CCol>

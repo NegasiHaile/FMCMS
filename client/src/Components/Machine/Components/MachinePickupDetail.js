@@ -708,7 +708,7 @@ function MachinePickupDetail() {
                   <CCol className="col-6">
                     <CRow className="mb-2">
                       <CCol className="col-4">
-                        <h6>* Pickup Date :</h6>
+                        <h6>* Recieved at :</h6>
                       </CCol>
                       <CCol className="col-6 border-bottom">
                         <h6>{formatingDate(pickup[0].createdAt)}</h6>
