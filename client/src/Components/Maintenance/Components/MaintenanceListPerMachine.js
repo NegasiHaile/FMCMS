@@ -88,7 +88,7 @@ function MaintenanceListPerMachine({ machineId }) {
           </CButton>
         )}
       </CCardHeader>
-      <CCardBody>
+      <CCardBody className="table-responsive">
         {maint_Per_Machine.length > 0 ? (
           <table className="table table-sm">
             <thead>
