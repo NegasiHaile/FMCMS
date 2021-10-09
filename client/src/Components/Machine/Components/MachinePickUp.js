@@ -44,10 +44,6 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     infoChange: [],
     issueDate: "",
     annualNextMaintenanceDate: "",
-    returnReason: "",
-    returnCertificate: "",
-    waitingDuration: "",
-    waitingCostPerMonth: "",
     pickedupBy: user._id,
   };
   const InfoChangeItemFields = {
