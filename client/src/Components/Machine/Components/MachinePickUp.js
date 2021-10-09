@@ -165,22 +165,22 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
   return (
     <div
       className="rounded "
-      style={{ minWidth: "900px", border: "solid 10px #D8DBE0" }}
+      style={{ minWidth: "900px", border: "solid 0px #D8DBE0" }}
     >
       <CForm onSubmit={onSubmitSavePickupDetail}>
         <CCard className="w-100 border-0">
           <CCardBody>
-            <CRow>
+            <CRow className="mt-3 p-4">
               <CCol className="d-flex justify-content-center" lg="12">
                 <CImg height="50px" src="/logo/fulllogo.png" />
               </CCol>
-              <CCol className="col-12 mt-4  border-bottom">
+              <CCol className="col-12 my-2  border-bottom">
                 <h3 className="text-center text-muted bold">
                   Machine receiving form
                 </h3>
               </CCol>
 
-              <CCol className="col-12 mt-4 d-flex justify-content-end">
+              <CCol className="col-12 my-2 d-flex justify-content-end">
                 <p>
                   <span className="">Date : </span>
                   <span className="border-bottom">
@@ -192,7 +192,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                 </p>
               </CCol>
 
-              <CCol className="col-12 mt-4">
+              <CCol className="col-12 my-2">
                 <CRow>
                   <CCol>
                     <h4 className="text-decoration-underline">
@@ -287,7 +287,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                 </CRow>
               </CCol>
 
-              <CCol className="col-12 mt-4">
+              <CCol className="col-12 my-2">
                 <h4 className="text-center">
                   Materials checkup during receiving
                 </h4>
@@ -556,7 +556,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                 </CRow>
               </CCol>
               {pickup.category === "annual" && (
-                <CCol className="col-12 mt-4">
+                <CCol className="col-12my-2">
                   <CRow className="border rounded mx-1 py-4">
                     <CCol className="col-6">
                       <CRow className="mb-2">
@@ -604,7 +604,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                 </CCol>
               )}
               {pickup.category === "incident" && (
-                <CCol className="col-12 mt-4">
+                <CCol className="col-12 my-2">
                   <CRow className="border rounded mx-1 py-4">
                     <CCol>
                       <CRow className="mb-2">
@@ -652,7 +652,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                 </CCol>
               )}
               {pickup.category === "information_change" && (
-                <CCol className="col-12 mt-4">
+                <CCol className="col-12 my-2">
                   <CRow className="border rounded mx-1 py-4">
                     <CCol className="col-3">
                       <CFormGroup>
@@ -837,7 +837,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                   </CRow>
                 </CCol>
               )}
-              <CCol className="col-12 mt-4">
+              <CCol className="col-12 my-2">
                 <h4 className="text-decoration-underline">receiving Summery</h4>
                 <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
                   The machine with <b> 1000949382773</b> serial number is
@@ -858,7 +858,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                   on {new Date().toLocaleString()}.
                 </h6>
               </CCol>
-              <CCol className="col-12">
+              <CCol className="col-12 my-2">
                 <CRow className="border rounded mx-1 py-4">
                   <CCol className="col-12">
                     <h5>Internal Use</h5>
