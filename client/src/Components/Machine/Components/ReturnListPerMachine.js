@@ -77,10 +77,14 @@ function ReturnListPerMachine({ machineId }) {
   return (
     <CCard>
       <CCardHeader className="d-flex justify-content-between">
-        <CLabel>Returning history of this machine</CLabel>
+        <CLabel>Withdrawal history of this machine</CLabel>
         {user.userRole === "technician" && (
-          <CButton size="sm" color="dark" to={`/pickup/machine/${machineId}`}>
-            <CIcon name="cil-plus" /> Receive this machine!
+          <CButton
+            size="sm"
+            color="dark"
+            to={`/machine/returning_pickup/${machineId}`}
+          >
+            <CIcon name="cil-plus" /> Receive for withdrawal!
           </CButton>
         )}
       </CCardHeader>
@@ -111,7 +115,7 @@ function ReturnListPerMachine({ machineId }) {
                         <>
                           <CLink
                             className="text-success"
-                            to={`/pickup/edit/${rtrn.machineId}/${rtrn._id}`}
+                            to={`/machine/returning_pickup/edit/${rtrn.machineId}/${rtrn._id}`}
                           >
                             <CTooltip content={`Edit this pickup detail.`}>
                               <CIcon name="cil-pencil" />
@@ -148,7 +152,7 @@ function ReturnListPerMachine({ machineId }) {
             </tbody>
           </table>
         ) : (
-          <BadRouting text="This machine haven't any return history yet!" />
+          <BadRouting text="This machine haven't any withdrawal history yet!" />
         )}
       </CCardBody>
     </CCard>

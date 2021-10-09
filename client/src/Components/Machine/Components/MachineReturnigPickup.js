@@ -17,7 +17,7 @@ import {
   CLink,
   CTooltip,
 } from "@coreui/react";
-function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
+function MachineReturnigPickup({ user, salesDetail, pickupType, pickupId }) {
   const pickupDetail = {
     branchId: user.branch,
     salesId: salesDetail.saleId,
@@ -176,7 +176,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
               </CCol>
               <CCol className="col-12 mt-4  border-bottom">
                 <h3 className="text-center text-muted bold">
-                  Machine receiving form
+                  Machine withdrawal receiving form
                 </h3>
               </CCol>
 
@@ -542,12 +542,11 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           }}
                         >
                           <option value="">
-                            Select machine receiving reason...
+                            Select machine Withdrawal reason...
                           </option>
-                          <option value="annual">Annual Maintenance</option>
-                          <option value="incident">Incident Maintenance</option>
-                          <option value="information_change">
-                            Information Change
+                          <option value="withdrawal">Withdrawal Machine</option>
+                          <option value="temporarly_store">
+                            Temporarly Store
                           </option>
                         </CSelect>
                       </CCol>
@@ -555,61 +554,13 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                   </CCol>
                 </CRow>
               </CCol>
-              {pickup.category === "annual" && (
-                <CCol className="col-12 mt-4">
-                  <CRow className="border rounded mx-1 py-4">
-                    <CCol className="col-6">
-                      <CRow className="mb-2">
-                        <CCol className="col-4">
-                          <h6>Annual service issued date: </h6>
-                        </CCol>
-                        <CCol className="col-8">
-                          <input
-                            className="w-100 form-control"
-                            style={{
-                              border: "0px",
-                              borderBottom: "solid 1px #D8DBE0",
-                            }}
-                            id="issueDate"
-                            name="issueDate"
-                            value={pickup.issueDate}
-                            onChange={handleInputChange}
-                            type="date"
-                          />
-                        </CCol>
-                      </CRow>
-                    </CCol>
-                    <CCol className="col-6">
-                      <CRow className="mb-2">
-                        <CCol className="col-4">
-                          <h6>Next annual service issue date: </h6>
-                        </CCol>
-                        <CCol className="col-8">
-                          <input
-                            className="w-100 form-control"
-                            style={{
-                              border: "0px",
-                              borderBottom: "solid 1px #D8DBE0",
-                            }}
-                            id="annualNextMaintenanceDate"
-                            name="annualNextMaintenanceDate"
-                            value={pickup.annualNextMaintenanceDate}
-                            onChange={handleInputChange}
-                            type="date"
-                          />
-                        </CCol>
-                      </CRow>
-                    </CCol>
-                  </CRow>
-                </CCol>
-              )}
-              {pickup.category === "incident" && (
+              {pickup.category === "withdrawal" && (
                 <CCol className="col-12 mt-4">
                   <CRow className="border rounded mx-1 py-4">
                     <CCol>
                       <CRow className="mb-2">
                         <CCol className="col-2">
-                          <h6>Client reported problems</h6>
+                          <h6>Machine Withdrawal reason </h6>
                         </CCol>
                         <CCol className="col-10">
                           <textarea
@@ -618,9 +569,9 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                               border: "0px",
                               borderBottom: "solid 1px #D8DBE0",
                             }}
-                            id="clientReportedProblems"
-                            name="clientReportedProblems"
-                            value={pickup.clientReportedProblems}
+                            id="returnReason"
+                            name="returnReason"
+                            value={pickup.returnReason}
                             onChange={handleInputChange}
                             rows="1"
                             required
@@ -629,18 +580,19 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                       </CRow>
                       <CRow className="mb-2">
                         <CCol className="col-2">
-                          <h6>Technician reported problems</h6>
+                          <h6>Upload withdrawal cetificate </h6>
                         </CCol>
                         <CCol className="col-10">
-                          <textarea
+                          <input
                             className="w-100 form-control"
                             style={{
                               border: "0px",
                               borderBottom: "solid 1px #D8DBE0",
                             }}
-                            id="technicianReportedProblems"
-                            name="technicianReportedProblems"
-                            value={pickup.technicianReportedProblems}
+                            type="file"
+                            id="returnCertificate"
+                            name="returnCertificate"
+                            value={pickup.returnCertificate}
                             onChange={handleInputChange}
                             rows="1"
                             required
@@ -651,188 +603,53 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                   </CRow>
                 </CCol>
               )}
-              {pickup.category === "information_change" && (
-                <CCol className="col-12 mt-4">
+              {pickup.category === "temporarly_store" && (
+                <CCol className="col-12">
                   <CRow className="border rounded mx-1 py-4">
-                    <CCol className="col-3">
-                      <CFormGroup>
-                        * Description
-                        <CInput
-                          size="sm"
-                          style={{
-                            border: "0px",
-                            borderBottom: "solid 1px #D8DBE0",
-                          }}
-                          id="description"
-                          name="description"
-                          placeholder="Enter detail of change"
-                          value={infoChangeItem.description}
-                          onChange={handleInfoChangeItem}
-                        />
-                      </CFormGroup>
+                    <CCol className="col-6">
+                      <CRow className="mb-2">
+                        <CCol className="col-4">
+                          <h6>Time duration of temporarily store </h6>
+                        </CCol>
+                        <CCol className="col-8">
+                          <input
+                            className="w-100 form-control"
+                            style={{
+                              border: "0px",
+                              borderBottom: "solid 1px #D8DBE0",
+                            }}
+                            id="waitingDuration"
+                            name="waitingDuration"
+                            value={pickup.waitingDuration}
+                            onChange={handleInputChange}
+                            type="date"
+                            required
+                          />
+                        </CCol>
+                      </CRow>
                     </CCol>
-                    <CCol className="col-3">
-                      <CFormGroup>
-                        * Part No
-                        <CInput
-                          size="sm"
-                          style={{
-                            border: "0px",
-                            borderBottom: "solid 1px #D8DBE0",
-                          }}
-                          id="partNo"
-                          name="partNo"
-                          placeholder="Enter part number"
-                          value={infoChangeItem.partNo}
-                          onChange={handleInfoChangeItem}
-                        />
-                      </CFormGroup>
-                    </CCol>
-                    <CCol className="col-2">
-                      <CFormGroup>
-                        * Item price
-                        <CInput
-                          type="number"
-                          min="1"
-                          size="sm"
-                          style={{
-                            border: "0px",
-                            borderBottom: "solid 1px #D8DBE0",
-                          }}
-                          id="price"
-                          name="price"
-                          placeholder="Enter needed quanitity"
-                          value={infoChangeItem.price}
-                          onChange={handleInfoChangeItem}
-                        />
-                      </CFormGroup>
-                    </CCol>
-                    <CCol className="col-2">
-                      <CFormGroup>
-                        * Quantity
-                        <CInput
-                          type="number"
-                          min="1"
-                          size="sm"
-                          style={{
-                            border: "0px",
-                            borderBottom: "solid 1px #D8DBE0",
-                          }}
-                          id="quantity"
-                          name="quantity"
-                          placeholder="Enter needed quantity"
-                          value={infoChangeItem.quantity}
-                          onChange={handleInfoChangeItem}
-                        />
-                      </CFormGroup>
-                    </CCol>
-
-                    <CCol className="col-2" className="pt-3">
-                      <CButton
-                        size="sm"
-                        color="dark"
-                        className="w-100"
-                        onClick={() => pushInfoChangeitem()}
-                      >
-                        <CIcon name="cil-plus" /> Add
-                      </CButton>
-                    </CCol>
-
-                    <CCol className="col-12">
-                      {pickup.infoChange.length > 0 && (
-                        <>
-                          <h5> List of part(s) required</h5>
-                          <table className="table table-sm border-bottom-0 border-left-0">
-                            <thead>
-                              <tr className="border">
-                                <th scope="col" className="border">
-                                  Order
-                                </th>
-                                <th scope="col" className="border">
-                                  Description
-                                </th>
-                                <th scope="col" className="border">
-                                  Part No
-                                </th>
-                                <th scope="col" className="border">
-                                  Item price
-                                </th>
-                                <th scope="col" className="border">
-                                  Quantity
-                                </th>
-                                <th scope="col" className="border text-right">
-                                  Unit Price
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {pickup.infoChange.map((item, index) => (
-                                <tr className="border" key={index}>
-                                  <th scope="row" className="border">
-                                    {index + 1}
-                                  </th>
-                                  <td className="border">{item.description}</td>
-                                  <td className="border">{item.partNo}</td>
-                                  <td className="border">{item.price}</td>
-                                  <td className="border">{item.quantity}</td>
-                                  <td className="border text-right ">
-                                    {item.price * item.quantity} {" ETB "}
-                                    <CLink
-                                      className="text-danger"
-                                      onClick={() =>
-                                        removeInfoChangeItem(index)
-                                      }
-                                    >
-                                      <CTooltip content={`Remove this item.`}>
-                                        <CIcon name="cil-x" />
-                                      </CTooltip>
-                                    </CLink>
-                                  </td>
-                                </tr>
-                              ))}
-
-                              <tr>
-                                <th
-                                  colSpan="5"
-                                  scope="row"
-                                  className="text-right border-0"
-                                >
-                                  Labor
-                                </th>{" "}
-                                <td className="border text-right">
-                                  0.00{" ETB"}
-                                </td>{" "}
-                              </tr>
-                              <tr>
-                                <th colSpan="5" className="text-right border-0">
-                                  Total
-                                </th>{" "}
-                                <td className="border text-right">
-                                  {findTotalPrice(pickup.infoChange)} {" ETB"}
-                                </td>{" "}
-                              </tr>
-                              <tr>
-                                <th colSpan="5" className="text-right border-0">
-                                  VAT
-                                </th>{" "}
-                                <td className="border text-right">
-                                  {findVAT(pickup.infoChange)}
-                                  {" ETB"}
-                                </td>{" "}
-                              </tr>
-                              <tr>
-                                <th colSpan="5" className="text-right border-0">
-                                  G. Total
-                                </th>{" "}
-                                <td className="border text-right">
-                                  {findGTotal(pickup.infoChange)}
-                                  {" ETB"}
-                                </td>{" "}
-                              </tr>
-                            </tbody>
-                          </table>
-                        </>
-                      )}
+                    <CCol className="col-6">
+                      <CRow className="mb-2">
+                        <CCol className="col-4">
+                          <h6>Temporarly store cost per month(ETB) </h6>
+                        </CCol>
+                        <CCol className="col-8">
+                          <input
+                            className="w-100 form-control"
+                            style={{
+                              border: "0px",
+                              borderBottom: "solid 1px #D8DBE0",
+                            }}
+                            type="number"
+                            id="waitingCostPerMonth"
+                            name="waitingCostPerMonth"
+                            value={pickup.waitingCostPerMonth}
+                            onChange={handleInputChange}
+                            rows="1"
+                            required
+                          />
+                        </CCol>
+                      </CRow>
                     </CCol>
                   </CRow>
                 </CCol>
@@ -918,4 +735,4 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
   );
 }
 
-export default MachinePickUp;
+export default MachineReturnigPickup;
