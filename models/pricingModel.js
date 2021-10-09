@@ -10,7 +10,7 @@ const pricingSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    type: {
+    description: {
       type: String,
     },
   },

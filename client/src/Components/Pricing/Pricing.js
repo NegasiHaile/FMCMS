@@ -28,7 +28,7 @@ import BadRouting from "../Utils/routing/BadRouting";
 const pricingDetail = {
   pricingName: "",
   price: "",
-  type: "",
+  description: "",
 };
 
 function Pricing() {
@@ -189,12 +189,12 @@ function Pricing() {
                 </CCol>
                 <CCol xs="12" md="4">
                   <CFormGroup>
-                    Type
+                    Description
                     <CInput
-                      id="type"
-                      name="type"
+                      id="description"
+                      name="description"
                       placeholder="Enter sub price."
-                      value={pricing.type}
+                      value={pricing.description}
                       onChange={onChangeInput}
                     />
                   </CFormGroup>

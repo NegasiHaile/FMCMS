@@ -4,7 +4,7 @@ const pricingCntrl = {
   registerPrcing: async (req, res) => {
     try {
       const newPeicing = new Pricings(
-        ({ pricingName, price, type } = req.body)
+        ({ pricingName, price, description } = req.body)
       );
 
       const checkPricingName = await Pricings.findOne({
@@ -33,7 +33,7 @@ const pricingCntrl = {
     try {
       await Pricings.findOneAndUpdate(
         { _id: req.params.id },
-        ({ pricingName, price, type } = req.body)
+        ({ pricingName, price, description } = req.body)
       );
       res.json({ msg: "Pricing is edited successfully!" });
     } catch (err) {
