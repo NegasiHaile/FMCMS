@@ -57,7 +57,9 @@ function ReturnListPerMachine({ machineId }) {
       }).then(async (result) => {
         try {
           if (result.isConfirmed) {
-            const res = await axios.delete(`/pickup/delete/${itmeId}`);
+            const res = await axios.delete(
+              `/pickup/delete_machine_Withdrawal/${itmeId}`
+            );
             setCallbackMachinePickup(!callbackMachinePickup);
             sweetAlert("success", res.data.msg);
           }

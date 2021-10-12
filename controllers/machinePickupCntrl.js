@@ -3,6 +3,8 @@ const Sales = require("../models/salesModel");
 const machines = require("../models/machineModel");
 const clientBusinesses = require("../models/clientBusinessModel");
 const branchs = require("../models/branchModel");
+const path = require("path");
+const fs = require("fs");
 
 const machinePickupCntrl = {
   addPickup: async (req, res) => {
@@ -33,10 +35,6 @@ const machinePickupCntrl = {
           TechnicianReportedProblems,
           infoChange,
           issueDate,
-          returnReason,
-          returnCertificate,
-          waitingDuration,
-          waitingCostPerMonth,
           pickedupBy,
         } = req.body)
       );
@@ -193,10 +191,6 @@ const machinePickupCntrl = {
           technicianReportedProblems,
           infoChange,
           issueDate,
-          returnReason,
-          returnCertificate,
-          waitingDuration,
-          waitingCostPerMonth,
           pickedupBy,
         } = req.body)
       );
@@ -208,6 +202,165 @@ const machinePickupCntrl = {
       res.json({
         msg: "Receiving detail eidited successfuly!",
       });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
+  addMachine_withdrawal: async (req, res) => {
+    if (req.file) {
+      const {
+        branchId,
+        salesId,
+        businessId,
+        machineId,
+        memoryKey,
+        drawer,
+        paper,
+        terminal,
+        terminalAdapte,
+        machineMaterial,
+        SBookTerminal,
+        SbookMachine,
+        paperRoller,
+        paperCover,
+        machineAdapter,
+        FDForm,
+        sealNumber,
+        MRCNumber,
+        category,
+        subCategory,
+        returnReason,
+        returnCertificate,
+        pickedupBy,
+      } = req.body;
+
+      const newReturingReceiving = new MachinePickups({
+        branchId,
+        salesId,
+        businessId,
+        machineId,
+        memoryKey,
+        drawer,
+        paper,
+        terminal,
+        terminalAdapte,
+        machineMaterial,
+        SBookTerminal,
+        SbookMachine,
+        paperRoller,
+        paperCover,
+        machineAdapter,
+        FDForm,
+        sealNumber,
+        MRCNumber,
+        category,
+        subCategory,
+        returnReason,
+        returnCertificate: "/uploads/" + req.file.filename,
+        pickedupBy,
+      });
+
+      await newReturingReceiving.save();
+      res.json({ msg: "Withdrawal receiving added successfuly!" });
+    } else {
+      return res.status(400).json({
+        msg: "Withdrawal certificate is required!",
+      });
+    }
+  },
+
+  deleteMachine_withdrawal: async (req, res) => {
+    try {
+      const withdrawalItme = await MachinePickups.findById(req.params.id);
+      if (!withdrawalItme)
+        return res
+          .status(400)
+          .json({ msg: "Item not found, please refresh your page!" });
+
+      if (
+        withdrawalItme.status === "New" ||
+        withdrawalItme.status === "unapproved"
+      ) {
+        const pathToFile =
+          "./client/public/" + withdrawalItme.returnCertificate;
+        fs.unlink(pathToFile, async (err) => {
+          // if (err) {
+          //   return res.status(400).json({
+          //     msg: "Erorr in deleting of the pdf file!",
+          //   });
+          //   // throw err;
+          // } else {
+          await MachinePickups.findOneAndDelete(req.params.id);
+          return res.json({ msg: "Withdrawal item deleted successfuly!" });
+          // }
+        });
+      } else {
+        return res
+          .status(400)
+          .json({ msg: "You can't delete this item, it's already approved!" });
+      }
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
+  eidtMachine_withdrawal: async (req, res) => {
+    try {
+      var withdrawalDetail = ({
+        branchId,
+        salesId,
+        businessId,
+        machineId,
+        memoryKey,
+        drawer,
+        paper,
+        terminal,
+        terminalAdapte,
+        machineMaterial,
+        SBookTerminal,
+        SbookMachine,
+        paperRoller,
+        paperCover,
+        machineAdapter,
+        FDForm,
+        sealNumber,
+        MRCNumber,
+        category,
+        subCategory,
+        returnReason,
+        returnCertificate,
+        pickedupBy,
+      } = req.body);
+
+      const withdrawalItme = await MachinePickups.findById(req.params.id);
+      if (!withdrawalItme)
+        return res.status(400).json({ msg: "Withdrawal item not found!" });
+      if (req.file) {
+        const oldFilePath =
+          "./client/public/" + withdrawalItme.returnCertificate;
+        fs.unlink(oldFilePath, async (err) => {
+          // if (err) {
+          //   throw err;
+          // } else {
+          withdrawalDetail.returnCertificate = `/uploads/${req.file.filename}`;
+          await MachinePickups.findOneAndUpdate(
+            { _id: req.params.id },
+            withdrawalDetail
+          );
+          return res.json({
+            msg: "Withdrawal detail eidited successfuly, With the certificate!",
+          });
+          // }
+        });
+      } else {
+        await MachinePickups.findOneAndUpdate(
+          { _id: req.params.id },
+          withdrawalDetail
+        );
+        return res.json({
+          msg: "Withdrawal detail eidited successfuly, witout the certificate!",
+        });
+      }
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }

@@ -3,6 +3,8 @@ import axios from "axios";
 import { GlobalState } from "../../../GlobalState";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+
+import PdfViewer from "../../Utils/PdfViewer/PdfViewer";
 import {
   CForm,
   CButton,
@@ -12,12 +14,14 @@ import {
   CRow,
   CCol,
   CSelect,
-  CFormGroup,
   CInput,
-  CLink,
-  CTooltip,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
 } from "@coreui/react";
-function MachineReturnigPickup({ user, salesDetail, pickupType, pickupId }) {
+function MachineReturnigPickup({ user, salesDetail, pickupId }) {
   const pickupDetail = {
     branchId: user.branch,
     salesId: salesDetail.saleId,
@@ -43,21 +47,15 @@ function MachineReturnigPickup({ user, salesDetail, pickupType, pickupId }) {
     returnCertificate: "",
     pickedupBy: user._id,
   };
-  const InfoChangeItemFields = {
-    description: "",
-    partNo: "",
-    price: 1,
-    quantity: 1,
-    unitPrice: 0.0,
-  };
 
   const state = useContext(GlobalState);
   const [maintenances] = state.MachinePickUpAPI.machinePickups;
   const [onEdit, setOnEdit] = useState(false);
   const [pickup, setPickup] = useState(pickupDetail);
-  const [infoChangeItem, setInfoChangeItem] = useState(InfoChangeItemFields);
   const [callbackMachinePickup, setCallbackMachinePickup] =
     state.MachinePickUpAPI.callback;
+
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (pickupId != "undefined") {
@@ -84,19 +82,9 @@ function MachineReturnigPickup({ user, salesDetail, pickupType, pickupId }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPickup({ ...pickup, [name]: value });
-    // console.log(pickup);
   };
-  const handleInfoChangeItem = (e) => {
-    const { name, value } = e.target;
-    setInfoChangeItem({ ...infoChangeItem, [name]: value });
-    // console.log(infoChangeItem);
-  };
-  const pushInfoChangeitem = () => {
-    pickup.infoChange.unshift(infoChangeItem);
-    // pickup.infoChange.push(infoChangeItem);
-    setInfoChangeItem(pickup);
-    setInfoChangeItem(InfoChangeItemFields);
-    // console.log(pickup);
+  const handleFileInputChange = (e) => {
+    setPickup({ ...pickup, returnCertificate: e.target.files[0] });
   };
   // console.log(pickup)
   const sweetAlert = (type, text) => {
@@ -113,15 +101,41 @@ function MachineReturnigPickup({ user, salesDetail, pickupType, pickupId }) {
 
   const onSubmitSavePickupDetail = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("branchId", pickup.branchId);
+    formData.append("salesId", pickup.salesId);
+    formData.append("businessId", pickup.businessId);
+    formData.append("machineId", pickup.machineId);
+    formData.append("memoryKey", pickup.memoryKey);
+    formData.append("drawer", pickup.drawer);
+    formData.append("paper", pickup.paper);
+    formData.append("terminal", pickup.terminal);
+    formData.append("terminalAdapte", pickup.terminalAdapte);
+    formData.append("machineMaterial", pickup.machineMaterial);
+    formData.append("SBookTerminal", pickup.SBookTerminal);
+    formData.append("SbookMachine", pickup.SbookMachine);
+    formData.append("paperRoller", pickup.paperRoller);
+    formData.append("paperCover", pickup.paperCover);
+    formData.append("machineAdapter", pickup.machineAdapter);
+    formData.append("FDForm", pickup.FDForm);
+    formData.append("sealNumber", pickup.sealNumber);
+    formData.append("MRCNumber", pickup.MRCNumber);
+    formData.append("category", pickup.category);
+    formData.append("subCategory", pickup.subCategory);
+    formData.append("returnReason", pickup.returnReason);
+    formData.append("returnCertificate", pickup.returnCertificate);
+    formData.append("pickedupBy", pickup.pickedupBy);
     try {
       if (onEdit) {
-        const res = await axios.put(`/pickup/edit/${pickupId}`, { ...pickup });
-        sweetAlert("success", res.data.msg);
+        const res = await axios.put(
+          `/pickup/edit_machine_withdrawal/${pickupId}`,
+          formData
+        );
         setCallbackMachinePickup(!callbackMachinePickup);
+        sweetAlert("success", res.data.msg);
       } else {
-        const res = await axios.post("/pickup/machine", {
-          ...pickup,
-        });
+        const res = await axios.post("/pickup/machine_withrawal", formData);
         setCallbackMachinePickup(!callbackMachinePickup);
         sweetAlert("success", res.data.msg);
       }
@@ -133,34 +147,17 @@ function MachineReturnigPickup({ user, salesDetail, pickupType, pickupId }) {
   const cleaeAllTheDetail = (e) => {
     e.preventDefault();
     setPickup(pickupDetail);
-    setInfoChangeItem(InfoChangeItemFields);
-  };
-  const removeInfoChangeItem = (index) => {
-    pickup.infoChange.splice(index, 1);
-    setInfoChangeItem(pickup);
-    setInfoChangeItem(InfoChangeItemFields);
-    console.log(pickup);
-  };
-  const findTotalPrice = (infoChange) => {
-    var total = 0.0;
-    infoChange.forEach((item) => {
-      const price = item.price * item.quantity;
-      total = total + price;
-    });
-    return total;
-  };
-  const findVAT = (infoChange) => {
-    return (findTotalPrice(infoChange) * 1.5) / 100;
-  };
-  const findGTotal = (infoChange) => {
-    return (findVAT(infoChange) + findTotalPrice(infoChange) + 0.0).toFixed(1);
   };
   return (
     <div
       className="rounded "
       style={{ minWidth: "900px", border: "solid 0px #D8DBE0" }}
     >
-      <CForm onSubmit={onSubmitSavePickupDetail}>
+      <CForm
+        onSubmit={onSubmitSavePickupDetail}
+        action="POST"
+        encType="multipart/form-data"
+      >
         <CCard className="w-100 border-0">
           <CCardBody>
             <CRow className="mt-3 p-4">
@@ -580,21 +577,32 @@ function MachineReturnigPickup({ user, salesDetail, pickupType, pickupId }) {
                       <CCol className="col-2">
                         <h6>Upload withdrawal cetificate </h6>
                       </CCol>
-                      <CCol className="col-10">
-                        <input
-                          className="w-100 form-control"
+                      <CCol className="col-10 input-group mb-3">
+                        {/* <div className="input-group mb-3"> */}
+                        <CInput
+                          className=" form-control"
                           style={{
                             border: "0px",
                             borderBottom: "solid 1px #D8DBE0",
                           }}
-                          type="file"
                           id="returnCertificate"
+                          type="file"
+                          accept=".pdf, .docx"
                           name="returnCertificate"
-                          value={pickup.returnCertificate}
-                          onChange={handleInputChange}
-                          rows="1"
-                          required
+                          onChange={handleFileInputChange}
                         />
+                        <div className="input-group-append">
+                          <CButton
+                            color="dark"
+                            className="d-print-none input-group-text"
+                            onClick={() => {
+                              setShowModal(!showModal);
+                            }}
+                          >
+                            Preview
+                          </CButton>
+                        </div>
+                        {/* </div> */}
                       </CCol>
                     </CRow>
                   </CCol>
@@ -678,6 +686,27 @@ function MachineReturnigPickup({ user, salesDetail, pickupType, pickupId }) {
           </div>
         </div>
       </CForm>
+      <CModal
+        size="lg"
+        show={showModal}
+        onClose={() => setShowModal(!showModal)}
+      >
+        <CModalHeader closeButton>
+          <CModalTitle>Withdrawal certificate preview</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <PdfViewer thePdfFile={pickup.returnCertificate} />
+        </CModalBody>
+        <CModalFooter>
+          <CButton
+            size="sm"
+            color="danger"
+            onClick={() => setShowModal(!showModal)}
+          >
+            <CIcon name="cil-x" /> Close
+          </CButton>
+        </CModalFooter>
+      </CModal>
     </div>
   );
 }

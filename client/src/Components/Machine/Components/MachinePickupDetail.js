@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { GlobalState } from "../../../GlobalState";
 import BadRouting from "../../Utils/routing/BadRouting";
+
+import PdfViewer from "../../Utils/PdfViewer/PdfViewer";
 import {
   CButton,
   CCard,
@@ -9,13 +11,12 @@ import {
   CImg,
   CRow,
   CCol,
-  CLabel,
-  CLink,
-  CForm,
-  CFormGroup,
   CSelect,
-  CTooltip,
-  CInput,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
@@ -27,6 +28,8 @@ function MachinePickupDetail() {
   const [machinePikups] = state.MachinePickUpAPI.machinePickups;
   const [pickup, setPickup] = useState([]);
 
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     machinePikups.forEach((pickupItem) => {
       if (pickupItem._id === params.id) {
@@ -35,10 +38,6 @@ function MachinePickupDetail() {
     });
   }, [params.id, machinePikups]);
 
-  // console.log("Outside useEffect :" + JSON.stringify(pickup));
-  // console.log("Outside length :" + pickup.lenght);
-
-  // console.log("pickup id :" + params.id);
   const handleCheckboxValue = (value) => {
     if (value === true) {
       return "YES";
@@ -555,63 +554,8 @@ function MachinePickupDetail() {
                 </CCol>
               )}
 
-              {pickup[0].category === "temporarly_store" && (
-                <CCol className="col-12 mt-4">
-                  <CRow className="border rounded mx-1 py-4">
-                    <CCol className="col-6">
-                      <CRow className="mb-2">
-                        <CCol className="col-4">
-                          <h6>Time duration of temporarily store </h6>
-                        </CCol>
-                        <CCol className="col-8">
-                          <input
-                            className="w-100 form-control"
-                            id="waitingDuration"
-                            name="waitingDuration"
-                            value={pickup[0].waitingDuration}
-                            type="date"
-                            required
-                            disabled
-                            style={{
-                              border: "0px",
-                              borderBottom: "solid 1px #D8DBE0",
-                              background: "white",
-                              resize: "none",
-                            }}
-                          />
-                        </CCol>
-                      </CRow>
-                    </CCol>
-                    <CCol className="col-6">
-                      <CRow className="mb-2">
-                        <CCol className="col-4">
-                          <h6>Temporarly store cost per month(ETB) </h6>
-                        </CCol>
-                        <CCol className="col-8">
-                          <input
-                            className="w-100 form-control"
-                            type="number"
-                            id="waitingCostPerMonth"
-                            name="waitingCostPerMonth"
-                            value={pickup[0].waitingCostPerMonth}
-                            rows="1"
-                            required
-                            disabled
-                            style={{
-                              border: "0px",
-                              borderBottom: "solid 1px #D8DBE0",
-                              background: "white",
-                              resize: "none",
-                            }}
-                          />
-                        </CCol>
-                      </CRow>
-                    </CCol>
-                  </CRow>
-                </CCol>
-              )}
-
-              {pickup[0].category === "withdrawal" && (
+              {(pickup[0].category === "withdrawal" ||
+                pickup[0].category === "temporarly_store") && (
                 <CCol className="col-12 mt-4">
                   <CRow className="border rounded mx-1 py-4">
                     <CCol>
@@ -641,9 +585,10 @@ function MachinePickupDetail() {
                         <CCol className="col-2">
                           <h6>Withdrawal reason cetificate </h6>
                         </CCol>
-                        <CCol className="col-10">
+                        <CCol className="col-10 input-group mb-3">
+                          {/* <div className="input-group mb-3"> */}
                           <input
-                            className="w-100 form-control"
+                            className=" form-control"
                             id="returnCertificate"
                             name="returnCertificate"
                             value={pickup[0].status}
@@ -657,6 +602,18 @@ function MachinePickupDetail() {
                               resize: "none",
                             }}
                           />
+                          <div className="input-group-append">
+                            <CButton
+                              color="dark"
+                              className="d-print-none input-group-text"
+                              onClick={() => {
+                                setShowModal(!showModal);
+                              }}
+                            >
+                              Preview file
+                            </CButton>
+                          </div>
+                          {/* </div> */}
                         </CCol>
                       </CRow>
                     </CCol>
@@ -773,10 +730,29 @@ function MachinePickupDetail() {
               </CCol>
             </CRow>
           </CCardBody>
-          <CButton color="success" className="d-print-none">
-            {" "}
-            d-print-none{" "}
-          </CButton>
+
+          <CModal
+            size="lg"
+            show={showModal}
+            onClose={() => setShowModal(!showModal)}
+            className="d-print-none"
+          >
+            <CModalHeader closeButton>
+              <CModalTitle>Withdrawal certificate preview</CModalTitle>
+            </CModalHeader>
+            <CModalBody>
+              <PdfViewer thePdfFile={pickup[0].returnCertificate} />
+            </CModalBody>
+            <CModalFooter>
+              <CButton
+                size="sm"
+                color="danger"
+                onClick={() => setShowModal(!showModal)}
+              >
+                <CIcon name="cil-x" /> Close
+              </CButton>
+            </CModalFooter>
+          </CModal>
         </CCard>
       ) : (
         <div className="mt-3">
