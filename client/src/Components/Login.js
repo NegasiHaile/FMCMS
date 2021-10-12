@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -74,7 +73,7 @@ const Login = () => {
                 </CCol>
                 <CCol md="11" className="mt-2">
                   <h5 className="text-center text-muted">WELCOME</h5>
-                  <p class="text-center  text-muted">
+                  <p className="text-center  text-muted">
                     Jupiter-Trading-FMCMS Sign in!
                   </p>
                 </CCol>
@@ -131,7 +130,7 @@ const Login = () => {
                         </CButton>
                       </CCol>
                       <CCol className="col-12 mt-3">
-                        <p class="mb-0 text-center">
+                        <p className="mb-0 text-center">
                           <br />
                           <small>
                             &copy; Copyright 2021{" "}

@@ -41,8 +41,6 @@ function MachineReturnigPickup({ user, salesDetail, pickupType, pickupId }) {
     subCategory: "",
     returnReason: "",
     returnCertificate: "",
-    waitingDuration: "",
-    waitingCostPerMonth: "",
     pickedupBy: user._id,
   };
   const InfoChangeItemFields = {
@@ -542,7 +540,7 @@ function MachineReturnigPickup({ user, salesDetail, pickupType, pickupId }) {
                           }}
                         >
                           <option value="">
-                            Select machine Withdrawal reason...
+                            Select machine withdrawal reason...
                           </option>
                           <option value="withdrawal">Withdrawal Machine</option>
                           <option value="temporarly_store">
@@ -554,108 +552,57 @@ function MachineReturnigPickup({ user, salesDetail, pickupType, pickupId }) {
                   </CCol>
                 </CRow>
               </CCol>
-              {pickup.category === "withdrawal" && (
-                <CCol className="col-12  my-2">
-                  <CRow className="border rounded mx-1 py-4">
-                    <CCol>
-                      <CRow className="mb-2">
-                        <CCol className="col-2">
-                          <h6>Machine Withdrawal reason </h6>
-                        </CCol>
-                        <CCol className="col-10">
-                          <textarea
-                            className="w-100 form-control"
-                            style={{
-                              border: "0px",
-                              borderBottom: "solid 1px #D8DBE0",
-                            }}
-                            id="returnReason"
-                            name="returnReason"
-                            value={pickup.returnReason}
-                            onChange={handleInputChange}
-                            rows="1"
-                            required
-                          />
-                        </CCol>
-                      </CRow>
-                      <CRow className="mb-2">
-                        <CCol className="col-2">
-                          <h6>Upload withdrawal cetificate </h6>
-                        </CCol>
-                        <CCol className="col-10">
-                          <input
-                            className="w-100 form-control"
-                            style={{
-                              border: "0px",
-                              borderBottom: "solid 1px #D8DBE0",
-                            }}
-                            type="file"
-                            id="returnCertificate"
-                            name="returnCertificate"
-                            value={pickup.returnCertificate}
-                            onChange={handleInputChange}
-                            rows="1"
-                            required
-                          />
-                        </CCol>
-                      </CRow>
-                    </CCol>
-                  </CRow>
-                </CCol>
-              )}
-              {pickup.category === "temporarly_store" && (
-                <CCol className="col-12  my-2">
-                  <CRow className="border rounded mx-1 py-4">
-                    <CCol className="col-6">
-                      <CRow className="mb-2">
-                        <CCol className="col-4">
-                          <h6>Time duration of temporarily store </h6>
-                        </CCol>
-                        <CCol className="col-8">
-                          <input
-                            className="w-100 form-control"
-                            style={{
-                              border: "0px",
-                              borderBottom: "solid 1px #D8DBE0",
-                            }}
-                            id="waitingDuration"
-                            name="waitingDuration"
-                            value={pickup.waitingDuration}
-                            onChange={handleInputChange}
-                            type="date"
-                            required
-                          />
-                        </CCol>
-                      </CRow>
-                    </CCol>
-                    <CCol className="col-6">
-                      <CRow className="mb-2">
-                        <CCol className="col-4">
-                          <h6>Temporarly store cost per month(ETB) </h6>
-                        </CCol>
-                        <CCol className="col-8">
-                          <input
-                            className="w-100 form-control"
-                            style={{
-                              border: "0px",
-                              borderBottom: "solid 1px #D8DBE0",
-                            }}
-                            type="number"
-                            id="waitingCostPerMonth"
-                            name="waitingCostPerMonth"
-                            value={pickup.waitingCostPerMonth}
-                            onChange={handleInputChange}
-                            rows="1"
-                            required
-                          />
-                        </CCol>
-                      </CRow>
-                    </CCol>
-                  </CRow>
-                </CCol>
-              )}
+
+              <CCol className="col-12  my-2">
+                <CRow className="border rounded mx-1 py-4">
+                  <CCol>
+                    <CRow className="mb-2">
+                      <CCol className="col-2">
+                        <h6>Machine Withdrawal reason </h6>
+                      </CCol>
+                      <CCol className="col-10">
+                        <textarea
+                          className="w-100 form-control"
+                          style={{
+                            border: "0px",
+                            borderBottom: "solid 1px #D8DBE0",
+                          }}
+                          id="returnReason"
+                          name="returnReason"
+                          value={pickup.returnReason}
+                          onChange={handleInputChange}
+                          rows="1"
+                          required
+                        />
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2">
+                      <CCol className="col-2">
+                        <h6>Upload withdrawal cetificate </h6>
+                      </CCol>
+                      <CCol className="col-10">
+                        <input
+                          className="w-100 form-control"
+                          style={{
+                            border: "0px",
+                            borderBottom: "solid 1px #D8DBE0",
+                          }}
+                          type="file"
+                          id="returnCertificate"
+                          name="returnCertificate"
+                          value={pickup.returnCertificate}
+                          onChange={handleInputChange}
+                          rows="1"
+                          required
+                        />
+                      </CCol>
+                    </CRow>
+                  </CCol>
+                </CRow>
+              </CCol>
+
               <CCol className="col-12 my-2">
-                <h4 className="text-decoration-underline">receiving Summery</h4>
+                <h4 className="text-decoration-underline">Receiving Summery</h4>
                 <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
                   The machine with <b> 1000949382773</b> serial number is
                   assigned to the company
