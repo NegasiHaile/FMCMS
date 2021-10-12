@@ -1,17 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  CForm,
-  CRow,
-  CFormGroup,
-  CLabel,
-  CButton,
-  CCol,
-  CCard,
-  CCardBody,
-  CTabs,
-  CCardHeader,
-  CImg,
-} from "@coreui/react";
+import { CRow, CCol } from "@coreui/react";
 import { Viewer } from "@react-pdf-viewer/core"; // install this library
 // Plugins
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout"; // install this library
