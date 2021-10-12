@@ -295,15 +295,6 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                       </CCol>
                       <CCol className="col-3 text-center ">
                         <input
-                          // style={{
-                          //   position: "absolute",
-                          //   top: 0,
-                          //   left: 0,
-                          //   height: "30px",
-                          //   width: "100px",
-                          //   backgroundColor: "#eee",
-                          //   paddingX: "5px",
-                          // }}
                           id="memoryKey"
                           name="memoryKey"
                           value={pickup.memoryKey}
@@ -311,7 +302,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.memoryKey}
                           onChange={handleCheckboxChange}
-                          // disabled
+                          className="jptr_checkBox"
                         />
                       </CCol>
                     </CRow>
@@ -328,6 +319,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.drawer}
                           onChange={handleCheckboxChange}
+                          className="jptr_checkBox"
                         />
                       </CCol>
                     </CRow>
@@ -344,6 +336,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.paper}
                           onChange={handleCheckboxChange}
+                          className="jptr_checkBox"
                         />
                       </CCol>
                     </CRow>
@@ -360,6 +353,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.terminal}
                           onChange={handleCheckboxChange}
+                          className="jptr_checkBox"
                         />
                       </CCol>
                     </CRow>
@@ -378,6 +372,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.terminalAdapte}
                           onChange={handleCheckboxChange}
+                          className="jptr_checkBox"
                         />
                       </CCol>
                     </CRow>
@@ -394,6 +389,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.machineMaterial}
                           onChange={handleCheckboxChange}
+                          className="jptr_checkBox"
                         />
                       </CCol>
                     </CRow>
@@ -410,6 +406,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.SBookTerminal}
                           onChange={handleCheckboxChange}
+                          className="jptr_checkBox"
                         />
                       </CCol>
                     </CRow>
@@ -426,6 +423,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.SbookMachine}
                           onChange={handleCheckboxChange}
+                          className="jptr_checkBox"
                         />
                       </CCol>
                     </CRow>
@@ -444,6 +442,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.paperRoller}
                           onChange={handleCheckboxChange}
+                          className="jptr_checkBox"
                         />
                       </CCol>
                     </CRow>
@@ -460,6 +459,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.paperCover}
                           onChange={handleCheckboxChange}
+                          className="jptr_checkBox"
                         />
                       </CCol>
                     </CRow>
@@ -476,6 +476,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.machineAdapter}
                           onChange={handleCheckboxChange}
+                          className="jptr_checkBox"
                         />
                       </CCol>
                     </CRow>
@@ -492,6 +493,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.FDForm}
                           onChange={handleCheckboxChange}
+                          className="jptr_checkBox"
                         />
                       </CCol>
                     </CRow>
@@ -509,6 +511,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.sealNumber}
                           onChange={handleCheckboxChange}
+                          className="jptr_checkBox"
                         />
                       </CCol>
                       <CCol className="col-3 d-flex justify-content-between">
@@ -521,6 +524,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           type="checkbox"
                           checked={pickup.MRCNumber}
                           onChange={handleCheckboxChange}
+                          className="jptr_checkBox"
                         />
                       </CCol>
                       <CCol className="d-flex justify-content-between">
@@ -834,7 +838,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                 </CCol>
               )}
               <CCol className="col-12 my-2">
-                <h4 className="text-decoration-underline">receiving Summery</h4>
+                <h4 className="text-decoration-underline">
+                  {" "}
+                  Receiving Summery
+                </h4>
                 <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
                   The machine with <b> 1000949382773</b> serial number is
                   assigned to the company
