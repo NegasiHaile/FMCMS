@@ -23,6 +23,7 @@ app.use("/pricing", require("./routes/pricingRouter"));
 
 // Connect to mongodb
 const URI = process.env.MONGODB_URL;
+// const URI = process.env.LOCAL_MONGODB_URL;
 mongoose.connect(
   URI,
   {

@@ -9,25 +9,35 @@ function UserAPI(token) {
   useEffect(() => {
     if (token) {
       const getUser = async () => {
-        // try {
-        const res = await axios.get("/user/profile", {
-          headers: { Authorization: token },
-        });
-
-        setUser(res.data);
-        setIsLogged(true);
-
-        // } catch (error) {
-        //   Swal.fire({
-        //     position: "center",
-        //     background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
-        //     icon: "error",
-        //     text: "Check your connection OR refresh your page!", //error.response.data.msg,
-        //     confirmButtonColor: "#1E263C",
-        //     showConfirmButton: false,
-        //     // timer: 1500,
-        //   });
-        // }
+        try {
+          const res = await axios.get("/user/profile", {
+            headers: { Authorization: token },
+          });
+          if (res.data) {
+            setUser(res.data);
+            setIsLogged(true);
+          } else {
+            Swal.fire({
+              position: "center",
+              background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+              icon: "error",
+              text: "Your connection seems lost!", //error.response.data.msg,
+              confirmButtonColor: "#1E263C",
+              showConfirmButton: false,
+              // timer: 1500,
+            });
+          }
+        } catch (error) {
+          Swal.fire({
+            position: "center",
+            background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+            icon: "error",
+            text: error.response.data.msg,
+            confirmButtonColor: "#1E263C",
+            showConfirmButton: false,
+            // timer: 1500,
+          });
+        }
       };
 
       getUser();

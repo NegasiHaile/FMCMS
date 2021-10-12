@@ -5,6 +5,7 @@ const PrivateFooter = () => {
   return (
     <CFooter fixed={false}>
       <div>
+        <span className="ml-1">&copy; 2021.</span>
         <a
           href="http://jupiter-tradingeth.com/"
           target="_blank"
@@ -12,7 +13,7 @@ const PrivateFooter = () => {
         >
           Jupiter-Trading
         </a>
-        <span className="ml-1">&copy; 2021 FMCMS.</span>
+        <span className="ml-1"> FMCMS.</span>
       </div>
       <div className="mfs-auto">
         <span className="mr-1">Powered by</span>
