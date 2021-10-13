@@ -10,7 +10,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
-const TheHeaderDropdownNotif = () => {
+const TheHeaderDropdownMaint = () => {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [notifications] = state.NotificationAPI.notifications;
@@ -67,4 +67,4 @@ const TheHeaderDropdownNotif = () => {
   );
 };
 
-export default TheHeaderDropdownNotif;
+export default TheHeaderDropdownMaint;

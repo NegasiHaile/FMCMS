@@ -21,7 +21,7 @@ import routes from "./routes";
 import TheHeaderDropdownSales from "../../Components/HeaderDropDowns/TheHeaderDropdownSales";
 import TheHeaderDropdown from "../../Components/HeaderDropDowns/TheHeaderDropdown";
 import TheHeaderDropdownMssg from "../../Components/HeaderDropDowns/TheHeaderDropdownMssg";
-import TheHeaderDropdownNotif from "../../Components/HeaderDropDowns/TheHeaderDropdownNotif";
+import TheHeaderDropdownMaint from "../../Components/HeaderDropDowns/TheHeaderDropdownMaint";
 
 const SuperAdminHeader = () => {
   const dispatch = useDispatch();
@@ -71,7 +71,7 @@ const SuperAdminHeader = () => {
 
       <CHeaderNav className="px-3">
         <TheHeaderDropdownSales />
-        <TheHeaderDropdownNotif />
+        <TheHeaderDropdownMaint />
         <TheHeaderDropdownMssg />
         <TheHeaderDropdown />
       </CHeaderNav>

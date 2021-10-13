@@ -20,7 +20,7 @@ import CIcon from "@coreui/icons-react";
 import routes from "./routes";
 
 import TheHeaderDropdown from "../../Components/HeaderDropDowns/TheHeaderDropdown";
-import TheHeaderDropdownNotif from "../../Components/HeaderDropDowns/TheHeaderDropdownNotif";
+import TheHeaderDropdownMaint from "../../Components/HeaderDropDowns/TheHeaderDropdownMaint";
 
 const BranchAdminHeader = () => {
   const state = useContext(GlobalState);
@@ -69,7 +69,7 @@ const BranchAdminHeader = () => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <TheHeaderDropdownNotif />
+        <TheHeaderDropdownMaint />
         <TheHeaderDropdown />
       </CHeaderNav>
 

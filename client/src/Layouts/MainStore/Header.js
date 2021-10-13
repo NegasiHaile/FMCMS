@@ -20,7 +20,7 @@ import routes from "./routes";
 
 import TheHeaderDropdown from "../../Components/HeaderDropDowns/TheHeaderDropdown";
 import TheHeaderDropdownMssg from "../../Components/HeaderDropDowns/TheHeaderDropdownMssg";
-import TheHeaderDropdownNotif from "../../Components/HeaderDropDowns/TheHeaderDropdownNotif";
+import TheHeaderDropdownMaint from "../../Components/HeaderDropDowns/TheHeaderDropdownMaint";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -69,7 +69,7 @@ const Header = () => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <TheHeaderDropdownNotif />
+        <TheHeaderDropdownMaint />
         <TheHeaderDropdownMssg />
         <TheHeaderDropdown />
       </CHeaderNav>
