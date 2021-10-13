@@ -109,7 +109,13 @@ function TheHeaderDropdownSales() {
             {salesAlert.map((sale) => (
               <CDropdownItem
                 key={sale.saleId}
-                to={`/sales/detail/${sale.saleId}`}
+                to={
+                  sale.status === "fiscalization" ||
+                  sale.status === "controlling" ||
+                  sale.status === "delivering"
+                    ? `/fiscalization/detail/${sale.saleId}`
+                    : `/sales/detail/${sale.saleId}`
+                }
               >
                 <div className="message">
                   <div className="pt-3 mr-3 float-left">
