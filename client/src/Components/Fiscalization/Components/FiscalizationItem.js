@@ -203,7 +203,7 @@ function FiscalizationItem() {
                 </CRow>
               </CCol>
 
-              {user.userRole === "machine-controller" &&
+              {user.userRole === "customer-service" &&
                 salesDetail[0].fiscalization === "done" && (
                   <CCol className="col-12 mt-4">
                     <CRow className=" border rounded mx-1 py-4">

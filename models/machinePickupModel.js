@@ -98,6 +98,9 @@ const machinePickupModel = new mongoose.Schema(
     pickedupBy: {
       type: String,
     },
+    technician: {
+      type: String,
+    },
     status: {
       type: String,
       default: "New",

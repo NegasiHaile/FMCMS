@@ -6,8 +6,6 @@ import {
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
-  CProgress,
-  CLink,
   CImg,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
@@ -66,14 +64,6 @@ function TheHeaderDropdownSales() {
         )
       );
       setAlertLable(" devlivering ");
-    } else if (
-      user.userRole === "super-admin" ||
-      user.userRole === "main-store"
-    ) {
-      setSalesAlert(
-        Sales.filter((filteredSale) => filteredSale.status !== "completed")
-      );
-      setAlertLable(" sales ");
     } else if (user.userRole === "branch-admin") {
       setSalesAlert(
         Sales.filter(
@@ -81,6 +71,14 @@ function TheHeaderDropdownSales() {
             filteredSale.status !== "completed" &&
             filteredSale.branchId == user.branch
         )
+      );
+      setAlertLable(" sales ");
+    } else if (
+      user.userRole === "super-admin" ||
+      user.userRole === "main-store"
+    ) {
+      setSalesAlert(
+        Sales.filter((filteredSale) => filteredSale.status !== "completed")
       );
       setAlertLable(" sales ");
     }
@@ -109,13 +107,14 @@ function TheHeaderDropdownSales() {
             {salesAlert.map((sale) => (
               <CDropdownItem
                 key={sale.saleId}
-                to={
-                  sale.status === "fiscalization" ||
-                  sale.status === "controlling" ||
-                  sale.status === "delivering"
-                    ? `/fiscalization/detail/${sale.saleId}`
-                    : `/sales/detail/${sale.saleId}`
-                }
+                // to={
+                //   sale.status === "fiscalization" ||
+                //   sale.status === "controlling" ||
+                //   sale.status === "delivering"
+                //     ? `/fiscalization/detail/${sale.saleId}`
+                //     : `/sales/detail/${sale.saleId}`
+                // }
+                to={`/sales/detail/${sale.saleId}`}
               >
                 <div className="message">
                   <div className="pt-3 mr-3 float-left">
@@ -123,7 +122,7 @@ function TheHeaderDropdownSales() {
                       <CImg
                         src={"/Others/bsnsIcon1.png"}
                         className="c-avatar-img"
-                        alt="admin@bootstrapmaster.com"
+                        alt={sale.machineSerialNumber}
                       />
                     </div>
                   </div>

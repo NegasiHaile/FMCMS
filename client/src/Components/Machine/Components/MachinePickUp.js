@@ -900,19 +900,29 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
 
         <div className="d-flex justify-content-end">
           <div>
-            <CButton type="submit" className="my-1 mr-1" size="sm" color="dark">
-              <CIcon name="cil-save"></CIcon> Save
-              {onEdit ? " all changes" : " this receiving detail"}!
-            </CButton>
-            {!onEdit && (
-              <CButton
-                className="my-1"
-                size="sm"
-                color="danger"
-                onClick={cleaeAllTheDetail}
-              >
-                <CIcon name="cil-x"></CIcon> Clear this receiving detail!
-              </CButton>
+            {user.userRole === "technician" && (
+              <>
+                {" "}
+                <CButton
+                  type="submit"
+                  className="my-1 mr-1"
+                  size="sm"
+                  color="dark"
+                >
+                  <CIcon name="cil-save"></CIcon> Save
+                  {onEdit ? " all changes" : " this receiving detail"}!
+                </CButton>
+                {!onEdit && (
+                  <CButton
+                    className="my-1"
+                    size="sm"
+                    color="danger"
+                    onClick={cleaeAllTheDetail}
+                  >
+                    <CIcon name="cil-x"></CIcon> Clear this receiving detail!
+                  </CButton>
+                )}
+              </>
             )}
           </div>
         </div>

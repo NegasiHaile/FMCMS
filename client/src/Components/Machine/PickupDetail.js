@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
 
-import MachinePickupDetail from "./Components/MachinePickupDetail";
+import {
+  MachinePickupDetail,
+  MachinePickupOperations,
+} from "./Components/MachinePickupDetail";
 import {
   CButton,
   CCard,
@@ -47,6 +50,7 @@ const PickupDetail = () => {
       </div>
       <div className="d-flex justify-content-end">
         <div>
+          <MachinePickupOperations />
           <CButton
             className="my-1"
             size="sm"

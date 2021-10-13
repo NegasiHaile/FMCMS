@@ -133,6 +133,7 @@ const machinePickupCntrl = {
           waitingDuration: pickup.waitingDuration,
           waitingCostPerMonth: pickup.waitingCostPerMonth,
           pickedupBy: pickup.pickedupBy,
+          technician: pickup.technician,
         });
       });
       // console.log("Outer " + JSON.stringify(data));

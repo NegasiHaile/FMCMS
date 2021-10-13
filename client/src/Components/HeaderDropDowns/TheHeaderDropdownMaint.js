@@ -6,27 +6,81 @@ import {
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
-  CProgress,
+  CImg,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
 const TheHeaderDropdownMaint = () => {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
-  const [notifications] = state.NotificationAPI.notifications;
-  const [myNotification, setMyNotification] = useState("");
+  const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
+  const [pickupMachine, setPickupMachine] = useState("");
 
   useEffect(() => {
-    var unSeenNotifications = notifications.filter(
-      (filteredNotification) =>
-        filteredNotification.receiverId === user._id &&
-        filteredNotification.status === 0
-    );
-    setMyNotification(unSeenNotifications);
-  }, [notifications, user]);
+    if (user.userRole === "machine-controller") {
+      setPickupMachine(
+        pickupMachines.filter(
+          (pickup) =>
+            (pickup.status === "New" ||
+              pickup.status === "controlling" ||
+              pickup.status === "maintained") &&
+            pickup.branchId == user.branch
+        )
+      );
+    } else if (user.userRole === "branch-store") {
+      setPickupMachine(
+        pickupMachines.filter(
+          (pickup) =>
+            pickup.status === "storing" && pickup.branchId == user.branch
+        )
+      );
+    } else if (user.userRole === "customer-service") {
+      setPickupMachine(
+        pickupMachines.filter(
+          (pickup) =>
+            (((pickup.status === "New" || pickup.status === "controlling") &&
+              (pickup.category === "annual" ||
+                pickup.category === "incident" ||
+                pickup.category === "information_change")) ||
+              pickup.status === "delivering") &&
+            pickup.branchId == user.branch
+        )
+      );
+    } else if (user.userRole === "technician") {
+      setPickupMachine(
+        pickupMachines.filter(
+          (pickup) =>
+            pickup.status === "maintaining" &&
+            pickup.technician === user._id &&
+            pickup.branchId == user.branch
+        )
+      );
+    } else if (user.userRole === "operational-manager") {
+      setPickupMachine(
+        pickupMachines.filter(
+          (pickup) =>
+            pickup.status !== "completed" && pickup.branchId == user.branch
+        )
+      );
+    } else if (user.userRole === "branch-admin") {
+      setPickupMachine(
+        pickupMachines.filter(
+          (pickup) =>
+            pickup.status !== "completed" && pickup.branchId == user.branch
+        )
+      );
+    } else if (
+      user.userRole === "super-admin" ||
+      user.userRole === "main-store"
+    ) {
+      setPickupMachine(
+        pickupMachines.filter((pickup) => pickup.status !== "completed")
+      );
+    }
+  }, [pickupMachines, user]);
 
-  // console.log(myNotification);
-  const itemsCount = myNotification.length;
+  // console.log(pickupMachine);
+  const itemsCount = pickupMachine.length;
 
   return (
     <CDropdown inNav className="c-header-nav-item mx-2">
@@ -37,32 +91,66 @@ const TheHeaderDropdownMaint = () => {
           {itemsCount}
         </CBadge>
       </CDropdownToggle>
-      {itemsCount !== 0 && (
-        <CDropdownMenu placement="bottom-end" className="pt-0">
-          <CDropdownItem header tag="div" className="text-center" color="light">
-            <strong>You have {itemsCount} notifications</strong>
+      <CDropdownMenu placement="bottom-end" className="pt-0">
+        <CDropdownItem header tag="div" className="text-center" color="light">
+          <strong>You have {itemsCount} machine receiving</strong>
+        </CDropdownItem>
+        {itemsCount !== 0 && (
+          <>
+            {pickupMachine.map((pickup, index) => (
+              <CDropdownItem
+                key={index}
+                to={
+                  (pickup.status === "New" ||
+                    pickup.status === "controlling") &&
+                  user.userRole === "customer-service"
+                    ? `/pickup/edit/${pickup.machineId}/${pickup._id}`
+                    : `/pickup/detail/${pickup._id}`
+                }
+              >
+                <div className="message">
+                  <div className="pt-3 mr-3 float-left">
+                    <div className="c-avatar">
+                      <CImg
+                        src={"/Others/fmimg1.jpg"}
+                        className="c-avatar-img"
+                        alt={pickup.serialNumber}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <small> {pickup.status}</small>
+                    <small className=" float-right mt-1">Just now</small>
+                  </div>
+                  <div
+                    className="text-truncate font-weight-bold"
+                    style={{ maxWidth: "300px" }}
+                  >
+                    <span className="fa fa-exclamation text-danger"></span>{" "}
+                    {pickup.category}, {pickup.serialNumber},{" "}
+                    {pickup.machineBrand}
+                  </div>
+                  <div
+                    className="small text-truncate"
+                    style={{ maxWidth: "400px" }}
+                  >
+                    {pickup.tradeName}, TIN :{pickup.TIN} , VAT: {pickup.VAT},{" "}
+                    {pickup.updatedAt},
+                  </div>
+                </div>
+              </CDropdownItem>
+            ))}
+          </>
+        )}
+        <div className="border-top d-flex justify-content-between">
+          <CDropdownItem to={`/maintenance/list`}>
+            <strong>View all maintenance</strong>
           </CDropdownItem>
-          {myNotification.map((notif) => (
-            <CDropdownItem key={notif._id}>
-              <CIcon name="cil-user-follow" className="mr-2 text-success" />
-              {notif.subject}
-            </CDropdownItem>
-          ))}
-          {/* <CDropdownItem header tag="div" color="light">
-          <strong>Server</strong>
-        </CDropdownItem>
-        <CDropdownItem className="d-block">
-          <div className="text-uppercase mb-1">
-            <small>
-              <b>CPU Usage</b>
-            </small>
-          </div>
-          <CProgress size="xs" color="info" value={25} />
-          <small className="text-muted">348 Processes. 1/4 Cores.</small>
-        </CDropdownItem>
-       */}
-        </CDropdownMenu>
-      )}{" "}
+          <CDropdownItem to={`/machine/return/list`}>
+            <strong>View all withdrawals</strong>
+          </CDropdownItem>
+        </div>
+      </CDropdownMenu>
     </CDropdown>
   );
 };

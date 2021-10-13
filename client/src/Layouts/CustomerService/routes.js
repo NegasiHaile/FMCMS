@@ -46,10 +46,16 @@ const PickupDetail = lazy(() =>
 );
 
 // Importing of maintenance ralted pages
+const MaintenancePickup = lazy(() =>
+  import("../../Components/Maintenance/MaintenancePickup")
+);
 const MaintenanceList = lazy(() =>
   import("../../Components/Maintenance/MaintenanceList")
 );
 // Importing of Machine Returning ralted pages
+const ReturningPickup = lazy(() =>
+  import("../../Components/MachineReturn/ReturningPickup")
+);
 const ReturningList = lazy(() =>
   import("../../Components/Machine/ReturningList/ReturningList")
 );
@@ -146,7 +152,19 @@ const routes = [
     name: "Machine-Returning-List",
     component: ReturningList,
   },
+  {
+    path: "/machine/returning_pickup/edit/:id/:pickupId",
+    exact: true,
+    name: "Machine-Withdrawal-Edit",
+    component: ReturningPickup,
+  },
   // Maintenance
+  {
+    path: "/pickup/edit/:id/:pickupId",
+    exact: true,
+    name: "Pickup-edit",
+    component: MaintenancePickup,
+  },
   {
     path: "/maintenance/list",
     exact: true,
