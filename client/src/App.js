@@ -12,6 +12,9 @@ const loading = (
 // Users
 const ClientLayout = lazy(() => import("./Layouts/Client/Layout"));
 const SlaesLayout = lazy(() => import("./Layouts/Sales/Layout"));
+const CustomerServiceLayout = lazy(() =>
+  import("./Layouts/CustomerService/Layout")
+);
 const TechnicianLayout = lazy(() => import("./Layouts/Technician/Layout"));
 
 const MachineControllerLayout = lazy(() =>
@@ -34,7 +37,6 @@ function App() {
   const state = useContext(GlobalState);
   const [isLogged] = state.UserAPI.isLogged;
   const [user] = state.UserAPI.User;
-  // console.log({ user: user, isLogged: isLogged });
 
   // setTimeout(() => {}, 5000)
 
@@ -53,6 +55,14 @@ function App() {
         path="/"
         name="Sales"
         render={(props) => <SlaesLayout {...props} />}
+      />
+    ); // client Layout
+  } else if (isLogged && user.userRole === "customer-service") {
+    userLayout = (
+      <Route
+        path="/"
+        name="Customer Service"
+        render={(props) => <CustomerServiceLayout {...props} />}
       />
     ); // client Layout
   } else if (isLogged && user.userRole === "technician") {

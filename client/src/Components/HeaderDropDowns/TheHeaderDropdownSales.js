@@ -57,6 +57,15 @@ function TheHeaderDropdownSales() {
         )
       );
       setAlertLable(" controlling ");
+    } else if (user.userRole === "customer-service") {
+      setSalesAlert(
+        Sales.filter(
+          (filteredSale) =>
+            filteredSale.status === "delivering" &&
+            filteredSale.branchId == user.branch
+        )
+      );
+      setAlertLable(" devlivering ");
     } else if (
       user.userRole === "super-admin" ||
       user.userRole === "main-store"

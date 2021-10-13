@@ -256,6 +256,7 @@ const RegisterEmployee = (props) => {
                   >
                     <option value="">Select employe task</option>
                     <option value="sales">sales</option>
+                    <option value="customer-service">Customer Service</option>
                     <option value="technician">Technician</option>
                     <option value="machine-controller">
                       Machine Controller
