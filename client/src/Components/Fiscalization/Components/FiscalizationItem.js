@@ -330,7 +330,28 @@ function FiscalizationOperations() {
       sweetAlert("error", error.response.data.msg);
     }
   };
-
+  const onclickRequestForDelivery = async (saleId) => {
+    try {
+      Swal.fire({
+        title: "",
+        text: "Are you want to request this machine for delovery to customer service?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3C4B64",
+        cancelButtonColor: "#d33",
+        confirmButtonSize: "sm",
+        confirmButtonText: "Yes, request it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const res = await axios.put(`/sales/request_for_delivery/${saleId}`);
+          Swal.fire("Done!", res.data.msg, "success");
+          setCallbackSales(!callbackSales);
+        }
+      });
+    } catch (error) {
+      sweetAlert("error", error.response.data.msg);
+    }
+  };
   const onclickComplateDelivery = async (saleId) => {
     try {
       Swal.fire({
@@ -361,7 +382,7 @@ function FiscalizationOperations() {
         <CButton
           className="mr-2"
           size="sm"
-          color="dark"
+          color="success"
           onClick={() =>
             onSubmitFiscalizationDone(
               salesDetail[0].saleId,
@@ -378,6 +399,24 @@ function FiscalizationOperations() {
         user.userRole === "machine-controller" &&
         salesDetail[0].fiscalization === "done" &&
         salesDetail[0].status === "controlling" && (
+          <CButton
+            className="mr-2"
+            size="sm"
+            color="warning"
+            onClick={() =>
+              onclickRequestForDelivery(
+                salesDetail[0].saleId,
+                salesDetail[0].machineId
+              )
+            }
+          >
+            <CIcon name="cil-memory"></CIcon> Request for delivery
+          </CButton>
+        )}
+      {salesDetail.length > 0 &&
+        user.userRole === "customer-service" &&
+        salesDetail[0].fiscalization === "done" &&
+        salesDetail[0].status === "delivering" && (
           <CButton
             className="mr-2"
             size="sm"

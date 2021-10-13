@@ -26,4 +26,9 @@ router.put(
 
 router.put("/delivery_completing/:salesId", salesCntrl.completingSalesDelivery);
 
+router.put(
+  "/request_for_delivery/:salesId",
+  salesCntrl.requestSalesForDelivery
+);
+
 module.exports = router;
