@@ -21,9 +21,9 @@ const TheHeaderDropdownMaint = () => {
       setPickupMachine(
         pickupMachines.filter(
           (pickup) =>
-            (pickup.status === "New" ||
-              pickup.status === "controlling" ||
-              pickup.status === "maintained") &&
+            (pickup.status === "controlling_maintenance" ||
+              pickup.status === "controlling_delivery" ||
+              pickup.status === "controlling_storing") &&
             pickup.branchId == user.branch
         )
       );
@@ -38,13 +38,17 @@ const TheHeaderDropdownMaint = () => {
       setPickupMachine(
         pickupMachines.filter(
           (pickup) =>
-            (((pickup.status === "New" || pickup.status === "controlling") &&
-              (pickup.category === "annual" ||
-                pickup.category === "incident" ||
-                pickup.category === "information_change")) ||
-              pickup.status === "delivering") &&
-            pickup.branchId == user.branch
+            pickup.status === "delivering" && pickup.branchId == user.branch
         )
+        // pickupMachines.filter(
+        //   (pickup) =>
+        //     (((pickup.status === "New" || pickup.status === "controlling") &&
+        //       (pickup.category === "annual" ||
+        //         pickup.category === "incident" ||
+        //         pickup.category === "information_change")) ||
+        //       pickup.status === "delivering") &&
+        //     pickup.branchId == user.branch
+        // )
       );
     } else if (user.userRole === "technician") {
       setPickupMachine(
@@ -59,14 +63,18 @@ const TheHeaderDropdownMaint = () => {
       setPickupMachine(
         pickupMachines.filter(
           (pickup) =>
-            pickup.status !== "completed" && pickup.branchId == user.branch
+            pickup.status !== "completed" &&
+            pickup.status !== "stored" &&
+            pickup.branchId == user.branch
         )
       );
     } else if (user.userRole === "branch-admin") {
       setPickupMachine(
         pickupMachines.filter(
           (pickup) =>
-            pickup.status !== "completed" && pickup.branchId == user.branch
+            pickup.status !== "completed" &&
+            pickup.status !== "stored" &&
+            pickup.branchId == user.branch
         )
       );
     } else if (
@@ -74,7 +82,10 @@ const TheHeaderDropdownMaint = () => {
       user.userRole === "main-store"
     ) {
       setPickupMachine(
-        pickupMachines.filter((pickup) => pickup.status !== "completed")
+        pickupMachines.filter(
+          (pickup) =>
+            pickup.status !== "completed" && pickup.status !== "stored"
+        )
       );
     }
   }, [pickupMachines, user]);
@@ -93,7 +104,7 @@ const TheHeaderDropdownMaint = () => {
       </CDropdownToggle>
       <CDropdownMenu placement="bottom-end" className="pt-0">
         <CDropdownItem header tag="div" className="text-center" color="light">
-          <strong>You have {itemsCount} machine receiving</strong>
+          <strong>You have {itemsCount} request(s)</strong>
         </CDropdownItem>
         {itemsCount !== 0 && (
           <>

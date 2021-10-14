@@ -45,6 +45,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     issueDate: "",
     annualNextMaintenanceDate: "",
     pickedupBy: user._id,
+    technician: "",
   };
   const InfoChangeItemFields = {
     description: "",
@@ -61,6 +62,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
   const [infoChangeItem, setInfoChangeItem] = useState(InfoChangeItemFields);
   const [callbackMachinePickup, setCallbackMachinePickup] =
     state.MachinePickUpAPI.callback;
+  const [allUsers] = state.UsersAPI.users;
 
   useEffect(() => {
     if (pickupId != "undefined") {
@@ -654,89 +656,93 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
               {pickup.category === "information_change" && (
                 <CCol className="col-12 my-2">
                   <CRow className="border rounded mx-1 py-4">
-                    <CCol className="col-3">
-                      <CFormGroup>
-                        * Description
-                        <CInput
-                          size="sm"
-                          style={{
-                            border: "0px",
-                            borderBottom: "solid 1px #D8DBE0",
-                          }}
-                          id="description"
-                          name="description"
-                          placeholder="Enter detail of change"
-                          value={infoChangeItem.description}
-                          onChange={handleInfoChangeItem}
-                        />
-                      </CFormGroup>
-                    </CCol>
-                    <CCol className="col-3">
-                      <CFormGroup>
-                        * Part No
-                        <CInput
-                          size="sm"
-                          style={{
-                            border: "0px",
-                            borderBottom: "solid 1px #D8DBE0",
-                          }}
-                          id="partNo"
-                          name="partNo"
-                          placeholder="Enter part number"
-                          value={infoChangeItem.partNo}
-                          onChange={handleInfoChangeItem}
-                        />
-                      </CFormGroup>
-                    </CCol>
-                    <CCol className="col-2">
-                      <CFormGroup>
-                        * Item price
-                        <CInput
-                          type="number"
-                          min="1"
-                          size="sm"
-                          style={{
-                            border: "0px",
-                            borderBottom: "solid 1px #D8DBE0",
-                          }}
-                          id="price"
-                          name="price"
-                          placeholder="Enter needed quanitity"
-                          value={infoChangeItem.price}
-                          onChange={handleInfoChangeItem}
-                        />
-                      </CFormGroup>
-                    </CCol>
-                    <CCol className="col-2">
-                      <CFormGroup>
-                        * Quantity
-                        <CInput
-                          type="number"
-                          min="1"
-                          size="sm"
-                          style={{
-                            border: "0px",
-                            borderBottom: "solid 1px #D8DBE0",
-                          }}
-                          id="quantity"
-                          name="quantity"
-                          placeholder="Enter needed quantity"
-                          value={infoChangeItem.quantity}
-                          onChange={handleInfoChangeItem}
-                        />
-                      </CFormGroup>
-                    </CCol>
+                    {user.userRole === "technician" && (
+                      <>
+                        <CCol className="col-3">
+                          <CFormGroup>
+                            * Description
+                            <CInput
+                              size="sm"
+                              style={{
+                                border: "0px",
+                                borderBottom: "solid 1px #D8DBE0",
+                              }}
+                              id="description"
+                              name="description"
+                              placeholder="Enter detail of change"
+                              value={infoChangeItem.description}
+                              onChange={handleInfoChangeItem}
+                            />
+                          </CFormGroup>
+                        </CCol>
+                        <CCol className="col-3">
+                          <CFormGroup>
+                            * Part No
+                            <CInput
+                              size="sm"
+                              style={{
+                                border: "0px",
+                                borderBottom: "solid 1px #D8DBE0",
+                              }}
+                              id="partNo"
+                              name="partNo"
+                              placeholder="Enter part number"
+                              value={infoChangeItem.partNo}
+                              onChange={handleInfoChangeItem}
+                            />
+                          </CFormGroup>
+                        </CCol>
+                        <CCol className="col-2">
+                          <CFormGroup>
+                            * Item price
+                            <CInput
+                              type="number"
+                              min="1"
+                              size="sm"
+                              style={{
+                                border: "0px",
+                                borderBottom: "solid 1px #D8DBE0",
+                              }}
+                              id="price"
+                              name="price"
+                              placeholder="Enter needed quanitity"
+                              value={infoChangeItem.price}
+                              onChange={handleInfoChangeItem}
+                            />
+                          </CFormGroup>
+                        </CCol>
+                        <CCol className="col-2">
+                          <CFormGroup>
+                            * Quantity
+                            <CInput
+                              type="number"
+                              min="1"
+                              size="sm"
+                              style={{
+                                border: "0px",
+                                borderBottom: "solid 1px #D8DBE0",
+                              }}
+                              id="quantity"
+                              name="quantity"
+                              placeholder="Enter needed quantity"
+                              value={infoChangeItem.quantity}
+                              onChange={handleInfoChangeItem}
+                            />
+                          </CFormGroup>
+                        </CCol>
 
-                    <CCol className="col-2" className="pt-3">
-                      <CButton
-                        size="sm"
-                        color="dark"
-                        className="w-100"
-                        onClick={() => pushInfoChangeitem()}
-                      >
-                        <CIcon name="cil-plus" /> Add
-                      </CButton>
-                    </CCol>
+                        <CCol className="col-2" className="pt-3">
+                          <CButton
+                            size="sm"
+                            color="dark"
+                            className="w-100"
+                            onClick={() => pushInfoChangeitem()}
+                          >
+                            <CIcon name="cil-plus" /> Add
+                          </CButton>
+                        </CCol>
+                      </>
+                    )}
 
                     <CCol className="col-12">
                       {pickup.infoChange.length > 0 && (
@@ -777,16 +783,18 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                                   <td className="border">{item.quantity}</td>
                                   <td className="border text-right ">
                                     {item.price * item.quantity} {" ETB "}
-                                    <CLink
-                                      className="text-danger"
-                                      onClick={() =>
-                                        removeInfoChangeItem(index)
-                                      }
-                                    >
-                                      <CTooltip content={`Remove this item.`}>
-                                        <CIcon name="cil-x" />
-                                      </CTooltip>
-                                    </CLink>
+                                    {user.userRole === "technician" && (
+                                      <CLink
+                                        className="text-danger"
+                                        onClick={() =>
+                                          removeInfoChangeItem(index)
+                                        }
+                                      >
+                                        <CTooltip content={`Remove this item.`}>
+                                          <CIcon name="cil-x" />
+                                        </CTooltip>
+                                      </CLink>
+                                    )}
                                   </td>
                                 </tr>
                               ))}
@@ -866,7 +874,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                   <CCol className="col-12">
                     <h5>Internal Use</h5>
                   </CCol>
-                  <CCol>
+                  <CCol className="col-6 mt-4">
                     <CRow className="mb-2">
                       <CCol className="col-3">
                         <h6>Received by :</h6>
@@ -882,7 +890,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                       <CCol className="col-8 border-bottom"></CCol>
                     </CRow>
                   </CCol>
-                  <CCol>
+                  <CCol className="col-6 mt-4">
                     <CRow className="mb-2">
                       <CCol className="col-4">
                         <h6>Receiving Date :</h6>
@@ -890,6 +898,48 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                       <CCol className="col-7 border-bottom">
                         <h6>{new Date().toLocaleDateString()}</h6>
                       </CCol>
+                    </CRow>
+                  </CCol>
+                  <CCol className="col-6 mt-4">
+                    <CRow className="mb-2">
+                      <CCol className="col-4">
+                        <h6>* Technician :</h6>
+                      </CCol>
+                      <CCol className="col-7 border-bottom">
+                        <CSelect
+                          aria-label="Default select example"
+                          id="technician"
+                          name="technician"
+                          onChange={handleInputChange}
+                          value={pickup.technician}
+                          required
+                          style={{
+                            border: "0px",
+                            borderBottom: "solid 1px #D8DBE0",
+                          }}
+                        >
+                          <option value="">
+                            Select maintenance technician ...
+                          </option>
+                          {allUsers
+                            .filter(
+                              (fltrdUser) =>
+                                fltrdUser.userRole === "technician" &&
+                                fltrdUser.branch === user.branch
+                            )
+                            .map((theUser) => (
+                              <option value={theUser._id} key={theUser._id}>
+                                {theUser.fName + " " + theUser.mName}
+                              </option>
+                            ))}
+                        </CSelect>
+                      </CCol>
+                    </CRow>
+                    <CRow className="mb-2">
+                      <CCol className="col-4">
+                        <h6>* Signature :</h6>
+                      </CCol>
+                      <CCol className="col-7 border-bottom"></CCol>
                     </CRow>
                   </CCol>
                 </CRow>

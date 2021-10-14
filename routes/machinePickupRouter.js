@@ -23,4 +23,6 @@ router.put(
   fileUpload.single("returnCertificate"),
   machinePickupCntrl.eidtMachine_withdrawal
 );
+
+router.put("/maintenance_processing", machinePickupCntrl.maintenanceProcessing);
 module.exports = router;

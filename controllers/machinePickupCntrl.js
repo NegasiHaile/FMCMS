@@ -366,5 +366,32 @@ const machinePickupCntrl = {
       res.status(500).json({ msg: error.message });
     }
   },
+  maintenanceProcessing: async (req, res) => {
+    try {
+      if (req.body.category === "withdrawal") {
+        await machines.findOneAndUpdate(
+          { _id: req.body.machineId },
+          { salesStatus: "unsold" }
+        );
+
+        await MachinePickups.findOneAndUpdate(
+          { _id: req.body._id },
+          { status: req.body.request }
+        );
+      } else {
+        await MachinePickups.findOneAndUpdate(
+          { _id: req.body._id },
+          { status: req.body.request }
+        );
+      }
+
+      return res.json({
+        msg:
+          "Receiving machine has been requested for " + req.body.request + "!",
+      });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
 };
 module.exports = machinePickupCntrl;
