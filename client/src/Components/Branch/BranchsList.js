@@ -179,7 +179,7 @@ function BranchsList() {
                         </CTooltip>
                       </CLink>
                       <span className="text-muted">|</span>
-                      <CLink
+                      {/* <CLink
                         className="text-danger"
                         onClick={() => deleteBranch(branch._id)}
                       >
@@ -189,7 +189,7 @@ function BranchsList() {
                           <CIcon name="cil-trash" />
                         </CTooltip>
                       </CLink>
-                      <span className="text-muted">|</span>{" "}
+                      <span className="text-muted">|</span> */}
                     </>
                   )}
 
@@ -317,7 +317,7 @@ function BranchsList() {
                       id="telephone"
                       name="telephone"
                       placeholder="Enter branch telephone"
-                      pattern="[1-9]{1}[0-9]{9}"
+                      // pattern="[1-9]{1}[0-9]{9}"
                       maxLength="13"
                       value={branch.telephone}
                       onChange={onChangeInput}

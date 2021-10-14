@@ -1,17 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { GlobalState } from "../../../GlobalState";
-import {
-  CRow,
-  CCard,
-  CCardHeader,
-  CCardBody,
-  CCardFooter,
-  CLabel,
-  CCol,
-} from "@coreui/react";
+import { CRow, CCard, CCardHeader, CCardBody, CCol } from "@coreui/react";
 function UserInfo({ id }) {
   const state = useContext(GlobalState);
   const [users] = state.UsersAPI.users;
+  const [branchs] = state.branchAPI.branchs;
   const [userDetail, setUserDetail] = useState("");
 
   useEffect(() => {
@@ -21,7 +14,14 @@ function UserInfo({ id }) {
     } else {
     }
   }, [id, users]);
-
+  const filterBranchUsing_id = (id) => {
+    const filteredBranch = branchs.filter((branch) => branch._id === id);
+    if (filteredBranch.length > 0) {
+      return filteredBranch[0].branchName;
+    } else {
+      return "not found!";
+    }
+  };
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
@@ -54,7 +54,7 @@ function UserInfo({ id }) {
                 </span>
                 <span className="d-flex justify-content-between">
                   <span> * Branch: </span>
-                  <span>{userDetail.branch}</span>
+                  <span>{filterBranchUsing_id(userDetail.branch)}</span>
                 </span>
                 <span className="d-flex justify-content-between">
                   <span> * User Role: </span>
