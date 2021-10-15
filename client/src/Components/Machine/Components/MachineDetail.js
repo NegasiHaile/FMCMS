@@ -37,6 +37,7 @@ function MachineDetail({ id }) {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [machines] = state.MachineAPI.machines;
+  const [branchs] = state.branchAPI.branchs;
   const [machineCallback, setMachineCallback] = state.MachineAPI.callback;
   const [mrcs] = state.MRCAPI.mrcs;
   const [mrcCallback, setMRCCallback] = state.MRCAPI.callback;
@@ -82,7 +83,14 @@ function MachineDetail({ id }) {
       // timer: 1500,
     });
   };
-
+  const filterBranchUsing_id = (id) => {
+    const filteredBranch = branchs.filter((branch) => branch._id === id);
+    if (filteredBranch.length > 0) {
+      return filteredBranch[0].branchName;
+    } else {
+      return "None";
+    }
+  };
   const formatingDate = (dateString) => {
     return new Date(dateString).toLocaleString();
   };
@@ -127,7 +135,7 @@ function MachineDetail({ id }) {
                 >
                   <CImg
                     className="shadow-sm "
-                    height="120"
+                    height="140"
                     src="/Others/fmimg1.jpg"
                     alt="Fiscal machine image"
                   />
@@ -146,24 +154,36 @@ function MachineDetail({ id }) {
                     <strong>* Machine Brand:</strong>
                     <span> {machieneDetail.brand} </span>
                   </p>
-                </CCol>
-                <CCol sm="6" md="3" lg="3" className="mt-1">
-                  <h6></h6>
                   <p className="d-flex justify-content-between">
                     <strong>* Acctual Price:</strong>{" "}
                     <span> {machieneDetail.price} ETB </span>
                   </p>
-                  <p className="d-flex justify-content-between">
-                    <strong>* Problem Status:</strong>
-                    <span> {machieneDetail.problemStatus} </span>
-                  </p>
+                </CCol>
+                <CCol sm="6" md="3" lg="3" className="mt-1">
+                  <h6></h6>
                   <p className="d-flex justify-content-between">
                     <strong>* Sales Status:</strong>
                     <span> {machieneDetail.salesStatus}</span>
                   </p>
+                  <p className="d-flex justify-content-between">
+                    <strong>* Fiscalization Times:</strong>{" "}
+                    <span> {machieneDetail.fiscalizationTimes} </span>
+                  </p>
+                  <p className="d-flex justify-content-between">
+                    <strong>* Branch:</strong>{" "}
+                    <span> {filterBranchUsing_id(machieneDetail.branch)} </span>
+                  </p>
+                  <p className="d-flex justify-content-between">
+                    <strong>* Available In:</strong>{" "}
+                    <span> {machieneDetail.availableIn} </span>
+                  </p>
                 </CCol>
                 <CCol sm="6" md="3" lg="3" className="mt-1">
                   <h6></h6>
+                  <p className="d-flex justify-content-between">
+                    <strong>* Problem Status:</strong>
+                    <span> {machieneDetail.problemStatus} </span>
+                  </p>
                   <p className="d-flex justify-content-between">
                     <strong>* MRC:</strong>
                     <span>
