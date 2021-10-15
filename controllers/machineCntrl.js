@@ -105,7 +105,7 @@ const machineCntrl = {
         }).limit(Number(req.body.quantity));
         await Machines.updateMany(
           { _id: { $in: ids } },
-          { branch: req.body.branchId, availableIn: "branch-store" }
+          { branch: req.body.branchId } //, availableIn: "branch-store" }
         );
         res.json({
           msg:
@@ -275,6 +275,30 @@ const machineCntrl = {
         res.json({ msg: "SIM card of this machine is updated successfully!!" });
       } else {
         return res.status(400).json({ msg: "Opration failed!" });
+      }
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+  approveMachineFromBranchStore: async (req, res) => {
+    try {
+      if (req.params.id === "all") {
+        await Machines.updateMany(
+          {
+            $and: [
+              { branch: req.params.branchId },
+              { availableIn: "main-store" },
+            ],
+          },
+          { $set: { availableIn: "branch-store" } }
+        );
+        res.json({ msg: "All new arival machines approved successfuly!" });
+      } else {
+        await Machines.findOneAndUpdate(
+          { _id: req.params.id },
+          { availableIn: "branch-store" }
+        );
+        res.json({ msg: "Machine approved successfuly!" });
       }
     } catch (err) {
       return res.status(500).json({ msg: err.message });

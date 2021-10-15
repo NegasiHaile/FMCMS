@@ -1,7 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { GlobalState } from "../../GlobalState";
+import NewArivals from "../Machine/Components/NewArivals";
 import {
+  CBadge,
   CButton,
   CCard,
   CCardHeader,
@@ -30,7 +32,7 @@ const MachinesList = () => {
   const [user] = state.UserAPI.User;
   const [token] = state.token;
   const [allMachines] = state.MachineAPI.machines;
-  const [machines, setMachines] = useState(allMachines);
+  const [machines, setMachines] = useState([]);
   const [allBranchs] = state.branchAPI.branchs;
   const [callback, setCallback] = state.MachineAPI.callback;
   const [callbackBusiness, setCallbackBusiness] = state.BusinessAPI.callback;
@@ -40,6 +42,8 @@ const MachinesList = () => {
   const [distributingMachineId, setDistributingMachineId] = useState("none");
   const [showMachineDistributeModal, setShowMachineDistributeModal] =
     useState(false);
+  const [newArivalsModal, setNewArivalsModal] = useState(false);
+  const [newArivals, setNewArivals] = useState([]);
   const [businesses] = state.BusinessAPI.businesses;
 
   const machineDetail = {
@@ -59,6 +63,13 @@ const MachinesList = () => {
       setMachines(
         allMachines.filter(
           (filteredMachine) => filteredMachine.branch == user.branch
+        )
+      );
+      setNewArivals(
+        allMachines.filter(
+          (filteredMachine) =>
+            filteredMachine.branch == user.branch &&
+            filteredMachine.availableIn === "main-store"
         )
       );
     } else {
@@ -219,6 +230,21 @@ const MachinesList = () => {
               <CIcon name="cil-plus" /> Add Machine
             </CButton>
           )}
+          {user.userRole === "branch-store" && (
+            <CButton
+              size="sm"
+              color="danger"
+              variant="outline"
+              onClick={() => {
+                setNewArivalsModal(!newArivalsModal);
+              }}
+            >
+              New Arivals{" "}
+              <CBadge color="danger" className="mfs-auto">
+                {newArivals.length}
+              </CBadge>
+            </CButton>
+          )}
         </CCardHeader>
         <CCardBody>
           <CDataTable
@@ -280,7 +306,7 @@ const MachinesList = () => {
                 <td className="d-flex justify-content-between">
                   {user.userRole === "main-store" && (
                     <>
-                      {machine.salesStatus !== "sold" && (
+                      {machine.salesStatus === "unsold" && (
                         <>
                           <CLink
                             className="text-success"
@@ -297,17 +323,22 @@ const MachinesList = () => {
                             </CTooltip>
                           </CLink>
 
-                          <span className="text-muted">|</span>
-                          <CLink
-                            className="text-danger"
-                            onClick={() => deletemachine(machine._id)}
-                          >
-                            <CTooltip
-                              content={`Delete - ${machine.serialNumber}- machine.`}
-                            >
-                              <CIcon name="cil-trash" />
-                            </CTooltip>
-                          </CLink>
+                          {machine.availableIn === "main-store" && (
+                            <>
+                              {" "}
+                              <span className="text-muted">|</span>
+                              <CLink
+                                className="text-danger"
+                                onClick={() => deletemachine(machine._id)}
+                              >
+                                <CTooltip
+                                  content={`Delete - ${machine.serialNumber}- machine.`}
+                                >
+                                  <CIcon name="cil-trash" />
+                                </CTooltip>
+                              </CLink>{" "}
+                            </>
+                          )}
                         </>
                       )}
                       <span className="text-muted">|</span>
@@ -539,6 +570,31 @@ const MachinesList = () => {
               </CButton>
             </CModalFooter>
           </CForm>
+        </CModal>
+
+        {/* Machines of new arivals */}
+        <CModal
+          size="lg"
+          show={newArivalsModal}
+          onClose={() => setNewArivalsModal(!newArivalsModal)}
+        >
+          <CModalHeader closeButton>
+            <CModalTitle className="text-muted">New arivals</CModalTitle>
+          </CModalHeader>
+          <CModalBody>
+            <NewArivals newArivals={newArivals} />
+          </CModalBody>
+          <CModalFooter>
+            <CButton
+              size="sm"
+              color="danger"
+              onClick={() => {
+                setNewArivalsModal(!newArivalsModal);
+              }}
+            >
+              <CIcon name="cil-x" /> Close
+            </CButton>
+          </CModalFooter>
         </CModal>
       </CCard>
     </>

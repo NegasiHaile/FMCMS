@@ -24,4 +24,9 @@ router.get("/inRequest_machines", machineCntrl.allMachinesInRequest);
 router.get("/sold_machines", machineCntrl.allSoldMachines);
 router.get("/unsold_machines", machineCntrl.allUnsoldMachines);
 
+router.put(
+  "/approve_machine_from_branch_store/:id/:branchId",
+  machineCntrl.approveMachineFromBranchStore
+);
+
 module.exports = router;
