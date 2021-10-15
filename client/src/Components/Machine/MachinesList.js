@@ -189,6 +189,7 @@ const MachinesList = () => {
     "SIM",
     "fiscalizationTimes",
     "salesStatus",
+    "availableIn",
     "problemStatus",
     {
       key: "Actions",
