@@ -134,34 +134,40 @@ function MrcsList() {
             pagination
             scopedSlots={{
               Actions: (mrc) => (
-                <td className="d-flex justify-content-between">
-                  {user.userRole === "main-store" && mrc.status === "free" && (
-                    <CLink
-                      className="text-success"
-                      onClick={() => {
-                        setActiveMRC("none");
-                        setShowModal(!showModal);
-                      }}
-                    >
-                      <CTooltip content={`See detail of - ${mrc.MRC}- branch.`}>
-                        <CIcon name="cil-pencil" />
-                      </CTooltip>
-                    </CLink>
+                <>
+                  {user.userRole === "main-store" && (
+                    <td className="d-flex justify-content-between">
+                      {mrc.status === "free" && (
+                        <CLink
+                          className="text-success"
+                          onClick={() => {
+                            setActiveMRC("none");
+                            setShowModal(!showModal);
+                          }}
+                        >
+                          <CTooltip
+                            content={`See detail of - ${mrc.MRC}- branch.`}
+                          >
+                            <CIcon name="cil-pencil" />
+                          </CTooltip>
+                        </CLink>
+                      )}
+                      {user.userRole === "main-store" && mrc.branch === "none" && (
+                        <>
+                          <span className="text-muted">|</span>
+                          <CLink
+                            className="text-danger"
+                            onClick={() => deleteMRC(mrc._id)}
+                          >
+                            <CTooltip content={`Delete - ${mrc.MRC}- MRC.`}>
+                              <CIcon name="cil-trash" />
+                            </CTooltip>
+                          </CLink>
+                        </>
+                      )}
+                    </td>
                   )}
-                  {user.userRole === "main-store" && mrc.branch === "none" && (
-                    <>
-                      <span className="text-muted">|</span>
-                      <CLink
-                        className="text-danger"
-                        onClick={() => deleteMRC(mrc._id)}
-                      >
-                        <CTooltip content={`Delete - ${mrc.MRC}- MRC.`}>
-                          <CIcon name="cil-trash" />
-                        </CTooltip>
-                      </CLink>
-                    </>
-                  )}
-                </td>
+                </>
               ),
             }}
           />

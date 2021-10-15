@@ -34,6 +34,7 @@ const MachinesList = () => {
   const [allMachines] = state.MachineAPI.machines;
   const [machines, setMachines] = useState([]);
   const [allBranchs] = state.branchAPI.branchs;
+  const [mrcs] = state.MRCAPI.mrcs;
   const [callback, setCallback] = state.MachineAPI.callback;
   const [callbackBusiness, setCallbackBusiness] = state.BusinessAPI.callback;
   const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
@@ -165,29 +166,12 @@ const MachinesList = () => {
     }
   };
 
-  const revertMachine = async (id) => {
-    try {
-      Swal.fire({
-        title: "Undistribute Machine?",
-        text: "You are about to undstribute machine from a busines!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3C4B64",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Undistribute it!",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          const res = await axios.put(`/machine/undistribute/${id}`, {
-            headers: { Authorization: token },
-          });
-          Swal.fire("Undistributed!", res.data.msg, "success");
-
-          setCallback(!callback);
-          setCallbackBusiness(!callbackBusiness);
-        }
-      });
-    } catch (error) {
-      sweetAlert("error", error.response.data.msg);
+  const filterMRCusing_id = (id) => {
+    const activeMRC = mrcs.filter((filteredMRC) => filteredMRC._id === id);
+    if (activeMRC.length > 0) {
+      return activeMRC[0].MRC;
+    } else {
+      return "none";
     }
   };
   // console.log(machine);
@@ -260,6 +244,7 @@ const MachinesList = () => {
             sorter
             pagination
             scopedSlots={{
+              MRC: (machine) => <td>{filterMRCusing_id(machine.MRC)}</td>,
               salesStatus: (machine) => (
                 <td className="d-flex justify-content-between">
                   {machine.salesStatus}
