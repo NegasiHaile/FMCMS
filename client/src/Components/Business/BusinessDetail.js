@@ -173,13 +173,17 @@ function BusinessDetail() {
         confirmButtonText: "Yes, Request it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.put(
-            `/sales/request_for_approval/${params.id}`
-          );
-          setCallback(!callback);
-          setCallbackBusiness(!callbackBusiness);
-          setCallbackSales(!callbackSales);
-          Swal.fire("Sent!", res.data.msg, "success");
+          try {
+            const res = await axios.put(
+              `/sales/request_for_approval/${params.id}`
+            );
+            setCallback(!callback);
+            setCallbackBusiness(!callbackBusiness);
+            setCallbackSales(!callbackSales);
+            Swal.fire("Sent!", res.data.msg, "success");
+          } catch (error) {
+            SweetAlert("error", error.response.data.msg);
+          }
         }
       });
     } catch (error) {

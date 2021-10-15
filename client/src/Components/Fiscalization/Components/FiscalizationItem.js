@@ -22,8 +22,8 @@ function FiscalizationItem() {
         Sales.filter(
           (filteredSale) =>
             filteredSale.saleId === params.id &&
-            (filteredSale.fiscalization !== "none" ||
-              filteredSale.fiscalization !== "")
+            filteredSale.fiscalization !== "none" &&
+            filteredSale.fiscalization !== ""
         )
       );
     }
