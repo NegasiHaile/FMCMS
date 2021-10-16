@@ -238,9 +238,15 @@ const salesCntrl = {
           status: "completed",
         }
       );
+      await machines.findOneAndUpdate(
+        { _id: req.params.machineId },
+        {
+          availableIn: "client-hand",
+        }
+      );
 
       return res.json({
-        msg: "Sales status changed to completed.",
+        msg: "This sales has been delived to the client successfuly!",
       });
     } catch (err) {
       return res.status(500).json({ msg: err.message });

@@ -24,7 +24,7 @@ function SalesList() {
   const [callbackMachines, setCallbackMachines] = state.MachineAPI.callback;
   const [callbackBusiness, setCallbackBusiness] = state.BusinessAPI.callback;
   const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
-  console.log(Sales);
+
   const sweetAlert = (type, text) => {
     Swal.fire({
       position: "center",

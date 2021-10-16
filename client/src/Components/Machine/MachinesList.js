@@ -105,7 +105,6 @@ const MachinesList = () => {
       sweetAlert("error", error.response.data.msg);
     }
   };
-
   const editmachineDetail = async (e) => {
     e.preventDefault();
     try {
@@ -194,8 +193,6 @@ const MachinesList = () => {
       filter: false,
     },
   ];
-
-  console.log(allMachines);
   return (
     <>
       <CCard className=" shadow-sm">

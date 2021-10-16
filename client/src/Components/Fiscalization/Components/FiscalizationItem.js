@@ -193,10 +193,10 @@ function FiscalizationItem() {
                   <CCol>
                     <CRow className="mb-2">
                       <CCol className="col-4">
-                        <h6>Fiscalized By :</h6>
+                        <h6>Fiscalization Date :</h6>
                       </CCol>
                       <CCol className="col-7 border-bottom">
-                        <h6>{user.fName + " " + user.mName}</h6>
+                        <h6>{formatingDate(salesDetail[0].createdAt)}</h6>
                       </CCol>
                     </CRow>
                   </CCol>
@@ -213,7 +213,7 @@ function FiscalizationItem() {
                       <CCol className="col-6 mt-3">
                         <CRow className="mb-2">
                           <CCol className="col-4">
-                            <h6>Technician Name :</h6>
+                            <h6>Delivered By :</h6>
                           </CCol>
                           <CCol className="col-7 border-bottom">
                             <h6> </h6>
@@ -234,7 +234,7 @@ function FiscalizationItem() {
                             <h6>Delivery Date :</h6>
                           </CCol>
                           <CCol className="col-7 border-bottom">
-                            <h6> </h6>
+                            <h6> {new Date().toLocaleString()}</h6>
                           </CCol>
                         </CRow>
                       </CCol>
@@ -352,11 +352,11 @@ function FiscalizationOperations() {
       sweetAlert("error", error.response.data.msg);
     }
   };
-  const onclickComplateDelivery = async (saleId) => {
+  const onclickComplateDelivery = async (saleId, machineId) => {
     try {
       Swal.fire({
         title: "",
-        text: "Are you the machine is delivered to the client?",
+        text: "Are you this machine sales is delivered to the client?",
         icon: "question",
         showCancelButton: true,
         confirmButtonColor: "#3C4B64",
@@ -365,9 +365,16 @@ function FiscalizationOperations() {
         confirmButtonText: "Yes, it's delivered!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.put(`/sales/delivery_completing/${saleId}`);
-          Swal.fire("Done!", res.data.msg, "success");
-          setCallbackSales(!callbackSales);
+          try {
+            const res = await axios.put(
+              `/sales/delivery_completing/${saleId}/${machineId}`
+            );
+            setCallbackSales(!callbackSales);
+            setCallbackMachines(!callbackMachines);
+            Swal.fire("Done!", res.data.msg, "success");
+          } catch (error) {
+            sweetAlert("error", error.response.data.msg);
+          }
         }
       });
     } catch (error) {

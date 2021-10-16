@@ -24,7 +24,10 @@ router.put(
   salesCntrl.fiscalizeAndSendForControlling
 );
 
-router.put("/delivery_completing/:salesId", salesCntrl.completingSalesDelivery);
+router.put(
+  "/delivery_completing/:salesId/:machineId",
+  salesCntrl.completingSalesDelivery
+);
 
 router.put(
   "/request_for_delivery/:salesId",
