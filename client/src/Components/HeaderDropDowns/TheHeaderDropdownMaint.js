@@ -14,7 +14,7 @@ const TheHeaderDropdownMaint = () => {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
-  const [PickupCallback, setPickupCallback] = state.MachinePickUpAPI.callback;
+  // const [PickupCallback, setPickupCallback] = state.MachinePickUpAPI.callback;
   const [pickupMachine, setPickupMachine] = useState("");
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const TheHeaderDropdownMaint = () => {
         )
       );
     }
-    setPickupCallback(!PickupCallback);
+    // setPickupCallback(!PickupCallback);
   }, [pickupMachines, user]);
 
   // console.log(pickupMachine);
