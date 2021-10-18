@@ -34,4 +34,6 @@ router.put(
   salesCntrl.requestSalesForDelivery
 );
 
+router.put("/assign_technician/:salesId", salesCntrl.assign_technician);
+
 module.exports = router;

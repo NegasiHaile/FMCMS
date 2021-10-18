@@ -63,6 +63,7 @@ const salesCntrl = {
           VAT: sale.business[0].VAT,
           telephone: sale.business[0].telephone,
           fiscalization: sale.fiscalization,
+          technician: sale.technician,
           status: sale.status,
           createdAt: sale.createdAt,
           updatedAt: sale.updatedAt,
@@ -179,6 +180,7 @@ const salesCntrl = {
   requestForFiscalization: async (req, res) => {
     try {
       const machine = await machines.findById({ _id: req.params.machineId });
+      const sale = await Sales.findById({ _id: req.params.salesId });
 
       if (machine.MRC === "none")
         return res.status(400).json({
@@ -188,6 +190,11 @@ const salesCntrl = {
       if (machine.SIM === "0" || machine.SIM === "")
         return res.status(400).json({
           msg: "The machine haven't SIM card number, Please assigne it first!",
+        });
+
+      if (sale.technician === "")
+        return res.status(400).json({
+          msg: "This sales hasn't assigned technician for fiscalization, Please contact the customer service to assign!!",
         });
 
       await Sales.findOneAndUpdate(
@@ -246,7 +253,7 @@ const salesCntrl = {
       );
 
       return res.json({
-        msg: "This sales has been delived to the client successfuly!",
+        msg: "Sales operation copleted!",
       });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
@@ -263,6 +270,22 @@ const salesCntrl = {
 
       return res.json({
         msg: "Sales requsted to customer service for delivery.",
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+  assign_technician: async (req, res) => {
+    try {
+      await Sales.findOneAndUpdate(
+        { _id: req.params.salesId },
+        {
+          technician: req.body.technician,
+        }
+      );
+
+      return res.json({
+        msg: "Technician Assigned successfully!",
       });
     } catch (err) {
       return res.status(500).json({ msg: err.message });

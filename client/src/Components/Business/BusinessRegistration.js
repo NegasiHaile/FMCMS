@@ -178,23 +178,23 @@ const BusinessRegistration = () => {
               <CNav variant="tabs">
                 <CNavItem>
                   <CNavLink>
-                    <CIcon name="cil-building"></CIcon>Profile
+                    <CIcon name="cil-building"></CIcon> Profile
                   </CNavLink>
                 </CNavItem>
                 <CNavItem>
                   <CNavLink>
-                    <CIcon name="cil-location-pin"></CIcon>Address
+                    <CIcon name="cil-location-pin"></CIcon> Address
                   </CNavLink>
                 </CNavItem>
                 <CNavItem>
                   <CNavLink>
-                    <CIcon name="cil-contact"></CIcon>Others
+                    <CIcon name="cil-contact"></CIcon> Others
                   </CNavLink>
                 </CNavItem>
 
                 <CNavItem>
                   <CNavLink>
-                    <CIcon name="cil-applications"></CIcon>Overview
+                    <CIcon name="cil-applications"></CIcon> Overview
                   </CNavLink>
                 </CNavItem>
               </CNav>
@@ -471,7 +471,7 @@ const BusinessRegistration = () => {
                           color="dark"
                         >
                           <CIcon name="cil-save" />
-                          {onEdit ? "Save Cahnges" : "Send Detail"}
+                          {onEdit ? " Save Cahnges " : " Save business detail "}
                         </CButton>
                         {!onEdit && (
                           <CButton

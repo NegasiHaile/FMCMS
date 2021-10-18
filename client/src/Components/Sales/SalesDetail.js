@@ -68,7 +68,8 @@ function SalesDetail() {
           setCallbackMachines(callbackMachines);
           setCallbackSales(!callbackSales);
           setCallbackBusiness(!callbackBusiness);
-          Swal.fire("Approved!", res.data.msg, "success");
+
+          SweetAlert("success", res.data.msg);
         }
       });
     } catch (error) {
@@ -112,7 +113,7 @@ function SalesDetail() {
           <CCardBody className="card-body">
             <CRow>
               <CCol sm="6" md="4" lg="3" className="border shadow-sm p-4">
-                <h6 className="text-center text-muted">Buyer Trade-Name</h6>
+                <h6 className="text-center text-muted">Trade-Name</h6>
                 <CLink to={`/business/Detail/${salesDetail.businessId}`}>
                   <h6 className="text-center text-primary">
                     {salesDetail.tradeName}
@@ -161,7 +162,7 @@ function SalesDetail() {
                           )
                         }
                       >
-                        Approve Request
+                        Approve this sales
                       </CButton>
                     </div>
                   )}

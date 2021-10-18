@@ -19,8 +19,9 @@ const salesSchema = new mongoose.Schema(
       type: String, //Value:-  none, ready, done, canceled
       default: "none",
     },
-    fiscalizedBy: {
+    technician: {
       type: String,
+      default: "",
     },
     status: {
       type: String, //Value:-  new, unapproved , instore/rejected, fiscallizing, controlling, delivering, completed

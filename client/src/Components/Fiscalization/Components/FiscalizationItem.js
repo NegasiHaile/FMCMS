@@ -2,7 +2,15 @@ import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { GlobalState } from "../../../GlobalState";
 import { useParams } from "react-router-dom";
-import { CButton, CCard, CCardBody, CImg, CRow, CCol } from "@coreui/react";
+import {
+  CButton,
+  CCard,
+  CCardBody,
+  CImg,
+  CRow,
+  CCol,
+  CSelect,
+} from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
 
@@ -13,21 +21,19 @@ function FiscalizationItem() {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [Sales] = state.SalesAPI.Sales;
+  const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
   const [salesDetail, setSalesDetail] = useState("");
   const [mrcs] = state.MRCAPI.mrcs;
+  const [allUsers] = state.UsersAPI.users;
 
   useEffect(() => {
     if (Sales.length > 0) {
-      setSalesDetail(
-        Sales.filter(
-          (filteredSale) =>
-            filteredSale.saleId === params.id &&
-            filteredSale.fiscalization !== "none" &&
-            filteredSale.fiscalization !== ""
-        )
+      const slsDtl = Sales.filter(
+        (filteredSale) => filteredSale.saleId === params.id
       );
+      setSalesDetail(slsDtl[0]);
     }
-  }, [Sales, setSalesDetail]);
+  }, [Sales]);
 
   const formatingDate = (stringdate) => {
     return new Date(stringdate).toLocaleString();
@@ -40,9 +46,37 @@ function FiscalizationItem() {
       return " ";
     }
   };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setSalesDetail({ ...salesDetail, [name]: value });
+    console.log(salesDetail);
+  };
+  const sweetAlert = (type, text) => {
+    Swal.fire({
+      position: "center",
+      background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+      icon: type,
+      text: text,
+      confirmButtonColor: "#3C4B64",
+      showConfirmButton: true,
+      // timer: 1500,
+    });
+  };
+  const editSalesTechnician = async (id) => {
+    try {
+      const res = await axios.put(`/sales/assign_technician/${id}`, {
+        technician: salesDetail.technician,
+      });
+      setCallbackSales(!callbackSales);
+      sweetAlert("success", res.data.msg);
+    } catch (error) {
+      sweetAlert("error", error.response.data.msg);
+    }
+  };
+
   return (
     <div style={{ minWidth: "900px", border: "solid 0px #D8DBE0" }}>
-      {salesDetail.length > 0 ? (
+      {salesDetail ? (
         <CCard className="mt-5 w-100">
           <CCardBody>
             <CRow>
@@ -64,7 +98,7 @@ function FiscalizationItem() {
                   </span>
                   <br />
                   <span className="">Branch :</span>{" "}
-                  <b className="border-bottom"> {salesDetail[0].branchName}</b>
+                  <b className="border-bottom"> {salesDetail.branchName}</b>
                 </p>
               </CCol>
 
@@ -79,7 +113,7 @@ function FiscalizationItem() {
                         <h6>Campany :</h6>
                       </CCol>
                       <CCol className="col-8 border-bottom">
-                        <h6>{salesDetail[0].tradeName}</h6>
+                        <h6>{salesDetail.tradeName}</h6>
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
@@ -87,7 +121,7 @@ function FiscalizationItem() {
                         <h6>Owner :</h6>
                       </CCol>
                       <CCol className="col-8 border-bottom">
-                        <h6>{salesDetail[0].companyName}</h6>
+                        <h6>{salesDetail.companyName}</h6>
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
@@ -95,7 +129,7 @@ function FiscalizationItem() {
                         <h6>TIN :</h6>
                       </CCol>
                       <CCol className="col-8 border-bottom">
-                        <h6>{salesDetail[0].TIN}</h6>
+                        <h6>{salesDetail.TIN}</h6>
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
@@ -103,7 +137,7 @@ function FiscalizationItem() {
                         <h6>VAT :</h6>
                       </CCol>
                       <CCol className="col-8 border-bottom">
-                        <h6>{salesDetail[0].VAT}</h6>
+                        <h6>{salesDetail.VAT}</h6>
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
@@ -111,7 +145,7 @@ function FiscalizationItem() {
                         <h6>Tel :</h6>
                       </CCol>
                       <CCol className="col-8 border-bottom">
-                        <h6>{salesDetail[0].telephone}</h6>
+                        <h6>{salesDetail.telephone}</h6>
                       </CCol>
                     </CRow>
                   </CCol>
@@ -124,7 +158,7 @@ function FiscalizationItem() {
                         <h6> Brand : </h6>
                       </CCol>
                       <CCol className="col-8 border-bottom">
-                        <h6>{salesDetail[0].machineBrand}</h6>
+                        <h6>{salesDetail.machineBrand}</h6>
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
@@ -132,7 +166,7 @@ function FiscalizationItem() {
                         <h6>Model :</h6>
                       </CCol>
                       <CCol className="col-8 border-bottom">
-                        <h6>{salesDetail[0].machineModel}</h6>
+                        <h6>{salesDetail.machineModel}</h6>
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
@@ -140,7 +174,7 @@ function FiscalizationItem() {
                         <h6>SER No :</h6>
                       </CCol>
                       <CCol className="col-8 border-bottom">
-                        <h6>{salesDetail[0].machineSerialNumber}</h6>
+                        <h6>{salesDetail.machineSerialNumber}</h6>
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
@@ -148,9 +182,7 @@ function FiscalizationItem() {
                         <h6>MRC :</h6>
                       </CCol>
                       <CCol className="col-8 border-bottom">
-                        <h6>
-                          {handleMRCNumberById(salesDetail[0].machineMRC)}
-                        </h6>
+                        <h6>{handleMRCNumberById(salesDetail.machineMRC)}</h6>
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
@@ -158,7 +190,7 @@ function FiscalizationItem() {
                         <h6>SIM :</h6>
                       </CCol>
                       <CCol className="col-8 border-bottom">
-                        <h6>{salesDetail[0].machineSIM}</h6>
+                        <h6>{salesDetail.machineSIM}</h6>
                       </CCol>
                     </CRow>
                   </CCol>
@@ -170,41 +202,107 @@ function FiscalizationItem() {
                   Fiscalization Summery
                 </h4>
                 <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
-                  This machine with <b> {salesDetail[0].machineSerialNumber}</b>{" "}
+                  This machine with <b> {salesDetail.machineSerialNumber}</b>{" "}
                   serial number is assigned to the company{" "}
-                  <b> {salesDetail[0].tradeName}</b> and fiscalized with above
-                  detail in <b> {salesDetail[0].branchName} </b> on{" "}
+                  <b> {salesDetail.tradeName}</b> and fiscalized with above
+                  detail in <b> {salesDetail.branchName} </b> on{" "}
                   {new Date().toLocaleString()}
                 </h6>{" "}
               </CCol>
 
               <CCol className="col-12 mt-4">
                 <CRow className="mt-4 border rounded mx-1 py-4">
-                  <CCol>
+                  <CCol className="col-6 my-2">
                     <CRow className="mb-2">
                       <CCol className="col-4">
                         <h6>Fiscalization Status:</h6>
                       </CCol>
                       <CCol className="col-7 border-bottom">
-                        <h6>{salesDetail[0].fiscalization}</h6>
+                        <h6>{salesDetail.fiscalization}</h6>
                       </CCol>
                     </CRow>
                   </CCol>
-                  <CCol>
+                  <CCol className="col-6 my-2">
                     <CRow className="mb-2">
                       <CCol className="col-4">
                         <h6>Fiscalization Date :</h6>
                       </CCol>
                       <CCol className="col-7 border-bottom">
-                        <h6>{formatingDate(salesDetail[0].createdAt)}</h6>
+                        <h6>{formatingDate(salesDetail.createdAt)}</h6>
                       </CCol>
+                    </CRow>
+                  </CCol>
+                  <CCol className="col-6 my-2">
+                    <CRow className="mb-2">
+                      <CCol className="col-4">
+                        <h6> Technician :</h6>
+                      </CCol>
+                      <CCol className="col-8  input-group ">
+                        {/* <div className="input-group mb-3"> */}
+                        <CSelect
+                          aria-label="Default select example"
+                          id="technician"
+                          name="technician"
+                          onChange={handleInputChange}
+                          value={salesDetail.technician}
+                          disabled={
+                            user.userRole === "customer-service" &&
+                            salesDetail.status === "instore"
+                              ? false
+                              : true
+                          }
+                          style={{
+                            border: "0px",
+                            borderBottom: "solid 1px #D8DBE0",
+                          }}
+                          className="bg-white"
+                        >
+                          <option value="">
+                            Select maintenance technician ...
+                          </option>
+                          {allUsers
+                            .filter(
+                              (fltrdUser) =>
+                                fltrdUser.userRole === "technician" &&
+                                fltrdUser.branch === user.branch
+                            )
+                            .map((theUser) => (
+                              <option value={theUser._id} key={theUser._id}>
+                                {theUser.fName + " " + theUser.mName}
+                              </option>
+                            ))}
+                        </CSelect>
+                        {salesDetail.status === "instore" &&
+                          user.userRole === "customer-service" && (
+                            <div className="input-group-append">
+                              <CButton
+                                color="dark"
+                                className="d-print-none input-group-text"
+                                onClick={() =>
+                                  editSalesTechnician(salesDetail.saleId)
+                                }
+                              >
+                                Done!
+                              </CButton>
+                            </div>
+                          )}
+                        {/* </div> */}
+                      </CCol>
+                    </CRow>
+                  </CCol>
+                  <CCol className="col-6 my-2">
+                    <CRow className="mb-2">
+                      <CCol className="col-4">
+                        <h6> Signature :</h6>
+                      </CCol>
+                      <CCol className="col-7 border-bottom"></CCol>
                     </CRow>
                   </CCol>
                 </CRow>
               </CCol>
 
               {user.userRole === "customer-service" &&
-                salesDetail[0].fiscalization === "done" && (
+                salesDetail.fiscalization === "done" && (
                   <CCol className="col-12 mt-4">
                     <CRow className=" border rounded mx-1 py-4">
                       <CCol className="col-12 border-bottom">
@@ -295,13 +393,12 @@ function FiscalizationOperations() {
 
   useEffect(() => {
     if (Sales.length > 0) {
-      setSalesDetail(
-        Sales.filter(
-          (filteredSale) =>
-            filteredSale.saleId === params.id &&
-            filteredSale.fiscalization !== "none"
-        )
+      const slsDtl = Sales.filter(
+        (filteredSale) =>
+          filteredSale.saleId === params.id &&
+          filteredSale.fiscalization !== "none"
       );
+      setSalesDetail(slsDtl[0]);
     }
   }, [Sales, setSalesDetail]);
 
@@ -383,18 +480,15 @@ function FiscalizationOperations() {
   };
   return (
     <>
-      {user.userRole === "technician" &&
-      salesDetail.length > 0 &&
-      salesDetail[0].fiscalization === "ready" ? (
+      {salesDetail &&
+      salesDetail.fiscalization === "ready" &&
+      user._id == salesDetail.technician ? (
         <CButton
           className="mr-2"
           size="sm"
           color="success"
           onClick={() =>
-            onSubmitFiscalizationDone(
-              salesDetail[0].saleId,
-              salesDetail[0].machineId
-            )
+            onSubmitFiscalizationDone(salesDetail.saleId, salesDetail.machineId)
           }
         >
           <CIcon name="cil-memory"></CIcon> Confirm fiscalization!
@@ -402,37 +496,34 @@ function FiscalizationOperations() {
       ) : (
         ""
       )}
-      {salesDetail.length > 0 &&
+      {salesDetail &&
         user.userRole === "machine-controller" &&
-        salesDetail[0].fiscalization === "done" &&
-        salesDetail[0].status === "controlling" && (
+        salesDetail.fiscalization === "done" &&
+        salesDetail.status === "controlling" && (
           <CButton
             className="mr-2"
             size="sm"
             color="warning"
             onClick={() =>
               onclickRequestForDelivery(
-                salesDetail[0].saleId,
-                salesDetail[0].machineId
+                salesDetail.saleId,
+                salesDetail.machineId
               )
             }
           >
             <CIcon name="cil-memory"></CIcon> Request for delivery
           </CButton>
         )}
-      {salesDetail.length > 0 &&
+      {salesDetail &&
         user.userRole === "customer-service" &&
-        salesDetail[0].fiscalization === "done" &&
-        salesDetail[0].status === "delivering" && (
+        salesDetail.fiscalization === "done" &&
+        salesDetail.status === "delivering" && (
           <CButton
             className="mr-2"
             size="sm"
             color="danger"
             onClick={() =>
-              onclickComplateDelivery(
-                salesDetail[0].saleId,
-                salesDetail[0].machineId
-              )
+              onclickComplateDelivery(salesDetail.saleId, salesDetail.machineId)
             }
           >
             <CIcon name="cil-memory"></CIcon> Delivery completed?
