@@ -749,6 +749,29 @@ function MachinePickupDetail() {
                         </CRow>
                       </CCol>
                     )}
+                    {pickup[0].category === "temporarly_store" && (
+                      <CCol className="col-6 mt-4">
+                        <CRow className="mb-2">
+                          <CCol className="col-4">
+                            <h6> Stored At :</h6>
+                          </CCol>
+                          <CCol className="col-7 border-bottom">
+                            <h6>{formatingDate(pickup[0].createdAt)}</h6>
+                          </CCol>
+                        </CRow>
+                        {(pickup[0].status === "delivering" ||
+                          pickup[0].status === "completed") && (
+                          <CRow className="mb-2">
+                            <CCol className="col-4">
+                              <h6> Dispatched at :</h6>
+                            </CCol>
+                            <CCol className="col-7 border-bottom">
+                              <h6>{new Date().toLocaleString()}</h6>
+                            </CCol>
+                          </CRow>
+                        )}
+                      </CCol>
+                    )}
                     {user.userRole === "customer-service" && (
                       <CCol className="col-6 mt-4">
                         <CRow className="mb-2">
