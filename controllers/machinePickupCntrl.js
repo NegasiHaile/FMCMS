@@ -98,6 +98,7 @@ const machinePickupCntrl = {
           machineMRC: pickup.machine[0].MRC,
           machineSIM: pickup.machine[0].SIM,
           machinePrice: pickup.machine[0].price,
+          machineProblemStatus: pickup.machine[0].problemStatus,
           businessId: pickup.business[0]._id,
           tradeName: pickup.business[0].tradeName,
           companyName: pickup.business[0].companyName,
@@ -368,6 +369,7 @@ const machinePickupCntrl = {
   },
   maintenanceProcessing: async (req, res) => {
     try {
+      const pickupDetail = await MachinePickups.findById(req.body._id);
       if (req.body.category === "withdrawal") {
         await machines.findOneAndUpdate(
           { _id: req.body.machineId },
@@ -378,6 +380,21 @@ const machinePickupCntrl = {
           { _id: req.body._id },
           { status: req.body.request }
         );
+      } else if (req.body.request === "maintaining") {
+        if (pickupDetail.technician === "") {
+          return res.status(400).json({
+            msg: "This maintenance hasn't assigned a technician yet, Please contact the customer service to assign!",
+          });
+        } else {
+          await machines.findOneAndUpdate(
+            { _id: req.body.machineId },
+            { problemStatus: "maintaining" }
+          );
+          await MachinePickups.findOneAndUpdate(
+            { _id: req.body._id },
+            { status: req.body.request }
+          );
+        }
       } else {
         await MachinePickups.findOneAndUpdate(
           { _id: req.body._id },
@@ -388,6 +405,19 @@ const machinePickupCntrl = {
       return res.json({
         msg:
           "Receiving machine has been requested for " + req.body.request + "!",
+      });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+  assigneTechnician: async (req, res) => {
+    try {
+      await MachinePickups.findOneAndUpdate(
+        { _id: req.params.id },
+        { technician: req.body.technicianId }
+      );
+      return res.json({
+        msg: "Technician assigned successfully!",
       });
     } catch (error) {
       res.status(500).json({ msg: error.message });

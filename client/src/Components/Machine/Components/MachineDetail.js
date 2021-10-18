@@ -255,7 +255,7 @@ function MachineDetail({ id }) {
                   </CNavItem>
                   <CNavItem>
                     <CNavLink>
-                      <CIcon name="cil-recycle"></CIcon> Returning
+                      <CIcon name="cil-recycle"></CIcon> Withdrawal
                     </CNavLink>
                   </CNavItem>
                 </CNav>

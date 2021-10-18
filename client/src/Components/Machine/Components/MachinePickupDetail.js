@@ -27,7 +27,10 @@ function MachinePickupDetail() {
   const [users] = state.UsersAPI.users;
   const [user] = state.UserAPI.User;
   const [machinePikups] = state.MachinePickUpAPI.machinePickups;
+  const [pricings] = state.PricingAPI.pricings;
   const [pickup, setPickup] = useState([]);
+
+  const [callbackPickup, setCallbackPickup] = state.MachinePickUpAPI.callback;
 
   const [showModal, setShowModal] = useState(false);
 
@@ -71,7 +74,10 @@ function MachinePickupDetail() {
     return total;
   };
   const findVAT = (infoChange) => {
-    return (findTotalPrice(infoChange) * 1.5) / 100;
+    const Vat = pricings.filter(
+      (price) => price.pricingName.toLowerCase() === "vat"
+    );
+    return (findTotalPrice(infoChange) * Vat[0].price) / 100;
   };
   const findGTotal = (infoChange) => {
     return (findVAT(infoChange) + findTotalPrice(infoChange) + 0.0).toFixed(1);
@@ -79,6 +85,39 @@ function MachinePickupDetail() {
 
   const formatingDate = (stringdate) => {
     return new Date(stringdate).toLocaleString();
+  };
+  const sweetAlert = (type, text) => {
+    Swal.fire({
+      title: text,
+      position: "center",
+      background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+      icon: type,
+      confirmButtonColor: "#3C4B64",
+      showConfirmButton: true,
+      // timer: 1500,
+    });
+  };
+  const maintenanceProblemSolved = (machineId) => {
+    try {
+      Swal.fire({
+        text: "Are you sure this maintenance is done!",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3C4B64",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Done!",
+      }).then(async (result) => {
+        try {
+          if (result.isConfirmed) {
+            const res = await axios.put(`/machine/problem_solved/${machineId}`);
+            setCallbackPickup(!callbackPickup);
+            sweetAlert("success", res.data.msg);
+          }
+        } catch (error) {
+          sweetAlert("error", error.response.data.msg);
+        }
+      });
+    } catch (error) {}
   };
 
   return (
@@ -593,7 +632,7 @@ function MachinePickupDetail() {
                         </CRow>
                         <CRow className="mb-2">
                           <CCol className="col-2">
-                            <h6>Withdrawal reason cetificate </h6>
+                            <h6>Machine Withdrawal status </h6>
                           </CCol>
                           <CCol className="col-10 input-group mb-3">
                             {/* <div className="input-group mb-3"> */}
@@ -601,7 +640,11 @@ function MachinePickupDetail() {
                               className=" form-control"
                               id="returnCertificate"
                               name="returnCertificate"
-                              value={pickup[0].status}
+                              value={
+                                pickup[0].status === "controlling_storing"
+                                  ? "In machine controller"
+                                  : pickup[0].status
+                              }
                               rows="1"
                               required
                               disabled
@@ -633,7 +676,7 @@ function MachinePickupDetail() {
 
                 <CCol className="col-12 mt-3">
                   <h4 className="text-decoration-underline">
-                    receiving Summery
+                    Receiving Summery
                   </h4>
                   <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
                     The machine with <b> 1000949382773</b> serial number is
@@ -748,6 +791,21 @@ function MachinePickupDetail() {
                   </CRow>
                 </CCol>
               </CRow>
+              {user.userRole === "technician" &&
+                pickup[0].machineProblemStatus === "maintaining" && (
+                  <CCol className="col-12 d-flex justify-content-end d-print-none">
+                    <CButton
+                      className="mr-2"
+                      size="sm"
+                      color="dark"
+                      onClick={() =>
+                        maintenanceProblemSolved(pickup[0].machineId)
+                      }
+                    >
+                      <CIcon name="cil-memory"></CIcon> Problem Solved!
+                    </CButton>
+                  </CCol>
+                )}
             </CCardBody>
 
             <CModal
@@ -867,7 +925,8 @@ function MachinePickupOperations() {
                     )
                   }
                 >
-                  <CIcon name="cil-memory"></CIcon> Request for controlling!
+                  <CIcon name="cil-memory"></CIcon> Request to
+                  machine-controller!
                 </CButton>
               )}
               {user.userRole === "machine-controller" &&
@@ -875,7 +934,7 @@ function MachinePickupOperations() {
                   <CButton
                     className="mr-2"
                     size="sm"
-                    color="secondary"
+                    color="danger"
                     onClick={() =>
                       onSubmitMaintenanceProcessing(
                         pickup[0]._id,
@@ -890,7 +949,8 @@ function MachinePickupOperations() {
                 )}
 
               {user.userRole === "technician" &&
-                pickup[0].status === "maintaining" && (
+                pickup[0].status === "maintaining" &&
+                pickup[0].machineProblemStatus === "fine" && (
                   <CButton
                     className="mr-2"
                     size="sm"
@@ -904,8 +964,8 @@ function MachinePickupOperations() {
                       )
                     }
                   >
-                    <CIcon name="cil-memory"></CIcon> Request back for
-                    controlling!
+                    <CIcon name="cil-memory"></CIcon> Request back to
+                    controller!
                   </CButton>
                 )}
             </>
@@ -928,7 +988,8 @@ function MachinePickupOperations() {
                     )
                   }
                 >
-                  <CIcon name="cil-memory"></CIcon> Request for controlling!
+                  <CIcon name="cil-memory"></CIcon> Request to
+                  machine-controller!
                 </CButton>
               )}
               {user.userRole === "machine-controller" &&
@@ -946,7 +1007,7 @@ function MachinePickupOperations() {
                       )
                     }
                   >
-                    <CIcon name="cil-memory"></CIcon> Request for storing!
+                    <CIcon name="cil-memory"></CIcon> Request to branch-store!
                   </CButton>
                 )}
               {user.userRole === "branch-store" &&
@@ -983,8 +1044,8 @@ function MachinePickupOperations() {
                       )
                     }
                   >
-                    <CIcon name="cil-memory"></CIcon> reaquestrt back for
-                    controlling!
+                    <CIcon name="cil-memory"></CIcon> Request back to
+                    controller!
                   </CButton>
                 )}
             </>

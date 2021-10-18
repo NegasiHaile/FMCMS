@@ -29,4 +29,9 @@ router.put(
   machineCntrl.approveMachineFromBranchStore
 );
 
+router.put(
+  "/problem_solved/:id",
+  machineCntrl.machineProblemSolvedInMaintenance
+);
+
 module.exports = router;

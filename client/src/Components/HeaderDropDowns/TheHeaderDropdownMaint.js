@@ -39,7 +39,9 @@ const TheHeaderDropdownMaint = () => {
       setPickupMachine(
         pickupMachines.filter(
           (pickup) =>
-            pickup.status === "delivering" && pickup.branchId == user.branch
+            (pickup.status === "delivering" ||
+              pickup.status === "controlling_maintenance") &&
+            pickup.branchId == user.branch
         )
         // pickupMachines.filter(
         //   (pickup) =>
@@ -115,7 +117,7 @@ const TheHeaderDropdownMaint = () => {
                 key={index}
                 to={
                   (pickup.status === "New" ||
-                    pickup.status === "controlling") &&
+                    pickup.status === "controlling_maintenance") &&
                   user.userRole === "customer-service"
                     ? `/pickup/edit/${pickup.machineId}/${pickup._id}`
                     : `/pickup/detail/${pickup._id}`
@@ -132,7 +134,14 @@ const TheHeaderDropdownMaint = () => {
                     </div>
                   </div>
                   <div>
-                    <small> {pickup.status}</small>
+                    <small>
+                      {" "}
+                      {user.userRole === "customer-service"
+                        ? pickup.technician === ""
+                          ? "Technician unassigned!"
+                          : "Technician Assigned!"
+                        : pickup.status}
+                    </small>
                     <small className=" float-right mt-1">Just now</small>
                   </div>
                   <div

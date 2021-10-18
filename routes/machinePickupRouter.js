@@ -25,4 +25,5 @@ router.put(
 );
 
 router.put("/maintenance_processing", machinePickupCntrl.maintenanceProcessing);
+router.put("/assign_technician/:id", machinePickupCntrl.assigneTechnician);
 module.exports = router;

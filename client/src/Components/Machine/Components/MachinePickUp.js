@@ -57,6 +57,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
 
   const state = useContext(GlobalState);
   const [maintenances] = state.MachinePickUpAPI.machinePickups;
+  const [pricings] = state.PricingAPI.pricings;
   const [onEdit, setOnEdit] = useState(false);
   const [pickup, setPickup] = useState(pickupDetail);
   const [infoChangeItem, setInfoChangeItem] = useState(InfoChangeItemFields);
@@ -134,6 +135,17 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
       sweetAlert("error", error.response.data.msg);
     }
   };
+  const editmaintenanceTechnician = async (id) => {
+    try {
+      const res = await axios.put(`/pickup/assign_technician/${id}`, {
+        technicianId: pickup.technician,
+      });
+      setCallbackMachinePickup(!callbackMachinePickup);
+      sweetAlert("success", res.data.msg);
+    } catch (error) {
+      sweetAlert("error", error.response.data.msg);
+    }
+  };
 
   const cleaeAllTheDetail = (e) => {
     e.preventDefault();
@@ -155,7 +167,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     return total;
   };
   const findVAT = (infoChange) => {
-    return (findTotalPrice(infoChange) * 1.5) / 100;
+    const Vat = pricings.filter(
+      (price) => price.pricingName.toLowerCase() === "vat"
+    );
+    return (findTotalPrice(infoChange) * Vat[0].price) / 100;
   };
   const findGTotal = (infoChange) => {
     return (findVAT(infoChange) + findTotalPrice(infoChange) + 0.0).toFixed(1);
@@ -900,48 +915,64 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                       </CCol>
                     </CRow>
                   </CCol>
-                  <CCol className="col-6 mt-4">
-                    <CRow className="mb-2">
-                      <CCol className="col-4">
-                        <h6>* Technician :</h6>
-                      </CCol>
-                      <CCol className="col-7 border-bottom">
-                        <CSelect
-                          aria-label="Default select example"
-                          id="technician"
-                          name="technician"
-                          onChange={handleInputChange}
-                          value={pickup.technician}
-                          required
-                          style={{
-                            border: "0px",
-                            borderBottom: "solid 1px #D8DBE0",
-                          }}
-                        >
-                          <option value="">
-                            Select maintenance technician ...
-                          </option>
-                          {allUsers
-                            .filter(
-                              (fltrdUser) =>
-                                fltrdUser.userRole === "technician" &&
-                                fltrdUser.branch === user.branch
-                            )
-                            .map((theUser) => (
-                              <option value={theUser._id} key={theUser._id}>
-                                {theUser.fName + " " + theUser.mName}
-                              </option>
-                            ))}
-                        </CSelect>
-                      </CCol>
-                    </CRow>
-                    <CRow className="mb-2">
-                      <CCol className="col-4">
-                        <h6>* Signature :</h6>
-                      </CCol>
-                      <CCol className="col-7 border-bottom"></CCol>
-                    </CRow>
-                  </CCol>
+                  {user.userRole === "customer-service" && (
+                    <CCol className="col-6 mt-4">
+                      <CRow className="mb-2">
+                        <CCol className="col-4">
+                          <h6>* Technician :</h6>
+                        </CCol>
+                        <CCol className="col-8  input-group ">
+                          {/* <div className="input-group mb-3"> */}
+                          <CSelect
+                            aria-label="Default select example"
+                            id="technician"
+                            name="technician"
+                            onChange={handleInputChange}
+                            value={pickup.technician}
+                            style={{
+                              border: "0px",
+                              borderBottom: "solid 1px #D8DBE0",
+                            }}
+                          >
+                            <option value="">
+                              Select maintenance technician ...
+                            </option>
+                            {allUsers
+                              .filter(
+                                (fltrdUser) =>
+                                  fltrdUser.userRole === "technician" &&
+                                  fltrdUser.branch === user.branch
+                              )
+                              .map((theUser) => (
+                                <option value={theUser._id} key={theUser._id}>
+                                  {theUser.fName + " " + theUser.mName}
+                                </option>
+                              ))}
+                          </CSelect>
+                          {pickup.status === "controlling_maintenance" && (
+                            <div className="input-group-append">
+                              <CButton
+                                color="dark"
+                                className="d-print-none input-group-text"
+                                onClick={() =>
+                                  editmaintenanceTechnician(pickup._id)
+                                }
+                              >
+                                Done!
+                              </CButton>
+                            </div>
+                          )}
+                          {/* </div> */}
+                        </CCol>
+                      </CRow>
+                      <CRow className="mb-2">
+                        <CCol className="col-4">
+                          <h6>* Signature :</h6>
+                        </CCol>
+                        <CCol className="col-7 border-bottom"></CCol>
+                      </CRow>
+                    </CCol>
+                  )}
                 </CRow>
               </CCol>
             </CRow>

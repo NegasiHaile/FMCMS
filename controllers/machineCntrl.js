@@ -304,6 +304,17 @@ const machineCntrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  machineProblemSolvedInMaintenance: async (req, res) => {
+    try {
+      await Machines.findOneAndUpdate(
+        { _id: req.params.id },
+        { problemStatus: "fine" }
+      );
+      res.json({ msg: "Done!" });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
 };
 
 module.exports = machineCntrl;
