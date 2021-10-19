@@ -522,8 +522,8 @@ function BusinessDetail() {
                     {allMachines
                       .filter(
                         (filteredMachine) =>
-                          (filteredMachine.salesStatus === "unsold" ||
-                            filteredMachine.salesStatus === "returned") &&
+                          filteredMachine.salesStatus === "unsold" &&
+                          filteredMachine.availableIn === "branch-store" &&
                           filteredMachine.branch == user.branch
                       )
                       .map((thisMachine) => (
@@ -537,7 +537,7 @@ function BusinessDetail() {
               </CCol>
               <CCol className="d-flex justify-content-between mt-1">
                 <CButton type="submit" size="sm" variant="outline" color="dark">
-                  <CIcon name="cil-check-circle" /> Confirm
+                  <CIcon name="cil-check-circle" /> Done!
                 </CButton>
                 <CButton
                   size="sm"

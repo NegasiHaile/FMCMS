@@ -113,7 +113,9 @@ function BusinessMachines({ businessId }) {
                           className="text-primary"
                           to={`/pickup/machine/${salesPerBusiness.machineId}`}
                         >
-                          <CTooltip content={`Receive this machine.`}>
+                          <CTooltip
+                            content={`Receive this machine for maintenance!`}
+                          >
                             <CIcon name="cil-recycle" />
                           </CTooltip>
                         </CLink>
