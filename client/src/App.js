@@ -3,11 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { GlobalState } from "./GlobalState";
 import "./scss/style.scss";
 
-const loading = (
-  <div className="pt-3 text-center">
-    <div className="sk-spinner sk-spinner-pulse"></div>
-  </div>
-);
+const loading = <div class="loader"></div>;
 
 // Users
 const ClientLayout = lazy(() => import("./Layouts/Client/Layout"));

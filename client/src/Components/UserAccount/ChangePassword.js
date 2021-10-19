@@ -135,7 +135,7 @@ const ChangePassword = () => {
                   required
                 />
               </CInputGroup>
-              <CButton type="submit" color="success" block>
+              <CButton type="submit" color="danger" block>
                 Change Password
               </CButton>
             </CForm>

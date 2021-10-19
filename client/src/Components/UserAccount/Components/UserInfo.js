@@ -104,22 +104,22 @@ function UserInfo({ id }) {
           </CCardBody>
         </CCard>
       </CCol>
-      <CCol md="12" lg="4">
+      {/* <CCol md="12" lg="4">
         <CCard>
           <CCardHeader>User tasks</CCardHeader>
           <CCardBody>
             <h3>{userDetail.fName}</h3>
           </CCardBody>
         </CCard>
-      </CCol>
-      <CCol>
+      </CCol> */}
+      {/* <CCol>
         <CCard>
           <CCardHeader>Work History</CCardHeader>
           <CCardBody>
             <h3>{userDetail.fName}</h3>
           </CCardBody>
         </CCard>
-      </CCol>
+      </CCol> */}
     </CRow>
   );
 }
