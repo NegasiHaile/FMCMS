@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { GlobalState } from "./GlobalState";
 import "./scss/style.scss";
 
-const loading = <div class="loader"></div>;
+const loading = <div className="loader"></div>;
 
 // Users
 const ClientLayout = lazy(() => import("./Layouts/Client/Layout"));
@@ -129,7 +129,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <h1> This despilays if Success!</h1> */}
       <BrowserRouter>
         <Suspense fallback={loading}>
           <Switch>
