@@ -61,22 +61,22 @@ const _nav = [
     icon: "cil-asterisk-circle",
   },
   // Spares Managment and controlling
-  // {
-  //   _tag: "CSidebarNavTitle",
-  //   _children: ["Spares-Managment"],
-  // },
-  // {
-  //   _tag: "CSidebarNavItem",
-  //   name: "SIM-Card List",
-  //   to: "/machines/list",
-  //   icon: "cil-file",
-  // },
-  // {
-  //   _tag: "CSidebarNavItem",
-  //   name: "Other Spares",
-  //   to: "/mrc/list",
-  //   icon: "cil-blur",
-  // },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Spares-Managment"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "SIM-Card List",
+    to: "/machines/list",
+    icon: "cil-file",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Other Spares",
+    to: "/mrc/list",
+    icon: "cil-blur",
+  },
 
   // others
   {
