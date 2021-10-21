@@ -15,6 +15,7 @@ app.use("/user", require("./routes/userRouter"));
 app.use("/branch", require("./routes/branchRouter"));
 app.use("/machine", require("./routes/machineRouter"));
 app.use("/mrc", require("./routes/mrcRouter"));
+app.use("/simcard", require("./routes/simCardRouter"));
 app.use("/business", require("./routes/clientBusinessRouter"));
 app.use("/notification", require("./routes/notificationRouter"));
 app.use("/sales", require("./routes/salesRouter"));
