@@ -88,7 +88,7 @@ const SystemSetting = lazy(() =>
 const Pricing = lazy(() => import("../../Components/Pricing/Pricing"));
 
 const routes = [
-  { path: "/", exact: true, name: "S-A" },
+  { path: "/", exact: true, name: "Supper-Admin" },
   {
     path: "/dashboard",
     exact: true,

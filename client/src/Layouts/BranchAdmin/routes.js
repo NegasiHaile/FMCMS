@@ -78,7 +78,7 @@ const Inventory = lazy(() => import("../../Components/Inventory/Inventory"));
 const SystemBackup = lazy(() => import("../../Components/System/SystemBackup"));
 
 const routes = [
-  { path: "/", exact: true, name: "Branch" },
+  { path: "/", exact: true, name: "Branch-Admin" },
   {
     path: "/dashboard",
     exact: true,
