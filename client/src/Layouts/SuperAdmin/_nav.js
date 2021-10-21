@@ -60,7 +60,7 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Returning List",
+    name: "Withdrawal List",
     to: "/machine/return/list",
     icon: "cil-recycle",
   },
