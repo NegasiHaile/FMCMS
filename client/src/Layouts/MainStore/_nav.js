@@ -60,18 +60,18 @@ const _nav = [
   // Spares Managment and controlling
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Spares-Managment"],
+    _children: ["SIM card-Managment"],
   },
   {
     _tag: "CSidebarNavItem",
     name: "SIM-Card List",
-    to: "/machines/list",
+    to: "/simcard/list",
     icon: "cil-file",
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Other Spares",
-    to: "/machines/list",
+    name: "Distribute Spares",
+    to: "/simcard/distribution",
     icon: "cil-blur",
   },
 

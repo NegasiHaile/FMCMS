@@ -39,20 +39,6 @@ const _nav = [
     icon: "cil-print",
   },
   // MRC Managment and controlling
-  // {
-  //   _tag: "CSidebarNavTitle",
-  //   _children: ["MRC-Managment"],
-  // },
-  // {
-  //   _tag: "CSidebarNavItem",
-  //   name: "New Arrivals",
-  //   to: "/mrc/distribution",
-  //   icon: "cil-asterisk",
-  //   badge: {
-  //     color: "danger",
-  //     text: 200,
-  //   },
-  // },
 
   {
     _tag: "CSidebarNavItem",
@@ -60,23 +46,24 @@ const _nav = [
     to: "/mrcs/list",
     icon: "cil-asterisk-circle",
   },
-  // Spares Managment and controlling
-  {
-    _tag: "CSidebarNavTitle",
-    _children: ["Spares-Managment"],
-  },
   {
     _tag: "CSidebarNavItem",
     name: "SIM-Card List",
-    to: "/machines/list",
+    to: "/simcard/list",
     icon: "cil-file",
   },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Other Spares",
-    to: "/mrc/list",
-    icon: "cil-blur",
-  },
+  // Spares Managment and controlling
+  // {
+  //   _tag: "CSidebarNavTitle",
+  //   _children: ["Spares-Managment"],
+  // },
+
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Other Spares",
+  //   to: "/mrc/list",
+  //   icon: "cil-blur",
+  // },
 
   // others
   {

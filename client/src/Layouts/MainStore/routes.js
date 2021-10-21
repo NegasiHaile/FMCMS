@@ -35,6 +35,11 @@ const MrcsList = lazy(() => import("../../Components/MRC/MrcsList"));
 const MRCDistribution = lazy(() =>
   import("../../Components/MRC/MRCDistribution")
 );
+// Importing SIM cards related routes
+const SIMCardList = lazy(() => import("../../Components/SIMCard/SIMcardList"));
+const DistributeSIMCard = lazy(() =>
+  import("../../Components/SIMCard/DistributeSIMCard")
+);
 // Importing of machine pickup ralted pages
 const PickupDetail = lazy(() =>
   import("../../Components/Machine/PickupDetail")
@@ -126,6 +131,19 @@ const routes = [
     exact: true,
     name: "MRC-Distribution",
     component: MRCDistribution,
+  },
+  // SIM cards
+  {
+    path: "/simcard/list",
+    exact: true,
+    name: "SIM-Card-List",
+    component: SIMCardList,
+  },
+  {
+    path: "/simcard/distribution",
+    exact: true,
+    name: "SIM-Card-Distribution",
+    component: DistributeSIMCard,
   },
   // Machine pickup detail
   {

@@ -55,6 +55,10 @@ const MachinesList = lazy(() =>
 const MachineIndetail = lazy(() =>
   import("../../Components/Machine/MachineIndetail")
 );
+// Importing MRC related routes
+const MrcsList = lazy(() => import("../../Components/MRC/MrcsList"));
+// Importing SIM cards related routes
+const SIMCardList = lazy(() => import("../../Components/SIMCard/SIMcardList"));
 // Importing of machine pickup ralted pages
 const PickupDetail = lazy(() =>
   import("../../Components/Machine/PickupDetail")
@@ -184,7 +188,20 @@ const routes = [
     name: "Machine-Indetail",
     component: MachineIndetail,
   },
-
+  // MRC
+  {
+    path: "/mrcs/list",
+    exact: true,
+    name: "Mrc-List",
+    component: MrcsList,
+  },
+  // SIM cards
+  {
+    path: "/simcard/list",
+    exact: true,
+    name: "SIM-Card-List",
+    component: SIMCardList,
+  },
   // Machine pickup detail
   {
     path: "/pickup/detail/:id",
