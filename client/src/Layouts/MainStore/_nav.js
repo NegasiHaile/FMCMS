@@ -70,7 +70,7 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Distribute Spares",
+    name: "Distribute SIM-Card",
     to: "/simcard/distribution",
     icon: "cil-blur",
   },
