@@ -1,6 +1,6 @@
 import React from "react";
 
-function SIMCardList() {
+function SimCardList() {
   return (
     <div>
       <p> List of all SIM cards</p>
@@ -8,4 +8,4 @@ function SIMCardList() {
   );
 }
 
-export default SIMCardList;
+export default SimCardList;

@@ -36,7 +36,7 @@ const MachineIndetail = lazy(() =>
 const MrcsList = lazy(() => import("../../Components/MRC/MrcsList"));
 
 // Importing SIM cards related routes
-const SIMCardList = lazy(() => import("../../Components/SIMCard/SIMCardList"));
+const SimCardList = lazy(() => import("../../Components/SIMCard/SimCardList"));
 
 // Importing of machine pickup ralted pages
 const PickupDetail = lazy(() =>
@@ -140,7 +140,7 @@ const routes = [
     path: "/simcard/list",
     exact: true,
     name: "SIM-Card-List",
-    component: SIMCardList,
+    component: SimCardList,
   },
   // Machine pickup detail
   {
