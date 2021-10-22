@@ -2,14 +2,16 @@ const mongoose = require("mongoose");
 
 const simCardsSchema = new mongoose.Schema(
   {
-    ccid: {
+    simNumber: {
       type: String,
-      require: true,
-      unique: true,
+      required: true,
     },
-    number: {
+    branch: {
       type: String,
-      unique: true,
+    },
+    availableIn: {
+      type: String,
+      default: "main-store",
     },
     status: {
       type: String,
@@ -24,4 +26,4 @@ const simCardsSchema = new mongoose.Schema(
   }
 );
 
-module.export = mongoose.model("SimCards", simCardsSchema);
+module.exports = mongoose.model("simcards", simCardsSchema);

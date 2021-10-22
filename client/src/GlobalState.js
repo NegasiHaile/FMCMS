@@ -4,6 +4,7 @@ import UsersAPI from "./api/UsersAPI";
 import BranchAPI from "./api/BranchAPI";
 import MachineAPI from "./api/MachineAPI";
 import MRCAPI from "./api/MRCAPI";
+import SIMCardAPI from "./api/SIMCardAPI";
 import BusinessAPI from "./api/BusinessAPI";
 import SalesAPI from "./api/SalesAPI";
 import MaintenanceAPI from "./api/MaintenanceAPI";
@@ -40,6 +41,7 @@ export const DataProvider = ({ children }) => {
     branchAPI: BranchAPI(),
     MachineAPI: MachineAPI(),
     MRCAPI: MRCAPI(),
+    SIMCardAPI: SIMCardAPI(),
     BusinessAPI: BusinessAPI(),
     SalesAPI: SalesAPI(),
     MaintenanceAPI: MaintenanceAPI(),

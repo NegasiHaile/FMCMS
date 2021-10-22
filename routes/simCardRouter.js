@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const simCardCntrl = require("../controllers/simCardCntrl");
 
-router.get("/list", simCardCntrl.addSIMCard);
+router.post("/register", simCardCntrl.addSIMCard);
+router.get("/list", simCardCntrl.getSIMCardsList);
 
 module.exports = router;
