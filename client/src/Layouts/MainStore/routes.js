@@ -36,7 +36,9 @@ const MRCDistribution = lazy(() =>
   import("../../Components/MRC/MRCDistribution")
 );
 // Importing SIM cards related routes
-const SimCardList = lazy(() => import("../../Components/SIMCard/SimCardList"));
+const SimCardsList = lazy(() =>
+  import("../../Components/SIMCard/SimCardsList")
+);
 const DistributeSIMCard = lazy(() =>
   import("../../Components/SIMCard/DistributeSIMCard")
 );
@@ -137,7 +139,7 @@ const routes = [
     path: "/simcard/list",
     exact: true,
     name: "SIM-Card-List",
-    component: SimCardList,
+    component: SimCardsList,
   },
   {
     path: "/simcard/distribution",
