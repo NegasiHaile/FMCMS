@@ -138,7 +138,7 @@ const routes = [
   },
   // SIM cards
   {
-    path: "/simcard/list",
+    path: "/branch_simcards/list",
     exact: true,
     name: "SIM-Card-List",
     component: SimCardsList,

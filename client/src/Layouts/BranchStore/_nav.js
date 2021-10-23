@@ -18,20 +18,6 @@ const _nav = [
     icon: "cil-star",
   },
   // Machines Managment and controlling
-  // {
-  //   _tag: "CSidebarNavTitle",
-  //   _children: ["Machine-Managment"],
-  // },
-  // {
-  //   _tag: "CSidebarNavItem",
-  //   name: "New Arrivals",
-  //   to: "/machine/distribution",
-  //   icon: "cil-control",
-  //   badge: {
-  //     color: "danger",
-  //     text: 200,
-  //   },
-  // },
   {
     _tag: "CSidebarNavItem",
     name: "List of machines",
@@ -49,21 +35,9 @@ const _nav = [
   {
     _tag: "CSidebarNavItem",
     name: "SIM-Card List",
-    to: "/simcard/list",
+    to: "/branch_simcards/list",
     icon: "cil-file",
   },
-  // Spares Managment and controlling
-  // {
-  //   _tag: "CSidebarNavTitle",
-  //   _children: ["Spares-Managment"],
-  // },
-
-  // {
-  //   _tag: "CSidebarNavItem",
-  //   name: "Other Spares",
-  //   to: "/mrc/list",
-  //   icon: "cil-blur",
-  // },
 
   // others
   {

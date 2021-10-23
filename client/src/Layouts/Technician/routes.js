@@ -167,9 +167,9 @@ const routes = [
   },
   // SIM cards
   {
-    path: "/simcard/list",
+    path: "/simcards/list",
     exact: true,
-    name: "SIM-Card-List",
+    name: "SIM-Cards-List",
     component: SimCardsList,
   },
   // Machine pickup detail

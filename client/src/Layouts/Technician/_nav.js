@@ -36,6 +36,23 @@ const _nav = [
     to: "/machine/return/list",
     icon: "cil-recycle",
   },
+
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["MRC & SIM"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "List of all MRC",
+    to: "/mrcs/list",
+    icon: "cil-asterisk-circle",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "SIM-Card List",
+    to: "/simcards/list",
+    icon: "cil-file",
+  },
   {
     _tag: "CSidebarNavTitle",
     _children: ["Client-Managment"],
