@@ -121,7 +121,7 @@ function MachineDistribution() {
                   onChange={onChangeInput}
                   value={machineDistribution.quantity}
                   min="1"
-                  max="200"
+                  max="500"
                   required
                 ></CInput>
               </CFormGroup>

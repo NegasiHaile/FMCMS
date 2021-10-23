@@ -48,6 +48,25 @@ const simCardCntrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  simCardDistribution: async (req, res) => {
+    try {
+      const unditributedSIMCards = await simcards.find({
+        branch: "none",
+        problemStatus: "fine",
+      });
+      // await simcards.findOneAndUpdate(
+      //   { _id: req.params.id },
+      //   ({ simNumber, branch, problemStatus } = req.body)
+      // );
+      res.json({
+        msg:
+          "SIM card has been successfuly distibuted!" +
+          unditributedSIMCards.length,
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
 };
 
 module.exports = simCardCntrl;

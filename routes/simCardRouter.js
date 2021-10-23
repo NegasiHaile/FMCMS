@@ -5,5 +5,6 @@ router.post("/register", simCardCntrl.addSIMCard);
 router.get("/list", simCardCntrl.getSIMCardsList);
 router.delete("/delete/:id", simCardCntrl.deleteSIMCard);
 router.put("/edit/:id", simCardCntrl.editSIMCard);
+router.put("/distribution", simCardCntrl.simCardDistribution);
 
 module.exports = router;

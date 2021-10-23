@@ -60,8 +60,6 @@ function MRCDistribution() {
       sweetAlert("error", error.response.data.msg);
     }
   };
-
-  console.log(mrcDistribution);
   return (
     <CCard sm="12" md="10" lg="8">
       <CCardHeader>
