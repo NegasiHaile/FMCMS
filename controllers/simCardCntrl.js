@@ -27,6 +27,27 @@ const simCardCntrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  deleteSIMCard: async (req, res) => {
+    try {
+      await simcards.findByIdAndDelete(req.params.id);
+      res.json({ msg: "SIM card has been successfuly deleted" });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+  editSIMCard: async (req, res) => {
+    try {
+      await simcards.findOneAndUpdate(
+        { _id: req.params.id },
+        ({ simNumber, branch, problemStatus } = req.body)
+      );
+      res.json({
+        msg: "SIM card has been successfuly edited!",
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
 };
 
 module.exports = simCardCntrl;

@@ -27,7 +27,7 @@ import Swal from "sweetalert2";
 const simCardDetail = {
   simNumber: "",
   branch: "none",
-  problemStatus: "",
+  problemStatus: "fine",
 };
 function SimCardsList() {
   const state = useContext(GlobalState);
@@ -38,7 +38,7 @@ function SimCardsList() {
   const [simCard, setSimCard] = useState(simCardDetail);
   const [callback, setCallback] = state.SIMCardAPI.callback;
   const [allBranchs] = state.branchAPI.branchs;
-  const [activeSIMCard, setActiveSIMCard] = useState("none");
+  const [onEdit, setOnEdit] = useState(false);
   const [newArivals, setNewArivals] = useState([]);
 
   useEffect(() => {
@@ -58,7 +58,6 @@ function SimCardsList() {
     } else {
       setSIMCardsToDisplay(allSIMCards);
     }
-    console.log("---///---///---" + allSIMCards);
   }, [user, allSIMCards]);
 
   const sweetAlert = (type, text) => {
@@ -79,9 +78,38 @@ function SimCardsList() {
   const onSubmitRegisterSIMCard = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/sim_card/register", { ...simCard });
-      setCallback(!callback);
-      sweetAlert("success", res.data.msg);
+      if (onEdit) {
+        const res = await axios.put(`/sim_card/edit/${simCard._id}`, {
+          ...simCard,
+        });
+        setCallback(!callback);
+        sweetAlert("success", res.data.msg);
+      } else {
+        const res = await axios.post("/sim_card/register", { ...simCard });
+        setCallback(!callback);
+        sweetAlert("success", res.data.msg);
+      }
+    } catch (error) {
+      sweetAlert("error", error.response.data.msg);
+    }
+  };
+  const deleteSIMCard = (_id) => {
+    try {
+      Swal.fire({
+        title: "Delete?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3C4B64",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const res = await axios.delete(`/sim_card/delete/${_id}`);
+          Swal.fire("Deleted!", res.data.msg, "success");
+          setCallback(!callback);
+        }
+      });
     } catch (error) {
       sweetAlert("error", error.response.data.msg);
     }
@@ -107,7 +135,8 @@ function SimCardsList() {
             size="sm"
             color="dark"
             onClick={() => {
-              setActiveSIMCard("none");
+              setSimCard(simCardDetail);
+              setOnEdit(false);
               setShowModal(!showModal);
             }}
           >
@@ -131,7 +160,46 @@ function SimCardsList() {
           scopedSlots={{
             Actions: (simCard) => (
               <td className="d-flex justify-content-between">
-                {simCard.simNumber}
+                {(user.userRole === "main-store" ||
+                  user.userRole === "technician") && (
+                  <CLink
+                    className="text-success"
+                    onClick={() => {
+                      setSimCard({ ...simCard });
+                      setOnEdit(true);
+                      setShowModal(!showModal);
+                    }}
+                  >
+                    <CTooltip
+                      content={`Edit the  - ${simCard.simNumber}- SIM detail.`}
+                    >
+                      <CIcon name="cil-pencil" />
+                    </CTooltip>
+                  </CLink>
+                )}
+                {user.userRole === "main-store" &&
+                  simCard.availableIn === "main-store" && (
+                    <CLink
+                      className="text-danger"
+                      onClick={() => deleteSIMCard(simCard._id)}
+                    >
+                      <CTooltip
+                        content={`Delete - ${simCard.simNumber}- SIM card.`}
+                      >
+                        <CIcon name="cil-trash" />
+                      </CTooltip>
+                    </CLink>
+                  )}
+                <CLink
+                  className="text-info"
+                  to={`/machine/indetail/${simCard._id}`}
+                >
+                  <CTooltip
+                    content={`See detail of  - ${simCard.simNumber}- SIM card.`}
+                  >
+                    <CIcon name="cil-align-center" />
+                  </CTooltip>
+                </CLink>
               </td>
             ),
           }}
@@ -150,21 +218,23 @@ function SimCardsList() {
         <CForm onSubmit={onSubmitRegisterSIMCard}>
           <CModalBody>
             <CRow>
-              <CCol xs="12" md="4">
-                <CFormGroup>
-                  SIM Number ({simCard.simNumber})
-                  <CInput
-                    id="simNumber"
-                    name="simNumber"
-                    placeholder="Enter SIM card number."
-                    required
-                    minLength="10"
-                    maxLength="10"
-                    value={simCard.simNumber}
-                    onChange={onChangeInput}
-                  />
-                </CFormGroup>
-              </CCol>
+              {user.userRole === "main-store" && (
+                <CCol xs="12" md="4">
+                  <CFormGroup>
+                    SIM Number ({simCard.simNumber})
+                    <CInput
+                      id="simNumber"
+                      name="simNumber"
+                      placeholder="Enter SIM card number."
+                      required
+                      minLength="10"
+                      maxLength="10"
+                      value={simCard.simNumber}
+                      onChange={onChangeInput}
+                    />
+                  </CFormGroup>
+                </CCol>
+              )}
               <CCol xs="12" md="4">
                 <CFormGroup>
                   SIM card problem status
@@ -181,7 +251,7 @@ function SimCardsList() {
                   </CSelect>
                 </CFormGroup>
               </CCol>
-              {activeSIMCard !== "none" && (
+              {onEdit && user.userRole === "main-store" && (
                 <CCol xs="12" md="4">
                   <CFormGroup>
                     SIM card branch
