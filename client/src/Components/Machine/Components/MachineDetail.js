@@ -41,6 +41,8 @@ function MachineDetail({ id }) {
   const [machineCallback, setMachineCallback] = state.MachineAPI.callback;
   const [mrcs] = state.MRCAPI.mrcs;
   const [mrcCallback, setMRCCallback] = state.MRCAPI.callback;
+  const [allSIMCards] = state.SIMCardAPI.simCards;
+  const [simCardcallback, setSIMCardCallback] = state.SIMCardAPI.callback;
   const [machieneDetail, setMachieneDetail] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [onMRCEdit, setOnMRCEdit] = useState(false);
@@ -107,7 +109,7 @@ function MachineDetail({ id }) {
       const res = await axios.put(`/machine/assigne_sim/${id}`, {
         ...assignementDetail,
       });
-      setMRCCallback(!mrcCallback);
+      setSIMCardCallback(!simCardcallback);
       setMachineCallback(!machineCallback);
       sweetAlert("success", res.data.msg);
     }
@@ -118,6 +120,14 @@ function MachineDetail({ id }) {
       return activeMRC[0].MRC;
     } else {
       return "none";
+    }
+  };
+  const filterSIMusing_id = (id) => {
+    const SIMCard = allSIMCards.filter((filteredSIM) => filteredSIM._id === id);
+    if (SIMCard.length > 0) {
+      return SIMCard[0].simNumber;
+    } else {
+      return "0";
     }
   };
   return (
@@ -212,7 +222,7 @@ function MachineDetail({ id }) {
                     <strong>* SIM:</strong>
 
                     <span>
-                      {machieneDetail.SIM}
+                      {filterSIMusing_id(machieneDetail.SIM)}
                       {user.userRole === "branch-store" && (
                         <>
                           {" "}
@@ -327,16 +337,31 @@ function MachineDetail({ id }) {
                 <CCol sm="12">
                   <CFormGroup>
                     Insert the 10 digit of SIM card number
-                    <CInput
+                    <CSelect
+                      aria-label="Select SIM card"
                       id="SIM"
                       name="SIM"
-                      placeholder="Inser SIM card number."
-                      maxLength="10"
-                      minLength="10"
                       value={assignementDetail.SIM}
                       onChange={onChangeInput}
                       required
-                    />
+                    >
+                      <option value="0">Select SIM card...</option>
+                      {allSIMCards
+                        .filter(
+                          (SIMCard) =>
+                            (SIMCard.status === "free" &&
+                              SIMCard.branch == user.branch) ||
+                            SIMCard._id == machieneDetail.SIM
+                        )
+                        .map((filteredSIMCard) => (
+                          <option
+                            value={filteredSIMCard._id}
+                            key={filteredSIMCard._id}
+                          >
+                            {filteredSIMCard.simNumber}
+                          </option>
+                        ))}
+                    </CSelect>
                   </CFormGroup>
                 </CCol>
               )}
