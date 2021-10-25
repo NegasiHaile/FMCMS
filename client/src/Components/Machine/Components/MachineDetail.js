@@ -336,7 +336,7 @@ function MachineDetail({ id }) {
               {onSIMEdit && (
                 <CCol sm="12">
                   <CFormGroup>
-                    Insert the 10 digit of SIM card number
+                    Select SIM card number
                     <CSelect
                       aria-label="Select SIM card"
                       id="SIM"
@@ -349,8 +349,9 @@ function MachineDetail({ id }) {
                       {allSIMCards
                         .filter(
                           (SIMCard) =>
-                            (SIMCard.status === "free" &&
-                              SIMCard.branch == user.branch) ||
+                            (SIMCard.branch == user.branch &&
+                              SIMCard.status === "free" &&
+                              SIMCard.availableIn === "branch-store") ||
                             SIMCard._id == machieneDetail.SIM
                         )
                         .map((filteredSIMCard) => (
