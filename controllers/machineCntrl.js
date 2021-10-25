@@ -2,6 +2,7 @@ const Machines = require("../models/machineModel");
 const clientBusinesses = require("../models/clientBusinessModel");
 const Sales = require("../models/salesModel");
 const MRCs = require("../models/mrcModel");
+const simcards = require("../models/simCardModel");
 
 const machineCntrl = {
   register: async (req, res) => {
@@ -267,14 +268,45 @@ const machineCntrl = {
   },
   assineSIM: async (req, res) => {
     try {
-      if (req.params.id) {
-        await Machines.findOneAndUpdate(
-          { _id: req.params.id },
-          { SIM: req.body.SIM }
-        );
-        res.json({ msg: "SIM card of this machine is updated successfully!!" });
+      const machine = await Machines.findById({ _id: req.params.id });
+      if (machine) {
+        if (machine.SIM != "0") {
+          await simcards.findOneAndUpdate(
+            { _id: machine.SIM },
+            { status: "free" }
+          );
+          await Machines.findOneAndUpdate(
+            { _id: req.params.id },
+            { SIM: req.body.SIM }
+          );
+          if (req.body.SIM != "0") {
+            await simcards.findOneAndUpdate(
+              { _id: req.body.SIM },
+              { status: "taken" }
+            );
+          }
+
+          res.json({
+            msg: "SIM card of this machine is updated successfully!! 1",
+          });
+        } else {
+          await Machines.findOneAndUpdate(
+            { _id: req.params.id },
+            { SIM: req.body.SIM }
+          );
+          if (req.body.SIM != "0") {
+            await simcards.findOneAndUpdate(
+              { _id: req.body.SIM },
+              { status: "taken" }
+            );
+          }
+
+          res.json({
+            msg: "SIM card of this machine is updated successfully!! 0",
+          });
+        }
       } else {
-        return res.status(400).json({ msg: "Opration failed!" });
+        return res.status(400).json({ msg: "Machine not found!" });
       }
     } catch (err) {
       return res.status(500).json({ msg: err.message });
