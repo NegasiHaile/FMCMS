@@ -206,14 +206,14 @@ function SimCardsList() {
         />
       </CCardBody>
 
-      {/* register machine modal */}
+      {/* register sim CARD modal */}
       <CModal
         size="lg"
         show={showModal}
         onClose={() => setShowModal(!showModal)}
       >
         <CModalHeader closeButton>
-          <CModalTitle className="text-muted">Open-New-machine</CModalTitle>
+          <CModalTitle className="text-muted">Add new SIM card</CModalTitle>
         </CModalHeader>
         <CForm onSubmit={onSubmitRegisterSIMCard}>
           <CModalBody>
@@ -251,7 +251,7 @@ function SimCardsList() {
                   </CSelect>
                 </CFormGroup>
               </CCol>
-              {onEdit && user.userRole === "main-store" && (
+              {user.userRole === "main-store" && (
                 <CCol xs="12" md="4">
                   <CFormGroup>
                     SIM card branch

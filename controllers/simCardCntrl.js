@@ -66,7 +66,10 @@ const simCardCntrl = {
         });
       } else {
         return res.status(400).json({
-          msg: "Insufficient stock, Add more SIM cards",
+          msg:
+            "Insufficient stock, You have only " +
+            unditributedSIMCards.length +
+            " undistribute SIM card(s)!",
         });
       }
     } catch (err) {

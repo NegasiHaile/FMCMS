@@ -87,7 +87,7 @@ function DistributeSIMCard() {
                   onChange={onChangeInput}
                   value={simCardDistribution.quantity}
                   min="1"
-                  // max={undistributedSIMCards.length}
+                  max={undistributedSIMCards.length}
                   required
                 ></CInput>
               </CFormGroup>
