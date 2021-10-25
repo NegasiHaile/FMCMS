@@ -50,19 +50,25 @@ const simCardCntrl = {
   },
   simCardDistribution: async (req, res) => {
     try {
-      const unditributedSIMCards = await simcards.find({
-        branch: "none",
-        problemStatus: "fine",
-      });
-      // await simcards.findOneAndUpdate(
-      //   { _id: req.params.id },
-      //   ({ simNumber, branch, problemStatus } = req.body)
-      // );
-      res.json({
-        msg:
-          "SIM card has been successfuly distibuted!" +
-          unditributedSIMCards.length,
-      });
+      const unditributedSIMCards = await simcards
+        .find({
+          branch: "none",
+          problemStatus: "fine",
+        })
+        .limit(Number(req.body.quantity));
+      if (req.body.quantity <= unditributedSIMCards.length) {
+        await simcards.updateMany(
+          { _id: { $in: unditributedSIMCards } },
+          { branch: req.body.branchId }
+        );
+        res.json({
+          msg: "SIM card has been successfuly distibuted!",
+        });
+      } else {
+        return res.status(400).json({
+          msg: "Insufficient stock, Add more SIM cards",
+        });
+      }
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
