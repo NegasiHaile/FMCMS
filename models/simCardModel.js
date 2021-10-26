@@ -4,6 +4,7 @@ const simCardsSchema = new mongoose.Schema(
   {
     simNumber: {
       type: String,
+      unique: true,
       required: true,
     },
     branch: {
