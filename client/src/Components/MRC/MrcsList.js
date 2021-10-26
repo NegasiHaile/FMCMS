@@ -32,7 +32,8 @@ const mrcDetail = {
 function MrcsList() {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
-  const [mrcs, setMRCs] = state.MRCAPI.mrcs;
+  const [allMRCs] = state.MRCAPI.mrcs;
+  const [mrcs, setMRCs] = useState([]);
   const [mrcCallBack, setMRCCallBack] = state.MRCAPI.callback;
   const [token] = state.token;
 
@@ -47,12 +48,12 @@ function MrcsList() {
   useEffect(() => {
     if (user.userRole !== "super-admin" && user.userRole !== "main-store") {
       setMRCs(
-        mrcs.filter((filteredMRCs) => filteredMRCs.branch == user.branch)
+        allMRCs.filter((filteredMRCs) => filteredMRCs.branch == user.branch)
       );
     } else {
-      setMRCs(mrcs);
+      setMRCs(allMRCs);
     }
-  }, [user, mrcs]);
+  }, [user, allMRCs]);
   const sweetAlert = (type, text) => {
     Swal.fire({
       position: "center",
