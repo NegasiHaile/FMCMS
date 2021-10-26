@@ -57,7 +57,7 @@ const ChangePassword = () => {
           position: "center",
           background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
           icon: "error",
-          text: "New password not mutch please retype your password!",
+          text: "New password doesn't match, please retype your password!",
           confirmButtonColor: "#1E263C",
           showConfirmButton: false,
           // timer: 1500,
