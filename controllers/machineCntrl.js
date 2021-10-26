@@ -248,17 +248,35 @@ const machineCntrl = {
       if (req.params.id) {
         const machineDetail = await Machines.findById({ _id: req.params.id });
 
-        if (machineDetail.MRC !== "none")
+        if (machineDetail.MRC !== "none") {
           await MRCs.findOneAndUpdate(
             { _id: machineDetail.MRC },
             { status: "free" }
           );
-        await Machines.findOneAndUpdate(
-          { _id: req.params.id },
-          { MRC: req.body.MRC }
-        );
-        await MRCs.findOneAndUpdate({ _id: req.body.MRC }, { status: "taken" });
-        res.json({ msg: "MRC of this machine is updated successfully!!" });
+          await Machines.findOneAndUpdate(
+            { _id: req.params.id },
+            { MRC: req.body.MRC }
+          );
+          if (req.body.MRC !== "none") {
+            await MRCs.findOneAndUpdate(
+              { _id: req.body.MRC },
+              { status: "taken" }
+            );
+          }
+          res.json({ msg: "MRC of this machine is updated successfully!!" });
+        } else {
+          await Machines.findOneAndUpdate(
+            { _id: req.params.id },
+            { MRC: req.body.MRC }
+          );
+          if (req.body.MRC !== "none") {
+            await MRCs.findOneAndUpdate(
+              { _id: req.body.MRC },
+              { status: "taken" }
+            );
+          }
+          res.json({ msg: "MRC of this machine is updated successfully!!" });
+        }
       } else {
         return res.status(400).json({ msg: "Opration failed!" });
       }
