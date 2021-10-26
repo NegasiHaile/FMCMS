@@ -38,7 +38,7 @@ function MrcsList() {
   const [token] = state.token;
 
   const [mrc, setMRC] = useState(mrcDetail);
-  const [activeMRC, setActiveMRC] = useState("none");
+  const [onEdit, setOnEdit] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const onChangeInput = (e) => {
@@ -69,10 +69,17 @@ function MrcsList() {
   const onChangeSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/mrc/register", { ...mrc });
-      sweetAlert("success", res.data.msg);
-      setShowModal(!showModal);
-      setMRCCallBack(!mrcCallBack);
+      if (onEdit) {
+        const res = await axios.put(`/mrc/edit`, { ...mrc });
+        setShowModal(!showModal);
+        setMRCCallBack(!mrcCallBack);
+        sweetAlert("success", res.data.msg);
+      } else {
+        const res = await axios.post("/mrc/register", { ...mrc });
+        setShowModal(!showModal);
+        setMRCCallBack(!mrcCallBack);
+        sweetAlert("success", res.data.msg);
+      }
     } catch (error) {
       sweetAlert("error", error.response.data.msg);
     }
@@ -101,7 +108,18 @@ function MrcsList() {
     }
   };
 
-  const mrcTableFields = ["MRC", "status", "createdAt", "Actions"];
+  const mrcTableFields = [
+    "MRC",
+    "status",
+    "createdAt",
+    ,
+    {
+      key: "Actions",
+      label: "Actions",
+      sorter: false,
+      filter: false,
+    },
+  ];
   return (
     <>
       <CCard className=" shadow-sm">
@@ -110,9 +128,10 @@ function MrcsList() {
           {user.userRole === "main-store" && (
             <CButton
               size="sm"
-              color="light"
+              color="dark"
               onClick={() => {
-                setActiveMRC("none");
+                setMRC(mrcDetail);
+                setOnEdit(false);
                 setShowModal(!showModal);
               }}
             >
@@ -127,6 +146,7 @@ function MrcsList() {
             items={mrcs}
             fields={mrcTableFields}
             tableFilter
+            columnFilter
             itemsPerPageSelect
             itemsPerPage={10}
             hover
@@ -136,38 +156,45 @@ function MrcsList() {
             scopedSlots={{
               Actions: (mrc) => (
                 <>
-                  {user.userRole === "main-store" && (
-                    <td className="d-flex justify-content-between">
-                      {mrc.status === "free" && (
+                  <td className="d-flex justify-content-between">
+                    {mrc.status === "free" && user.userRole === "main-store" && (
+                      <>
+                        {" "}
                         <CLink
                           className="text-success"
                           onClick={() => {
-                            setActiveMRC("none");
+                            setMRC({ ...mrc });
+                            setOnEdit(true);
                             setShowModal(!showModal);
                           }}
                         >
-                          <CTooltip
-                            content={`See detail of - ${mrc.MRC}- branch.`}
-                          >
+                          <CTooltip content={`Edit - ${mrc.MRC} - MRC.`}>
                             <CIcon name="cil-pencil" />
                           </CTooltip>
                         </CLink>
-                      )}
-                      {user.userRole === "main-store" && mrc.branch === "none" && (
-                        <>
-                          <span className="text-muted">|</span>
-                          <CLink
-                            className="text-danger"
-                            onClick={() => deleteMRC(mrc._id)}
-                          >
-                            <CTooltip content={`Delete - ${mrc.MRC}- MRC.`}>
-                              <CIcon name="cil-trash" />
-                            </CTooltip>
-                          </CLink>
-                        </>
-                      )}
-                    </td>
-                  )}
+                        <span className="text-muted">|</span>{" "}
+                      </>
+                    )}
+                    {mrc.branch === "none" && user.userRole === "main-store" && (
+                      <>
+                        <CLink
+                          className="text-danger"
+                          onClick={() => deleteMRC(mrc._id)}
+                        >
+                          <CTooltip content={`Delete - ${mrc.MRC} - MRC.`}>
+                            <CIcon name="cil-trash" />
+                          </CTooltip>
+                        </CLink>
+
+                        <span className="text-muted">|</span>
+                      </>
+                    )}
+                    <CLink className="text-info" to={`/mrc/detail/${mrc._id}`}>
+                      <CTooltip content={`See detail of  - ${mrc.MRC} - MRC.`}>
+                        <CIcon name="cil-align-center" />
+                      </CTooltip>
+                    </CLink>
+                  </td>
                 </>
               ),
             }}
@@ -176,7 +203,9 @@ function MrcsList() {
 
         <CModal show={showModal} onClose={() => setShowModal(!showModal)}>
           <CModalHeader closeButton>
-            <CModalTitle>Add new MRC</CModalTitle>
+            <CModalTitle>
+              {onEdit ? " Edit " + mrc.MRC + " MRC" : " Add new MRC "}
+            </CModalTitle>
           </CModalHeader>
           <CForm onSubmit={onChangeSubmit}>
             <CModalBody>
@@ -199,13 +228,10 @@ function MrcsList() {
               </CRow>
             </CModalBody>
             <CModalFooter>
-              {activeMRC === "none" ? (
-                <CButton type="submit" size="sm" color="success">
-                  <CIcon name="cil-save" /> Save
-                </CButton>
-              ) : (
-                ""
-              )}
+              <CButton type="submit" size="sm" color="success">
+                <CIcon name="cil-save" /> {onEdit ? " Save Change " : " Save "}
+              </CButton>
+
               <CButton
                 size="sm"
                 color="danger"

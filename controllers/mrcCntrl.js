@@ -31,7 +31,19 @@ const salesCntrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
-
+  editMRC: async (req, res) => {
+    try {
+      await MRCs.findOneAndUpdate(
+        { _id: req.body._id },
+        ({ MRC, branch, status } = req.body)
+      );
+      res.json({
+        msg: "MRC has been successfuly edited!",
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
   deleteMRC: async (req, res) => {
     try {
       await MRCs.findByIdAndDelete(req.params.id);

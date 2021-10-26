@@ -4,6 +4,7 @@ const mrcSchema = new mongoose.Schema(
   {
     MRC: {
       type: String,
+      unique: true,
       required: true,
     },
     branch: {
