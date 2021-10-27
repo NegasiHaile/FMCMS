@@ -35,6 +35,7 @@ const MachinesList = () => {
   const [machines, setMachines] = useState([]);
   const [allBranchs] = state.branchAPI.branchs;
   const [mrcs] = state.MRCAPI.mrcs;
+  const [allSIMCards] = state.SIMCardAPI.simCards;
   const [callback, setCallback] = state.MachineAPI.callback;
   const [callbackBusiness, setCallbackBusiness] = state.BusinessAPI.callback;
   const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
@@ -170,7 +171,15 @@ const MachinesList = () => {
     if (activeMRC.length > 0) {
       return activeMRC[0].MRC;
     } else {
-      return "none";
+      return id;
+    }
+  };
+  const filterSIMusing_id = (id) => {
+    const SIMCard = allSIMCards.filter((filteredSIM) => filteredSIM._id === id);
+    if (SIMCard.length > 0) {
+      return SIMCard[0].simNumber;
+    } else {
+      return id;
     }
   };
   // console.log(machine);
@@ -242,6 +251,7 @@ const MachinesList = () => {
             pagination
             scopedSlots={{
               MRC: (machine) => <td>{filterMRCusing_id(machine.MRC)}</td>,
+              SIM: (machine) => <td>{filterSIMusing_id(machine.SIM)}</td>,
               salesStatus: (machine) => (
                 <td className="d-flex justify-content-between">
                   {machine.salesStatus}
