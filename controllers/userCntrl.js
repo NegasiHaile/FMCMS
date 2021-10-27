@@ -128,7 +128,7 @@ const userCntrl = {
 
   getUsers: async (req, res) => {
     try {
-      res.json(await Users.find().sort({ createdAt: -1 }));
+      res.json(await Users.find().sort({ createdAt: -1 }).select("-password"));
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
