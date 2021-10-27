@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { GlobalState } from "../../GlobalState";
+import NewArrivals from "./Components/NewArrivals";
 import {
   CButton,
   CCard,
@@ -21,6 +22,7 @@ import {
   CDataTable,
   CLink,
   CTooltip,
+  CBadge,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
@@ -40,12 +42,15 @@ function SimCardsList() {
   const [allBranchs] = state.branchAPI.branchs;
   const [onEdit, setOnEdit] = useState(false);
   const [newArivals, setNewArivals] = useState([]);
+  const [newArivalsModal, setNewArivalsModal] = useState(false);
 
   useEffect(() => {
     if (user.userRole !== "super-admin" && user.userRole !== "main-store") {
       setSIMCardsToDisplay(
         allSIMCards.filter(
-          (filteredSIMCard) => filteredSIMCard.branch == user.branch
+          (filteredSIMCard) =>
+            filteredSIMCard.branch == user.branch &&
+            filteredSIMCard.availableIn === "branch-store"
         )
       );
       setNewArivals(
@@ -141,6 +146,21 @@ function SimCardsList() {
             }}
           >
             <CIcon name="cil-plus" /> Add SIM card
+          </CButton>
+        )}
+        {user.userRole === "branch-store" && (
+          <CButton
+            size="sm"
+            color="danger"
+            variant="outline"
+            onClick={() => {
+              setNewArivalsModal(!newArivalsModal);
+            }}
+          >
+            New Arivals{" "}
+            <CBadge color="danger" className="mfs-auto">
+              {newArivals.length}
+            </CBadge>
           </CButton>
         )}
       </CCardHeader>
@@ -288,6 +308,31 @@ function SimCardsList() {
             </CButton>
           </CModalFooter>
         </CForm>
+      </CModal>
+
+      {/* Machines of new arivals */}
+      <CModal
+        size="lg"
+        show={newArivalsModal}
+        onClose={() => setNewArivalsModal(!newArivalsModal)}
+      >
+        <CModalHeader closeButton>
+          <CModalTitle className="text-muted">New arivals</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <NewArrivals newArrivals={newArivals} />
+        </CModalBody>
+        <CModalFooter>
+          <CButton
+            size="sm"
+            color="danger"
+            onClick={() => {
+              setNewArivalsModal(!newArivalsModal);
+            }}
+          >
+            <CIcon name="cil-x" /> Close
+          </CButton>
+        </CModalFooter>
       </CModal>
     </CCard>
   );

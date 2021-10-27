@@ -76,6 +76,30 @@ const simCardCntrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  approveSIMCardFromTheBranchStore: async (req, res) => {
+    try {
+      if (req.params.id === "all") {
+        await simcards.updateMany(
+          {
+            $and: [
+              { branch: req.params.branchId },
+              { availableIn: "main-store" },
+            ],
+          },
+          { $set: { availableIn: "branch-store" } }
+        );
+        res.json({ msg: "All new arrival approved successfuly!" });
+      } else {
+        await simcards.findOneAndUpdate(
+          { _id: req.params.id },
+          { availableIn: "branch-store" }
+        );
+        res.json({ msg: "SIM card is approved successfuly!" });
+      }
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
 };
 
 module.exports = simCardCntrl;
