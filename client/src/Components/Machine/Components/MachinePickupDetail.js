@@ -870,6 +870,7 @@ function MachinePickupOperations() {
   const [machinePikups] = state.MachinePickUpAPI.machinePickups;
   const [callbackPickup, setCallbackPickup] = state.MachinePickUpAPI.callback;
   const [callbackMachine, setCallbackMachine] = state.MachineAPI.callback;
+  const [callbackSIMCard, setCallbackSIMCard] = state.SIMCardAPI.callback;
   const [pickup, setPickup] = useState([]);
 
   useEffect(() => {
@@ -895,7 +896,8 @@ function MachinePickupOperations() {
     _id,
     machineId,
     category,
-    request
+    request,
+    simCard
   ) => {
     try {
       Swal.fire({
@@ -913,8 +915,11 @@ function MachinePickupOperations() {
               machineId,
               category,
               request,
+              simCard,
             });
             setCallbackPickup(!callbackPickup);
+            setCallbackMachine(!callbackMachine);
+            setCallbackSIMCard(!callbackSIMCard);
             sweetAlert("success", res.data.msg);
           }
         } catch (error) {
@@ -1044,7 +1049,8 @@ function MachinePickupOperations() {
                         pickup[0]._id,
                         pickup[0].machineId,
                         pickup[0].category,
-                        "stored"
+                        "stored",
+                        pickup[0].machineSIM
                       )
                     }
                   >

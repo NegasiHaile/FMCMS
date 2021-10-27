@@ -1,6 +1,7 @@
 const MachinePickups = require("../models/machinePickupModel");
 const Sales = require("../models/salesModel");
 const machines = require("../models/machineModel");
+const simcards = require("../models/simCardModel");
 const clientBusinesses = require("../models/clientBusinessModel");
 const branchs = require("../models/branchModel");
 const path = require("path");
@@ -370,12 +371,22 @@ const machinePickupCntrl = {
   maintenanceProcessing: async (req, res) => {
     try {
       const pickupDetail = await MachinePickups.findById(req.body._id);
-      if (req.body.category === "withdrawal") {
+      const SIM_id = req.body.simCard;
+      if (req.body.request === "stored") {
         await machines.findOneAndUpdate(
           { _id: req.body.machineId },
           { salesStatus: "unsold" }
         );
-
+        if (SIM_id.length >= 20) {
+          await simcards.findOneAndUpdate(
+            { _id: SIM_id },
+            { status: "discarded" }
+          );
+        }
+        await machines.findOneAndUpdate(
+          { _id: req.body.machineId },
+          { availableIn: "branch-store" }
+        );
         await MachinePickups.findOneAndUpdate(
           { _id: req.body._id },
           { status: req.body.request }
