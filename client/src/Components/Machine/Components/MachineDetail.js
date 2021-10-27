@@ -119,7 +119,7 @@ function MachineDetail({ id }) {
     if (activeMRC.length > 0) {
       return activeMRC[0].MRC;
     } else {
-      return "none";
+      return id;
     }
   };
   const filterSIMusing_id = (id) => {
@@ -127,7 +127,7 @@ function MachineDetail({ id }) {
     if (SIMCard.length > 0) {
       return SIMCard[0].simNumber;
     } else {
-      return "0";
+      return id;
     }
   };
   return (
