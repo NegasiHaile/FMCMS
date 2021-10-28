@@ -22,16 +22,16 @@ function ReturnListPerMachine({ machineId }) {
     state.MachinePickUpAPI.callback;
 
   useEffect(() => {
-    if (pickupMachines.length > 0) {
-      const value = pickupMachines.filter(
-        (pickup) =>
-          pickup.machineId == machineId &&
-          (pickup.category === "withdrawal" ||
-            pickup.category === "temporarly_store")
-      );
-      setReturns_Per_Machine(value);
-    }
-  }, [pickupMachines, machineId, setReturns_Per_Machine]);
+    // if (pickupMachines.length > 0) {
+    const value = pickupMachines.filter(
+      (pickup) =>
+        pickup.machineId == machineId &&
+        (pickup.category === "withdrawal" ||
+          pickup.category === "temporarly_store")
+    );
+    setReturns_Per_Machine(value);
+    // }
+  }, [pickupMachines]);
 
   const sweetAlert = (type, text) => {
     Swal.fire({

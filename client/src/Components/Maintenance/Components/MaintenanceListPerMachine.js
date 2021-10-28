@@ -24,18 +24,18 @@ function MaintenanceListPerMachine({ machineId }) {
     state.MachinePickUpAPI.callback;
 
   useEffect(() => {
-    if (maintenances.length > 0) {
-      setMaint_Per_Machine(
-        maintenances.filter(
-          (maintenance) =>
-            maintenance.machineId == machineId &&
-            (maintenance.category === "annual" ||
-              maintenance.category === "incident" ||
-              maintenance.category === "information_change")
-        )
-      );
-    }
-  }, [maintenances, machineId, setMaint_Per_Machine]);
+    // if (maintenances.length > 0) {
+    setMaint_Per_Machine(
+      maintenances.filter(
+        (maintenance) =>
+          maintenance.machineId == machineId &&
+          (maintenance.category === "annual" ||
+            maintenance.category === "incident" ||
+            maintenance.category === "information_change")
+      )
+    );
+    // }
+  }, [maintenances]);
   const sweetAlert = (type, text) => {
     Swal.fire({
       position: "center",
