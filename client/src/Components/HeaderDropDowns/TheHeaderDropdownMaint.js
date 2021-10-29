@@ -136,7 +136,8 @@ const TheHeaderDropdownMaint = () => {
                   <div>
                     <small>
                       {" "}
-                      {user.userRole === "customer-service"
+                      {user.userRole === "customer-service" &&
+                      pickup.status === "controlling_maintenance"
                         ? pickup.technician === ""
                           ? "Technician unassigned!"
                           : "Technician Assigned!"

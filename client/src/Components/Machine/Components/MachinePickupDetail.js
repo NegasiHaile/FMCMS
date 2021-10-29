@@ -132,7 +132,9 @@ function MachinePickupDetail() {
                 </CCol>
                 <CCol className="col-12 mt-3  border-bottom">
                   <h3 className="text-center text-muted">
-                    {user.userRole === "customer-service"
+                    {user.userRole === "customer-service" &&
+                    (pickup[0].status === "delivering" ||
+                      pickup[0].status === "completed")
                       ? "MACHINE DELIVERY NOTE"
                       : "Machine receiving note"}
                   </h3>
@@ -676,10 +678,14 @@ function MachinePickupDetail() {
 
                 <CCol className="col-12 mt-3">
                   <h4 className="text-decoration-underline">
-                    Receiving Summery
+                    {user.userRole === "customer-service" &&
+                    (pickup[0].status === "delivering" ||
+                      pickup[0].status === "completed")
+                      ? " DELIVERING SUMMERY"
+                      : "Receiving Summery"}
                   </h4>
                   <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
-                    The machine with <b> 1000949382773</b> serial number is
+                    This machine with <b> 1000949382773</b> serial number is
                     assigned to the company{" "}
                     <b> Edna Mall privated Limited Company</b> and fiscalized
                     with MRC of <b> CLC10008768 </b>
@@ -693,6 +699,11 @@ function MachinePickupDetail() {
                       ? " machine "
                       : pickup[0].category === ""
                       ? " _______ "
+                      : ""}
+                    {user.userRole === "customer-service" &&
+                    (pickup[0].status === "delivering" ||
+                      pickup[0].status === "completed")
+                      ? ", Then delivered to the company contact person"
                       : ""}
                     .
                   </h6>
@@ -814,8 +825,8 @@ function MachinePickupDetail() {
                   </CRow>
                 </CCol>
               </CRow>
-              {user.userRole === "technician" &&
-                pickup[0].machineProblemStatus === "maintaining" && (
+              {pickup[0].machineProblemStatus === "maintaining" &&
+                pickup[0].technician === user._id && (
                   <CCol className="col-12 d-flex justify-content-end d-print-none">
                     <CButton
                       className="mr-2"
@@ -976,9 +987,8 @@ function MachinePickupOperations() {
                   </CButton>
                 )}
 
-              {user.userRole === "technician" &&
-                pickup[0].status === "maintaining" &&
-                pickup[0].machineProblemStatus === "fine" && (
+              {pickup[0].status === "maintaining" &&
+                pickup[0].technician === user._id && (
                   <CButton
                     className="mr-2"
                     size="sm"
