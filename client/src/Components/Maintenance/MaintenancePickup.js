@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import { GlobalState } from "../../GlobalState";
 import MachinePickUp from "../Machine/Components/MachinePickUp";
 import BadRouting from "../Utils/routing/BadRouting";
-import CIcon from "@coreui/icons-react";
-import Swal from "sweetalert2";
 
 function MaintenancePickup() {
   const params = useParams();
