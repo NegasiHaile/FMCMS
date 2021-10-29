@@ -155,12 +155,13 @@ const machinePickupCntrl = {
           .json({ msg: "Item not found, please refresh your page!" });
 
       if (pickup.status === "New" || pickup.status === "unapproved") {
-        await MachinePickups.findOneAndDelete(req.params.id);
+        await MachinePickups.findByIdAndDelete(req.params.id);
         res.json({ msg: "Receiving item deleted successfuly!" });
+      } else {
+        return res
+          .status(400)
+          .json({ msg: "You can't delete this item, it's already approved!" });
       }
-      return res
-        .status(400)
-        .json({ msg: "You can't delete this item, it's already approved!" });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -275,18 +276,18 @@ const machinePickupCntrl = {
 
   deleteMachine_withdrawal: async (req, res) => {
     try {
-      const withdrawalItme = await MachinePickups.findById(req.params.id);
-      if (!withdrawalItme)
+      const withdrawalItem = await MachinePickups.findById(req.params.id);
+      if (!withdrawalItem)
         return res
           .status(400)
           .json({ msg: "Item not found, please refresh your page!" });
 
       if (
-        withdrawalItme.status === "New" ||
-        withdrawalItme.status === "unapproved"
+        withdrawalItem.status === "New" ||
+        withdrawalItem.status === "unapproved"
       ) {
         const pathToFile =
-          "./client/public/" + withdrawalItme.returnCertificate;
+          "./client/public/" + withdrawalItem.returnCertificate;
         fs.unlink(pathToFile, async (err) => {
           // if (err) {
           //   return res.status(400).json({
@@ -294,7 +295,7 @@ const machinePickupCntrl = {
           //   });
           //   // throw err;
           // } else {
-          await MachinePickups.findOneAndDelete(req.params.id);
+          await MachinePickups.findByIdAndDelete(req.params.id);
           return res.json({ msg: "Withdrawal item deleted successfuly!" });
           // }
         });
@@ -335,12 +336,12 @@ const machinePickupCntrl = {
         pickedupBy,
       } = req.body);
 
-      const withdrawalItme = await MachinePickups.findById(req.params.id);
-      if (!withdrawalItme)
+      const withdrawalItem = await MachinePickups.findById(req.params.id);
+      if (!withdrawalItem)
         return res.status(400).json({ msg: "Withdrawal item not found!" });
       if (req.file) {
         const oldFilePath =
-          "./client/public/" + withdrawalItme.returnCertificate;
+          "./client/public/" + withdrawalItem.returnCertificate;
         fs.unlink(oldFilePath, async (err) => {
           // if (err) {
           //   throw err;
@@ -372,7 +373,7 @@ const machinePickupCntrl = {
     try {
       const pickupDetail = await MachinePickups.findById(req.body._id);
       const SIM_id = req.body.simCard;
-      if (req.body.request === "stored") {
+      if (req.body.request === "stored" && req.body.category === "withdrawal") {
         await machines.findOneAndUpdate(
           { _id: req.body.machineId },
           { salesStatus: "unsold" }
@@ -389,7 +390,7 @@ const machinePickupCntrl = {
         );
         await MachinePickups.findOneAndUpdate(
           { _id: req.body._id },
-          { status: req.body.request }
+          { status: "completed" }
         );
       } else if (req.body.request === "maintaining") {
         if (pickupDetail.technician === "") {

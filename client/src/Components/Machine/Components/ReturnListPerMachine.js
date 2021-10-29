@@ -44,7 +44,7 @@ function ReturnListPerMachine({ machineId }) {
       // timer: 1500,
     });
   };
-  const deletePickupDetail = async (itmeId) => {
+  const deleteWithdrawalDetail = async (itmeId) => {
     try {
       Swal.fire({
         title: "Delete?",
@@ -119,16 +119,16 @@ function ReturnListPerMachine({ machineId }) {
                             className="text-success"
                             to={`/machine/returning_pickup/edit/${rtrn.machineId}/${rtrn._id}`}
                           >
-                            <CTooltip content={`Edit this pickup detail.`}>
+                            <CTooltip content={`Edit this withdrawal detail.`}>
                               <CIcon name="cil-pencil" />
                             </CTooltip>
                           </CLink>
                           <span className="text-muted">|</span>
                           <CLink
                             className="text-danger"
-                            onClick={() => deletePickupDetail(rtrn._id)}
+                            onClick={() => deleteWithdrawalDetail(rtrn._id)}
                           >
-                            <CTooltip content={`Delete this operation!.`}>
+                            <CTooltip content={`Delete this withdrawal!.`}>
                               <CIcon name="cil-trash" />
                             </CTooltip>
                           </CLink>
@@ -142,7 +142,7 @@ function ReturnListPerMachine({ machineId }) {
                           className="text-info"
                           to={`/pickup/detail/${rtrn._id}`}
                         >
-                          <CTooltip content={`See detail of machine pickup!`}>
+                          <CTooltip content={`See detail of this withdrawal!`}>
                             <CIcon name="cil-align-center" />
                           </CTooltip>
                         </CLink>
