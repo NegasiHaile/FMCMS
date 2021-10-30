@@ -51,12 +51,12 @@ function BusinessDetail() {
   const [branchs] = state.branchAPI.branchs;
   const [users, setUsers] = state.UsersAPI.users;
   const [allSales] = state.SalesAPI.Sales;
-  const [sales, setSales] = useState(allSales);
+  const [newSales, setNewSales] = useState([]);
   const [callback, setCallback] = state.MachineAPI.callback;
   const [callbackBusiness, setCallbackBusiness] = state.BusinessAPI.callback;
   const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
   const [allMachines] = state.MachineAPI.machines;
-  const [ownerId, setOwnerId] = useState("");
+  // const [ownerId, setOwnerId] = useState("");
 
   const [showRejectBusinessModal, setShowRejectBusinessModal] = useState(false);
   const [notification, setNotification] = useState({
@@ -86,14 +86,17 @@ function BusinessDetail() {
         subject: "Rejection",
         theMessage: "",
       });
-      var bsnsSales = allSales.filter(
-        (filteredSale) => filteredSale.businessId === params.id
-      );
       // console.log(bsnsSales);
-      setSales(bsnsSales);
+      setNewSales(
+        allSales.filter(
+          (filteredSale) =>
+            filteredSale.businessId === params.id &&
+            filteredSale.status === "New"
+        )
+      );
     } else {
       setBusiness("");
-      setSales("");
+      setNewSales([]);
     }
   }, [businesses, allSales, params.id]);
 
@@ -265,20 +268,18 @@ function BusinessDetail() {
                         )}
                       </>
                     )}
-                    {user.userRole === "sales" &&
-                      business.machine === "assigned" && (
-                        <span className="d-flex justify-content-between">
-                          <CButton
-                            color="dark"
-                            size="sm"
-                            className="mr-1 w-100"
-                            onClick={onSubmitRequestForApproval}
-                          >
-                            <CIcon name="cil-check-circle" /> Request for
-                            approval
-                          </CButton>
-                        </span>
-                      )}
+                    {newSales.length > 0 && user.userRole === "sales" && (
+                      <span className="d-flex justify-content-between">
+                        <CButton
+                          color="success"
+                          size="sm"
+                          className="mr-1 w-100"
+                          onClick={onSubmitRequestForApproval}
+                        >
+                          <CIcon name="cil-check-circle" /> Request for approval
+                        </CButton>
+                      </span>
+                    )}
                   </CCol>
                 </CRow>
               </CCol>

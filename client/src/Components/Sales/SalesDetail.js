@@ -36,8 +36,7 @@ function SalesDetail() {
   }, [params.id, Sales]);
 
   const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    return new Date(dateString).toLocaleString();
   };
   const SweetAlert = (type, text) => {
     Swal.fire({

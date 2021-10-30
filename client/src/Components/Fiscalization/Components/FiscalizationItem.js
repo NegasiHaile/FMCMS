@@ -33,7 +33,7 @@ function FiscalizationItem() {
       );
       setSalesDetail(slsDtl[0]);
     }
-  }, [Sales]);
+  }, [Sales, params.id]);
 
   const formatingDate = (stringdate) => {
     return new Date(stringdate).toLocaleString();

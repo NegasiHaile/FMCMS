@@ -171,7 +171,7 @@ const salesCntrl = {
         }
       );
       res.json({
-        msg: "This sales request is successfully apprived, it is sent to the store issue!",
+        msg: "This sales request is successfully approved, it is sent to the store issue!",
       });
     } catch (err) {
       return res.status(500).json({ msg: err.message });

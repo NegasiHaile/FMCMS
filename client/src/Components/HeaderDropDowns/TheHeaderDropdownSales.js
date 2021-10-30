@@ -128,7 +128,16 @@ function TheHeaderDropdownSales() {
                     </div>
                   </div>
                   <div>
-                    <small> {sale.status}</small>
+                    <small>
+                      {" "}
+                      {user.userRole === "customer-service" &&
+                      sale.status === "instore"
+                        ? sale.technician === ""
+                          ? "Technician = unassigned!"
+                          : "Technician = Assigned!"
+                        : sale.status}
+                    </small>
+                    {/* <small> {sale.status}</small> */}
                     <small className=" float-right mt-1">Just now</small>
                   </div>
                   <div

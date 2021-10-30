@@ -94,7 +94,14 @@ const BusinessRegistration = () => {
   const onChangeInput = (e) => {
     try {
       const { name, value } = e.target;
-      setBusiness({ ...business, [name]: value });
+      if (name === "TIN" || name === "telephone") {
+        const nmbrPattern = /^[0-9\b]+$/;
+        if (e.target.value === "" || nmbrPattern.test(e.target.value)) {
+          setBusiness({ ...business, [name]: value });
+        }
+      } else {
+        setBusiness({ ...business, [name]: value });
+      }
     } catch {}
   };
   const onChangeFileInput = (e) => {
@@ -194,7 +201,7 @@ const BusinessRegistration = () => {
 
                 <CNavItem>
                   <CNavLink>
-                    <CIcon name="cil-applications"></CIcon> Overview
+                    <CIcon name="cil-applications"></CIcon> Preview
                   </CNavLink>
                 </CNavItem>
               </CNav>
@@ -241,6 +248,8 @@ const BusinessRegistration = () => {
                             placeholder="Enter bussiness TIN."
                             value={business.TIN}
                             onChange={onChangeInput}
+                            minLength="10"
+                            maxLength="10"
                             required
                           />
                         </CFormGroup>
@@ -363,6 +372,8 @@ const BusinessRegistration = () => {
                             placeholder="Enter telephone number."
                             value={business.telephone}
                             onChange={onChangeInput}
+                            minLength="10"
+                            maxLength="13"
                             required
                           />
                         </CFormGroup>
@@ -458,7 +469,10 @@ const BusinessRegistration = () => {
                         </CFormGroup>
                       </CCol>
                     </CRow>
-                    <CRow className="d-flex justify-content-center">
+                  </CTabPane>
+                  <CTabPane>
+                    <BusinessOverview {...business} />
+                    <CRow className="d-flex justify-content-center mt-3">
                       <CCol
                         xs="12"
                         sm="6"
@@ -493,9 +507,6 @@ const BusinessRegistration = () => {
                         </span>
                       </CCol>
                     </CRow>
-                  </CTabPane>
-                  <CTabPane>
-                    <BusinessOverview {...business} />
                   </CTabPane>
                 </CTabContent>
               </CForm>
