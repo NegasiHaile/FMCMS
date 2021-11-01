@@ -4,9 +4,8 @@ import {
   FiscalizationItem,
   FiscalizationOperations,
 } from "./Components/FiscalizationItem";
-import { CButton } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import { render } from "react-dom";
+import PrintButton from "../Utils/Buttons/PrintButton";
+
 import { useReactToPrint } from "react-to-print";
 
 class ComponentToPrint extends React.Component {
@@ -37,14 +36,7 @@ const FiscalizationDetail = () => {
       <div className="d-flex justify-content-end">
         <div>
           <FiscalizationOperations />
-          <CButton
-            className="mr-2"
-            size="sm"
-            color="primary"
-            onClick={handlePrint}
-          >
-            <CIcon name="cil-print"></CIcon> Print this out!
-          </CButton>
+          <PrintButton handlePrint={handlePrint} printType="sales_delivery" />
         </div>
       </div>
     </div>

@@ -4,23 +4,8 @@ import {
   MachinePickupDetail,
   MachinePickupOperations,
 } from "./Components/MachinePickupDetail";
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CImg,
-  CRow,
-  CCol,
-  CLabel,
-  CLink,
-  CForm,
-  CFormGroup,
-  CSelect,
-  CTooltip,
-  CInput,
-} from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import { render } from "react-dom";
+import PrintButton from "../Utils/Buttons/PrintButton";
+
 import { useReactToPrint } from "react-to-print";
 
 class ComponentToPrint extends React.Component {
@@ -51,14 +36,11 @@ const PickupDetail = () => {
       <div className="d-flex justify-content-end">
         <div>
           <MachinePickupOperations />
-          <CButton
-            className="my-1"
-            size="sm"
-            color="primary"
-            onClick={handlePrint}
-          >
-            <CIcon name="cil-print"></CIcon> Print this out!
-          </CButton>
+
+          <PrintButton
+            handlePrint={handlePrint}
+            printType="oldmachine_delivery"
+          />
         </div>
       </div>
     </div>
