@@ -26,6 +26,7 @@ function FiscalizationItem() {
   const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
   const [salesDetail, setSalesDetail] = useState("");
   const [allUsers] = state.UsersAPI.users;
+  const [technicians, setTechnicians] = useState([]);
 
   useEffect(() => {
     if (Sales.length > 0) {
@@ -35,6 +36,21 @@ function FiscalizationItem() {
       setSalesDetail(slsDtl[0]);
     }
   }, [Sales, params.id]);
+  useEffect(() => {
+    if (!user.branch) {
+      setTechnicians(
+        allUsers.filter((fltrdUser) => fltrdUser.userRole === "technician")
+      );
+    } else {
+      setTechnicians(
+        allUsers.filter(
+          (fltrdUser) =>
+            fltrdUser.userRole === "technician" &&
+            fltrdUser.branch === user.branch
+        )
+      );
+    }
+  }, [user, allUsers]);
 
   const formatingDate = (stringdate) => {
     return new Date(stringdate).toLocaleString();
@@ -265,6 +281,7 @@ function FiscalizationItem() {
                               ? {
                                   border: "0px",
                                   borderBottom: "solid 1px #D8DBE0",
+                                  background: "white",
                                 }
                               : {
                                   border: "0px",
@@ -275,20 +292,12 @@ function FiscalizationItem() {
                                 }
                           }
                         >
-                          <option value="">
-                            Select maintenance technician ...
-                          </option>
-                          {allUsers
-                            .filter(
-                              (fltrdUser) =>
-                                fltrdUser.userRole === "technician" &&
-                                fltrdUser.branch === user.branch
-                            )
-                            .map((theUser) => (
-                              <option value={theUser._id} key={theUser._id}>
-                                {theUser.fName + " " + theUser.mName}
-                              </option>
-                            ))}
+                          <option value="">Technician unassigned ...</option>
+                          {technicians.map((theUser) => (
+                            <option value={theUser._id} key={theUser._id}>
+                              {theUser.fName + " " + theUser.mName}
+                            </option>
+                          ))}
                         </CSelect>
                         {salesDetail.status === "instore" &&
                           user.userRole === "customer-service" && (
@@ -319,64 +328,65 @@ function FiscalizationItem() {
                 </CRow>
               </CCol>
 
-              {user.userRole === "customer-service" &&
-                salesDetail.fiscalization === "done" && (
-                  <CCol className="col-12 mt-4">
-                    <CRow className=" border rounded mx-1 py-4">
-                      <CCol className="col-12 border-bottom">
-                        <h4>DELIVERY DETAIL</h4>
-                      </CCol>
-                      <CCol className="col-6 mt-3">
-                        <CRow className="mb-2">
-                          <CCol className="col-4">
-                            <h6>Delivered By :</h6>
-                          </CCol>
-                          <CCol className="col-7 border-bottom">
-                            <h6> </h6>
-                          </CCol>
-                        </CRow>
-                        <CRow className="mb-2">
-                          <CCol className="col-4">
-                            <h6>Signature :</h6>
-                          </CCol>
-                          <CCol className="col-7 border-bottom">
-                            <h6> </h6>
-                          </CCol>
-                        </CRow>
-                      </CCol>
-                      <CCol className="col-6 mt-5">
-                        <CRow className="mb-2">
-                          <CCol className="col-4">
-                            <h6>Delivery Date :</h6>
-                          </CCol>
-                          <CCol className="col-7 border-bottom">
-                            <h6> {new Date().toLocaleString()}</h6>
-                          </CCol>
-                        </CRow>
-                      </CCol>
-                      <CCol className="col-6 mt-4">
-                        <CRow className="mb-2">
-                          <CCol className="col-4">
-                            <h6>Contact Person Name:</h6>
-                          </CCol>
-                          <CCol className="col-7 border-bottom">
-                            <h6></h6>
-                          </CCol>
-                        </CRow>
-                      </CCol>
-                      <CCol className="col-6 mt-4">
-                        <CRow className="mb-2">
-                          <CCol className="col-4">
-                            <h6>Contact Person Signature :</h6>
-                          </CCol>
-                          <CCol className="col-7 border-bottom">
-                            <h6> </h6>
-                          </CCol>
-                        </CRow>
-                      </CCol>
-                    </CRow>
-                  </CCol>
-                )}
+              {((user.userRole === "customer-service" &&
+                salesDetail.fiscalization === "done") ||
+                salesDetail.status === "completed") && (
+                <CCol className="col-12 mt-4">
+                  <CRow className=" border rounded mx-1 py-4">
+                    <CCol className="col-12 border-bottom">
+                      <h4>DELIVERY DETAIL</h4>
+                    </CCol>
+                    <CCol className="col-6 mt-3">
+                      <CRow className="mb-2">
+                        <CCol className="col-4">
+                          <h6>Delivered By :</h6>
+                        </CCol>
+                        <CCol className="col-7 border-bottom">
+                          <h6> </h6>
+                        </CCol>
+                      </CRow>
+                      <CRow className="mb-2">
+                        <CCol className="col-4">
+                          <h6>Signature :</h6>
+                        </CCol>
+                        <CCol className="col-7 border-bottom">
+                          <h6> </h6>
+                        </CCol>
+                      </CRow>
+                    </CCol>
+                    <CCol className="col-6 mt-5">
+                      <CRow className="mb-2">
+                        <CCol className="col-4">
+                          <h6>Delivery Date :</h6>
+                        </CCol>
+                        <CCol className="col-7 border-bottom">
+                          <h6> {new Date().toLocaleString()}</h6>
+                        </CCol>
+                      </CRow>
+                    </CCol>
+                    <CCol className="col-6 mt-4">
+                      <CRow className="mb-2">
+                        <CCol className="col-4">
+                          <h6>Contact Person Name:</h6>
+                        </CCol>
+                        <CCol className="col-7 border-bottom">
+                          <h6></h6>
+                        </CCol>
+                      </CRow>
+                    </CCol>
+                    <CCol className="col-6 mt-4">
+                      <CRow className="mb-2">
+                        <CCol className="col-4">
+                          <h6>Contact Person Signature :</h6>
+                        </CCol>
+                        <CCol className="col-7 border-bottom">
+                          <h6> </h6>
+                        </CCol>
+                      </CRow>
+                    </CCol>
+                  </CRow>
+                </CCol>
+              )}
             </CRow>
           </CCardBody>
         </CCard>
