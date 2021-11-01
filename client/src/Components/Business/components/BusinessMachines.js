@@ -4,16 +4,15 @@ import { GlobalState } from "../../../GlobalState";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
 
+import FilterMRC from "../../Utils/Filters/FilterMRC";
+import FilterSIMCard from "../../Utils/Filters/FilterSIMCard";
+
 import { CButton, CCard, CDataTable, CLink, CTooltip } from "@coreui/react";
 
 function BusinessMachines({ businessId }) {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
-  const [businesses] = state.BusinessAPI.businesses;
   const [allSales] = state.SalesAPI.Sales;
-  const [allMachines] = state.MachineAPI.machines;
-  const [allSIMCards] = state.SIMCardAPI.simCards;
-  const [mrcs] = state.MRCAPI.mrcs;
 
   const [callbackMachines, setCallbackMachines] = state.MachineAPI.callback;
   const [callbackBusiness, setCallbackBusiness] = state.BusinessAPI.callback;
@@ -66,22 +65,7 @@ function BusinessMachines({ businessId }) {
       sweetAlert("error", error.response.data.msg);
     }
   };
-  const filterMRCusing_id = (id) => {
-    const activeMRC = mrcs.filter((filteredMRC) => filteredMRC._id === id);
-    if (activeMRC.length > 0) {
-      return activeMRC[0].MRC;
-    } else {
-      return id;
-    }
-  };
-  const filterSIMusing_id = (id) => {
-    const SIMCard = allSIMCards.filter((filteredSIM) => filteredSIM._id === id);
-    if (SIMCard.length > 0) {
-      return SIMCard[0].simNumber;
-    } else {
-      return id;
-    }
-  };
+
   const salesTableAttributes = [
     "machineSerialNumber",
     "machineMRC",
@@ -106,10 +90,21 @@ function BusinessMachines({ businessId }) {
           fields={salesTableAttributes}
           scopedSlots={{
             machineMRC: (salesPerBusiness) => (
-              <td>{filterMRCusing_id(salesPerBusiness.machineMRC)}</td>
+              <td>
+                {" "}
+                <FilterMRC
+                  mrcId={salesPerBusiness.machineMRC}
+                  filterType="mrcNumber"
+                />
+              </td>
             ),
             machineSIM: (salesPerBusiness) => (
-              <td>{filterSIMusing_id(salesPerBusiness.machineSIM)}</td>
+              <td>
+                <FilterSIMCard
+                  simId={salesPerBusiness.machineSIM}
+                  filterType="simNumber"
+                />
+              </td>
             ),
             Actions: (salesPerBusiness) => (
               <>

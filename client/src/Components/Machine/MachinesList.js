@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { GlobalState } from "../../GlobalState";
 import NewArivals from "../Machine/Components/NewArivals";
+import FilterMRC from "../Utils/Filters/FilterMRC";
+import FilterSIMCard from "../Utils/Filters/FilterSIMCard";
 import {
   CBadge,
   CButton,
@@ -34,8 +36,6 @@ const MachinesList = () => {
   const [allMachines] = state.MachineAPI.machines;
   const [machines, setMachines] = useState([]);
   const [allBranchs] = state.branchAPI.branchs;
-  const [mrcs] = state.MRCAPI.mrcs;
-  const [allSIMCards] = state.SIMCardAPI.simCards;
   const [callback, setCallback] = state.MachineAPI.callback;
   const [callbackBusiness, setCallbackBusiness] = state.BusinessAPI.callback;
   const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
@@ -166,22 +166,6 @@ const MachinesList = () => {
     }
   };
 
-  const filterMRCusing_id = (id) => {
-    const activeMRC = mrcs.filter((filteredMRC) => filteredMRC._id === id);
-    if (activeMRC.length > 0) {
-      return activeMRC[0].MRC;
-    } else {
-      return id;
-    }
-  };
-  const filterSIMusing_id = (id) => {
-    const SIMCard = allSIMCards.filter((filteredSIM) => filteredSIM._id === id);
-    if (SIMCard.length > 0) {
-      return SIMCard[0].simNumber;
-    } else {
-      return id;
-    }
-  };
   // console.log(machine);
   const machineTablefields = [
     "serialNumber",
@@ -250,8 +234,16 @@ const MachinesList = () => {
             sorter
             pagination
             scopedSlots={{
-              MRC: (machine) => <td>{filterMRCusing_id(machine.MRC)}</td>,
-              SIM: (machine) => <td>{filterSIMusing_id(machine.SIM)}</td>,
+              MRC: (machine) => (
+                <td>
+                  <FilterMRC mrcId={machine.MRC} filterType="mrcNumber" />
+                </td>
+              ),
+              SIM: (machine) => (
+                <td>
+                  <FilterSIMCard simId={machine.SIM} filterType="simNumber" />
+                </td>
+              ),
               salesStatus: (machine) => (
                 <td className="d-flex justify-content-between">
                   {machine.salesStatus}

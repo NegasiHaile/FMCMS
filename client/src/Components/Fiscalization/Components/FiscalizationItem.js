@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { GlobalState } from "../../../GlobalState";
 import { useParams } from "react-router-dom";
+import FilterMRC from "../../Utils/Filters/FilterMRC";
+import FilterSIMCard from "../../Utils/Filters/FilterSIMCard";
 import {
   CButton,
   CCard,
@@ -23,7 +25,6 @@ function FiscalizationItem() {
   const [Sales] = state.SalesAPI.Sales;
   const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
   const [salesDetail, setSalesDetail] = useState("");
-  const [mrcs] = state.MRCAPI.mrcs;
   const [allUsers] = state.UsersAPI.users;
 
   useEffect(() => {
@@ -37,14 +38,6 @@ function FiscalizationItem() {
 
   const formatingDate = (stringdate) => {
     return new Date(stringdate).toLocaleString();
-  };
-  const handleMRCNumberById = (mrcId) => {
-    if (mrcId != "undefined" || mrcId != "none") {
-      const mrcDetail = mrcs.filter((fltrdMRC) => fltrdMRC._id == mrcId);
-      console.log(JSON.stringify(mrcDetail));
-      if (mrcDetail.length === 1) return mrcDetail[0].MRC;
-      return " ";
-    }
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -182,7 +175,13 @@ function FiscalizationItem() {
                         <h6>MRC :</h6>
                       </CCol>
                       <CCol className="col-8 border-bottom">
-                        <h6>{handleMRCNumberById(salesDetail.machineMRC)}</h6>
+                        <h6>
+                          {" "}
+                          <FilterMRC
+                            mrcId={salesDetail.machineMRC}
+                            filterType="mrcNumber"
+                          />
+                        </h6>
                       </CCol>
                     </CRow>
                     <CRow className="mb-2">
@@ -190,7 +189,13 @@ function FiscalizationItem() {
                         <h6>SIM :</h6>
                       </CCol>
                       <CCol className="col-8 border-bottom">
-                        <h6>{salesDetail.machineSIM}</h6>
+                        <h6>
+                          {" "}
+                          <FilterSIMCard
+                            simId={salesDetail.machineSIM}
+                            filterType="simNumber"
+                          />
+                        </h6>
                       </CCol>
                     </CRow>
                   </CCol>
