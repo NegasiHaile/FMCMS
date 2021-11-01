@@ -70,15 +70,19 @@ function FiscalizationItem() {
   return (
     <div style={{ minWidth: "900px", border: "solid 0px #D8DBE0" }}>
       {salesDetail ? (
-        <CCard className="mt-5 w-100">
+        <CCard className="w-100 border-0">
           <CCardBody>
-            <CRow>
+            <CRow className="mt-3 p-4">
               <CCol className="d-flex justify-content-center" lg="12">
                 <CImg height="50px" src="/logo/fulllogo.png" />
               </CCol>
               <CCol className="col-12 mt-2  border-bottom">
                 <h4 className="text-center text-muted bold">
-                  Machine fiscalization detail
+                  {user.userRole === "customer-service" &&
+                  (salesDetail.status === "delivery" ||
+                    salesDetail.status === "completed")
+                    ? "MACHINE DELIVERY NOTE"
+                    : "Machine fiscalization detail"}
                 </h4>
               </CCol>
 
@@ -209,9 +213,9 @@ function FiscalizationItem() {
                 <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
                   This machine with <b> {salesDetail.machineSerialNumber}</b>{" "}
                   serial number is assigned to the company{" "}
-                  <b> {salesDetail.tradeName}</b> and fiscalized with above
-                  detail in <b> {salesDetail.branchName} </b> on{" "}
-                  {new Date().toLocaleString()}
+                  <b> {salesDetail.tradeName}</b> and fiscalized with the above
+                  detail in <b> {salesDetail.branchName} </b> of jupiter
+                  tradingeth on {new Date().toLocaleString()}
                 </h6>{" "}
               </CCol>
 
@@ -219,10 +223,10 @@ function FiscalizationItem() {
                 <CRow className="mt-4 border rounded mx-1 py-4">
                   <CCol className="col-6 my-2">
                     <CRow className="mb-2">
-                      <CCol className="col-4">
+                      <CCol className="col-5">
                         <h6>Fiscalization Status:</h6>
                       </CCol>
-                      <CCol className="col-7 border-bottom">
+                      <CCol className="col-6 border-bottom">
                         <h6>{salesDetail.fiscalization}</h6>
                       </CCol>
                     </CRow>
@@ -240,7 +244,7 @@ function FiscalizationItem() {
                   <CCol className="col-6 my-2">
                     <CRow className="mb-2">
                       <CCol className="col-4">
-                        <h6> Technician :</h6>
+                        <h6>Assigned Technician :</h6>
                       </CCol>
                       <CCol className="col-8  input-group ">
                         {/* <div className="input-group mb-3"> */}
@@ -256,11 +260,20 @@ function FiscalizationItem() {
                               ? false
                               : true
                           }
-                          style={{
-                            border: "0px",
-                            borderBottom: "solid 1px #D8DBE0",
-                          }}
-                          className="bg-white"
+                          style={
+                            salesDetail.status === "instore"
+                              ? {
+                                  border: "0px",
+                                  borderBottom: "solid 1px #D8DBE0",
+                                }
+                              : {
+                                  border: "0px",
+                                  borderBottom: "solid 1px #D8DBE0",
+                                  background: "white",
+                                  color: "#3C4B64",
+                                  appearance: "none",
+                                }
+                          }
                         >
                           <option value="">
                             Select maintenance technician ...
@@ -282,7 +295,7 @@ function FiscalizationItem() {
                             <div className="input-group-append">
                               <CButton
                                 color="dark"
-                                className="d-print-none input-group-text"
+                                className="d-print-none input-group-text mb-2"
                                 onClick={() =>
                                   editSalesTechnician(salesDetail.saleId)
                                 }
@@ -311,7 +324,7 @@ function FiscalizationItem() {
                   <CCol className="col-12 mt-4">
                     <CRow className=" border rounded mx-1 py-4">
                       <CCol className="col-12 border-bottom">
-                        <h4>Delivery Detail</h4>
+                        <h4>DELIVERY DETAIL</h4>
                       </CCol>
                       <CCol className="col-6 mt-3">
                         <CRow className="mb-2">
