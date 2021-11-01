@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalState } from "../../../GlobalState";
 import { CButton } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 function PrintButton(props) {
+  const state = useContext(GlobalState);
+  const [user] = state.UserAPI.User;
   return (
-    <CButton
-      className="mr-2"
-      size="sm"
-      color="primary"
-      onClick={props.handlePrint}
-    >
-      <CIcon name="cil-print"></CIcon> Print this out!
-    </CButton>
+    <>
+      {user.userRole === "customer-service" ? (
+        <CButton
+          className="mr-2"
+          size="sm"
+          color="primary"
+          onClick={props.handlePrint}
+        >
+          <CIcon name="cil-print"></CIcon> Print this out!
+        </CButton>
+      ) : (
+        <span className="text-danger">
+          Printing of this page is allowed to customer service only!
+        </span>
+      )}
+    </>
   );
 }
 
