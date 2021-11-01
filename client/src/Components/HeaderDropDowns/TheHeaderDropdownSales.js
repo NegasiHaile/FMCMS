@@ -110,9 +110,10 @@ function TheHeaderDropdownSales() {
               <CDropdownItem
                 key={sale.saleId}
                 to={
-                  user.userRole === "customer-service" &&
-                  (sale.status === "instore" || sale.status === "delivering")
-                    ? `/fiscalization/detail/${sale.saleId}`
+                  user.userRole === "customer-service" ||
+                  user.userRole === "technician"
+                    ? // && (sale.status === "instore" || sale.status === "delivering")
+                      `/fiscalization/detail/${sale.saleId}`
                     : `/sales/detail/${sale.saleId}`
                 }
                 // to={`/sales/detail/${sale.saleId}`}
