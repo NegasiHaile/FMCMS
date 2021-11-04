@@ -1,25 +1,6 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
-import { GlobalState } from "../../GlobalState";
-import axios from "axios";
-import MachinePickupDetail from "../Machine/Components/MachinePickupDetail";
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CImg,
-  CRow,
-  CCol,
-  CLabel,
-  CLink,
-  CForm,
-  CFormGroup,
-  CSelect,
-  CTooltip,
-  CInput,
-} from "@coreui/react";
+import React, { useRef } from "react";
+import { CButton, CCard, CCardBody, CImg, CRow, CCol } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import Swal from "sweetalert2";
-import { render } from "react-dom";
 import { useReactToPrint } from "react-to-print";
 
 class ComponentToPrint extends React.Component {

@@ -3,16 +3,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 import { GlobalState } from "../../GlobalState";
-import {
-  CButton,
-  CCard,
-  CCardHeader,
-  CCardBody,
-  CLabel,
-  CDataTable,
-  CLink,
-  CTooltip,
-} from "@coreui/react";
+import { CCard, CCardBody, CDataTable, CLink, CTooltip } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
 function SalesList() {

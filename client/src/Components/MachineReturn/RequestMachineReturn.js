@@ -15,7 +15,6 @@ import {
   CLabel,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 
 function RequestMachineReturn() {

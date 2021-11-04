@@ -8,7 +8,6 @@ import {
   CCard,
   CCardHeader,
   CCardBody,
-  CLabel,
   CDataTable,
   CLink,
   CTooltip,
@@ -17,7 +16,6 @@ import CIcon from "@coreui/icons-react";
 
 const BusinessesList = () => {
   const state = useContext(GlobalState);
-  const [token] = state.token;
   const [user] = state.UserAPI.User;
   const [allAusinesses] = state.BusinessAPI.businesses;
   const [businesses, setBusinesses] = useState(allAusinesses);
@@ -128,7 +126,7 @@ const BusinessesList = () => {
                         }}
                       >
                         <CTooltip
-                          content={`Edit the  - ${business.TIN}- business detail.`}
+                          content={`Edit the  - ${business.tradeName}- business detail.`}
                         >
                           <CIcon name="cil-pencil" />
                         </CTooltip>

@@ -23,7 +23,6 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
-import { json } from "body-parser";
 
 const mrcDetail = {
   MRC: "",
@@ -35,7 +34,6 @@ function MrcsList() {
   const [allMRCs] = state.MRCAPI.mrcs;
   const [mrcs, setMRCs] = useState([]);
   const [mrcCallBack, setMRCCallBack] = state.MRCAPI.callback;
-  const [token] = state.token;
 
   const [mrc, setMRC] = useState(mrcDetail);
   const [onEdit, setOnEdit] = useState(false);

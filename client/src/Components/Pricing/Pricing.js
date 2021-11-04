@@ -34,7 +34,6 @@ const pricingDetail = {
 function Pricing() {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
-  const [token] = state.token;
   const [pricing, setPricing] = useState(pricingDetail);
   const [pricings] = state.PricingAPI.pricings;
   const [callback, setCallback] = state.PricingAPI.callback;

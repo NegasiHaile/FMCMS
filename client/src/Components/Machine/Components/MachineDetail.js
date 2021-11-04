@@ -28,7 +28,6 @@ import {
   CFormGroup,
   CSelect,
   CTooltip,
-  CInput,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";

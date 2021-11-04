@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { GlobalState } from "../../../GlobalState";
 

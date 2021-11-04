@@ -1,9 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { GlobalState } from "../../../GlobalState";
-import axios from "axios";
 import BadRouting from "../../Utils/routing/BadRouting";
 import {
-  CButton,
   CCard,
   CCardHeader,
   CCardBody,

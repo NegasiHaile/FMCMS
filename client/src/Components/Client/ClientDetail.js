@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { GlobalState } from "../../GlobalState";
 import CIcon from "@coreui/icons-react";
-import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 import BusinessesPerClient from "./Components/BusinessesPerClient";
 import BadRouting from "../Utils/routing/BadRouting";

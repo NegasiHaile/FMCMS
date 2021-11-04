@@ -43,15 +43,6 @@ const TheHeaderDropdownMaint = () => {
               pickup.status === "controlling_maintenance") &&
             pickup.branchId == user.branch
         )
-        // pickupMachines.filter(
-        //   (pickup) =>
-        //     (((pickup.status === "New" || pickup.status === "controlling") &&
-        //       (pickup.category === "annual" ||
-        //         pickup.category === "incident" ||
-        //         pickup.category === "information_change")) ||
-        //       pickup.status === "delivering") &&
-        //     pickup.branchId == user.branch
-        // )
       );
     } else if (user.userRole === "technician") {
       setPickupMachine(
@@ -91,10 +82,8 @@ const TheHeaderDropdownMaint = () => {
         )
       );
     }
-    // setPickupCallback(!PickupCallback);
   }, [pickupMachines, user]);
 
-  // console.log(pickupMachine);
   const itemsCount = pickupMachine.length;
 
   return (

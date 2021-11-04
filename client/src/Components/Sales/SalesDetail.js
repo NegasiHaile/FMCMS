@@ -4,15 +4,7 @@ import { GlobalState } from "../../GlobalState";
 import BadRouting from "../Utils/routing/BadRouting";
 import axios from "axios";
 import Swal from "sweetalert2";
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CLink,
-  CTooltip,
-  CRow,
-  CCol,
-} from "@coreui/react";
+import { CButton, CCard, CCardBody, CLink, CRow, CCol } from "@coreui/react";
 
 function SalesDetail() {
   const params = useParams();

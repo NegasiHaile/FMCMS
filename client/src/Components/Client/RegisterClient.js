@@ -14,7 +14,6 @@ import {
   CModalTitle,
   CModalBody,
   CModalFooter,
-  CLabel,
   CForm,
   CSelect,
   CRow,
@@ -40,7 +39,7 @@ function RegisterClient() {
   const state = useContext(GlobalState);
   const [token] = state.token;
   const [user] = state.UserAPI.User;
-  const [users, setUsers] = state.UsersAPI.users;
+  const [users] = state.UsersAPI.users;
   const [clients, setClients] = useState(users);
   const [callback, setCallback] = state.UsersAPI.callback;
   const [showModal, setShowModal] = useState(false);

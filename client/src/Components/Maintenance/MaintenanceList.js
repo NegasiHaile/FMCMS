@@ -1,16 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-import axios from "axios";
 import { GlobalState } from "../../GlobalState";
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CDataTable,
-  CLink,
-  CTooltip,
-} from "@coreui/react";
+import { CCard, CCardBody, CDataTable, CLink, CTooltip } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import Swal from "sweetalert2";
 
 const machinePickupsFields = [
   "tradeName",

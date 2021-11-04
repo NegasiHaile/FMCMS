@@ -23,7 +23,6 @@ import {
   CCardBody,
   CTabs,
   CCardHeader,
-  CImg,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
@@ -32,7 +31,6 @@ const BusinessRegistration = () => {
   const state = useContext(GlobalState);
   const params = useParams();
   const [user] = state.UserAPI.User;
-  const [credentials, setCredentials] = useState("");
 
   const businessDetail = {
     ownerID: params.clientId,
@@ -63,19 +61,6 @@ const BusinessRegistration = () => {
   const [callback, setCallback] = state.BusinessAPI.callback;
 
   const [onEdit, setOnEdit] = useState(false);
-
-  console.log("upper" + JSON.stringify(business));
-
-  // useEffect(() => {
-  //   if (user.userRole === "client") {
-  //     businessDetail.ownerID = user._id;
-  //     setBusiness(businessDetail);
-  //   } else if (params.clientId) {
-  //     businessDetail.ownerID = params.clientId;
-  //     // businessDetail.companyName = params.clientId;
-  //     setBusiness(businessDetail);
-  //   }
-  // }, [user, params.clientId]);
 
   useEffect(() => {
     if (params.businessId) {

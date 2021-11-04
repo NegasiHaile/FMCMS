@@ -1,31 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
-import axios from "axios";
 import { GlobalState } from "../../GlobalState";
 import { useParams } from "react-router-dom";
 import BadRouting from "../Utils/routing/BadRouting";
 import {
-  CButton,
   CCard,
   CCardHeader,
   CCardBody,
-  CModal,
-  CModalHeader,
   CCardFooter,
-  CModalTitle,
-  CModalBody,
-  CModalFooter,
-  CLabel,
-  CForm,
   CRow,
   CCol,
-  CFormGroup,
-  CInput,
-  CDataTable,
-  CLink,
-  CTooltip,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import Swal from "sweetalert2";
 
 function BranchIndetail() {
   const state = useContext(GlobalState);
@@ -66,7 +50,6 @@ function BranchIndetail() {
       }
     } catch (error) {}
   }, [params.id, allBranchs, allUsers]);
-  console.log(branch);
   return (
     <>
       {branch != undefined ? (

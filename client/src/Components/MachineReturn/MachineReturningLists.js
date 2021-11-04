@@ -1,19 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import Swal from "sweetalert2";
+import React, { useContext } from "react";
 
 import { GlobalState } from "../../GlobalState";
-import {
-  CButton,
-  CCard,
-  CCardHeader,
-  CCardBody,
-  CLabel,
-  CDataTable,
-  CLink,
-  CTooltip,
-} from "@coreui/react";
-import CIcon from "@coreui/icons-react";
+import { CCard, CCardBody, CDataTable } from "@coreui/react";
 
 function MachineReturningLists() {
   const state = useContext(GlobalState);

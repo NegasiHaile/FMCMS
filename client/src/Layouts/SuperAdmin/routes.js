@@ -43,9 +43,6 @@ const BusinessDetail = lazy(() =>
 );
 
 // Importing of machine related pages
-const MachineRegister = lazy(() =>
-  import("../../Components/Machine/MachineRegister")
-);
 const MachineDistribute = lazy(() =>
   import("../../Components/Machine/MachineDistribute")
 );
@@ -166,12 +163,6 @@ const routes = [
     component: BusinessDetail,
   },
   // Machine
-  {
-    path: "/machine/register",
-    exact: true,
-    name: "Register-Machine",
-    component: MachineRegister,
-  },
   {
     path: "/machine/distribute",
     exact: true,

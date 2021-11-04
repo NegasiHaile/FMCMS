@@ -12,7 +12,6 @@ import {
   CDataTable,
   CLink,
   CTooltip,
-  CSwitch,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { GlobalState } from "../../GlobalState";
 import {
@@ -10,7 +10,6 @@ import {
   CLabel,
   CForm,
   CSelect,
-  CInput,
   CRow,
   CCol,
   CFormGroup,
