@@ -81,7 +81,9 @@ const ChangePassword = () => {
       <CCol xs="12" md="9" lg="7" xl="6">
         <CCard className="mx-4 shadow">
           <CCardHeader>
-            <h5 className="text-muted">Change your password</h5>
+            <h6 className="text-muted text-center text-uppercase">
+              Change password
+            </h6>
           </CCardHeader>
           <CCardBody className="p-4">
             <CForm onSubmit={onSubmitChangePassword}>
@@ -101,41 +103,70 @@ const ChangePassword = () => {
                   required
                 />
               </CInputGroup>
-              <CInputGroup className="mb-3">
-                <CInputGroupPrepend>
-                  <CInputGroupText>
-                    <CIcon name="cil-lock-locked" />
-                  </CInputGroupText>
-                </CInputGroupPrepend>
-                <CInput
-                  type="password"
-                  name="newPassword"
-                  placeholder="New Password"
-                  autoComplete="new-password"
-                  minLength="6"
-                  onChange={onChangeInput}
-                  value={Password.newPassword}
-                  required
-                />
-              </CInputGroup>
-              <CInputGroup className="mb-4">
-                <CInputGroupPrepend>
-                  <CInputGroupText>
-                    <CIcon name="cil-lock-locked" />
-                  </CInputGroupText>
-                </CInputGroupPrepend>
-                <CInput
-                  type="password"
-                  placeholder="Repeat new password"
-                  autoComplete="new-password"
-                  name="retypeNewPassword"
-                  minLength="6"
-                  onChange={onChangeInput}
-                  value={Password.retypeNewPassword}
-                  required
-                />
-              </CInputGroup>
-              <CButton type="submit" color="danger" block>
+              <div className="mb-3">
+                <CInputGroup>
+                  <CInputGroupPrepend>
+                    <CInputGroupText>
+                      <CIcon name="cil-lock-locked" />
+                    </CInputGroupText>
+                  </CInputGroupPrepend>
+                  <CInput
+                    type="password"
+                    name="newPassword"
+                    placeholder="New Password"
+                    autoComplete="new-password"
+                    minLength="6"
+                    onChange={onChangeInput}
+                    value={Password.newPassword}
+                    required
+                  />
+                </CInputGroup>
+                {Password.newPassword !== "" &&
+                  Password.newPassword.length < 6 && (
+                    <small className="text-danger d-block">
+                      * New password must be more than or equals to 6
+                      chareacters lengthen!
+                    </small>
+                  )}
+              </div>
+              <div className="mb-3">
+                <CInputGroup>
+                  <CInputGroupPrepend>
+                    <CInputGroupText>
+                      <CIcon name="cil-lock-locked" />
+                    </CInputGroupText>
+                  </CInputGroupPrepend>
+                  <CInput
+                    type="password"
+                    placeholder="Repeat new password"
+                    autoComplete="new-password"
+                    name="retypeNewPassword"
+                    minLength="6"
+                    onChange={onChangeInput}
+                    value={Password.retypeNewPassword}
+                    required
+                  />
+                </CInputGroup>
+                {Password.retypeNewPassword !== "" &&
+                  Password.newPassword !== Password.retypeNewPassword && (
+                    <small className="text-danger">
+                      * Password not match, please retype to match new password!
+                    </small>
+                  )}
+              </div>
+
+              <CButton
+                type="submit"
+                color="primary"
+                block
+                disabled={
+                  Password.oldPassword !== "" &&
+                  Password.newPassword.length >= 6 &&
+                  Password.newPassword === Password.retypeNewPassword
+                    ? false
+                    : true
+                }
+              >
                 Change Password
               </CButton>
             </CForm>
