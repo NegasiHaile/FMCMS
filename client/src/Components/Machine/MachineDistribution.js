@@ -24,7 +24,7 @@ function MachineDistribution() {
   const [allMachines] = state.MachineAPI.machines;
   const [machineBrands, setMachineBrands] = useState("");
   const [allBranchs] = state.branchAPI.branchs;
-  const [branchCallback, setBranchCallback] = state.branchAPI.callback;
+  const [callbackMachine, setCallbackMachine] = state.MachineAPI.callback;
 
   const distributingDetail = {
     branchId: user.branch,
@@ -64,12 +64,9 @@ function MachineDistribution() {
       const res = await axios.post("/machine/distribution", {
         ...machineDistribution,
       });
-      console.log(machineDistribution);
+      setmachineDistribution(distributingDetail);
+      setCallbackMachine(!callbackMachine);
       sweetAlert("success", res.data.msg);
-      // sweetAlert("success", res.data.msg);
-      // setCallback(!callback);
-      // setCallbackBusiness(!callbackBusiness);
-      // setCallbackSales(!callbackSales);
     } catch (error) {
       sweetAlert("error", error.response.data.msg);
     }
