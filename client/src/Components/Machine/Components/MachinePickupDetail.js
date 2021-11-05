@@ -988,7 +988,8 @@ function MachinePickupOperations() {
                 )}
 
               {pickup[0].status === "maintaining" &&
-                pickup[0].technician === user._id && (
+                pickup[0].technician === user._id &&
+                pickup[0].machineProblemStatus === "fine" && (
                   <CButton
                     className="mr-2"
                     size="sm"
