@@ -111,7 +111,8 @@ function TheHeaderDropdownSales() {
                 key={sale.saleId}
                 to={
                   user.userRole === "customer-service" ||
-                  user.userRole === "technician"
+                  user.userRole === "technician" ||
+                  user.userRole === "machine-controller"
                     ? // && (sale.status === "instore" || sale.status === "delivering")
                       `/fiscalization/detail/${sale.saleId}`
                     : `/sales/detail/${sale.saleId}`
