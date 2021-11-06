@@ -8,9 +8,9 @@ const machinePickupsFields = [
   "serialNumber",
   "machineModel",
   "category",
-  "status",
   "createdAt",
   "branchName",
+  "status",
   {
     key: "Actions",
     label: "Actions",

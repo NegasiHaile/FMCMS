@@ -10,38 +10,45 @@ const fs = require("fs");
 const machinePickupCntrl = {
   addPickup: async (req, res) => {
     try {
-      const newPickup = new MachinePickups(
-        ({
-          branchId,
-          salesId,
-          businessId,
-          machineId,
-          memoryKey,
-          drawer,
-          paper,
-          terminal,
-          terminalAdapte,
-          machineMaterial,
-          SBookTerminal,
-          SbookMachine,
-          paperRoller,
-          paperCover,
-          machineAdapter,
-          FDForm,
-          sealNumber,
-          MRCNumber,
-          category,
-          subCategory,
-          clientReportedProblems,
-          TechnicianReportedProblems,
-          infoChange,
-          issueDate,
-          pickedupBy,
-        } = req.body)
-      );
+      const mchn = await machines.findById(req.body.machineId);
+      if (mchn.availableIn === "client-hand") {
+        const newPickup = new MachinePickups(
+          ({
+            branchId,
+            salesId,
+            businessId,
+            machineId,
+            memoryKey,
+            drawer,
+            paper,
+            terminal,
+            terminalAdapte,
+            machineMaterial,
+            SBookTerminal,
+            SbookMachine,
+            paperRoller,
+            paperCover,
+            machineAdapter,
+            FDForm,
+            sealNumber,
+            MRCNumber,
+            category,
+            subCategory,
+            clientReportedProblems,
+            TechnicianReportedProblems,
+            infoChange,
+            issueDate,
+            pickedupBy,
+          } = req.body)
+        );
 
-      await newPickup.save();
-      res.json({ msg: "Machine receiving detail saved successfuly!" });
+        await newPickup.save();
+        res.json({ msg: "Machine receiving detail saved successfuly!" });
+      } else {
+        return res.status(400).json({
+          msg: "This machine is already instore, you can receive machine in client hand!",
+        });
+      }
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -91,7 +98,7 @@ const machinePickupCntrl = {
           _id: pickup._id,
           branchId: pickup.branchId,
           branchName: pickup.branch[0].branchName,
-          salesId: pickup._id,
+          salesId: pickup.salesId,
           machineId: pickup.machine[0]._id,
           serialNumber: pickup.machine[0].serialNumber,
           machineModel: pickup.machine[0].machineModel,
@@ -376,7 +383,7 @@ const machinePickupCntrl = {
       if (req.body.request === "stored" && req.body.category === "withdrawal") {
         await machines.findOneAndUpdate(
           { _id: req.body.machineId },
-          { salesStatus: "unsold" }
+          { SIM: "0", salesStatus: "unsold", availableIn: "branch-store" }
         );
         if (SIM_id.length >= 20) {
           await simcards.findOneAndUpdate(
@@ -384,9 +391,9 @@ const machinePickupCntrl = {
             { status: "discarded" }
           );
         }
-        await machines.findOneAndUpdate(
-          { _id: req.body.machineId },
-          { availableIn: "branch-store" }
+        await Sales.findOneAndUpdate(
+          { _id: req.body.salesId },
+          { status: "canceled" }
         );
         await MachinePickups.findOneAndUpdate(
           { _id: req.body._id },

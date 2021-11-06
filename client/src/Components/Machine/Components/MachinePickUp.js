@@ -192,7 +192,8 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
       className="rounded "
       style={{ minWidth: "900px", border: "solid 0px #D8DBE0" }}
     >
-      {incompletePickups.length === 0 || onEdit ? (
+      {(incompletePickups.length === 0 && salesDetail.status !== "canceled") ||
+      onEdit ? (
         <CForm onSubmit={onSubmitSavePickupDetail}>
           <CCard className="w-100 border-0">
             <CCardBody>

@@ -882,6 +882,7 @@ function MachinePickupOperations() {
   const [callbackPickup, setCallbackPickup] = state.MachinePickUpAPI.callback;
   const [callbackMachine, setCallbackMachine] = state.MachineAPI.callback;
   const [callbackSIMCard, setCallbackSIMCard] = state.SIMCardAPI.callback;
+  const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
   const [pickup, setPickup] = useState([]);
 
   useEffect(() => {
@@ -905,6 +906,7 @@ function MachinePickupOperations() {
   };
   const onSubmitMaintenanceProcessing = async (
     _id,
+    salesId,
     machineId,
     category,
     request,
@@ -923,6 +925,7 @@ function MachinePickupOperations() {
           if (result.isConfirmed) {
             const res = await axios.put(`/pickup/maintenance_processing`, {
               _id,
+              salesId,
               machineId,
               category,
               request,
@@ -931,6 +934,7 @@ function MachinePickupOperations() {
             setCallbackPickup(!callbackPickup);
             setCallbackMachine(!callbackMachine);
             setCallbackSIMCard(!callbackSIMCard);
+            setCallbackSales(!callbackSales);
             sweetAlert("success", res.data.msg);
           }
         } catch (error) {
@@ -958,6 +962,7 @@ function MachinePickupOperations() {
                   onClick={() =>
                     onSubmitMaintenanceProcessing(
                       pickup[0]._id,
+                      pickup[0].salesId,
                       pickup[0].machineId,
                       pickup[0].category,
                       "controlling_maintenance"
@@ -977,6 +982,7 @@ function MachinePickupOperations() {
                     onClick={() =>
                       onSubmitMaintenanceProcessing(
                         pickup[0]._id,
+                        pickup[0].salesId,
                         pickup[0].machineId,
                         pickup[0].category,
                         "maintaining"
@@ -997,6 +1003,7 @@ function MachinePickupOperations() {
                     onClick={() =>
                       onSubmitMaintenanceProcessing(
                         pickup[0]._id,
+                        pickup[0].salesId,
                         pickup[0].machineId,
                         pickup[0].category,
                         "controlling_delivery"
@@ -1021,6 +1028,7 @@ function MachinePickupOperations() {
                   onClick={() =>
                     onSubmitMaintenanceProcessing(
                       pickup[0]._id,
+                      pickup[0].salesId,
                       pickup[0].machineId,
                       pickup[0].category,
                       "controlling_storing"
@@ -1040,6 +1048,7 @@ function MachinePickupOperations() {
                     onClick={() =>
                       onSubmitMaintenanceProcessing(
                         pickup[0]._id,
+                        pickup[0].salesId,
                         pickup[0].machineId,
                         pickup[0].category,
                         "storing"
@@ -1058,6 +1067,7 @@ function MachinePickupOperations() {
                     onClick={() =>
                       onSubmitMaintenanceProcessing(
                         pickup[0]._id,
+                        pickup[0].salesId,
                         pickup[0].machineId,
                         pickup[0].category,
                         "stored",
@@ -1078,6 +1088,7 @@ function MachinePickupOperations() {
                     onClick={() =>
                       onSubmitMaintenanceProcessing(
                         pickup[0]._id,
+                        pickup[0].salesId,
                         pickup[0].machineId,
                         pickup[0].category,
                         "controlling_delivery"
@@ -1100,6 +1111,7 @@ function MachinePickupOperations() {
                 onClick={() =>
                   onSubmitMaintenanceProcessing(
                     pickup[0]._id,
+                    pickup[0].salesId,
                     pickup[0].machineId,
                     pickup[0].category,
                     "delivering"
@@ -1118,6 +1130,7 @@ function MachinePickupOperations() {
                 onClick={() =>
                   onSubmitMaintenanceProcessing(
                     pickup[0]._id,
+                    pickup[0].salesId,
                     pickup[0].machineId,
                     pickup[0].category,
                     "completed"

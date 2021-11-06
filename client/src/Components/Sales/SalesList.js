@@ -120,9 +120,11 @@ function SalesList() {
                     {user.userRole === "technician" && (
                       <CLink
                         className="text-danger"
-                        to={`/pickup/machine/${sales.machineId}`}
+                        to={`/machine/returning_pickup/${sales.machineId}`}
                       >
-                        <CTooltip content={`Receive machine of this sales.`}>
+                        <CTooltip
+                          content={`Withdraw machine of this sales and cancel the sales.`}
+                        >
                           <CIcon name="cil-recycle" />
                         </CTooltip>
                       </CLink>
