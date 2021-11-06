@@ -101,31 +101,31 @@ function SalesList() {
                       user.userRole === "client") && (
                       <>
                         {sales.status === "New" ||
-                        sales.status === "unapproved" ||
-                        sales.status === "rejected" ? (
-                          <CLink
-                            className="text-danger"
-                            onClick={() => cancelUnapprovedSales(sales.saleId)}
-                          >
-                            <CTooltip content={`Cancel this sales.`}>
-                              <CIcon name="cil-trash" />
-                            </CTooltip>
-                          </CLink>
-                        ) : (
-                          <>
+                          sales.status === "unapproved" ||
+                          (sales.status === "rejected" && (
                             <CLink
                               className="text-danger"
-                              to={`/pickup/machine/${sales.machineId}`}
+                              onClick={() =>
+                                cancelUnapprovedSales(sales.saleId)
+                              }
                             >
-                              <CTooltip
-                                content={`Pickup machine of this sales.`}
-                              >
-                                <CIcon name="cil-recycle" />
+                              <CTooltip content={`Cancel this sales.`}>
+                                <CIcon name="cil-trash" />
                               </CTooltip>
                             </CLink>
-                          </>
-                        )}
+                          ))}
                       </>
+                    )}
+
+                    {user.userRole === "technician" && (
+                      <CLink
+                        className="text-danger"
+                        to={`/pickup/machine/${sales.machineId}`}
+                      >
+                        <CTooltip content={`Receive machine of this sales.`}>
+                          <CIcon name="cil-recycle" />
+                        </CTooltip>
+                      </CLink>
                     )}
 
                     <CLink
