@@ -48,7 +48,14 @@ function BranchsList() {
 
   const onChangeInput = (e) => {
     const { name, value } = e.target;
-    setBranch({ ...branch, [name]: value });
+    if (name === "telephone") {
+      const nmbrPattern = /^[0-9\b]+$/;
+      if (e.target.value === "" || nmbrPattern.test(e.target.value)) {
+        setBranch({ ...branch, [name]: value });
+      }
+    } else {
+      setBranch({ ...branch, [name]: value });
+    }
   };
 
   const sweetAlert = (type, text) => {
@@ -318,7 +325,7 @@ function BranchsList() {
                       name="telephone"
                       placeholder="Enter branch telephone"
                       // pattern="[1-9]{1}[0-9]{9}"
-                      maxLength="13"
+                      maxLength="10"
                       value={branch.telephone}
                       onChange={onChangeInput}
                       required
