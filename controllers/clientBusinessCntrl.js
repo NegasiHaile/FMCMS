@@ -84,14 +84,10 @@ const clientBusinessCntrl = {
       if (bsnss.machine !== "assigned") {
         const pathToFile = "./client/public/" + bsnss.TL_Image;
         fs.unlink(pathToFile, async (err) => {
-          if (err) {
-            throw err;
-          } else {
-            await clientBusinesses.findByIdAndDelete(req.params.businessId);
-            return res.json({
-              msg: "Business detail has been deleted succesfully!",
-            });
-          }
+          await clientBusinesses.findByIdAndDelete(req.params.businessId);
+          return res.json({
+            msg: "Business detail has been deleted succesfully!",
+          });
         });
       } else {
         return res.status(400).json({
