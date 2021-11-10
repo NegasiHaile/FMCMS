@@ -14,6 +14,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import MainChartExample from "../charts/MainChartExample";
+import EmployeesList from "../Employee/EmployeesList";
 
 const WidgetsDropdown = lazy(() => import("../widgets/WidgetsDropdown.js"));
 const WidgetsBrand = lazy(() => import("../widgets/WidgetsBrand.js"));
@@ -30,7 +31,7 @@ const BranchAdminDashboard = () => {
               </h4>
               <div className="small text-muted">November 2017</div>
             </CCol>
-            <CCol sm="7" className="d-none d-md-block">
+            {/* <CCol sm="7" className="d-none d-md-block">
               <CButton color="primary" className="float-right">
                 <CIcon name="cil-cloud-download" />
               </CButton>
@@ -46,9 +47,9 @@ const BranchAdminDashboard = () => {
                   </CButton>
                 ))}
               </CButtonGroup>
-            </CCol>
+            </CCol> */}
           </CRow>
-          <MainChartExample style={{ height: "300px", marginTop: "40px" }} />
+          <MainChartExample style={{ height: "300px", marginTop: "10px" }} />
         </CCardBody>
         <CCardFooter>
           <CRow className="text-center">
@@ -107,7 +108,7 @@ const BranchAdminDashboard = () => {
 
       <WidgetsBrand withCharts />
 
-      <CRow>
+      {/* <CRow>
         <CCol>
           <CCard>
             <CCardHeader>Traffic {" & "} Sales</CCardHeader>
@@ -408,7 +409,8 @@ const BranchAdminDashboard = () => {
             </CCardBody>
           </CCard>
         </CCol>
-      </CRow>
+      </CRow> */}
+      <EmployeesList />
     </>
   );
 };

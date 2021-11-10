@@ -168,6 +168,12 @@ const EmployeeList = () => {
                     size="sm"
                     variant="ghost"
                     color={employee.status === "ON" ? "danger" : "primary"}
+                    disabled={
+                      user.userRole === "super-admin" ||
+                      user.userRole === "branch-admin"
+                        ? false
+                        : true
+                    }
                     onClick={() => {
                       if (employee.status === "ON") {
                         switchUserAccount(

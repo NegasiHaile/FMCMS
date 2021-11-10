@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+
+import { GlobalState } from "../../GlobalState";
+
 import { CChartLine } from "@coreui/react-chartjs";
 import { getStyle, hexToRgba } from "@coreui/utils";
 
@@ -7,19 +10,78 @@ const brandInfo = getStyle("info") || "#20a8d8";
 const brandDanger = getStyle("danger") || "#f86c6b";
 
 const MainChartExample = (attributes) => {
+  const state = useContext(GlobalState);
+  const [user] = state.UserAPI.User;
+  const [Sales] = state.SalesAPI.Sales;
+
+  var months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const machineSales = [];
+  const annualMaintenance = [];
+  const incidentMaintenance = [];
   const random = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  const defaultDatasets = (() => {
-    let elements = 27;
-    const data1 = [];
-    const data2 = [];
-    const data3 = [];
+  const generalData = () => {
+    let elements = months.length - 1;
     for (let i = 0; i <= elements; i++) {
-      data1.push(random(50, 200));
-      data2.push(random(80, 100));
-      data3.push(65);
+      machineSales.push(
+        Sales.filter(
+          (sale) =>
+            new Date(sale.createdAt).toLocaleString("en-us", {
+              month: "short",
+            }) == months[i]
+        ).length
+      );
+      annualMaintenance.push(random(40, 100));
+      // incidentMaintenance.push(65);
+      incidentMaintenance.push(random(70, 150));
+    }
+  };
+
+  const branchData = () => {
+    let elements = months.length - 1;
+    for (let i = 0; i <= elements; i++) {
+      machineSales.push(
+        Sales.filter(
+          (sale) =>
+            sale.branchId === user.branch &&
+            new Date(sale.createdAt).toLocaleString("en-us", {
+              month: "short",
+            }) == months[i]
+        ).length
+      );
+      annualMaintenance.push(random(40, 100));
+      incidentMaintenance.push(random(70, 150));
+    }
+  };
+
+  // useEffect(() => {
+  //   if (user.branch) {
+  //     branchData();
+  //   } else {
+  //     generalData();
+  //   }
+  // }, [user, Sales]);
+  const defaultDatasets = (() => {
+    if (user.branch) {
+      branchData();
+    } else {
+      generalData();
     }
     return [
       {
@@ -28,7 +90,7 @@ const MainChartExample = (attributes) => {
         borderColor: brandInfo,
         pointHoverBackgroundColor: brandInfo,
         borderWidth: 2,
-        data: data1,
+        data: machineSales,
       },
       {
         label: "Annual Maintenance",
@@ -36,7 +98,7 @@ const MainChartExample = (attributes) => {
         borderColor: brandSuccess,
         pointHoverBackgroundColor: brandSuccess,
         borderWidth: 2,
-        data: data2,
+        data: annualMaintenance,
       },
       {
         label: "Incident Maintenance",
@@ -45,7 +107,7 @@ const MainChartExample = (attributes) => {
         pointHoverBackgroundColor: brandDanger,
         borderWidth: 1,
         borderDash: [8, 5],
-        data: data3,
+        data: incidentMaintenance,
       },
     ];
   })();
@@ -53,6 +115,7 @@ const MainChartExample = (attributes) => {
   const defaultOptions = (() => {
     return {
       maintainAspectRatio: false,
+
       legend: {
         display: false,
       },
@@ -61,6 +124,10 @@ const MainChartExample = (attributes) => {
           {
             gridLines: {
               drawOnChartArea: false,
+            },
+            scaleLabel: {
+              labelString: "Months",
+              display: true,
             },
           },
         ],
@@ -71,6 +138,10 @@ const MainChartExample = (attributes) => {
               maxTicksLimit: 5,
               stepSize: Math.ceil(250 / 5),
               max: 250,
+            },
+            scaleLabel: {
+              labelString: "Machine quantity",
+              display: true,
             },
             gridLines: {
               display: true,
@@ -95,50 +166,17 @@ const MainChartExample = (attributes) => {
       {...attributes}
       datasets={defaultDatasets}
       options={defaultOptions}
-      labels={[
-        "Jan",
-        "Fab",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sept",
-        "Oct",
-        "Nov",
-        "Dec",
-        // "Mo",
-        // "Tu",
-        // "We",
-        // "Th",
-        // "Fr",
-        // "Sa",
-        // "Su",
-        // "Mo",
-        // "Tu",
-        // "We",
-        // "Th",
-        // "Fr",
-        // "Sa",
-        // "Su",
-        // "Mo",
-        // "Tu",
-        // "We",
-        // "Th",
-        // "Fr",
-        // "Sa",
-        // "Su",
-        // "Mo",
-        // "Tu",
-        // "We",
-        // "Th",
-        // "Fr",
-        // "Sa",
-        // "Su",
-      ]}
+      labels={months}
     />
   );
 };
 
 export default MainChartExample;
+
+// CChartBar;
+// CChartLine;
+// CChartHorizontalBar;
+// CChartDoughnut;
+// CChartRadar;
+// CChartPie;
+// CChartPolarArea;
