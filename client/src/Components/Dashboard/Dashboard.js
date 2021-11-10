@@ -25,12 +25,12 @@ const BranchAdminDashboard = () => {
       <CCard>
         <CCardBody>
           <CRow>
-            <CCol sm="5">
+            {/* <CCol sm="5">
               <h4 id="traffic" className="card-title mb-0">
                 Machines
               </h4>
               <div className="small text-muted">November 2017</div>
-            </CCol>
+            </CCol> */}
             {/* <CCol sm="7" className="d-none d-md-block">
               <CButton color="primary" className="float-right">
                 <CIcon name="cil-cloud-download" />

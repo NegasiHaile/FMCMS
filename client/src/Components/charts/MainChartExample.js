@@ -105,7 +105,7 @@ const MainChartExample = (attributes) => {
         backgroundColor: "transparent",
         borderColor: brandDanger,
         pointHoverBackgroundColor: brandDanger,
-        borderWidth: 1,
+        borderWidth: 2,
         borderDash: [8, 5],
         data: incidentMaintenance,
       },
@@ -117,7 +117,7 @@ const MainChartExample = (attributes) => {
       maintainAspectRatio: false,
 
       legend: {
-        display: false,
+        display: true,
       },
       scales: {
         xAxes: [
