@@ -22,7 +22,7 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Employee's-Managment"],
+    _children: ["Employees-Managment"],
   },
   {
     _tag: "CSidebarNavItem",
@@ -63,6 +63,24 @@ const _nav = [
     name: "Withdrawal List",
     to: "/machine/return/list",
     icon: "cil-recycle",
+  },
+
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["MRC/SIM-Managment"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "MRCs List",
+    to: "/mrcs/list",
+    icon: "cil-file",
+  },
+
+  {
+    _tag: "CSidebarNavItem",
+    name: "SIM Cards List",
+    to: "/simcard/list",
+    icon: "cil-file",
   },
   {
     _tag: "CSidebarNavTitle",
