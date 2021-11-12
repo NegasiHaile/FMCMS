@@ -76,7 +76,7 @@ const WidgetsDropdown = () => {
   // render
   return (
     <CRow>
-      {widgetsContent.map((widgt, index) => (
+      {/* {widgetsContent.map((widgt, index) => (
         <CCol sm="6" lg="3" Key={index}>
           <CWidgetDropdown
             color={widgt.color}
@@ -106,43 +106,73 @@ const WidgetsDropdown = () => {
             </CDropdown>
           </CWidgetDropdown>
         </CCol>
-      ))}
+      ))} */}
 
-      {/*
-<CCol sm="6" lg="3" Key={index}>
-          <CWidgetDropdown
-            color="gradient-primary"
-            header="10"
-            text="Branchs"
-            footerSlot={
-              <ChartLineSimple
-                pointed
-                className="c-chart-wrapper mt-3 mx-3"
-                style={{ height: "70px" }}
-                dataPoints={[65, 59, 84, 84, 51, 55, 40, 30, 70, 100]}
-                pointHoverBackgroundColor="primary"
-                label="Members"
-                labels="months"
-              />
-            }
-          >
-            <CDropdown>
-              <CDropdownToggle color="transparent">
-                <CIcon name="cil-settings" />
-              </CDropdownToggle>
-              <CDropdownMenu className="pt-0" placement="bottom-end">
-                <CDropdownItem>Open Branch</CDropdownItem>
-                <CDropdownItem>Branchs List</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-          </CWidgetDropdown>
-        </CCol>
+      <CCol sm="6" lg="3">
+        <CWidgetDropdown
+          style={{ backgroundColor: "#3CB371" }}
+          header="4530"
+          text="Machines"
+          footerSlot={
+            <ChartLineSimple
+              pointed
+              className="c-chart-wrapper mt-3 mx-3"
+              style={{ height: "70px" }}
+              dataPoints={[65, 59, 84, 84, 51, 55, 40, 30, 70, 100]}
+              pointHoverBackgroundColor="#3CB371"
+              label="Machines"
+              labels="months"
+            />
+          }
+        >
+          <CDropdown>
+            <CDropdownToggle color="transparent">
+              <CIcon name="cil-print" />
+            </CDropdownToggle>
+            <CDropdownMenu className="pt-0" placement="bottom-end">
+              <CDropdownItem to="/machines/list" className="border-bottom">
+                Machines List
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>New Arrivals: </span> <span> 500</span>
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Unsold: </span> <span> 4567</span>
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Sold: </span> <span> 4567</span>
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Processing: </span> <span> 67</span>
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Damaged: </span> <span> 67</span>
+              </CDropdownItem>
+            </CDropdownMenu>
+          </CDropdown>
+        </CWidgetDropdown>
+      </CCol>
 
-       <CCol sm="6" lg="3">
+      <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-info"
           header="83"
-          text="Employees"
+          text="MRC"
           footerSlot={
             <ChartLineSimple
               pointed
@@ -151,18 +181,31 @@ const WidgetsDropdown = () => {
               dataPoints={[1, 18, 9, 17, 34, 22, 11]}
               pointHoverBackgroundColor="info"
               options={{ elements: { line: { tension: 0.00001 } } }}
-              label="Members"
+              label="MRC"
               labels="months"
             />
           }
         >
           <CDropdown>
             <CDropdownToggle color="transparent">
-              <CIcon name="cil-settings" />
+              <CIcon name="cil-asterisk-circle" />
             </CDropdownToggle>
             <CDropdownMenu className="pt-0" placement="bottom-end">
-              <CDropdownItem>Add Employee</CDropdownItem>
-              <CDropdownItem>Employee List</CDropdownItem>
+              <CDropdownItem to="/mrcs/list" className="border-bottom">
+                MRC List
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Free: </span> <span>4567</span>
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Taken: </span> <span>4567</span>
+              </CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
         </CWidgetDropdown>
@@ -172,7 +215,7 @@ const WidgetsDropdown = () => {
         <CWidgetDropdown
           color="gradient-warning"
           header="823"
-          text="Clients"
+          text="SIM Cards"
           footerSlot={
             <ChartLineSimple
               className="mt-3"
@@ -181,19 +224,43 @@ const WidgetsDropdown = () => {
               dataPoints={[78, 81, 80, 45, 34, 12, 40]}
               options={{ elements: { line: { borderWidth: 2.5 } } }}
               pointHoverBackgroundColor="warning"
-              label="Members"
+              label="SIM Cards"
               labels="months"
             />
           }
         >
           <CDropdown>
             <CDropdownToggle color="transparent">
-              <CIcon name="cil-settings" />
+              <CIcon name="cil-file" />
             </CDropdownToggle>
             <CDropdownMenu className="pt-0" placement="bottom-end">
-              <CDropdownItem>Add Client</CDropdownItem>
-              <CDropdownItem>Clients List</CDropdownItem>
-              <CDropdownItem disabled>Quantity: 4567</CDropdownItem>
+              <CDropdownItem to="/simcards/list" className="border-bottom">
+                SIM Cards List
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>New Arrivals: </span> <span>567</span>
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Free: </span> <span>567</span>
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Taken: </span> <span>4567</span>
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Discarded: </span> <span>467</span>
+              </CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
         </CWidgetDropdown>
@@ -203,28 +270,64 @@ const WidgetsDropdown = () => {
         <CWidgetDropdown
           color="gradient-danger"
           header="1423"
-          text="Businesses"
+          text="Received Machines"
           footerSlot={
             <ChartBarSimple
               className="mt-3 mx-3"
               style={{ height: "70px" }}
               backgroundColor="rgb(250, 152, 152)"
-              label="Members"
+              label="Machines"
               labels="months"
             />
           }
         >
           <CDropdown>
             <CDropdownToggle caret className="text-white" color="transparent">
-              <CIcon name="cil-settings" />
+              <CIcon name="cil-recycle" />
             </CDropdownToggle>
             <CDropdownMenu className="pt-0" placement="bottom-end">
-              <CDropdownItem>Business List</CDropdownItem>
-              <CDropdownItem disabled>Quantity: 4567</CDropdownItem>
+              <CDropdownItem to="/maintenance/list" className="border-bottom">
+                {" "}
+                Maintenance List
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Annual:</span> <span>4567</span>
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Incident:</span> <span>4567</span>
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Info' Change: </span> <span>4567</span>
+              </CDropdownItem>
+              <CDropdownItem to="/machine/return/list" className="border">
+                {" "}
+                Withdrawals List
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Widrawal: </span> <span>4567</span>
+              </CDropdownItem>
+              <CDropdownItem
+                className="d-flex justify-content-between"
+                disabled
+              >
+                <span>Tempo' Store: </span> <span>4567</span>
+              </CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
         </CWidgetDropdown>
-      </CCol> */}
+      </CCol>
     </CRow>
   );
 };
