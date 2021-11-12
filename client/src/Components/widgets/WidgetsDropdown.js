@@ -234,7 +234,7 @@ const WidgetsDropdown = () => {
               <CIcon name="cil-file" />
             </CDropdownToggle>
             <CDropdownMenu className="pt-0" placement="bottom-end">
-              <CDropdownItem to="/simcards/list" className="border-bottom">
+              <CDropdownItem to="/simcard/list" className="border-bottom">
                 SIM Cards List
               </CDropdownItem>
               <CDropdownItem
