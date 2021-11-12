@@ -73,7 +73,7 @@ const _nav = [
     _tag: "CSidebarNavItem",
     name: "MRCs List",
     to: "/mrcs/list",
-    icon: "cil-file",
+    icon: "cil-asterisk-circle",
   },
 
   {
