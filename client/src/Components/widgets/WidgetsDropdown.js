@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import { GlobalState } from "../../GlobalState";
 import {
   CWidgetDropdown,
   CRow,
@@ -13,6 +15,11 @@ import ChartLineSimple from "../charts/ChartLineSimple";
 import ChartBarSimple from "../charts/ChartBarSimple";
 
 const WidgetsDropdown = () => {
+  const state = useContext(GlobalState);
+  const [user] = state.UserAPI.User;
+  const [allMachines] = state.MachineAPI.machines;
+  const [allMRCs] = state.MRCAPI.mrcs;
+  const [allSIMCards] = state.SIMCardAPI.simCards;
   const widgetsContent = [
     {
       color: "gradient-primary",
@@ -73,6 +80,7 @@ const WidgetsDropdown = () => {
       ],
     },
   ];
+  const machineArray = () => {};
   // render
   return (
     <CRow>
@@ -111,14 +119,19 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           style={{ backgroundColor: "#3CB371" }}
-          header="4530"
+          header={
+            user.branch
+              ? allMachines.filter((machine) => machine.branch === user.branch)
+                  .length
+              : allMachines.length
+          }
           text="Machines"
           footerSlot={
             <ChartLineSimple
               pointed
               className="c-chart-wrapper mt-3 mx-3"
               style={{ height: "70px" }}
-              dataPoints={[65, 59, 84, 84, 51, 55, 40, 30, 70, 100]}
+              dataPoints={[65, 59, 84, 84, 51, 55, 40]}
               pointHoverBackgroundColor="#3CB371"
               label="Machines"
               labels="months"
@@ -137,31 +150,89 @@ const WidgetsDropdown = () => {
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>New Arrivals: </span> <span> 500</span>
+                <span>New Arrivals: </span>{" "}
+                <span>
+                  {user.branch
+                    ? allMachines.filter(
+                        (machine) =>
+                          machine.branch === user.branch &&
+                          machine.availableIn === "main-store"
+                      ).length
+                    : allMachines.filter(
+                        (machine) =>
+                          machine.branch === "none" || machine.branch === ""
+                      ).length}
+                </span>
               </CDropdownItem>
               <CDropdownItem
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Unsold: </span> <span> 4567</span>
+                <span>Unsold: </span>{" "}
+                <span>
+                  {user.branch
+                    ? allMachines.filter(
+                        (machine) =>
+                          machine.branch === user.branch &&
+                          machine.salesStatus === "unsold"
+                      ).length
+                    : allMachines.filter(
+                        (machine) => machine.salesStatus === "unsold"
+                      ).length}
+                </span>
               </CDropdownItem>
               <CDropdownItem
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Sold: </span> <span> 4567</span>
+                <span>Sold: </span>{" "}
+                <span>
+                  {user.branch
+                    ? allMachines.filter(
+                        (machine) =>
+                          machine.branch === user.branch &&
+                          machine.salesStatus === "sold"
+                      ).length
+                    : allMachines.filter(
+                        (machine) => machine.salesStatus === "sold"
+                      ).length}
+                </span>
               </CDropdownItem>
               <CDropdownItem
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Processing: </span> <span> 67</span>
+                <span>Damaged: </span>{" "}
+                <span>
+                  {" "}
+                  {user.branch
+                    ? allMachines.filter(
+                        (machine) =>
+                          machine.branch === user.branch &&
+                          machine.problemStatus === "damaged"
+                      ).length
+                    : allMachines.filter(
+                        (machine) => machine.problemStatus === "damaged"
+                      ).length}
+                </span>
               </CDropdownItem>
+
               <CDropdownItem
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Damaged: </span> <span> 67</span>
+                <span>Maintainig: </span>{" "}
+                <span>
+                  {user.branch
+                    ? allMachines.filter(
+                        (machine) =>
+                          machine.branch === user.branch &&
+                          machine.problemStatus === "maintainig"
+                      ).length
+                    : allMachines.filter(
+                        (machine) => machine.problemStatus === "maintainig"
+                      ).length}
+                </span>
               </CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
@@ -171,7 +242,11 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-info"
-          header="83"
+          header={
+            user.branch
+              ? allMRCs.filter((MRC) => MRC.branch === user.branch).length
+              : allMRCs.length
+          }
           text="MRC"
           footerSlot={
             <ChartLineSimple
@@ -198,13 +273,29 @@ const WidgetsDropdown = () => {
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Free: </span> <span>4567</span>
+                <span>Free: </span>{" "}
+                <span>
+                  {user.branch
+                    ? allMRCs.filter(
+                        (MRC) =>
+                          MRC.branch === user.branch && MRC.status === "free"
+                      ).length
+                    : allMRCs.filter((MRC) => MRC.status === "free").length}
+                </span>
               </CDropdownItem>
               <CDropdownItem
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Taken: </span> <span>4567</span>
+                <span>Taken: </span>{" "}
+                <span>
+                  {user.branch
+                    ? allMRCs.filter(
+                        (MRC) =>
+                          MRC.branch === user.branch && MRC.status === "taken"
+                      ).length
+                    : allMRCs.filter((MRC) => MRC.status === "taken").length}
+                </span>
               </CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
@@ -214,7 +305,12 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-warning"
-          header="823"
+          header={
+            user.branch
+              ? allSIMCards.filter((SIMCard) => SIMCard.branch === user.branch)
+                  .length
+              : allSIMCards.length
+          }
           text="SIM Cards"
           footerSlot={
             <ChartLineSimple
@@ -241,25 +337,68 @@ const WidgetsDropdown = () => {
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>New Arrivals: </span> <span>567</span>
+                <span>New Arrivals: </span>{" "}
+                <span>
+                  {user.branch
+                    ? allSIMCards.filter(
+                        (SIMCard) =>
+                          SIMCard.branch === user.branch &&
+                          SIMCard.availableIn === "main-store"
+                      ).length
+                    : allSIMCards.filter(
+                        (SIMCard) => SIMCard.availableIn === "main-store"
+                      ).length}
+                </span>
               </CDropdownItem>
               <CDropdownItem
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Free: </span> <span>567</span>
+                <span>Free: </span>{" "}
+                <span>
+                  {user.branch
+                    ? allSIMCards.filter(
+                        (SIMCard) =>
+                          SIMCard.branch === user.branch &&
+                          SIMCard.status === "free"
+                      ).length
+                    : allSIMCards.filter((SIMCard) => SIMCard.status === "free")
+                        .length}
+                </span>
               </CDropdownItem>
               <CDropdownItem
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Taken: </span> <span>4567</span>
+                <span>Taken: </span>{" "}
+                <span>
+                  {user.branch
+                    ? allSIMCards.filter(
+                        (SIMCard) =>
+                          SIMCard.branch === user.branch &&
+                          SIMCard.status === "taken"
+                      ).length
+                    : allSIMCards.filter(
+                        (SIMCard) => SIMCard.status === "taken"
+                      ).length}
+                </span>
               </CDropdownItem>
               <CDropdownItem
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Discarded: </span> <span>467</span>
+                <span>Discarded: </span>{" "}
+                <span>
+                  {user.branch
+                    ? allSIMCards.filter(
+                        (SIMCard) =>
+                          SIMCard.branch === user.branch &&
+                          SIMCard.status === "discarded"
+                      ).length
+                    : allSIMCards.filter(
+                        (SIMCard) => SIMCard.status === "discarded"
+                      ).length}
+                </span>
               </CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
