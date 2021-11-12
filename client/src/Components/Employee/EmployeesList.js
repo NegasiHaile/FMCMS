@@ -51,13 +51,13 @@ const EmployeeList = () => {
     // e.preventDefault();
     try {
       Swal.fire({
-        title: "Are you sure",
+        title: "Delete this?",
         text:
-          "You want to delelte " +
+          "WARNING:- Every data related to " +
           fName +
           " " +
           mName +
-          "'s detail permanently?!",
+          "' will be lost!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#1E263C",
