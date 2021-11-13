@@ -20,6 +20,7 @@ const WidgetsDropdown = () => {
   const [allMachines] = state.MachineAPI.machines;
   const [allMRCs] = state.MRCAPI.mrcs;
   const [allSIMCards] = state.SIMCardAPI.simCards;
+  const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
   const widgetsContent = [
     {
       color: "gradient-primary",
@@ -84,41 +85,9 @@ const WidgetsDropdown = () => {
   // render
   return (
     <CRow>
-      {/* {widgetsContent.map((widgt, index) => (
-        <CCol sm="6" lg="3" Key={index}>
-          <CWidgetDropdown
-            color={widgt.color}
-            header={widgt.header}
-            text={widgt.text}
-            footerSlot={
-              <ChartLineSimple
-                pointed
-                className="c-chart-wrapper mt-3 mx-3"
-                style={{ height: "70px" }}
-                dataPoints={widgt.dataPoints}
-                pointHoverBackgroundColor={widgt.pointHoverBackgroundColor}
-                label="Members"
-                labels="months"
-              />
-            }
-          >
-            <CDropdown>
-              <CDropdownToggle color="transparent">
-                <CIcon name={widgt.cicon} />
-              </CDropdownToggle>
-              <CDropdownMenu className="pt-0" placement="bottom-end">
-                {widgt.dropdown.map((drpdwn, index) => (
-                  <CDropdownItem key={index}>{drpdwn}</CDropdownItem>
-                ))}
-              </CDropdownMenu>
-            </CDropdown>
-          </CWidgetDropdown>
-        </CCol>
-      ))} */}
-
       <CCol sm="6" lg="3">
         <CWidgetDropdown
-          style={{ backgroundColor: "#3CB371" }}
+          style={{ backgroundColor: "#8884D8" }}
           header={
             user.branch
               ? allMachines.filter((machine) => machine.branch === user.branch)
@@ -132,7 +101,7 @@ const WidgetsDropdown = () => {
               className="c-chart-wrapper mt-3 mx-3"
               style={{ height: "70px" }}
               dataPoints={[65, 59, 84, 84, 51, 55, 40]}
-              pointHoverBackgroundColor="#3CB371"
+              pointHoverBackgroundColor="#8884D8"
               label="Machines"
               labels="months"
             />
@@ -408,7 +377,13 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-danger"
-          header="1423"
+          header={
+            user.branch
+              ? pickupMachines.filter(
+                  (pickup) => pickup.branchId === user.branch
+                ).length
+              : pickupMachines.length
+          }
           text="Received Machines"
           footerSlot={
             <ChartBarSimple
@@ -433,19 +408,52 @@ const WidgetsDropdown = () => {
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Annual:</span> <span>4567</span>
+                <span>Annual:</span>{" "}
+                <span>
+                  {user.branch
+                    ? pickupMachines.filter(
+                        (pickup) =>
+                          pickup.branchId === user.branch &&
+                          pickup.category === "annual"
+                      ).length
+                    : pickupMachines.filter(
+                        (pickup) => pickup.category === "annual"
+                      ).length}
+                </span>
               </CDropdownItem>
               <CDropdownItem
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Incident:</span> <span>4567</span>
+                <span>Incident:</span>{" "}
+                <span>
+                  {user.branch
+                    ? pickupMachines.filter(
+                        (pickup) =>
+                          pickup.branchId === user.branch &&
+                          pickup.category === "incident"
+                      ).length
+                    : pickupMachines.filter(
+                        (pickup) => pickup.category === "incident"
+                      ).length}
+                </span>
               </CDropdownItem>
               <CDropdownItem
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Info' Change: </span> <span>4567</span>
+                <span>Info' Change: </span>{" "}
+                <span>
+                  {user.branch
+                    ? pickupMachines.filter(
+                        (pickup) =>
+                          pickup.branchId === user.branch &&
+                          pickup.category === "information_change"
+                      ).length
+                    : pickupMachines.filter(
+                        (pickup) => pickup.category === "information_change"
+                      ).length}
+                </span>
               </CDropdownItem>
               <CDropdownItem to="/machine/return/list" className="border">
                 {" "}
@@ -455,13 +463,35 @@ const WidgetsDropdown = () => {
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Widrawal: </span> <span>4567</span>
+                <span>Widrawal: </span>{" "}
+                <span>
+                  {user.branch
+                    ? pickupMachines.filter(
+                        (pickup) =>
+                          pickup.branchId === user.branch &&
+                          pickup.category === "withdrawal"
+                      ).length
+                    : pickupMachines.filter(
+                        (pickup) => pickup.category === "withdrawal"
+                      ).length}
+                </span>
               </CDropdownItem>
               <CDropdownItem
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Tempo' Store: </span> <span>4567</span>
+                <span>Tempo' Store: </span>{" "}
+                <span>
+                  {user.branch
+                    ? pickupMachines.filter(
+                        (pickup) =>
+                          pickup.branchId === user.branch &&
+                          pickup.category === "temporarly_store"
+                      ).length
+                    : pickupMachines.filter(
+                        (pickup) => pickup.category === "temporarly_store"
+                      ).length}
+                </span>
               </CDropdownItem>
             </CDropdownMenu>
           </CDropdown>

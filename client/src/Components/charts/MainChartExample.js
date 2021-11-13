@@ -135,9 +135,9 @@ const MainChartExample = (attributes) => {
           {
             ticks: {
               beginAtZero: true,
-              maxTicksLimit: 5,
-              stepSize: Math.ceil(250 / 5),
-              max: 250,
+              maxTicksLimit: 10,
+              stepSize: Math.ceil(500 / 10),
+              max: 500,
             },
             scaleLabel: {
               labelString: "Machine quantity",
@@ -173,6 +173,8 @@ const MainChartExample = (attributes) => {
 
 export default MainChartExample;
 
+// backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+// hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
 // CChartBar;
 // CChartLine;
 // CChartHorizontalBar;
