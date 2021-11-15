@@ -1,72 +1,118 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { CCard, CCardBody, CCardGroup, CCardHeader } from "@coreui/react";
 import {
   CChartBar,
   CChartLine,
   CChartDoughnut,
-  CChartRadar,
   CChartPie,
-  CChartPolarArea,
 } from "@coreui/react-chartjs";
 
+import { GlobalState } from "../../GlobalState";
+var months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 const Charts = () => {
+  const state = useContext(GlobalState);
+  const [user] = state.UserAPI.User;
+  const [Sales] = state.SalesAPI.Sales;
+  const [allBusinesses] = state.BusinessAPI.businesses;
+  const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
+  var linemachineSales = [0];
+  var lineClientsBusinesses = [0];
+  var barReceivedMachines = [0];
+  var doughnutSalesStatus = [];
+  var piAnnualService = [];
+
+  const pushMachineSales = () => {
+    let elements = months.length - 1;
+    for (let i = 0; i <= elements; i++) {
+      linemachineSales.push(
+        Sales.filter(
+          (sale) =>
+            new Date(sale.createdAt).toLocaleString("en-us", {
+              month: "short",
+            }) == months[i]
+        ).length
+      );
+    }
+
+    return linemachineSales;
+  };
+  const pushClientsBusinesses = () => {
+    let elements = months.length - 1;
+    for (let i = 0; i <= elements; i++) {
+      lineClientsBusinesses.push(
+        allBusinesses.filter(
+          (sale) =>
+            new Date(sale.createdAt).toLocaleString("en-us", {
+              month: "short",
+            }) == months[i]
+        ).length
+      );
+    }
+    return lineClientsBusinesses;
+  };
+  const pushReceivedMachines = () => {
+    let elements = months.length - 1;
+    for (let i = 0; i <= elements; i++) {
+      barReceivedMachines.push(
+        pickupMachines.filter(
+          (pickup) =>
+            new Date(pickup.createdAt).toLocaleString("en-us", {
+              month: "short",
+            }) == months[i]
+        ).length
+      );
+    }
+    return barReceivedMachines;
+  };
+  const pushSalesStatus = () => {
+    doughnutSalesStatus.push(
+      Sales.filter(
+        (sale) => sale.status !== "completed" && sale.status !== "canceled"
+      ).length
+    );
+    doughnutSalesStatus.push(
+      Sales.filter((sale) => sale.status === "completed").length
+    );
+    doughnutSalesStatus.push(
+      Sales.filter((sale) => sale.status === "canceled").length
+    );
+    return doughnutSalesStatus;
+  };
+
+  const puahAnnualService = () => {
+    piAnnualService.push(80, 10, 10);
+    return piAnnualService;
+  };
+
   return (
     <CCardGroup columns className="cols-2">
       <CCard>
-        <CCardHeader>Bar Chart</CCardHeader>
-        <CCardBody>
-          <CChartBar
-            datasets={[
-              {
-                label: "GitHub Commits",
-                backgroundColor: "#8884D8",
-                data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11],
-              },
-            ]}
-            labels="months"
-            options={{
-              tooltips: {
-                enabled: true,
-              },
-            }}
-          />
-        </CCardBody>
-      </CCard>
-
-      <CCard>
-        <CCardHeader>Doughnut Chart</CCardHeader>
-        <CCardBody>
-          <CChartDoughnut
-            datasets={[
-              {
-                backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
-                data: [40, 20, 80, 10],
-              },
-            ]}
-            labels={["VueJs", "EmberJs", "ReactJs", "AngularJs"]}
-            options={{
-              tooltips: {
-                enabled: true,
-              },
-            }}
-          />
-        </CCardBody>
-      </CCard>
-
-      <CCard>
-        <CCardHeader>Line Chart</CCardHeader>
+        <CCardHeader>Clients & Sales</CCardHeader>
         <CCardBody>
           <CChartLine
             datasets={[
               {
-                label: "Data One",
-                backgroundColor: "rgb(228,102,81,0.9)",
-                data: [30, 39, 10, 50, 30, 70, 35],
+                label: "Clients",
+                backgroundColor: "#FF6384",
+                data: pushClientsBusinesses(),
               },
               {
-                label: "Data Two",
-                backgroundColor: "rgb(0,216,255,0.9)",
-                data: [39, 80, 40, 35, 40, 20, 45],
+                label: "Sales",
+                backgroundColor: "#36A2EB",
+                data: pushMachineSales(),
               },
             ]}
             options={{
@@ -74,22 +120,22 @@ const Charts = () => {
                 enabled: true,
               },
             }}
-            labels="months"
+            labels={months}
           />
         </CCardBody>
       </CCard>
 
       <CCard>
-        <CCardHeader>Pie Chart</CCardHeader>
+        <CCardHeader>Sales Status</CCardHeader>
         <CCardBody>
-          <CChartPie
+          <CChartDoughnut
             datasets={[
               {
-                backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
-                data: [40, 20, 80, 10],
+                backgroundColor: ["#FFCE56", "#36A2EB", "#FF6384"],
+                data: pushSalesStatus(),
               },
             ]}
-            labels={["VueJs", "EmberJs", "ReactJs", "AngularJs"]}
+            labels={["Proccessing", "Complated", "Canceled"]}
             options={{
               tooltips: {
                 enabled: true,
@@ -99,95 +145,46 @@ const Charts = () => {
         </CCardBody>
       </CCard>
 
-      {/* <CCard>
-        <CCardHeader>Polar Area Chart</CCardHeader>
+      <CCard>
+        <CCardHeader>Received machines</CCardHeader>
         <CCardBody>
-          <CChartPolarArea
+          <CChartBar
             datasets={[
               {
-                label: "My First dataset",
-                backgroundColor: "rgba(179,181,198,0.2)",
-                pointBackgroundColor: "rgba(179,181,198,1)",
-                pointBorderColor: "#fff",
-                pointHoverBackgroundColor: "rgba(179,181,198,1)",
-                pointHoverBorderColor: "rgba(179,181,198,1)",
-                data: [65, 59, 90, 81, 56, 55, 40],
-              },
-              {
-                label: "My Second dataset",
-                backgroundColor: "rgba(255,99,132,0.2)",
-                pointBackgroundColor: "rgba(255,99,132,1)",
-                pointBorderColor: "#fff",
-                pointHoverBackgroundColor: "rgba(255,99,132,1)",
-                pointHoverBorderColor: "rgba(255,99,132,1)",
-                data: [28, 48, 40, 19, 96, 27, 100],
+                label: "Received Machines",
+                backgroundColor: "#8884D8",
+                data: pushReceivedMachines(),
               },
             ]}
+            labels={months}
             options={{
-              aspectRatio: 1.5,
               tooltips: {
                 enabled: true,
               },
             }}
-            labels={[
-              "Eating",
-              "Drinking",
-              "Sleeping",
-              "Designing",
-              "Coding",
-              "Cycling",
-              "Running",
-            ]}
           />
         </CCardBody>
-      </CCard> */}
+      </CCard>
 
-      {/* <CCard>
-        <CCardHeader>Radar Chart</CCardHeader>
+      <CCard>
+        <CCardHeader>This year annual Service</CCardHeader>
         <CCardBody>
-          <CChartRadar
+          <CChartPie
             datasets={[
               {
-                label: "2019",
-                backgroundColor: "rgba(179,181,198,0.2)",
-                borderColor: "rgba(179,181,198,1)",
-                pointBackgroundColor: "rgba(179,181,198,1)",
-                pointBorderColor: "#fff",
-                pointHoverBackgroundColor: "#fff",
-                pointHoverBorderColor: "rgba(179,181,198,1)",
-                tooltipLabelColor: "rgba(179,181,198,1)",
-                data: [65, 59, 90, 81, 56, 55, 40],
-              },
-              {
-                label: "2020",
-                backgroundColor: "rgba(255,99,132,0.2)",
-                borderColor: "rgba(255,99,132,1)",
-                pointBackgroundColor: "rgba(255,99,132,1)",
-                pointBorderColor: "#fff",
-                pointHoverBackgroundColor: "#fff",
-                pointHoverBorderColor: "rgba(255,99,132,1)",
-                tooltipLabelColor: "rgba(255,99,132,1)",
-                data: [28, 48, 40, 19, 96, 27, 100],
+                backgroundColor: ["#FF6384", "#36A2EB", "#41B883"],
+                data: puahAnnualService(),
               },
             ]}
+            labels={["Unrenewed", "Processing", "Renewed"]}
             options={{
-              aspectRatio: 1.5,
               tooltips: {
                 enabled: true,
               },
             }}
-            labels={[
-              "Eating",
-              "Drinking",
-              "Sleeping",
-              "Designing",
-              "Coding",
-              "Cycling",
-              "Running",
-            ]}
           />
         </CCardBody>
-      </CCard> */}
+      </CCard>
     </CCardGroup>
   );
 };

@@ -12,17 +12,17 @@ const WidgetsBrand = ({ withCharts }) => {
       <CCol sm="6" lg="3">
         <CWidgetBrand
           color="facebook"
-          rightHeader="89k"
-          rightFooter="Sold"
-          leftHeader="459"
-          leftFooter="Unsold"
+          rightHeader="20"
+          rightFooter="Active"
+          leftHeader="5"
+          leftFooter="Blocked"
         >
-          <CIcon name="cil-print" height="52" className="my-4" />
+          <CIcon name="cil-group" height="52" className="my-4" />
           <ChartLineSimple
             className="position-absolute w-100 h-100"
             backgroundColor="rgba(255,255,255,.1)"
             dataPoints={[65, 59, 84, 84, 51, 55, 40]}
-            label="Friends"
+            label="user Accounts"
             labels="months"
           />
         </CWidgetBrand>

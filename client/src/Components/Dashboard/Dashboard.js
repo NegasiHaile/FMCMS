@@ -11,13 +11,14 @@ const BranchAdminDashboard = () => {
   return (
     <>
       <WidgetsDropdown />
+
+      <Charts />
+
       <CCard>
         <CCardBody>
           <MainChartExample style={{ height: "300px", marginTop: "10px" }} />
         </CCardBody>
       </CCard>
-
-      <Charts />
 
       <EmployeesList />
       <WidgetsBrand withCharts />

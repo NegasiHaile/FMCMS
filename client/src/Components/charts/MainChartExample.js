@@ -8,11 +8,12 @@ import { getStyle, hexToRgba } from "@coreui/utils";
 const brandSuccess = getStyle("success") || "#4dbd74";
 const brandInfo = getStyle("info") || "#20a8d8";
 const brandDanger = getStyle("danger") || "#f86c6b";
+const brandWarning = getStyle("warning") || "#FFCE56";
 
 const MainChartExample = (attributes) => {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
-  const [Sales] = state.SalesAPI.Sales;
+  const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
 
   var months = [
     "Jan",
@@ -29,9 +30,11 @@ const MainChartExample = (attributes) => {
     "Dec",
   ];
 
-  const machineSales = [];
-  const annualMaintenance = [];
   const incidentMaintenance = [];
+  const informationChange = [];
+  const withdrawal = [];
+  const temporarlyStore = [];
+
   const random = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
@@ -39,44 +42,94 @@ const MainChartExample = (attributes) => {
   const generalData = () => {
     let elements = months.length - 1;
     for (let i = 0; i <= elements; i++) {
-      machineSales.push(
-        Sales.filter(
-          (sale) =>
-            new Date(sale.createdAt).toLocaleString("en-us", {
+      incidentMaintenance.push(
+        pickupMachines.filter(
+          (pickup) =>
+            pickup.category === "incident" &&
+            new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
             }) == months[i]
         ).length
       );
-      annualMaintenance.push(random(40, 100));
-      // incidentMaintenance.push(65);
-      incidentMaintenance.push(random(70, 150));
+      informationChange.push(
+        pickupMachines.filter(
+          (pickup) =>
+            pickup.category === "infomation-change" &&
+            new Date(pickup.createdAt).toLocaleString("en-us", {
+              month: "short",
+            }) == months[i]
+        ).length
+      );
+
+      withdrawal.push(
+        pickupMachines.filter(
+          (pickup) =>
+            pickup.category === "withdrawal" &&
+            new Date(pickup.createdAt).toLocaleString("en-us", {
+              month: "short",
+            }) == months[i]
+        ).length
+      );
+
+      temporarlyStore.push(
+        pickupMachines.filter(
+          (pickup) =>
+            pickup.category === "temporarly-store" &&
+            new Date(pickup.createdAt).toLocaleString("en-us", {
+              month: "short",
+            }) == months[i]
+        ).length
+      );
     }
   };
 
   const branchData = () => {
     let elements = months.length - 1;
     for (let i = 0; i <= elements; i++) {
-      machineSales.push(
-        Sales.filter(
-          (sale) =>
-            sale.branchId === user.branch &&
-            new Date(sale.createdAt).toLocaleString("en-us", {
+      incidentMaintenance.push(
+        pickupMachines.filter(
+          (pickup) =>
+            pickup.category === "incident" &&
+            pickup.branchId === user.branch &&
+            new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
             }) == months[i]
         ).length
       );
-      annualMaintenance.push(random(40, 100));
-      incidentMaintenance.push(random(70, 150));
+      informationChange.push(
+        pickupMachines.filter(
+          (pickup) =>
+            pickup.category === "incident" &&
+            pickup.branchId === user.branch &&
+            new Date(pickup.createdAt).toLocaleString("en-us", {
+              month: "short",
+            }) == months[i]
+        ).length
+      );
+      withdrawal.push(
+        pickupMachines.filter(
+          (pickup) =>
+            pickup.category === "withdrawal" &&
+            pickup.branchId === user.branch &&
+            new Date(pickup.createdAt).toLocaleString("en-us", {
+              month: "short",
+            }) == months[i]
+        ).length
+      );
+
+      temporarlyStore.push(
+        pickupMachines.filter(
+          (pickup) =>
+            pickup.category === "temporarly-store" &&
+            pickup.branchId === user.branch &&
+            new Date(pickup.createdAt).toLocaleString("en-us", {
+              month: "short",
+            }) == months[i]
+        ).length
+      );
     }
   };
 
-  // useEffect(() => {
-  //   if (user.branch) {
-  //     branchData();
-  //   } else {
-  //     generalData();
-  //   }
-  // }, [user, Sales]);
   const defaultDatasets = (() => {
     if (user.branch) {
       branchData();
@@ -85,29 +138,37 @@ const MainChartExample = (attributes) => {
     }
     return [
       {
-        label: "Machine sales",
-        backgroundColor: hexToRgba(brandInfo, 10),
-        borderColor: brandInfo,
-        pointHoverBackgroundColor: brandInfo,
-        borderWidth: 2,
-        data: machineSales,
-      },
-      {
-        label: "Annual Maintenance",
-        backgroundColor: "transparent",
-        borderColor: brandSuccess,
-        pointHoverBackgroundColor: brandSuccess,
-        borderWidth: 2,
-        data: annualMaintenance,
-      },
-      {
         label: "Incident Maintenance",
-        backgroundColor: "transparent",
+        backgroundColor: hexToRgba(brandDanger, 10),
         borderColor: brandDanger,
         pointHoverBackgroundColor: brandDanger,
         borderWidth: 2,
         borderDash: [8, 5],
         data: incidentMaintenance,
+      },
+      {
+        label: "Information Change",
+        backgroundColor: hexToRgba(brandInfo, 10),
+        borderColor: brandInfo,
+        pointHoverBackgroundColor: brandInfo,
+        borderWidth: 2,
+        data: informationChange,
+      },
+      {
+        label: "withdrawal",
+        backgroundColor: hexToRgba(brandSuccess, 10),
+        borderColor: brandSuccess,
+        pointHoverBackgroundColor: brandSuccess,
+        borderWidth: 2,
+        data: withdrawal,
+      },
+      {
+        label: "Temporarly Store",
+        backgroundColor: hexToRgba(brandWarning, 10),
+        borderColor: brandWarning,
+        pointHoverBackgroundColor: brandWarning,
+        borderWidth: 2,
+        data: temporarlyStore,
       },
     ];
   })();
@@ -136,8 +197,8 @@ const MainChartExample = (attributes) => {
             ticks: {
               beginAtZero: true,
               maxTicksLimit: 10,
-              stepSize: Math.ceil(500 / 10),
-              max: 500,
+              stepSize: Math.ceil(30 / 10),
+              max: 30,
             },
             scaleLabel: {
               labelString: "Machine quantity",
