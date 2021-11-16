@@ -17,7 +17,7 @@ const BranchAdminDashboard = () => {
 
       <CCard>
         <CCardBody>
-          <MainChartExample style={{ height: "300px", marginTop: "10px" }} />
+          <MainChartExample />
         </CCardBody>
       </CCard>
 

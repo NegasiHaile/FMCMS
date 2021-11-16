@@ -81,13 +81,18 @@ const WidgetsDropdown = () => {
       ],
     },
   ];
-  const machineArray = () => {};
+  const bgC8884D8 = {
+    backgroundColor: "#8884D8",
+  };
+  const height70 = {
+    height: "70px",
+  };
   // render
   return (
     <CRow>
       <CCol sm="6" lg="3">
         <CWidgetDropdown
-          style={{ backgroundColor: "#8884D8" }}
+          style={bgC8884D8}
           header={
             user.branch
               ? allMachines.filter((machine) => machine.branch === user.branch)
@@ -99,7 +104,7 @@ const WidgetsDropdown = () => {
             <ChartLineSimple
               pointed
               className="c-chart-wrapper mt-3 mx-3"
-              style={{ height: "70px" }}
+              style={height70}
               dataPoints={[65, 59, 84, 84, 51, 55, 40]}
               pointHoverBackgroundColor="#8884D8"
               label="Machines"
@@ -221,10 +226,10 @@ const WidgetsDropdown = () => {
             <ChartLineSimple
               pointed
               className="mt-3 mx-3"
-              style={{ height: "70px" }}
+              style={height70}
               dataPoints={[1, 18, 9, 17, 34, 22, 11]}
               pointHoverBackgroundColor="info"
-              options={{ elements: { line: { tension: 0.00001 } } }}
+              // options={{ elements: { line: { tension: 0.00001 } } }}
               label="MRC"
               labels="months"
             />
@@ -284,10 +289,9 @@ const WidgetsDropdown = () => {
           footerSlot={
             <ChartLineSimple
               className="mt-3"
-              style={{ height: "70px" }}
+              style={height70}
               backgroundColor="rgba(255,255,255,.2)"
               dataPoints={[78, 81, 80, 45, 34, 12, 40]}
-              options={{ elements: { line: { borderWidth: 2.5 } } }}
               pointHoverBackgroundColor="warning"
               label="SIM Cards"
               labels="months"
@@ -388,7 +392,7 @@ const WidgetsDropdown = () => {
           footerSlot={
             <ChartBarSimple
               className="mt-3 mx-3"
-              style={{ height: "70px" }}
+              style={height70}
               backgroundColor="rgb(250, 152, 152)"
               label="Machines"
               labels="months"

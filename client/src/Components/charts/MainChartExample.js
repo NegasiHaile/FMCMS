@@ -10,7 +10,7 @@ const brandInfo = getStyle("info") || "#20a8d8";
 const brandDanger = getStyle("danger") || "#f86c6b";
 const brandWarning = getStyle("warning") || "#FFCE56";
 
-const MainChartExample = (attributes) => {
+const MainChartExample = () => {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
@@ -54,7 +54,7 @@ const MainChartExample = (attributes) => {
       informationChange.push(
         pickupMachines.filter(
           (pickup) =>
-            pickup.category === "infomation-change" &&
+            pickup.category === "information_change" &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
             }) == months[i]
@@ -74,7 +74,7 @@ const MainChartExample = (attributes) => {
       temporarlyStore.push(
         pickupMachines.filter(
           (pickup) =>
-            pickup.category === "temporarly-store" &&
+            pickup.category === "temporarly_store" &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
             }) == months[i]
@@ -99,7 +99,7 @@ const MainChartExample = (attributes) => {
       informationChange.push(
         pickupMachines.filter(
           (pickup) =>
-            pickup.category === "incident" &&
+            pickup.category === "information_change" &&
             pickup.branchId === user.branch &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
@@ -120,7 +120,7 @@ const MainChartExample = (attributes) => {
       temporarlyStore.push(
         pickupMachines.filter(
           (pickup) =>
-            pickup.category === "temporarly-store" &&
+            pickup.category === "temporarly_store" &&
             pickup.branchId === user.branch &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
@@ -221,10 +221,14 @@ const MainChartExample = (attributes) => {
     };
   })();
 
+  const mystyle = {
+    height: "300px",
+    marginTop: "10px",
+  };
   // render
   return (
     <CChartLine
-      {...attributes}
+      style={mystyle}
       datasets={defaultDatasets}
       options={defaultOptions}
       labels={months}
