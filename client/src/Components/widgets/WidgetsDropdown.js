@@ -93,12 +93,11 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           style={bgC8884D8}
-          header={
-            user.branch
-              ? allMachines.filter((machine) => machine.branch === user.branch)
-                  .length
-              : allMachines.length
-          }
+          header={(user.branch
+            ? allMachines.filter((machine) => machine.branch === user.branch)
+                .length
+            : allMachines.length
+          ).toString()}
           text="Machines"
           footerSlot={
             <ChartLineSimple
@@ -216,11 +215,10 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-info"
-          header={
-            user.branch
-              ? allMRCs.filter((MRC) => MRC.branch === user.branch).length
-              : allMRCs.length
-          }
+          header={(user.branch
+            ? allMRCs.filter((MRC) => MRC.branch === user.branch).length
+            : allMRCs.length
+          ).toString()}
           text="MRC"
           footerSlot={
             <ChartLineSimple
@@ -279,12 +277,11 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-warning"
-          header={
-            user.branch
-              ? allSIMCards.filter((SIMCard) => SIMCard.branch === user.branch)
-                  .length
-              : allSIMCards.length
-          }
+          header={(user.branch
+            ? allSIMCards.filter((SIMCard) => SIMCard.branch === user.branch)
+                .length
+            : allSIMCards.length
+          ).toString()}
           text="SIM Cards"
           footerSlot={
             <ChartLineSimple
@@ -381,13 +378,11 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-danger"
-          header={
-            user.branch
-              ? pickupMachines.filter(
-                  (pickup) => pickup.branchId === user.branch
-                ).length
-              : pickupMachines.length
-          }
+          header={(user.branch
+            ? pickupMachines.filter((pickup) => pickup.branchId === user.branch)
+                .length
+            : pickupMachines.length
+          ).toString()}
           text="Received Machines"
           footerSlot={
             <ChartBarSimple
