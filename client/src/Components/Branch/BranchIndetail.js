@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { GlobalState } from "../../GlobalState";
 import { useParams } from "react-router-dom";
 import BadRouting from "../Utils/routing/BadRouting";
+import Dashboard from "../Dashboard/Dashboard";
 import {
   CCard,
   CCardHeader,
@@ -54,75 +55,48 @@ function BranchIndetail() {
     <>
       {branch != undefined ? (
         <>
-          {" "}
-          <CRow>
-            <CCol sm="12" lg="4">
-              <CCard className="shadow-lg" color="info">
-                <CCardHeader>
-                  <h6>
-                    <small>Detail of : </small>
-                    {branch.branchName}
-                  </h6>
-                </CCardHeader>
-                <CCardBody>
+          <CCard>
+            <CCardHeader color="light">
+              <span
+                className="p-1 px-3 rounded"
+                style={{ backgroundColor: "#FFFFFF", color: "#3C4B64" }}
+              >
+                {branch.branchName}
+              </span>
+            </CCardHeader>
+            <CCardBody>
+              <CRow>
+                <CCol sm="12" md="6" lg="4">
                   <span className="d-flex justify-content-between">
-                    <span> city: </span> <span>{branch.city}</span>
+                    <span>* city: </span> <span>{branch.city}</span>
                   </span>
                   <span className="d-flex justify-content-between">
-                    <span> Sub city: </span> <span>{branch.subCity}</span>
+                    <span>* Sub city: </span> <span>{branch.subCity}</span>
+                  </span>
+                </CCol>
+                <CCol sm="12" md="6" lg="4">
+                  <span className="d-flex justify-content-between">
+                    <span>* Kebele: </span> <span>{branch.kebele}</span>
                   </span>
                   <span className="d-flex justify-content-between">
-                    <span> Kebele: </span> <span>{branch.kebele}</span>
+                    <span>* Woreda: </span> <span>{branch.woreda}</span>
                   </span>
+                </CCol>
+
+                <CCol sm="12" md="6" lg="4">
                   <span className="d-flex justify-content-between">
-                    <span> Woreda: </span> <span>{branch.woreda}</span>
-                  </span>
-                  <span className="d-flex justify-content-between">
-                    <span> Building Name: </span>{" "}
+                    <span>* Building Name: </span>{" "}
                     <span>{branch.buildingName}</span>
                   </span>
                   <span className="d-flex justify-content-between">
-                    <span> Office Number: </span>{" "}
+                    <span>* Office Number: </span>{" "}
                     <span>{branch.officeNumber}</span>
                   </span>
-                </CCardBody>
-              </CCard>
-            </CCol>
-            <CCol sm="12" lg="4">
-              <CCard className="shadow-lg">
-                <CCardHeader color="warning">
-                  <h6>
-                    <small>Detail of : </small>
-                    {branch.branchName}
-                  </h6>
-                </CCardHeader>
-                <CCardBody></CCardBody>
-
-                <CCardFooter></CCardFooter>
-              </CCard>
-            </CCol>
-            <CCol sm="12" lg="4">
-              <CCard className="shadow-lg">
-                <CCardHeader color="success">
-                  <h6>
-                    <small>Detail of : </small>
-                    {branch.branchName}
-                  </h6>
-                </CCardHeader>
-                <CCardBody></CCardBody>
-
-                <CCardFooter></CCardFooter>
-              </CCard>
-            </CCol>
-          </CRow>
-          <CCard>
-            <CCardHeader>
-              <h6>
-                <small>Branch sales </small>
-              </h6>
-            </CCardHeader>
-            <CCardBody></CCardBody>
-          </CCard>{" "}
+                </CCol>
+              </CRow>
+            </CCardBody>
+          </CCard>
+          <Dashboard branchId={params.id} />
         </>
       ) : (
         <BadRouting text="Bad routing! There is no branch with this routing!" />
