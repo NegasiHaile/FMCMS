@@ -9,6 +9,7 @@ import {
   CInput,
   CInputGroup,
   CInputGroupPrepend,
+  CInputGroupAppend,
   CInputGroupText,
   CRow,
 } from "@coreui/react";
@@ -21,7 +22,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-
+const [passwordSecure, setPasswordSecure] = useState(true)
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
@@ -102,7 +103,7 @@ const Login = () => {
                         </CInputGroupText>
                       </CInputGroupPrepend>
                       <CInput
-                        type="password"
+                        type= {passwordSecure ? "password" : "text"}
                         name="password"
                         placeholder="Password"
                         autoComplete="current-password"
@@ -110,6 +111,11 @@ const Login = () => {
                         onChange={onChangeInput}
                         required
                       />
+                      <CInputGroupAppend>
+          <CInputGroupText style={{backgroundColor: "transparent", cursor: "pointer"}} onClick={() => setPasswordSecure(!passwordSecure)}>
+            <CIcon  name= {passwordSecure ? "cil-sun" : "cil-low-vision"}/>
+          </CInputGroupText>
+        </CInputGroupAppend>
                     </CInputGroup>
                     <CCol className="col-12 mt-1 d-flex justify-content-end">
                       <a
