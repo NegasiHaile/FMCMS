@@ -36,7 +36,12 @@
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
-
+.l-b-none{
+  border-left: none;
+}
+.r-b-none{
+  border-right: none;
+}
 /* Safari */
 @-webkit-keyframes spin {
   0% {
