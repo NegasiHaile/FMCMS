@@ -13,6 +13,7 @@ import {
   CInput,
   CInputGroup,
   CInputGroupPrepend,
+  CInputGroupAppend,
   CInputGroupText,
   CRow,
 } from "@coreui/react";
@@ -27,6 +28,11 @@ const ChangePassword = () => {
     retypeNewPassword: "",
   });
 
+  const [oldPasswordSecure, setOldPasswordSecure] = useState(true)
+  const [newPasswordSecure, setNewPasswordSecure] = useState(true)
+  const [retypeNewPasswordSecure, setRetypeNewOldPasswordSecure] = useState(true)
+
+
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     setPassword({ ...Password, [name]: value });
@@ -36,22 +42,34 @@ const ChangePassword = () => {
     e.preventDefault();
     try {
       if (Password.newPassword === Password.retypeNewPassword) {
-        const res = await axios.post(
-          `/user/change_password/${user._id}`,
-          {
-            ...Password,
-          },
-          { headers: { Authorization: token } }
-        );
-        Swal.fire({
-          position: "center",
-          background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
-          icon: "success",
-          text: res.data.msg,
-          confirmButtonColor: "#1E263C",
-          showConfirmButton: false,
-          // timer: 1500,
-        });
+        if(Password.oldPassword !== Password.newPassword){
+          const res = await axios.post(
+            `/user/change_password/${user._id}`,
+            {
+              ...Password,
+            },
+            { headers: { Authorization: token } }
+          );
+          Swal.fire({
+            position: "center",
+            background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+            icon: "success",
+            text: res.data.msg,
+            confirmButtonColor: "#1E263C",
+            showConfirmButton: false,
+            // timer: 1500,
+          });
+        }else{
+          Swal.fire({
+            position: "center",
+            background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+            icon: "error",
+            text: "Your new password and old password must not be equal!",
+            confirmButtonColor: "#1E263C",
+            showConfirmButton: false,
+            // timer: 1500,
+          });
+        }
       } else {
         Swal.fire({
           position: "center",
@@ -94,14 +112,21 @@ const ChangePassword = () => {
                   </CInputGroupText>
                 </CInputGroupPrepend>
                 <CInput
-                  type="password"
+                        type= {oldPasswordSecure ? "password" : "text"}
                   name="oldPassword"
                   placeholder="old password"
                   autoComplete="oldPassword"
                   onChange={onChangeInput}
                   value={Password.oldPassword}
                   required
-                />
+                  style={{borderRight : "none"}}
+                /><CInputGroupAppend>
+                <CInputGroupText style={{backgroundColor: "transparent", 
+                borderLeft : "none", cursor: "pointer"}} 
+                onClick={() => setOldPasswordSecure(!oldPasswordSecure)}>
+                  <CIcon  name= {oldPasswordSecure ? "cil-sun" : "cil-low-vision"}/>
+                </CInputGroupText>
+              </CInputGroupAppend>
               </CInputGroup>
               <div className="mb-3">
                 <CInputGroup>
@@ -111,7 +136,7 @@ const ChangePassword = () => {
                     </CInputGroupText>
                   </CInputGroupPrepend>
                   <CInput
-                    type="password"
+                    type= {newPasswordSecure ? "password" : "text"}
                     name="newPassword"
                     placeholder="New Password"
                     autoComplete="new-password"
@@ -119,7 +144,14 @@ const ChangePassword = () => {
                     onChange={onChangeInput}
                     value={Password.newPassword}
                     required
-                  />
+                    style={{borderRight : "none"}}
+                  /><CInputGroupAppend>
+                  <CInputGroupText style={{backgroundColor: "transparent", 
+                  borderLeft : "none", cursor: "pointer"}} 
+                  onClick={() => setNewPasswordSecure(!newPasswordSecure)}>
+                    <CIcon  name= {newPasswordSecure ? "cil-sun" : "cil-low-vision"}/>
+                  </CInputGroupText>
+                </CInputGroupAppend>
                 </CInputGroup>
                 {Password.newPassword !== "" &&
                   Password.newPassword.length < 6 && (
@@ -137,7 +169,7 @@ const ChangePassword = () => {
                     </CInputGroupText>
                   </CInputGroupPrepend>
                   <CInput
-                    type="password"
+                    type={retypeNewPasswordSecure? "password": "text"} 
                     placeholder="Repeat new password"
                     autoComplete="new-password"
                     name="retypeNewPassword"
@@ -145,7 +177,15 @@ const ChangePassword = () => {
                     onChange={onChangeInput}
                     value={Password.retypeNewPassword}
                     required
+                    style={{borderRight : "none"}}
                   />
+                  <CInputGroupAppend>
+                  <CInputGroupText style={{backgroundColor: "transparent", 
+                  borderLeft : "none", cursor: "pointer"}} 
+                  onClick={() => setRetypeNewOldPasswordSecure(!retypeNewPasswordSecure)}>
+                    <CIcon  name= {retypeNewPasswordSecure ? "cil-sun" : "cil-low-vision"}/>
+                  </CInputGroupText>
+                </CInputGroupAppend>
                 </CInputGroup>
                 {Password.retypeNewPassword !== "" &&
                   Password.newPassword !== Password.retypeNewPassword && (
