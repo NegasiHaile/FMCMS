@@ -110,9 +110,10 @@ const [passwordSecure, setPasswordSecure] = useState(true)
                         value={user.password}
                         onChange={onChangeInput}
                         required
+                        style={{borderRight : "none"}}
                       />
                       <CInputGroupAppend>
-          <CInputGroupText style={{backgroundColor: "transparent", cursor: "pointer"}} onClick={() => setPasswordSecure(!passwordSecure)}>
+          <CInputGroupText style={{backgroundColor: "transparent", borderLeft : "none", cursor: "pointer"}} onClick={() => setPasswordSecure(!passwordSecure)}>
             <CIcon  name= {passwordSecure ? "cil-sun" : "cil-low-vision"}/>
           </CInputGroupText>
         </CInputGroupAppend>
