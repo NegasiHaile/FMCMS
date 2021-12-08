@@ -28,10 +28,10 @@ const ChangePassword = () => {
     retypeNewPassword: "",
   });
 
-  const [oldPasswordSecure, setOldPasswordSecure] = useState(true)
-  const [newPasswordSecure, setNewPasswordSecure] = useState(true)
-  const [retypeNewPasswordSecure, setRetypeNewOldPasswordSecure] = useState(true)
-
+  const [oldPasswordSecure, setOldPasswordSecure] = useState(true);
+  const [newPasswordSecure, setNewPasswordSecure] = useState(true);
+  const [retypeNewPasswordSecure, setRetypeNewOldPasswordSecure] =
+    useState(true);
 
   const onChangeInput = (e) => {
     const { name, value } = e.target;
@@ -42,7 +42,7 @@ const ChangePassword = () => {
     e.preventDefault();
     try {
       if (Password.newPassword === Password.retypeNewPassword) {
-        if(Password.oldPassword !== Password.newPassword){
+        if (Password.oldPassword !== Password.newPassword) {
           const res = await axios.post(
             `/user/change_password/${user._id}`,
             {
@@ -59,7 +59,7 @@ const ChangePassword = () => {
             showConfirmButton: false,
             // timer: 1500,
           });
-        }else{
+        } else {
           Swal.fire({
             position: "center",
             background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
@@ -112,21 +112,29 @@ const ChangePassword = () => {
                   </CInputGroupText>
                 </CInputGroupPrepend>
                 <CInput
-                className="l-b-none r-b-none"
-                        type= {oldPasswordSecure ? "password" : "text"}
+                  className="r-b-none"
+                  type={oldPasswordSecure ? "password" : "text"}
                   name="oldPassword"
                   placeholder="old password"
                   autoComplete="oldPassword"
                   onChange={onChangeInput}
                   value={Password.oldPassword}
                   required
-                /><CInputGroupAppend>
-                <CInputGroupText className="l-b-none" style={{backgroundColor: "transparent", 
-                 cursor: "pointer"}} 
-                onClick={() => setOldPasswordSecure(!oldPasswordSecure)}>
-                  <CIcon  name= {oldPasswordSecure ? "cil-sun" : "cil-low-vision"}/>
-                </CInputGroupText>
-              </CInputGroupAppend>
+                />
+                <CInputGroupAppend>
+                  <CInputGroupText
+                    className="l-b-none"
+                    style={{
+                      backgroundColor: "transparent",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setOldPasswordSecure(!oldPasswordSecure)}
+                  >
+                    <CIcon
+                      name={oldPasswordSecure ? "cil-sun" : "cil-low-vision"}
+                    />
+                  </CInputGroupText>
+                </CInputGroupAppend>
               </CInputGroup>
               <div className="mb-3">
                 <CInputGroup>
@@ -136,8 +144,8 @@ const ChangePassword = () => {
                     </CInputGroupText>
                   </CInputGroupPrepend>
                   <CInput
-                  className="r-b-none"
-                    type= {newPasswordSecure ? "password" : "text"}
+                    className="r-b-none"
+                    type={newPasswordSecure ? "password" : "text"}
                     name="newPassword"
                     placeholder="New Password"
                     autoComplete="new-password"
@@ -145,13 +153,21 @@ const ChangePassword = () => {
                     onChange={onChangeInput}
                     value={Password.newPassword}
                     required
-                  /><CInputGroupAppend>
-                  <CInputGroupText className="l-b-none" style={{backgroundColor: "transparent",
-                   cursor: "pointer"}} 
-                  onClick={() => setNewPasswordSecure(!newPasswordSecure)}>
-                    <CIcon  name= {newPasswordSecure ? "cil-sun" : "cil-low-vision"}/>
-                  </CInputGroupText>
-                </CInputGroupAppend>
+                  />
+                  <CInputGroupAppend>
+                    <CInputGroupText
+                      className="l-b-none"
+                      style={{
+                        backgroundColor: "transparent",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setNewPasswordSecure(!newPasswordSecure)}
+                    >
+                      <CIcon
+                        name={newPasswordSecure ? "cil-sun" : "cil-low-vision"}
+                      />
+                    </CInputGroupText>
+                  </CInputGroupAppend>
                 </CInputGroup>
                 {Password.newPassword !== "" &&
                   Password.newPassword.length < 6 && (
@@ -169,8 +185,8 @@ const ChangePassword = () => {
                     </CInputGroupText>
                   </CInputGroupPrepend>
                   <CInput
-                  className="r-b-none"
-                    type={retypeNewPasswordSecure? "password": "text"} 
+                    className="r-b-none"
+                    type={retypeNewPasswordSecure ? "password" : "text"}
                     placeholder="Repeat new password"
                     autoComplete="new-password"
                     name="retypeNewPassword"
@@ -180,12 +196,23 @@ const ChangePassword = () => {
                     required
                   />
                   <CInputGroupAppend>
-                  <CInputGroupText className="l-b-none" style={{backgroundColor: "transparent", 
-                   cursor: "pointer"}} 
-                  onClick={() => setRetypeNewOldPasswordSecure(!retypeNewPasswordSecure)}>
-                    <CIcon  name= {retypeNewPasswordSecure ? "cil-sun" : "cil-low-vision"}/>
-                  </CInputGroupText>
-                </CInputGroupAppend>
+                    <CInputGroupText
+                      className="l-b-none"
+                      style={{
+                        backgroundColor: "transparent",
+                        cursor: "pointer",
+                      }}
+                      onClick={() =>
+                        setRetypeNewOldPasswordSecure(!retypeNewPasswordSecure)
+                      }
+                    >
+                      <CIcon
+                        name={
+                          retypeNewPasswordSecure ? "cil-sun" : "cil-low-vision"
+                        }
+                      />
+                    </CInputGroupText>
+                  </CInputGroupAppend>
                 </CInputGroup>
                 {Password.retypeNewPassword !== "" &&
                   Password.newPassword !== Password.retypeNewPassword && (
