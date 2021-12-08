@@ -43,7 +43,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     clientReportedProblems: "",
     technicianReportedProblems: "",
     infoChange: [],
-    issueDate: "",
+    issueDate: new Date(),
     annualNextMaintenanceDate: "",
     pickedupBy: user._id,
     technician: "",
@@ -67,6 +67,21 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     state.MachinePickUpAPI.callback;
   const [allUsers] = state.UsersAPI.users;
 
+  useEffect(() => {
+    var curr = new Date();
+    // curr.setDate(curr.getDate());
+    var date = curr.toISOString().substr(0, 10);
+    pickup.issueDate = date;
+  }, [pickupId]);
+  useEffect(() => {
+    const newDate = new Date(pickup.issueDate);
+    // const date = newDate.getDate();
+    // const month = newDate.getMonth() + 1;
+    // const year = newDate.getFullYear();
+    newDate.setFullYear(newDate.getFullYear() + 1);
+    pickup.annualNextMaintenanceDate = newDate.toISOString().substring(0, 10);
+    console.log(newDate);
+  }, [pickupId, pickup.issueDate]);
   useEffect(() => {
     if (pickupId != "undefined") {
       maintenances.forEach((pickupItem) => {
@@ -598,6 +613,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                           </CCol>
                           <CCol className="col-8">
                             <input
+                              type="date"
                               className="w-100 form-control"
                               style={{
                                 border: "0px",
@@ -607,7 +623,6 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                               name="issueDate"
                               value={pickup.issueDate}
                               onChange={handleInputChange}
-                              type="date"
                             />
                           </CCol>
                         </CRow>
