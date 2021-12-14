@@ -117,24 +117,30 @@ function SalesList() {
                       </>
                     )}
 
-                    {user.userRole === "technician" &&
-                    sales.status === "completed" ? (
-                      <CLink
-                        className="text-danger"
-                        to={`/machine/returning_pickup/${sales.machineId}`}
-                      >
-                        <CTooltip content={`Withdraw machine of this sales.`}>
-                          <CIcon name="cil-recycle" />
-                        </CTooltip>
-                      </CLink>
-                    ) : (
-                      <span className="text-dark">
-                        <CTooltip
-                          content={`Sales is ${sales.status}, you can't withdraw this.`}
-                        >
-                          <small> ???</small>
-                        </CTooltip>
-                      </span>
+                    {user.userRole === "technician" && (
+                      <>
+                        {" "}
+                        {sales.status === "completed" ? (
+                          <CLink
+                            className="text-danger"
+                            to={`/machine/returning_pickup/${sales.machineId}`}
+                          >
+                            <CTooltip
+                              content={`Withdraw machine of this sales.`}
+                            >
+                              <CIcon name="cil-recycle" />
+                            </CTooltip>
+                          </CLink>
+                        ) : (
+                          <span className="text-dark">
+                            <CTooltip
+                              content={`Sales is ${sales.status}, you can't withdraw this.`}
+                            >
+                              <small> ???</small>
+                            </CTooltip>
+                          </span>
+                        )}
+                      </>
                     )}
 
                     <CLink
