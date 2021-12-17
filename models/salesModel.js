@@ -23,6 +23,13 @@ const salesSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    renewHistory: {
+      type: Array,
+      default: [],
+    },
+    nextRenewDate: {
+      type: Date,
+    },
     status: {
       type: String, //Value:-  new, unapproved , instore/rejected, fiscallizing, controlling, delivering, completed
     },
