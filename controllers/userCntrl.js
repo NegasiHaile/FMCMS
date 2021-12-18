@@ -73,7 +73,7 @@ const userCntrl = {
       // })
 
       res.json({
-        msg: "User Successfuly registered, and we have sent a passord for this user to the email!",
+        msg: "User has been successfuly registered, and we have sent a password to the email!",
       });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
