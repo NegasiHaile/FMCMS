@@ -320,9 +320,17 @@ function FiscalizationItem() {
                   <CCol className="col-6 my-2">
                     <CRow className="mb-2">
                       <CCol className="col-4">
-                        <h6> Signature :</h6>
+                        {salesDetail.renewHistory && (
+                          <h6>
+                            {" "}
+                            Annual service of{" "}
+                            {Number(salesDetail.renewHistory.slice(-1)) + 1} :
+                          </h6>
+                        )}
                       </CCol>
-                      <CCol className="col-7 border-bottom"></CCol>
+                      <CCol className="col-7 border-bottom">
+                        <h6>{formatingDate(salesDetail.nextRenewDate)}</h6>
+                      </CCol>
                     </CRow>
                   </CCol>
                 </CRow>

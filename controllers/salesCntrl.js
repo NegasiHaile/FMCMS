@@ -64,6 +64,8 @@ const salesCntrl = {
           telephone: sale.business[0].telephone,
           fiscalization: sale.fiscalization,
           technician: sale.technician,
+          renewHistory: sale.renewHistory,
+          nextRenewDate: sale.nextRenewDate,
           status: sale.status,
           createdAt: sale.createdAt,
           updatedAt: sale.updatedAt,
@@ -215,6 +217,9 @@ const salesCntrl = {
   fiscalizeAndSendForControlling: async (req, res) => {
     try {
       const machine = await machines.findById({ _id: req.params.machineId });
+      const thisDay = new Date().getDate();
+      const thisMonth = new Date().getMonth();
+      const thisYear = new Date().getFullYear();
 
       await machines.findOneAndUpdate(
         { _id: req.params.machineId },
@@ -227,8 +232,12 @@ const salesCntrl = {
         {
           status: "controlling",
           fiscalization: "done",
+          $push: { renewHistory: thisYear },
+          nextRenewDate: `${thisMonth}/${thisDay}/${thisYear + 1}`,
         }
       );
+
+      // db.students.updateOne({ _id: 1 }, { $push: { scores: 89 } });
 
       return res.json({
         msg: "The machine is requested for controlling.",

@@ -395,7 +395,7 @@ function BusinessDetail() {
                         ))}
                     </CCol>
                     <CCol sm="12" md="4" lg="4" className="mt-1">
-                      <h6 className="text-muted">Branch</h6>
+                      <h6 className="text-muted">Servicing Branch</h6>
                       <hr></hr>
                       {branchs
                         .filter(
