@@ -100,59 +100,61 @@ const TheHeaderDropdownMaint = () => {
           <strong>You have {itemsCount} request(s)</strong>
         </CDropdownItem>
         {itemsCount !== 0 && (
-          <>
-            {pickupMachine.map((pickup, index) => (
-              <CDropdownItem
-                key={index}
-                to={
-                  (pickup.status === "New" ||
-                    pickup.status === "controlling_maintenance") &&
-                  user.userRole === "customer-service"
-                    ? `/pickup/edit/${pickup.machineId}/${pickup._id}`
-                    : `/pickup/detail/${pickup._id}`
-                }
-              >
-                <div className="message">
-                  <div className="pt-3 mr-3 float-left">
-                    <div className="c-avatar">
-                      <CImg
-                        src={"/Others/fmimg1.jpg"}
-                        className="c-avatar-img"
-                        alt={pickup.serialNumber}
-                      />
+          <div style={{ overflowY: "scroll" }}>
+            <div style={{ maxHeight: "400px" }}>
+              {pickupMachine.map((pickup, index) => (
+                <CDropdownItem
+                  key={index}
+                  to={
+                    (pickup.status === "New" ||
+                      pickup.status === "controlling_maintenance") &&
+                    user.userRole === "customer-service"
+                      ? `/pickup/edit/${pickup.machineId}/${pickup._id}`
+                      : `/pickup/detail/${pickup._id}`
+                  }
+                >
+                  <div className="message">
+                    <div className="pt-3 mr-3 float-left">
+                      <div className="c-avatar">
+                        <CImg
+                          src={"/Others/fmimg1.jpg"}
+                          className="c-avatar-img"
+                          alt={pickup.serialNumber}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <small>
+                        {" "}
+                        {user.userRole === "customer-service" &&
+                        pickup.status === "controlling_maintenance"
+                          ? pickup.technician === ""
+                            ? "Technician unassigned!"
+                            : "Technician Assigned!"
+                          : pickup.status}
+                      </small>
+                      <small className=" float-right mt-1">Just now</small>
+                    </div>
+                    <div
+                      className="text-truncate font-weight-bold"
+                      style={{ maxWidth: "300px" }}
+                    >
+                      <span className="fa fa-exclamation text-danger"></span>{" "}
+                      {pickup.category}, {pickup.serialNumber},{" "}
+                      {pickup.machineBrand}
+                    </div>
+                    <div
+                      className="small text-truncate"
+                      style={{ maxWidth: "400px" }}
+                    >
+                      {pickup.tradeName}, TIN :{pickup.TIN} , VAT: {pickup.VAT},{" "}
+                      {pickup.updatedAt},
                     </div>
                   </div>
-                  <div>
-                    <small>
-                      {" "}
-                      {user.userRole === "customer-service" &&
-                      pickup.status === "controlling_maintenance"
-                        ? pickup.technician === ""
-                          ? "Technician unassigned!"
-                          : "Technician Assigned!"
-                        : pickup.status}
-                    </small>
-                    <small className=" float-right mt-1">Just now</small>
-                  </div>
-                  <div
-                    className="text-truncate font-weight-bold"
-                    style={{ maxWidth: "300px" }}
-                  >
-                    <span className="fa fa-exclamation text-danger"></span>{" "}
-                    {pickup.category}, {pickup.serialNumber},{" "}
-                    {pickup.machineBrand}
-                  </div>
-                  <div
-                    className="small text-truncate"
-                    style={{ maxWidth: "400px" }}
-                  >
-                    {pickup.tradeName}, TIN :{pickup.TIN} , VAT: {pickup.VAT},{" "}
-                    {pickup.updatedAt},
-                  </div>
-                </div>
-              </CDropdownItem>
-            ))}
-          </>
+                </CDropdownItem>
+              ))}
+            </div>
+          </div>
         )}
         <div className="border-top d-flex justify-content-between">
           <CDropdownItem to={`/maintenance/list`}>
