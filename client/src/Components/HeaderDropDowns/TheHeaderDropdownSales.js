@@ -97,12 +97,8 @@ function TheHeaderDropdownSales() {
           {itemsCount}
         </CBadge>
       </CDropdownToggle>
-      <CDropdownMenu
-        placement="bottom-end"
-        className="pt-0"
-        style={{ overflowY: "scroll" }}
-      >
-        <div style={{ maxHeight: "400px" }}>
+      <CDropdownMenu placement="bottom-end" className="pt-0">
+        <div>
           <CDropdownItem header tag="div" color="light">
             <strong>
               You have {itemsCount} {alertLable} requests
@@ -110,62 +106,64 @@ function TheHeaderDropdownSales() {
           </CDropdownItem>
 
           {itemsCount && (
-            <>
-              {salesAlert.map((sale) => (
-                <CDropdownItem
-                  key={sale.saleId}
-                  to={
-                    user.userRole === "customer-service" ||
-                    user.userRole === "technician" ||
-                    user.userRole === "machine-controller"
-                      ? // && (sale.status === "instore" || sale.status === "delivering")
-                        `/fiscalization/detail/${sale.saleId}`
-                      : `/sales/detail/${sale.saleId}`
-                  }
-                  // to={`/sales/detail/${sale.saleId}`}
-                >
-                  <div className="message">
-                    <div className="pt-3 mr-3 float-left">
-                      <div className="c-avatar">
-                        <CImg
-                          src={"/Others/bsnsIcon1.png"}
-                          className="c-avatar-img"
-                          alt={sale.machineSerialNumber}
-                        />
+            <div style={{ overflowY: "scroll" }}>
+              <div style={{ maxHeight: "400px" }}>
+                {salesAlert.map((sale) => (
+                  <CDropdownItem
+                    key={sale.saleId}
+                    to={
+                      user.userRole === "customer-service" ||
+                      user.userRole === "technician" ||
+                      user.userRole === "machine-controller"
+                        ? // && (sale.status === "instore" || sale.status === "delivering")
+                          `/fiscalization/detail/${sale.saleId}`
+                        : `/sales/detail/${sale.saleId}`
+                    }
+                    // to={`/sales/detail/${sale.saleId}`}
+                  >
+                    <div className="message">
+                      <div className="pt-3 mr-3 float-left">
+                        <div className="c-avatar">
+                          <CImg
+                            src={"/Others/bsnsIcon1.png"}
+                            className="c-avatar-img"
+                            alt={sale.machineSerialNumber}
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <small>
+                          {" "}
+                          {user.userRole === "customer-service" &&
+                          sale.status === "instore"
+                            ? sale.technician === ""
+                              ? "Technician = unassigned!"
+                              : "Technician = Assigned!"
+                            : sale.status}
+                        </small>
+                        {/* <small> {sale.status}</small> */}
+                        <small className=" float-right mt-1">Just now</small>
+                      </div>
+                      <div
+                        className="text-truncate font-weight-bold"
+                        style={{ maxWidth: "300px" }}
+                      >
+                        <span className="fa fa-exclamation text-danger"></span>{" "}
+                        {sale.machineSerialNumber}, {sale.machineBrand},{" "}
+                        {sale.machineModel}
+                      </div>
+                      <div
+                        className="small text-truncate"
+                        style={{ maxWidth: "400px" }}
+                      >
+                        {sale.tradeName}, TIN :{sale.TIN} , VAT: {sale.VAT},{" "}
+                        {sale.updatedAt}
                       </div>
                     </div>
-                    <div>
-                      <small>
-                        {" "}
-                        {user.userRole === "customer-service" &&
-                        sale.status === "instore"
-                          ? sale.technician === ""
-                            ? "Technician = unassigned!"
-                            : "Technician = Assigned!"
-                          : sale.status}
-                      </small>
-                      {/* <small> {sale.status}</small> */}
-                      <small className=" float-right mt-1">Just now</small>
-                    </div>
-                    <div
-                      className="text-truncate font-weight-bold"
-                      style={{ maxWidth: "300px" }}
-                    >
-                      <span className="fa fa-exclamation text-danger"></span>{" "}
-                      {sale.machineSerialNumber}, {sale.machineBrand},{" "}
-                      {sale.machineModel}
-                    </div>
-                    <div
-                      className="small text-truncate"
-                      style={{ maxWidth: "400px" }}
-                    >
-                      {sale.tradeName}, TIN :{sale.TIN} , VAT: {sale.VAT},{" "}
-                      {sale.updatedAt}
-                    </div>
-                  </div>
-                </CDropdownItem>
-              ))}
-            </>
+                  </CDropdownItem>
+                ))}
+              </div>
+            </div>
           )}
 
           <CDropdownItem
