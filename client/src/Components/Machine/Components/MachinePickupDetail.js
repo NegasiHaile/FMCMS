@@ -97,7 +97,12 @@ function MachinePickupDetail() {
       // timer: 1500,
     });
   };
-  const maintenanceProblemSolved = (machineId) => {
+  const maintenanceProblemSolved = (
+    machineId,
+    salesId,
+    category,
+    annualNextMaintenanceDate
+  ) => {
     try {
       Swal.fire({
         text: "Are you sure this maintenance is done!",
@@ -109,7 +114,9 @@ function MachinePickupDetail() {
       }).then(async (result) => {
         try {
           if (result.isConfirmed) {
-            const res = await axios.put(`/machine/problem_solved/${machineId}`);
+            const res = await axios.put(
+              `/machine/problem_solved/${machineId}/${salesId}/${category}/${annualNextMaintenanceDate}`
+            );
             setCallbackPickup(!callbackPickup);
             sweetAlert("success", res.data.msg);
           }
@@ -833,10 +840,18 @@ function MachinePickupDetail() {
                       size="sm"
                       color="dark"
                       onClick={() =>
-                        maintenanceProblemSolved(pickup[0].machineId)
+                        maintenanceProblemSolved(
+                          pickup[0].machineId,
+                          pickup[0].salesId,
+                          pickup[0].category,
+                          pickup[0].annualNextMaintenanceDate
+                        )
                       }
                     >
-                      <CIcon name="cil-memory"></CIcon> Problem Solved!
+                      <CIcon name="cil-memory"></CIcon>{" "}
+                      {pickup[0].category === "annual"
+                        ? "Annual service done!"
+                        : "Problem Solved!"}
                     </CButton>
                   </CCol>
                 )}

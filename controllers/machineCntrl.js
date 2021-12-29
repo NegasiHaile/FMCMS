@@ -356,11 +356,29 @@ const machineCntrl = {
   },
   machineProblemSolvedInMaintenance: async (req, res) => {
     try {
-      await Machines.findOneAndUpdate(
-        { _id: req.params.id },
-        { problemStatus: "fine" }
-      );
-      res.json({ msg: "Done!" });
+      if (req.params.category === "annual") {
+        const thisYear = new Date().getFullYear();
+        await Machines.findOneAndUpdate(
+          { _id: req.params.id },
+          { problemStatus: "fine" }
+        );
+        await Sales.findOneAndUpdate(
+          { _id: req.params.salesId },
+          {
+            $push: { renewHistory: thisYear },
+            nextRenewDate: req.params.annualNextMaintenanceDate,
+          }
+        );
+        res.json({
+          msg: "Annual service done! " + req.params.annualNextMaintenanceDate,
+        });
+      } else {
+        await Machines.findOneAndUpdate(
+          { _id: req.params.id },
+          { problemStatus: "fine" }
+        );
+        res.json({ msg: "Done!" });
+      }
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }

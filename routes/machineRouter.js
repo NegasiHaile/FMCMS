@@ -30,7 +30,7 @@ router.put(
 );
 
 router.put(
-  "/problem_solved/:id",
+  "/problem_solved/:id/:salesId/:category/:annualNextMaintenanceDate",
   machineCntrl.machineProblemSolvedInMaintenance
 );
 
