@@ -32,7 +32,7 @@ const Charts = () => {
   var lineClientsBusinesses = [0];
   var barReceivedMachines = [0];
   var doughnutSalesStatus = [];
-  var piAnnualService = [];
+  var pushAnnualServiceArray = [];
 
   const pushMachineSales = () => {
     let elements = months.length - 1;
@@ -92,9 +92,20 @@ const Charts = () => {
     return doughnutSalesStatus;
   };
 
-  const puahAnnualService = () => {
-    piAnnualService.push(80, 10, 10);
-    return piAnnualService;
+  const pushAnnualService = () => {
+    let renewedSales = 0;
+    for (let i = 0; i < Sales.length; i++) {
+      if (Sales[i].renewHistory) {
+        var therenewhistry = Sales[i].renewHistory;
+        if (therenewhistry.includes(new Date().getFullYear())) {
+          renewedSales++;
+          console.log(renewedSales);
+        }
+      }
+    }
+
+    pushAnnualServiceArray.push(Sales.length - renewedSales, renewedSales);
+    return pushAnnualServiceArray;
   };
 
   return (
@@ -167,16 +178,16 @@ const Charts = () => {
       </CCard>
 
       <CCard>
-        <CCardHeader>This year annual Service</CCardHeader>
+        <CCardHeader>Annual Service of {new Date().getFullYear()}</CCardHeader>
         <CCardBody>
           <CChartPie
             datasets={[
               {
-                backgroundColor: ["#FF6384", "#36A2EB", "#41B883"],
-                data: puahAnnualService(),
+                backgroundColor: ["#FF6384", "#36A2EB"],
+                data: pushAnnualService(),
               },
             ]}
-            labels={["Unrenewed", "Processing", "Renewed"]}
+            labels={["Unrenewed", "Renewed"]}
             options={{
               tooltips: {
                 enabled: true,
