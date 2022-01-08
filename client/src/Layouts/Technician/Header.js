@@ -20,7 +20,7 @@ import routes from "./routes";
 
 import TheHeaderDropdownSales from "../../Components/HeaderDropDowns/TheHeaderDropdownSales";
 import TheHeaderDropdown from "../../Components/HeaderDropDowns/TheHeaderDropdown";
-import TheHeaderDropdownMssg from "../../Components/HeaderDropDowns/TheHeaderDropdownMssg";
+// import TheHeaderDropdownMssg from "../../Components/HeaderDropDowns/TheHeaderDropdownMssg";
 import TheHeaderDropdownMaint from "../../Components/HeaderDropDowns/TheHeaderDropdownMaint";
 
 const SuperAdminHeader = () => {
@@ -69,7 +69,7 @@ const SuperAdminHeader = () => {
       <CHeaderNav className="px-3">
         <TheHeaderDropdownSales />
         <TheHeaderDropdownMaint />
-        <TheHeaderDropdownMssg />
+        {/* <TheHeaderDropdownMssg /> */}
         <TheHeaderDropdown />
       </CHeaderNav>
 

@@ -19,7 +19,7 @@ import CIcon from "@coreui/icons-react";
 import routes from "./routes";
 
 import TheHeaderDropdown from "../../Components/HeaderDropDowns/TheHeaderDropdown";
-import TheHeaderDropdownMssg from "../../Components/HeaderDropDowns/TheHeaderDropdownMssg";
+// import TheHeaderDropdownMssg from "../../Components/HeaderDropDowns/TheHeaderDropdownMssg";
 import TheHeaderDropdownMaint from "../../Components/HeaderDropDowns/TheHeaderDropdownMaint";
 
 const Header = () => {
@@ -70,7 +70,7 @@ const Header = () => {
 
       <CHeaderNav className="px-3">
         <TheHeaderDropdownMaint />
-        <TheHeaderDropdownMssg />
+        {/* <TheHeaderDropdownMssg /> */}
         <TheHeaderDropdown />
       </CHeaderNav>
 
