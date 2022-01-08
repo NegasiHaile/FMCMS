@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState, } from "react";
 import { CCard, CCardBody, CCardGroup, CCardHeader } from "@coreui/react";
 import {
   CChartBar,
@@ -22,113 +22,185 @@ var months = [
   "Nov",
   "Dec",
 ];
-const Charts = () => {
+const Charts = (props) => {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [Sales] = state.SalesAPI.Sales;
   const [allBusinesses] = state.BusinessAPI.businesses;
   const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
+
+  const [thisYear, setThisYear] =  useState(new Date().getFullYear())
+
   var linemachineSales = [0];
   var lineClientsBusinesses = [0];
   var barReceivedMachines = [0];
   var doughnutSalesStatus = [];
   var pushAnnualServiceArray = [];
 
-  const pushMachineSales = () => {
-    let elements = months.length - 1;
+  useEffect(() => {
+    if (props.branchId && props.branchId !== "none" ){
+      dataPerBranch()
+      console.log("datPerBranch: " + props.branchId)
+    }else{
+      getGeneralData()
+      console.log("getGeneralData: " + props.branchId)
+    }
+  }, [props, thisYear])
+
+const  getGeneralData = () => {
+  let elements = months.length - 1;
+    for (let i = 0; i <= elements; i++) {
+      lineClientsBusinesses.push(
+        allBusinesses.filter(
+          (business) =>
+            new Date(business.createdAt).toLocaleString("en-us", {
+              month: "short",
+            }) == months[i] &&  new Date(business.createdAt).getFullYear() === thisYear
+        ).length
+      );
+    }
+
     for (let i = 0; i <= elements; i++) {
       linemachineSales.push(
         Sales.filter(
           (sale) =>
             new Date(sale.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]
+            }) == months[i] && new Date(sale.createdAt).getFullYear() === thisYear
         ).length
       );
     }
 
-    return linemachineSales;
-  };
-  const pushClientsBusinesses = () => {
-    let elements = months.length - 1;
-    for (let i = 0; i <= elements; i++) {
-      lineClientsBusinesses.push(
-        allBusinesses.filter(
-          (sale) =>
-            new Date(sale.createdAt).toLocaleString("en-us", {
-              month: "short",
-            }) == months[i]
-        ).length
-      );
-    }
-    return lineClientsBusinesses;
-  };
-  const pushReceivedMachines = () => {
-    let elements = months.length - 1;
+    doughnutSalesStatus.push(
+      Sales.filter(
+        (sale) => sale.status !== "completed" && sale.status !== "canceled" && new Date(sale.createdAt).getFullYear() === thisYear
+      ).length
+    );
+    doughnutSalesStatus.push(
+      Sales.filter((sale) => sale.status === "completed" && new Date(sale.createdAt).getFullYear() === thisYear).length 
+    );
+    doughnutSalesStatus.push(
+      Sales.filter((sale) => sale.status === "canceled" && new Date(sale.createdAt).getFullYear() === thisYear).length
+    );
+
     for (let i = 0; i <= elements; i++) {
       barReceivedMachines.push(
         pickupMachines.filter(
           (pickup) =>
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]
+            }) == months[i] && new Date(pickup.createdAt).getFullYear() === thisYear
         ).length
       );
     }
-    return barReceivedMachines;
-  };
-  const pushSalesStatus = () => {
-    doughnutSalesStatus.push(
-      Sales.filter(
-        (sale) => sale.status !== "completed" && sale.status !== "canceled"
-      ).length
-    );
-    doughnutSalesStatus.push(
-      Sales.filter((sale) => sale.status === "completed").length
-    );
-    doughnutSalesStatus.push(
-      Sales.filter((sale) => sale.status === "canceled").length
-    );
-    return doughnutSalesStatus;
-  };
 
-  const pushAnnualService = () => {
     let renewedSales = 0;
     for (let i = 0; i < Sales.length; i++) {
       if (Sales[i].renewHistory) {
         var therenewhistry = Sales[i].renewHistory;
         if (therenewhistry.includes(new Date().getFullYear())) {
           renewedSales++;
-          console.log(renewedSales);
         }
       }
     }
-
     pushAnnualServiceArray.push(Sales.length - renewedSales, renewedSales);
-    return pushAnnualServiceArray;
-  };
+    
+}
+
+const dataPerBranch = () => {
+  let elements = months.length - 1;
+  for (let i = 0; i <= elements; i++) {
+    lineClientsBusinesses.push(
+      allBusinesses.filter(
+        (business) =>
+        business.branch === props.branchId &&
+          new Date(business.createdAt).toLocaleString("en-us", {
+            month: "short",
+          }) == months[i] &&  new Date(business.createdAt).getFullYear() === thisYear
+      ).length
+    );
+  }
+
+  for (let i = 0; i <= elements; i++) {
+    linemachineSales.push(
+      Sales.filter(
+        (sale) =>
+        sale.branchId === props.branchId && new Date(sale.createdAt).toLocaleString("en-us", {
+            month: "short",
+          }) == months[i] && new Date(sale.createdAt).getFullYear() === thisYear
+      ).length
+    );
+  }
+
+  doughnutSalesStatus.push(
+    Sales.filter(
+      (sale) => sale.branchId === props.branchId && sale.status !== "completed" && sale.status !== "canceled" 
+      ).length
+  );
+  doughnutSalesStatus.push(
+    Sales.filter((sale) => sale.branchId === props.branchId && sale.status === "completed").length 
+  );
+  doughnutSalesStatus.push(
+    Sales.filter((sale) => sale.branchId === props.branchId && sale.status === "canceled").length
+  );
+
+  for (let i = 0; i <= elements; i++) {
+    barReceivedMachines.push(
+      pickupMachines.filter(
+        (pickup) =>
+        pickup.branchId === props.branchId && new Date(pickup.createdAt).toLocaleString("en-us", {
+            month: "short",
+          }) == months[i] && new Date(pickup.createdAt).getFullYear() === thisYear
+      ).length
+    );
+  }
+
+  let renewedSales = 0;
+  const branchsales = Sales.filter((sale) => sale.branchId === props.branchId)
+  for (let i = 0; i < branchsales.length; i++) {
+    if (branchsales[i].renewHistory) {
+      var therenewhistry = branchsales[i].renewHistory;
+      if (therenewhistry.includes(new Date().getFullYear())) {
+        renewedSales++;
+      }
+    }
+  }
+  pushAnnualServiceArray.push(branchsales.length - renewedSales, renewedSales);
+}
 
   return (
     <CCardGroup columns className="cols-2">
       <CCard>
-        <CCardHeader>Clients & Sales</CCardHeader>
+        <CCardHeader>Clients & Sales </CCardHeader>
         <CCardBody>
           <CChartLine
             datasets={[
               {
                 label: "Clients",
                 backgroundColor: "#FF6384",
-                data: pushClientsBusinesses(),
+                data: lineClientsBusinesses,
               },
               {
                 label: "Sales",
                 backgroundColor: "#36A2EB",
-                data: pushMachineSales(),
+                data: linemachineSales,
               },
             ]}
             options={{
               tooltips: {
                 enabled: true,
+              },
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                    },
+                    gridLines: {
+                      display: true,
+                    },
+                  },
+                ],
               },
             }}
             labels={months}
@@ -143,7 +215,7 @@ const Charts = () => {
             datasets={[
               {
                 backgroundColor: ["#FFCE56", "#36A2EB", "#FF6384"],
-                data: pushSalesStatus(),
+                data: doughnutSalesStatus,
               },
             ]}
             labels={["Proccessing", "Complated", "Canceled"]}
@@ -164,7 +236,7 @@ const Charts = () => {
               {
                 label: "Received Machines",
                 backgroundColor: "#8884D8",
-                data: pushReceivedMachines(),
+                data: barReceivedMachines,
               },
             ]}
             labels={months}
@@ -172,19 +244,31 @@ const Charts = () => {
               tooltips: {
                 enabled: true,
               },
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                    },
+                    gridLines: {
+                      display: true,
+                    },
+                  },
+                ],
+              },
             }}
           />
         </CCardBody>
       </CCard>
 
       <CCard>
-        <CCardHeader>Annual Service of {new Date().getFullYear()}</CCardHeader>
+        <CCardHeader>Annual Service of {thisYear}</CCardHeader>
         <CCardBody>
           <CChartPie
             datasets={[
               {
                 backgroundColor: ["#FF6384", "#36A2EB"],
-                data: pushAnnualService(),
+                data: pushAnnualServiceArray,
               },
             ]}
             labels={["Unrenewed", "Renewed"]}

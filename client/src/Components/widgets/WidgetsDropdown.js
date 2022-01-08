@@ -14,7 +14,7 @@ import CIcon from "@coreui/icons-react";
 import ChartLineSimple from "../charts/ChartLineSimple";
 import ChartBarSimple from "../charts/ChartBarSimple";
 
-const WidgetsDropdown = () => {
+const WidgetsDropdown = (props) => {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [allMachines] = state.MachineAPI.machines;
@@ -93,8 +93,8 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           style={bgC8884D8}
-          header={(user.branch
-            ? allMachines.filter((machine) => machine.branch === user.branch)
+          header={(props.branchId
+            ? allMachines.filter((machine) => machine.branch === props.branchId)
                 .length
             : allMachines.length
           ).toString()}
@@ -125,10 +125,10 @@ const WidgetsDropdown = () => {
               >
                 <span>New Arrivals: </span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? allMachines.filter(
                         (machine) =>
-                          machine.branch === user.branch &&
+                          machine.branch === props.branchId &&
                           machine.availableIn === "main-store"
                       ).length
                     : allMachines.filter(
@@ -143,10 +143,10 @@ const WidgetsDropdown = () => {
               >
                 <span>Unsold: </span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? allMachines.filter(
                         (machine) =>
-                          machine.branch === user.branch &&
+                          machine.branch === props.branchId &&
                           machine.salesStatus === "unsold"
                       ).length
                     : allMachines.filter(
@@ -160,10 +160,10 @@ const WidgetsDropdown = () => {
               >
                 <span>Sold: </span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? allMachines.filter(
                         (machine) =>
-                          machine.branch === user.branch &&
+                          machine.branch === props.branchId &&
                           machine.salesStatus === "sold"
                       ).length
                     : allMachines.filter(
@@ -178,10 +178,10 @@ const WidgetsDropdown = () => {
                 <span>Damaged: </span>{" "}
                 <span>
                   {" "}
-                  {user.branch
+                  {props.branchId
                     ? allMachines.filter(
                         (machine) =>
-                          machine.branch === user.branch &&
+                          machine.branch === props.branchId &&
                           machine.problemStatus === "damaged"
                       ).length
                     : allMachines.filter(
@@ -196,10 +196,10 @@ const WidgetsDropdown = () => {
               >
                 <span>Maintainig: </span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? allMachines.filter(
                         (machine) =>
-                          machine.branch === user.branch &&
+                          machine.branch === props.branchId &&
                           machine.problemStatus === "maintainig"
                       ).length
                     : allMachines.filter(
@@ -215,8 +215,8 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-info"
-          header={(user.branch
-            ? allMRCs.filter((MRC) => MRC.branch === user.branch).length
+          header={(props.branchId
+            ? allMRCs.filter((MRC) => MRC.branch === props.branchId).length
             : allMRCs.length
           ).toString()}
           text="MRC"
@@ -247,10 +247,10 @@ const WidgetsDropdown = () => {
               >
                 <span>Free: </span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? allMRCs.filter(
                         (MRC) =>
-                          MRC.branch === user.branch && MRC.status === "free"
+                          MRC.branch === props.branchId && MRC.status === "free"
                       ).length
                     : allMRCs.filter((MRC) => MRC.status === "free").length}
                 </span>
@@ -261,10 +261,10 @@ const WidgetsDropdown = () => {
               >
                 <span>Taken: </span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? allMRCs.filter(
                         (MRC) =>
-                          MRC.branch === user.branch && MRC.status === "taken"
+                          MRC.branch === props.branchId && MRC.status === "taken"
                       ).length
                     : allMRCs.filter((MRC) => MRC.status === "taken").length}
                 </span>
@@ -277,8 +277,8 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-warning"
-          header={(user.branch
-            ? allSIMCards.filter((SIMCard) => SIMCard.branch === user.branch)
+          header={(props.branchId
+            ? allSIMCards.filter((SIMCard) => SIMCard.branch === props.branchId)
                 .length
             : allSIMCards.length
           ).toString()}
@@ -309,10 +309,10 @@ const WidgetsDropdown = () => {
               >
                 <span>New Arrivals: </span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? allSIMCards.filter(
                         (SIMCard) =>
-                          SIMCard.branch === user.branch &&
+                          SIMCard.branch === props.branchId &&
                           SIMCard.availableIn === "main-store"
                       ).length
                     : allSIMCards.filter(
@@ -326,10 +326,10 @@ const WidgetsDropdown = () => {
               >
                 <span>Free: </span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? allSIMCards.filter(
                         (SIMCard) =>
-                          SIMCard.branch === user.branch &&
+                          SIMCard.branch === props.branchId &&
                           SIMCard.status === "free"
                       ).length
                     : allSIMCards.filter((SIMCard) => SIMCard.status === "free")
@@ -342,10 +342,10 @@ const WidgetsDropdown = () => {
               >
                 <span>Taken: </span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? allSIMCards.filter(
                         (SIMCard) =>
-                          SIMCard.branch === user.branch &&
+                          SIMCard.branch === props.branchId &&
                           SIMCard.status === "taken"
                       ).length
                     : allSIMCards.filter(
@@ -359,10 +359,10 @@ const WidgetsDropdown = () => {
               >
                 <span>Discarded: </span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? allSIMCards.filter(
                         (SIMCard) =>
-                          SIMCard.branch === user.branch &&
+                          SIMCard.branch === props.branchId &&
                           SIMCard.status === "discarded"
                       ).length
                     : allSIMCards.filter(
@@ -378,8 +378,8 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-danger"
-          header={(user.branch
-            ? pickupMachines.filter((pickup) => pickup.branchId === user.branch)
+          header={(props.branchId
+            ? pickupMachines.filter((pickup) => pickup.branchId === props.branchId)
                 .length
             : pickupMachines.length
           ).toString()}
@@ -409,10 +409,10 @@ const WidgetsDropdown = () => {
               >
                 <span>Annual:</span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? pickupMachines.filter(
                         (pickup) =>
-                          pickup.branchId === user.branch &&
+                          pickup.branchId === props.branchId &&
                           pickup.category === "annual"
                       ).length
                     : pickupMachines.filter(
@@ -426,10 +426,10 @@ const WidgetsDropdown = () => {
               >
                 <span>Incident:</span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? pickupMachines.filter(
                         (pickup) =>
-                          pickup.branchId === user.branch &&
+                          pickup.branchId === props.branchId &&
                           pickup.category === "incident"
                       ).length
                     : pickupMachines.filter(
@@ -443,10 +443,10 @@ const WidgetsDropdown = () => {
               >
                 <span>Info' Change: </span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? pickupMachines.filter(
                         (pickup) =>
-                          pickup.branchId === user.branch &&
+                          pickup.branchId === props.branchId &&
                           pickup.category === "information_change"
                       ).length
                     : pickupMachines.filter(
@@ -464,10 +464,10 @@ const WidgetsDropdown = () => {
               >
                 <span>Widrawal: </span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? pickupMachines.filter(
                         (pickup) =>
-                          pickup.branchId === user.branch &&
+                          pickup.branchId === props.branchId &&
                           pickup.category === "withdrawal"
                       ).length
                     : pickupMachines.filter(
@@ -481,10 +481,10 @@ const WidgetsDropdown = () => {
               >
                 <span>Tempo' Store: </span>{" "}
                 <span>
-                  {user.branch
+                  {props.branchId
                     ? pickupMachines.filter(
                         (pickup) =>
-                          pickup.branchId === user.branch &&
+                          pickup.branchId === props.branchId &&
                           pickup.category === "temporarly_store"
                       ).length
                     : pickupMachines.filter(
