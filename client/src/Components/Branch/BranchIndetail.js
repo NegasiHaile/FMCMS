@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 
 import BadRouting from "../Utils/routing/BadRouting";
 import BranchProfile from "../Branch/BranchProfile"
-import Charts from "../charts/Charts";
 import WidgetsDropdown from "../widgets/WidgetsDropdown";
+import Charts from "../charts/Charts";
+import MainChartExample from "../charts/MainChartExample";
+import RecentEvents from "../Dashboard/Tables/RecentEvents"
 
 
 function BranchIndetail() {
@@ -22,6 +24,8 @@ function BranchIndetail() {
           <WidgetsDropdown branchId = {params.id} />
 
       <Charts branchId = {params.id} />
+      <MainChartExample branchId = {params.id} />
+      <RecentEvents branchId = {params.id}/>
         </>
       ) : (
         <BadRouting text="Bad routing! There is no branch with this routing!" />

@@ -29,7 +29,7 @@ const Charts = (props) => {
   const [allBusinesses] = state.BusinessAPI.businesses;
   const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
 
-  const [thisYear, setThisYear] =  useState(new Date().getFullYear())
+  const [theYear, setTheYear] =  useState(new Date().getFullYear())
 
   var linemachineSales = [0];
   var lineClientsBusinesses = [0];
@@ -37,15 +37,7 @@ const Charts = (props) => {
   var doughnutSalesStatus = [];
   var pushAnnualServiceArray = [];
 
-  useEffect(() => {
-    if (props.branchId && props.branchId !== "none" ){
-      dataPerBranch()
-      console.log("datPerBranch: " + props.branchId)
-    }else{
-      getGeneralData()
-      console.log("getGeneralData: " + props.branchId)
-    }
-  }, [props, thisYear])
+  
 
 const  getGeneralData = () => {
   let elements = months.length - 1;
@@ -55,7 +47,7 @@ const  getGeneralData = () => {
           (business) =>
             new Date(business.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i] &&  new Date(business.createdAt).getFullYear() === thisYear
+            }) == months[i] &&  new Date(business.createdAt).getFullYear() === theYear
         ).length
       );
     }
@@ -66,21 +58,21 @@ const  getGeneralData = () => {
           (sale) =>
             new Date(sale.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i] && new Date(sale.createdAt).getFullYear() === thisYear
+            }) == months[i] && new Date(sale.createdAt).getFullYear() === theYear
         ).length
       );
     }
 
     doughnutSalesStatus.push(
       Sales.filter(
-        (sale) => sale.status !== "completed" && sale.status !== "canceled" && new Date(sale.createdAt).getFullYear() === thisYear
+        (sale) => sale.status !== "completed" && sale.status !== "canceled" && new Date(sale.createdAt).getFullYear() === theYear
       ).length
     );
     doughnutSalesStatus.push(
-      Sales.filter((sale) => sale.status === "completed" && new Date(sale.createdAt).getFullYear() === thisYear).length 
+      Sales.filter((sale) => sale.status === "completed" && new Date(sale.createdAt).getFullYear() === theYear).length 
     );
     doughnutSalesStatus.push(
-      Sales.filter((sale) => sale.status === "canceled" && new Date(sale.createdAt).getFullYear() === thisYear).length
+      Sales.filter((sale) => sale.status === "canceled" && new Date(sale.createdAt).getFullYear() === theYear).length
     );
 
     for (let i = 0; i <= elements; i++) {
@@ -89,7 +81,7 @@ const  getGeneralData = () => {
           (pickup) =>
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i] && new Date(pickup.createdAt).getFullYear() === thisYear
+            }) == months[i] && new Date(pickup.createdAt).getFullYear() === theYear
         ).length
       );
     }
@@ -116,7 +108,7 @@ const dataPerBranch = () => {
         business.branch === props.branchId &&
           new Date(business.createdAt).toLocaleString("en-us", {
             month: "short",
-          }) == months[i] &&  new Date(business.createdAt).getFullYear() === thisYear
+          }) == months[i] &&  new Date(business.createdAt).getFullYear() === theYear
       ).length
     );
   }
@@ -127,7 +119,7 @@ const dataPerBranch = () => {
         (sale) =>
         sale.branchId === props.branchId && new Date(sale.createdAt).toLocaleString("en-us", {
             month: "short",
-          }) == months[i] && new Date(sale.createdAt).getFullYear() === thisYear
+          }) == months[i] && new Date(sale.createdAt).getFullYear() === theYear
       ).length
     );
   }
@@ -135,13 +127,15 @@ const dataPerBranch = () => {
   doughnutSalesStatus.push(
     Sales.filter(
       (sale) => sale.branchId === props.branchId && sale.status !== "completed" && sale.status !== "canceled" 
-      ).length
+      && new Date(sale.createdAt).getFullYear() === theYear).length
   );
   doughnutSalesStatus.push(
-    Sales.filter((sale) => sale.branchId === props.branchId && sale.status === "completed").length 
+    Sales.filter((sale) => sale.branchId === props.branchId && sale.status === "completed" 
+    && new Date(sale.createdAt).getFullYear() === theYear).length 
   );
   doughnutSalesStatus.push(
-    Sales.filter((sale) => sale.branchId === props.branchId && sale.status === "canceled").length
+    Sales.filter((sale) => sale.branchId === props.branchId && sale.status === "canceled" 
+    && new Date(sale.createdAt).getFullYear() === theYear).length
   );
 
   for (let i = 0; i <= elements; i++) {
@@ -150,7 +144,7 @@ const dataPerBranch = () => {
         (pickup) =>
         pickup.branchId === props.branchId && new Date(pickup.createdAt).toLocaleString("en-us", {
             month: "short",
-          }) == months[i] && new Date(pickup.createdAt).getFullYear() === thisYear
+          }) == months[i] && new Date(pickup.createdAt).getFullYear() === theYear
       ).length
     );
   }
@@ -160,7 +154,7 @@ const dataPerBranch = () => {
   for (let i = 0; i < branchsales.length; i++) {
     if (branchsales[i].renewHistory) {
       var therenewhistry = branchsales[i].renewHistory;
-      if (therenewhistry.includes(new Date().getFullYear())) {
+      if (therenewhistry.includes(theYear)) {
         renewedSales++;
       }
     }
@@ -168,10 +162,19 @@ const dataPerBranch = () => {
   pushAnnualServiceArray.push(branchsales.length - renewedSales, renewedSales);
 }
 
+useEffect(() => {
+  if (props.branchId && props.branchId !== "none" ){
+    dataPerBranch()
+    console.log("datPerBranch: " + props.branchId)
+  }else{
+    getGeneralData()
+    console.log("getGeneralData: " + props.branchId)
+  }
+}, [props])
   return (
     <CCardGroup columns className="cols-2">
       <CCard>
-        <CCardHeader>Clients & Sales </CCardHeader>
+        <CCardHeader>Clients & Sales of {theYear} </CCardHeader>
         <CCardBody>
           <CChartLine
             datasets={[
@@ -209,7 +212,7 @@ const dataPerBranch = () => {
       </CCard>
 
       <CCard>
-        <CCardHeader>Sales Status</CCardHeader>
+        <CCardHeader>Sales status of {theYear}</CCardHeader>
         <CCardBody>
           <CChartDoughnut
             datasets={[
@@ -229,7 +232,7 @@ const dataPerBranch = () => {
       </CCard>
 
       <CCard>
-        <CCardHeader>Received machines</CCardHeader>
+        <CCardHeader>Received machines of {theYear}</CCardHeader>
         <CCardBody>
           <CChartBar
             datasets={[
@@ -262,7 +265,7 @@ const dataPerBranch = () => {
       </CCard>
 
       <CCard>
-        <CCardHeader>Annual Service of {thisYear}</CCardHeader>
+        <CCardHeader>Annual service of {theYear}</CCardHeader>
         <CCardBody>
           <CChartPie
             datasets={[

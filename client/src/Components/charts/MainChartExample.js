@@ -1,19 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import { GlobalState } from "../../GlobalState";
 
 import { CChartLine } from "@coreui/react-chartjs";
 import { getStyle, hexToRgba } from "@coreui/utils";
 
+import { CCard, CCardBody } from "@coreui/react";
 const brandSuccess = getStyle("success") || "#4dbd74";
 const brandInfo = getStyle("info") || "#20a8d8";
 const brandDanger = getStyle("danger") || "#f86c6b";
 const brandWarning = getStyle("warning") || "#FFCE56";
 
-const MainChartExample = () => {
+const MainChartExample = (props) => {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
+  const [theYear, setTheYear] = useState(new Date().getFullYear())
 
   var months = [
     "Jan",
@@ -35,9 +37,13 @@ const MainChartExample = () => {
   const withdrawal = [];
   const temporarlyStore = [];
 
-  const random = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  };
+  useEffect(() => {
+    if (props.branchId) {
+      branchData();
+    } else {
+      generalData();
+    }
+  }, [props, theYear])
 
   const generalData = () => {
     let elements = months.length - 1;
@@ -45,39 +51,37 @@ const MainChartExample = () => {
       incidentMaintenance.push(
         pickupMachines.filter(
           (pickup) =>
-            pickup.category === "incident" &&
+            pickup.category == "incident" &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]
+            }) == months[i] && new Date(pickup.createdAt).getFullYear() == theYear
         ).length
       );
       informationChange.push(
         pickupMachines.filter(
           (pickup) =>
-            pickup.category === "information_change" &&
+            pickup.category == "information_change" &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]
+            }) == months[i] && new Date(pickup.createdAt).getFullYear() == theYear
         ).length
       );
-
       withdrawal.push(
         pickupMachines.filter(
           (pickup) =>
-            pickup.category === "withdrawal" &&
+            pickup.category == "withdrawal" &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]
+            }) == months[i] && new Date(pickup.createdAt).getFullYear() == theYear
         ).length
       );
-
       temporarlyStore.push(
         pickupMachines.filter(
           (pickup) =>
-            pickup.category === "temporarly_store" &&
+            pickup.category == "temporarly_store" &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]
+            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == theYear
         ).length
       );
     }
@@ -89,53 +93,47 @@ const MainChartExample = () => {
       incidentMaintenance.push(
         pickupMachines.filter(
           (pickup) =>
-            pickup.category === "incident" &&
-            pickup.branchId === user.branch &&
+            pickup.category == "incident" &&
+            pickup.branchId == props.branchId &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]
+            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == theYear
         ).length
       );
       informationChange.push(
         pickupMachines.filter(
           (pickup) =>
-            pickup.category === "information_change" &&
-            pickup.branchId === user.branch &&
+            pickup.category == "information_change" &&
+            pickup.branchId == props.branchId &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]
+            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == theYear
         ).length
       );
       withdrawal.push(
         pickupMachines.filter(
           (pickup) =>
-            pickup.category === "withdrawal" &&
-            pickup.branchId === user.branch &&
+            pickup.category == "withdrawal" &&
+            pickup.branchId == props.branchId &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]
+            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == theYear
         ).length
       );
-
       temporarlyStore.push(
         pickupMachines.filter(
           (pickup) =>
-            pickup.category === "temporarly_store" &&
-            pickup.branchId === user.branch &&
+            pickup.category == "temporarly_store" &&
+            pickup.branchId == props.branchId &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]
+            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == theYear
         ).length
       );
     }
   };
 
   const defaultDatasets = (() => {
-    if (user.branch) {
-      branchData();
-    } else {
-      generalData();
-    }
     return [
       {
         label: "Incident Maintenance",
@@ -227,12 +225,16 @@ const MainChartExample = () => {
   };
   // render
   return (
-    <CChartLine
+    <CCard>
+      <CCardBody>
+      <CChartLine
       style={mystyle}
       datasets={defaultDatasets}
       options={defaultOptions}
       labels={months}
     />
+      </CCardBody>
+    </CCard>
   );
 };
 
