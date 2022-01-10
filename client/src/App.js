@@ -29,6 +29,8 @@ const Login = lazy(() => import("./Components/Login"));
 const Page404 = lazy(() => import("./Components/Utils/page404/Page404"));
 const Page500 = lazy(() => import("./Components/Utils/page500/Page500"));
 
+const Loader = lazy(() => import("./Components/Utils/Commons/Loader"))
+
 function App() {
   const state = useContext(GlobalState);
   const [isLogged] = state.UserAPI.isLogged;
@@ -36,88 +38,97 @@ function App() {
 
   // setTimeout(() => {}, 5000)
 
+  var isThereAUser = localStorage.getItem("firstLogin");
   let userLayout;
-  if (isLogged && user.userRole === "client") {
-    userLayout = (
-      <Route
-        path="/"
-        name="Client"
-        render={(props) => <ClientLayout {...props} />}
-      />
-    ); // client Layout
-  } else if (isLogged && user.userRole === "sales") {
-    userLayout = (
-      <Route
-        path="/"
-        name="Sales"
-        render={(props) => <SlaesLayout {...props} />}
-      />
-    ); // client Layout
-  } else if (isLogged && user.userRole === "customer-service") {
-    userLayout = (
-      <Route
-        path="/"
-        name="Customer Service"
-        render={(props) => <CustomerServiceLayout {...props} />}
-      />
-    ); // client Layout
-  } else if (isLogged && user.userRole === "technician") {
-    userLayout = (
-      <Route
-        path="/"
-        name="Technician"
-        render={(props) => <TechnicianLayout {...props} />}
-      />
-    ); // client Layout
-  } else if (isLogged && user.userRole === "machine-controller") {
-    userLayout = (
-      <Route
-        path="/"
-        name="Branch-Store"
-        render={(props) => <MachineControllerLayout {...props} />}
-      />
-    ); // Branch Admin Layout
-  } else if (isLogged && user.userRole === "branch-store") {
-    userLayout = (
-      <Route
-        path="/"
-        name="Branch-Store"
-        render={(props) => <BranchStoreLayout {...props} />}
-      />
-    ); // Branch Admin Layout
-  } else if (isLogged && user.userRole === "main-store") {
-    userLayout = (
-      <Route
-        path="/"
-        name="Main-Store"
-        render={(props) => <MainStoreLayout {...props} />}
-      />
-    ); // Branch Admin Layout
-  } else if (isLogged && user.userRole === "operational-manager") {
-    userLayout = (
-      <Route
-        path="/"
-        name="O-M"
-        render={(props) => <OprationalManagerLayout {...props} />}
-      />
-    ); // Branch Admin Layout
-  } else if (isLogged && user.userRole === "branch-admin") {
-    userLayout = (
-      <Route
-        path="/"
-        name="B-A"
-        render={(props) => <BranchAdminLayout {...props} />}
-      />
-    ); // Branch Admin Layout
-  } else if (isLogged && user.userRole === "super-admin") {
-    userLayout = (
-      <Route
-        path="/"
-        name="S-A"
-        render={(props) => <SuperAdminLayout {...props} />}
-      />
-    ); // super admin Layout
-  } else {
+  if(isThereAUser){
+    if(isLogged){
+      if (user.userRole === "client") {
+        userLayout = (
+          <Route
+            path="/"
+            name="Client"
+            render={(props) => <ClientLayout {...props} />}
+          />
+        ); // client Layout
+      } else if (user.userRole === "sales") {
+        userLayout = (
+          <Route
+            path="/"
+            name="Sales"
+            render={(props) => <SlaesLayout {...props} />}
+          />
+        ); // client Layout
+      } else if (user.userRole === "customer-service") {
+        userLayout = (
+          <Route
+            path="/"
+            name="Customer Service"
+            render={(props) => <CustomerServiceLayout {...props} />}
+          />
+        ); // client Layout
+      } else if (user.userRole === "technician") {
+        userLayout = (
+          <Route
+            path="/"
+            name="Technician"
+            render={(props) => <TechnicianLayout {...props} />}
+          />
+        ); // client Layout
+      } else if (user.userRole === "machine-controller") {
+        userLayout = (
+          <Route
+            path="/"
+            name="Branch-Store"
+            render={(props) => <MachineControllerLayout {...props} />}
+          />
+        ); // Branch Admin Layout
+      } else if (user.userRole === "branch-store") {
+        userLayout = (
+          <Route
+            path="/"
+            name="Branch-Store"
+            render={(props) => <BranchStoreLayout {...props} />}
+          />
+        ); // Branch Admin Layout
+      } else if (user.userRole === "main-store") {
+        userLayout = (
+          <Route
+            path="/"
+            name="Main-Store"
+            render={(props) => <MainStoreLayout {...props} />}
+          />
+        ); // Branch Admin Layout
+      } else if (user.userRole === "operational-manager") {
+        userLayout = (
+          <Route
+            path="/"
+            name="O-M"
+            render={(props) => <OprationalManagerLayout {...props} />}
+          />
+        ); // Branch Admin Layout
+      } else if (user.userRole === "branch-admin") {
+        userLayout = (
+          <Route
+            path="/"
+            name="B-A"
+            render={(props) => <BranchAdminLayout {...props} />}
+          />
+        ); // Branch Admin Layout
+      } else if (user.userRole === "super-admin") {
+        userLayout = (
+          <Route
+            path="/"
+            name="S-A"
+            render={(props) => <SuperAdminLayout {...props} />}
+          />
+        ); // super admin Layout
+      }
+    }
+    else{
+      userLayout = <Loader />
+    }
+  }
+   else {
     userLayout = (
       <Route
         path="/"
@@ -133,6 +144,39 @@ function App() {
         <Suspense fallback={loading}>
           <Switch>
             {userLayout}
+            {/* {isLogged ? 
+            <> {user.userRole === "super-admin" ? 
+            <Route
+            path="/"
+            name="S-A"
+            render={(props) => <SuperAdminLayout {...props} />}
+          />: 
+          user.userRole === "branch-admin" ? 
+          <Route
+            path="/"
+            name="B-A"
+            render={(props) => <BranchAdminLayout {...props} />}
+          /> : 
+          user.userRole === "sales" ?
+          <Route
+          path="/"
+          name="Sales"
+          render={(props) => <SlaesLayout {...props} />}
+        />:
+        <Route
+              exact
+              path="*"
+              name="Page 404"
+              render={(props) => <Page404 {...props} />}
+            />
+        } </>: 
+            <Route
+            path="/"
+            name="Login Page"
+            render={(props) => <Login {...props} />}
+          />} */}
+
+          
             <Route
               exact
               path="*"
