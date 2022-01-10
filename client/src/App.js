@@ -41,7 +41,7 @@ function App() {
   var isThereAUser = localStorage.getItem("firstLogin");
   let userLayout;
   if(isThereAUser){
-    if(isLogged){
+    if(isLogged && user){
       if (user.userRole === "client") {
         userLayout = (
           <Route
