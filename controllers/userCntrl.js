@@ -313,11 +313,17 @@ const generatePassword = () => {
 
 const sendMailToUser = (mailDetail) => {
   var transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
       user: "negasihaile19@gmail.com",
       pass: "Negasi@DevelopmentEmail", // Thepassword of the mailer
     },
+    tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false
+    }
   });
 
   console.log(mailDetail);
@@ -327,7 +333,7 @@ const sendMailToUser = (mailDetail) => {
     subject: mailDetail.subject,
     text: mailDetail.text + mailDetail.passwordToMail,
   };
-  transporter.sendMail(mailOptions, function (error, info) {
+  transporter.sendMail(mailOptions,  (error, info) => {
     if (error) {
       console.log(error);
     } else {
