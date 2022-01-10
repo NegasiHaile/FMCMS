@@ -20,7 +20,7 @@ const EmployeeList = () => {
   const [user] = state.UserAPI.User;
   const [token] = state.token;
   const [allUsers] = state.UsersAPI.users;
-  const [employees, setEmployees] = useState(allUsers);
+  const [employees, setEmployees] = useState([]);
 
   const [branchs] = state.branchAPI.branchs;
   const [callback, setCallback] = state.UsersAPI.callback;
@@ -117,6 +117,7 @@ const EmployeeList = () => {
     "mName",
     "gender",
     "phoneNumber",
+    "email",
     "branch",
     "userRole",
     "status",
