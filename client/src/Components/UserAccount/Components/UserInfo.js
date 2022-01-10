@@ -104,14 +104,36 @@ function UserInfo({ id }) {
           </CCardBody>
         </CCard>
       </CCol>
-      {/* <CCol md="12" lg="4">
+      {userDetail.userRole === "super-admin" && 
+      <CCol md="12" lg="4">
         <CCard>
-          <CCardHeader>User tasks</CCardHeader>
+          <CCardHeader>Sender email help</CCardHeader>
           <CCardBody>
-            <h3>{userDetail.fName}</h3>
+            <h6> While you are adding a new employee, A password is expected sent to the employee email
+              authomaticaly. But in case the employee hasn't been accepting any email, Do the folowing 
+              steps to the sender email.
+            </h6>
+            <p>1, <a
+              href="https://accounts.google.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-info"
+            >Log in to {userDetail.email}.</a> </p>
+            <p>2, <a
+              href="https://myaccount.google.com/lesssecureapps"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-info"
+            >Make the sender email less secure.</a> </p>
+            <p>3, <a
+              href="https://accounts.google.com/b/0/displayunlockcaptcha"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-info"
+            >Disable Captcha so an email can be sent.</a></p>
           </CCardBody>
         </CCard>
-      </CCol> */}
+      </CCol>}
       {/* <CCol>
         <CCard>
           <CCardHeader>Work History</CCardHeader>
