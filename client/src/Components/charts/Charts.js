@@ -31,9 +31,9 @@ const Charts = (props) => {
 
   const [theYear, setTheYear] =  useState(new Date().getFullYear())
 
-  var linemachineSales = [0];
-  var lineClientsBusinesses = [0];
-  var barReceivedMachines = [0];
+  var linemachineSales = [];
+  var lineClientsBusinesses = [];
+  var barReceivedMachines = [];
   var doughnutSalesStatus = [];
   var pushAnnualServiceArray = [];
 
