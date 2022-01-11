@@ -19,8 +19,8 @@ function RecentEvents(props) {
     const generalRecentSales = () =>{
       const theRecentgeneralSales = Sales.filter((filteredSale) => filteredSale);
       const theRecentGeneralReceivings = pickupMachines.filter((filteredPickUp) =>filteredPickUp);
-      theRecentgeneralSales.length =5 
-      theRecentGeneralReceivings.length = 5
+      theRecentgeneralSales.length = 7
+      theRecentGeneralReceivings.length = 7
         setRecentSales(theRecentgeneralSales);
         setRecentReceivings(theRecentGeneralReceivings);
     }
@@ -30,8 +30,8 @@ function RecentEvents(props) {
           filteredPickUp.branchId == props.branchId
       )
 
-      theRecentSales.length = 5
-      theRecentReceivings.length = 5
+      theRecentSales.length = 7
+      theRecentReceivings.length = 7
 
       setRecentSales(theRecentSales);
       setRecentReceivings(theRecentReceivings);
@@ -45,21 +45,10 @@ function RecentEvents(props) {
         }
     }, [props])
 
-    const recentSalesTableAttr = [
-        // "branchId",
-        "tradeName",
-        "machineSerialNumber",
-        "status",
-        {
-          key: "Actions",
-          label: "Actions",
-          // _style: { width: "1%" },
-          sorter: false,
-          filter: false,
-        },
-      ];
+    const trnctMaxWidth = {
+      maxWidth: "130px"
+    }
       const recentRecievingstableAttr = [
-        "tradeName",
         "serialNumber",
         "category",
         "status",
@@ -72,68 +61,90 @@ function RecentEvents(props) {
         },
       ];
     return (
-        <CCardGroup className="cols-2 mb-3">
+        <CCardGroup columns className="cols-2 mb-3">
            <CCard>
         <CCardHeader>Recent sales</CCardHeader>
         <CCardBody>
-        <CDataTable 
-            size="sm"
-            items={recentSales}
-            fields={recentSalesTableAttr}
-            itemsPerPage={5}
-            hover
-            sorter
-            pagination
-            scopedSlots={{
-              Actions: (sales) => (
-                <>
+          <div  className=" table-responsive">
+        <table className="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Machine</th>
+                <th scope="col">Buyer client</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {recentSales.length > 0 && recentSales.map((sale, index) => (
+                <tr key={index}>
+                  <th scope="row">{index + 1}</th>
+                  <td >{sale.machineSerialNumber}</td>
+                  <td className="text-truncate" style={trnctMaxWidth}>{sale.tradeName}</td>
+                  <td className={`${sale.status === "completed"  ? "text-success" : 
+                  sale.status === "canceled" ? "text-danger" : 
+                  sale.status === "New" ? "text-primary" : "text-warning" } rounded text-center`}>
+                    <b> <i> {sale.status}</i></b></td>
                   <td className="d-flex justify-content-center">
 
                     <CLink
                       className="text-info"
-                      to={`/sales/detail/${sales.saleId}`}
+                      to={`/sales/detail/${sale.saleId}`}
                     >
                       <CTooltip content={`See detail of this sales.`}>
                         <CIcon name="cil-align-center" />
                       </CTooltip>
                     </CLink>
                   </td>
-                </>
-              ),
-            }}
-          />
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          </div>
         </CCardBody>
       </CCard> 
       <CCard>
         <CCardHeader>Recent recieved machines</CCardHeader>
         <CCardBody>
-        <CDataTable
-            size="sm"
-            items={recentReceivings}
-            fields={recentRecievingstableAttr}
-            itemsPerPage={5}
-            hover
-            sorter
-            pagination
-            scopedSlots={{
-              Actions: (pickup) => (
-                <td className="d-flex justify-content-center">
-                  <>
+          <div  className=" table-responsive">
+        <table className="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Machine</th>
+                <th scope="col">Recieving reason</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {recentReceivings.length > 0 &&
+              recentReceivings.map((machine, index) => (
+                <tr key={index}>
+                  <th scope="row">{index + 1}</th>
+                  <td >{machine.serialNumber}</td>
+                  <td >{machine.category}</td>
+                  <td className={`${machine.status === "completed"  ? "text-success" : 
+                  machine.status === "New" ? "text-primary" : "text-warning" } rounded text-center`}>
+                    <b> <i> {machine.status}</i></b></td>
+                    <td className="d-flex justify-content-center">
                     <CLink
                       className="text-info"
-                      to={`/pickup/detail/${pickup._id}`}
+                      to={`/pickup/detail/${machine._id}`}
                     >
                       <CTooltip
-                        content={`See detail of this ${pickup.category} maintenance.`}
+                        content={`See detail of this ${machine.category} maintenance.`}
                       >
                         <CIcon name="cil-align-center" />
                       </CTooltip>
                     </CLink>
-                  </>
                 </td>
-              ),
-            }}
-          />
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          </div>
         </CCardBody>
       </CCard> 
         </CCardGroup>
