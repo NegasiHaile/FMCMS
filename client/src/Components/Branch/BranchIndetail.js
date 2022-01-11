@@ -9,12 +9,29 @@ import Charts from "../charts/Charts";
 import MainChartExample from "../charts/MainChartExample";
 import RecentEvents from "../Dashboard/Tables/RecentEvents"
 
+import { CSelect  } from "@coreui/react";
 
 function BranchIndetail() {
   const state = useContext(GlobalState);
   const params = useParams();
   const [allBranchs] = state.branchAPI.branchs;
+  const [theYear, setTheYear] = useState(new Date().getFullYear())
 
+  var workyears = [];
+
+  const handleChange = (e) => {
+    // console.log(" Done : "+ e.target.value)
+    setTheYear(e.target.value)
+    // console.log(" TheYear is : "+ JSON.stringify(theYear))
+  }
+
+  const getWorkYears = ()=>{
+    for (let i = 2020; i <= new Date().getFullYear(); i++){
+      workyears.push(i)
+    }
+    console.log("the work years:" + workyears);
+    return workyears;
+  }
 
   return (
     <>
@@ -23,8 +40,23 @@ function BranchIndetail() {
           <BranchProfile branchId = {params.id} />
           <WidgetsDropdown branchId = {params.id} />
 
-      <Charts branchId = {params.id} />
-      <MainChartExample branchId = {params.id} />
+          <CSelect 
+          aria-label="Default select example"
+          id="gender"
+          name="theYear"
+          onChange={handleChange}
+          value={theYear}
+          required
+          border={"danger"}
+        >
+          <option value="" disabled>Select year to see report ...</option>
+          {getWorkYears().map ((year, index) => 
+            <option key={index} value={year}>{year}</option>
+          )}
+      </CSelect>
+
+      <Charts branchId = {params.id} theYear = {theYear} />
+      <MainChartExample branchId = {params.id} theYear = {theYear} />
       <RecentEvents branchId = {params.id}/>
         </>
       ) : (

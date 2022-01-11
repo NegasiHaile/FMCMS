@@ -2,7 +2,7 @@ import React, {useContext, useState} from "react";
 
 import { GlobalState } from "../../GlobalState";
 
-import { CCard, CCardBody, CSelect  } from "@coreui/react";
+import { CSelect  } from "@coreui/react";
 import MainChartExample from "../charts/MainChartExample";
 import Charts from "../charts/Charts";
 import EmployeesList from "../Employee/EmployeesList";
@@ -16,36 +16,45 @@ import RecentEvents from "./Tables/RecentEvents"
 const BranchAdminDashboard = () => {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
-
   const [theYear, setTheYear] = useState(new Date().getFullYear())
+
+  var workyears = [];
 
   const handleChange = (e) => {
     // console.log(" Done : "+ e.target.value)
     setTheYear(e.target.value)
     // console.log(" TheYear is : "+ JSON.stringify(theYear))
+  }
 
+  const getWorkYears = ()=>{
+    for (let i = 2020; i <= new Date().getFullYear(); i++){
+      workyears.push(i)
+    }
+    console.log("the work years:" + workyears);
+    return workyears;
   }
   return (
     <>
       <WidgetsDropdown branchId = {user.branch} />
 
-      {/* <CSelect 
+      <CSelect 
           aria-label="Default select example"
           id="gender"
           name="theYear"
           onChange={handleChange}
           value={theYear}
           required
+          className="mb-2"
         >
-          <option value="">Select year</option>
-          <option value="2020">2020</option>
-          <option value="2021">2021</option>
-          <option value="2022">2022</option>
-      </CSelect> */}
+          <option value="" disabled>Select year to see report ...</option>
+          {getWorkYears().map ((year, index) => 
+            <option key={index} value={year}>{year}</option>
+          )}
+      </CSelect>
 
-      <Charts branchId = {user.branch}/>
+      <Charts branchId = {user.branch} theYear = {theYear}/>
 
-      <MainChartExample branchId = {user.branch}/>
+      <MainChartExample branchId = {user.branch} theYear = {theYear}/>
       {/* <WidgetsBrand withCharts  branchId = {user.branch}/> */}
       <RecentEvents branchId = {user.branch}/>
       <EmployeesList />

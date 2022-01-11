@@ -14,19 +14,15 @@ function RecentEvents(props) {
     const [recentSales, setRecentSales] = useState([]);
   const [recentReceivings, setRecentReceivings] = useState([]);
 
-    useEffect(() => {
-        if(props.branchId){
-            branchRecentSales()
-        }else{
-            generalRecentSales()
-        }
-    }, [props])
+    
 
     const generalRecentSales = () =>{
-      Sales.length =5 
-      pickupMachines.length = 5
-        setRecentSales(Sales);
-        setRecentReceivings(pickupMachines);
+      const theRecentgeneralSales = Sales.filter((filteredSale) => filteredSale);
+      const theRecentGeneralReceivings = pickupMachines.filter((filteredPickUp) =>filteredPickUp);
+      theRecentgeneralSales.length =5 
+      theRecentGeneralReceivings.length = 5
+        setRecentSales(theRecentgeneralSales);
+        setRecentReceivings(theRecentGeneralReceivings);
     }
     const branchRecentSales = () =>{
       const theRecentSales = Sales.filter((filteredSale) => filteredSale.branchId == props.branchId)
@@ -40,6 +36,15 @@ function RecentEvents(props) {
       setRecentSales(theRecentSales);
       setRecentReceivings(theRecentReceivings);
     }
+
+    useEffect(() => {
+        if(props.branchId){
+            branchRecentSales()
+        }else{
+            generalRecentSales()
+        }
+    }, [props])
+
     const recentSalesTableAttr = [
         // "branchId",
         "tradeName",

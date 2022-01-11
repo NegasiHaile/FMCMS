@@ -1,11 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 
 import { GlobalState } from "../../GlobalState";
 
 import { CChartLine } from "@coreui/react-chartjs";
 import { getStyle, hexToRgba } from "@coreui/utils";
 
-import { CCard, CCardBody } from "@coreui/react";
+import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 const brandSuccess = getStyle("success") || "#4dbd74";
 const brandInfo = getStyle("info") || "#20a8d8";
 const brandDanger = getStyle("danger") || "#f86c6b";
@@ -13,9 +13,7 @@ const brandWarning = getStyle("warning") || "#FFCE56";
 
 const MainChartExample = (props) => {
   const state = useContext(GlobalState);
-  const [user] = state.UserAPI.User;
   const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
-  const [theYear, setTheYear] = useState(new Date().getFullYear())
 
   var months = [
     "Jan",
@@ -37,14 +35,6 @@ const MainChartExample = (props) => {
   const withdrawal = [];
   const temporarlyStore = [];
 
-  useEffect(() => {
-    if (props.branchId) {
-      branchData();
-    } else {
-      generalData();
-    }
-  }, [props, theYear])
-
   const generalData = () => {
     let elements = months.length - 1;
     for (let i = 0; i <= elements; i++) {
@@ -54,7 +44,7 @@ const MainChartExample = (props) => {
             pickup.category == "incident" &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i] && new Date(pickup.createdAt).getFullYear() == theYear
+            }) == months[i] && new Date(pickup.createdAt).getFullYear() == props.theYear
         ).length
       );
       informationChange.push(
@@ -63,7 +53,7 @@ const MainChartExample = (props) => {
             pickup.category == "information_change" &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i] && new Date(pickup.createdAt).getFullYear() == theYear
+            }) == months[i] && new Date(pickup.createdAt).getFullYear() == props.theYear
         ).length
       );
       withdrawal.push(
@@ -72,7 +62,7 @@ const MainChartExample = (props) => {
             pickup.category == "withdrawal" &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i] && new Date(pickup.createdAt).getFullYear() == theYear
+            }) == months[i] && new Date(pickup.createdAt).getFullYear() == props.theYear
         ).length
       );
       temporarlyStore.push(
@@ -81,7 +71,7 @@ const MainChartExample = (props) => {
             pickup.category == "temporarly_store" &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == theYear
+            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == props.theYear
         ).length
       );
     }
@@ -97,7 +87,7 @@ const MainChartExample = (props) => {
             pickup.branchId == props.branchId &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == theYear
+            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == props.theYear
         ).length
       );
       informationChange.push(
@@ -107,7 +97,7 @@ const MainChartExample = (props) => {
             pickup.branchId == props.branchId &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == theYear
+            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == props.theYear
         ).length
       );
       withdrawal.push(
@@ -117,7 +107,7 @@ const MainChartExample = (props) => {
             pickup.branchId == props.branchId &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == theYear
+            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == props.theYear
         ).length
       );
       temporarlyStore.push(
@@ -127,7 +117,7 @@ const MainChartExample = (props) => {
             pickup.branchId == props.branchId &&
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == theYear
+            }) == months[i]  && new Date(pickup.createdAt).getFullYear() == props.theYear
         ).length
       );
     }
@@ -170,6 +160,14 @@ const MainChartExample = (props) => {
       },
     ];
   })();
+
+  // useEffect(() => {
+    if (props.branchId) {
+      branchData();
+    } else {
+      generalData();
+    }
+  // }, [props, props.theYear])
 
   const defaultOptions = (() => {
     return {
@@ -226,6 +224,9 @@ const MainChartExample = (props) => {
   // render
   return (
     <CCard>
+      <CCardHeader>
+      Maintenance report of {props.theYear} 
+      </CCardHeader>
       <CCardBody>
       <CChartLine
       style={mystyle}

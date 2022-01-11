@@ -1,4 +1,4 @@
-import React, { useContext, useState, } from "react";
+import React, { useContext } from "react";
 import { CCard, CCardBody, CCardGroup, CCardHeader } from "@coreui/react";
 import {
   CChartBar,
@@ -24,12 +24,9 @@ var months = [
 ];
 const Charts = (props) => {
   const state = useContext(GlobalState);
-  const [user] = state.UserAPI.User;
   const [Sales] = state.SalesAPI.Sales;
   const [allBusinesses] = state.BusinessAPI.businesses;
   const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
-
-  const [theYear, setTheYear] =  useState(new Date().getFullYear())
 
   var linemachineSales = [];
   var lineClientsBusinesses = [];
@@ -47,7 +44,7 @@ const  getGeneralData = () => {
           (business) =>
             new Date(business.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i] &&  new Date(business.createdAt).getFullYear() === theYear
+            }) == months[i] &&  new Date(business.createdAt).getFullYear() == props.theYear
         ).length
       );
     }
@@ -58,48 +55,52 @@ const  getGeneralData = () => {
           (sale) =>
             new Date(sale.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i] && new Date(sale.createdAt).getFullYear() === theYear
+            }) == months[i] && new Date(sale.createdAt).getFullYear() == props.theYear
         ).length
       );
     }
 
     doughnutSalesStatus.push(
       Sales.filter(
-        (sale) => sale.status !== "completed" && sale.status !== "canceled" && new Date(sale.createdAt).getFullYear() === theYear
+        (sale) => sale.status !== "completed" && sale.status !== "canceled" && new Date(sale.createdAt).getFullYear() == props.theYear
       ).length
     );
     doughnutSalesStatus.push(
-      Sales.filter((sale) => sale.status === "completed" && new Date(sale.createdAt).getFullYear() === theYear).length 
+      Sales.filter((sale) => sale.status === "completed" && new Date(sale.createdAt).getFullYear() == props.theYear).length 
     );
     doughnutSalesStatus.push(
-      Sales.filter((sale) => sale.status === "canceled" && new Date(sale.createdAt).getFullYear() === theYear).length
+      Sales.filter((sale) => sale.status === "canceled" && new Date(sale.createdAt).getFullYear() == props.theYear).length
     );
-
+console.log("The doughnutSalesStatus :" +doughnutSalesStatus)
     for (let i = 0; i <= elements; i++) {
       barReceivedMachines.push(
         pickupMachines.filter(
           (pickup) =>
             new Date(pickup.createdAt).toLocaleString("en-us", {
               month: "short",
-            }) == months[i] && new Date(pickup.createdAt).getFullYear() === theYear
+            }) == months[i] && new Date(pickup.createdAt).getFullYear() == props.theYear
         ).length
       );
     }
 
     let renewedSales = 0;
-    for (let i = 0; i < Sales.length; i++) {
-      if (Sales[i].renewHistory) {
-        var therenewhistry = Sales[i].renewHistory;
-        if (therenewhistry.includes(new Date().getFullYear())) {
+    const completedSales = Sales.filter((sale) => sale.status === "completed")
+    for (let i = 0; i < completedSales.length; i++) {
+      if (completedSales[i].renewHistory) {
+        var therenewhistry = completedSales[i].renewHistory;
+        if (therenewhistry.includes(Number(props.theYear))) {
           renewedSales++;
         }
       }
+      
     }
-    pushAnnualServiceArray.push(Sales.length - renewedSales, renewedSales);
+    // console.log("renewedSales outside :" + renewedSales)
+    pushAnnualServiceArray.push(completedSales.length - renewedSales, renewedSales);
     
 }
 
 const dataPerBranch = () => {
+  console.log(" Branch Before : "+ linemachineSales)
   let elements = months.length - 1;
   for (let i = 0; i <= elements; i++) {
     lineClientsBusinesses.push(
@@ -108,7 +109,7 @@ const dataPerBranch = () => {
         business.branch === props.branchId &&
           new Date(business.createdAt).toLocaleString("en-us", {
             month: "short",
-          }) == months[i] &&  new Date(business.createdAt).getFullYear() === theYear
+          }) == months[i] &&  new Date(business.createdAt).getFullYear() == props.theYear
       ).length
     );
   }
@@ -119,7 +120,7 @@ const dataPerBranch = () => {
         (sale) =>
         sale.branchId === props.branchId && new Date(sale.createdAt).toLocaleString("en-us", {
             month: "short",
-          }) == months[i] && new Date(sale.createdAt).getFullYear() === theYear
+          }) == months[i] && new Date(sale.createdAt).getFullYear() == props.theYear
       ).length
     );
   }
@@ -127,15 +128,15 @@ const dataPerBranch = () => {
   doughnutSalesStatus.push(
     Sales.filter(
       (sale) => sale.branchId === props.branchId && sale.status !== "completed" && sale.status !== "canceled" 
-      && new Date(sale.createdAt).getFullYear() === theYear).length
+      && new Date(sale.createdAt).getFullYear() == props.theYear).length
   );
   doughnutSalesStatus.push(
     Sales.filter((sale) => sale.branchId === props.branchId && sale.status === "completed" 
-    && new Date(sale.createdAt).getFullYear() === theYear).length 
+    && new Date(sale.createdAt).getFullYear() == props.theYear).length 
   );
   doughnutSalesStatus.push(
     Sales.filter((sale) => sale.branchId === props.branchId && sale.status === "canceled" 
-    && new Date(sale.createdAt).getFullYear() === theYear).length
+    && new Date(sale.createdAt).getFullYear() == props.theYear).length
   );
 
   for (let i = 0; i <= elements; i++) {
@@ -144,7 +145,7 @@ const dataPerBranch = () => {
         (pickup) =>
         pickup.branchId === props.branchId && new Date(pickup.createdAt).toLocaleString("en-us", {
             month: "short",
-          }) == months[i] && new Date(pickup.createdAt).getFullYear() === theYear
+          }) == months[i] && new Date(pickup.createdAt).getFullYear() == props.theYear
       ).length
     );
   }
@@ -154,7 +155,7 @@ const dataPerBranch = () => {
   for (let i = 0; i < branchsales.length; i++) {
     if (branchsales[i].renewHistory) {
       var therenewhistry = branchsales[i].renewHistory;
-      if (therenewhistry.includes(theYear)) {
+      if (therenewhistry.includes(Number(props.theYear))) {
         renewedSales++;
       }
     }
@@ -165,16 +166,17 @@ const dataPerBranch = () => {
 //useEffect(() => {
   if (props.branchId && props.branchId !== "none" ){
     dataPerBranch()
-    console.log("datPerBranch: " + props.branchId)
+    // console.log("datPerBranch: " + props.branchId)
   }else{
     getGeneralData()
-    console.log("getGeneralData: " + props.branchId)
+    // console.log("getGeneralData: " + props.branchId)
   }
 //}, [props])
+
   return (
     <CCardGroup columns className="cols-2">
       <CCard>
-        <CCardHeader>Clients & Sales of {theYear} </CCardHeader>
+        <CCardHeader>Clients & Sales of {props.theYear} </CCardHeader>
         <CCardBody>
           <CChartLine
             datasets={[
@@ -212,7 +214,7 @@ const dataPerBranch = () => {
       </CCard>
 
       <CCard>
-        <CCardHeader>Sales status of {theYear}</CCardHeader>
+        <CCardHeader>Sales status of {props.theYear}</CCardHeader>
         <CCardBody>
           <CChartDoughnut
             datasets={[
@@ -232,7 +234,7 @@ const dataPerBranch = () => {
       </CCard>
 
       <CCard>
-        <CCardHeader>Received machines of {theYear}</CCardHeader>
+        <CCardHeader>Received machines of {props.theYear}</CCardHeader>
         <CCardBody>
           <CChartBar
             datasets={[
@@ -265,7 +267,7 @@ const dataPerBranch = () => {
       </CCard>
 
       <CCard>
-        <CCardHeader>Annual service of {theYear}</CCardHeader>
+        <CCardHeader>Annual service of {props.theYear}</CCardHeader>
         <CCardBody>
           <CChartPie
             datasets={[
