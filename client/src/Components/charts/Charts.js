@@ -84,7 +84,7 @@ console.log("The doughnutSalesStatus :" +doughnutSalesStatus)
     }
 
     let renewedSales = 0;
-    const completedSales = Sales.filter((sale) => sale.status === "completed")
+    const completedSales = Sales.filter((sale) => sale.status === "completed" && new Date(sale.createdAt).getFullYear() <= props.theYear)
     for (let i = 0; i < completedSales.length; i++) {
       if (completedSales[i].renewHistory) {
         var therenewhistry = completedSales[i].renewHistory;
@@ -151,16 +151,16 @@ const dataPerBranch = () => {
   }
 
   let renewedSales = 0;
-  const branchsales = Sales.filter((sale) => sale.branchId === props.branchId)
-  for (let i = 0; i < branchsales.length; i++) {
-    if (branchsales[i].renewHistory) {
-      var therenewhistry = branchsales[i].renewHistory;
+  const branchCompletedSales = Sales.filter((sale) => sale.branchId === props.branchId && sale.status === "completed" && new Date(sale.createdAt).getFullYear() <= props.theYear)
+  for (let i = 0; i < branchCompletedSales.length; i++) {
+    if (branchCompletedSales[i].renewHistory) {
+      var therenewhistry = branchCompletedSales[i].renewHistory;
       if (therenewhistry.includes(Number(props.theYear))) {
         renewedSales++;
       }
     }
   }
-  pushAnnualServiceArray.push(branchsales.length - renewedSales, renewedSales);
+  pushAnnualServiceArray.push(branchCompletedSales.length - renewedSales, renewedSales);
 }
 
 //useEffect(() => {
