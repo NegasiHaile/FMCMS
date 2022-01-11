@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, } from "react";
+import React, { useContext, useState, } from "react";
 import { CCard, CCardBody, CCardGroup, CCardHeader } from "@coreui/react";
 import {
   CChartBar,
@@ -162,7 +162,7 @@ const dataPerBranch = () => {
   pushAnnualServiceArray.push(branchsales.length - renewedSales, renewedSales);
 }
 
-useEffect(() => {
+//useEffect(() => {
   if (props.branchId && props.branchId !== "none" ){
     dataPerBranch()
     console.log("datPerBranch: " + props.branchId)
@@ -170,7 +170,7 @@ useEffect(() => {
     getGeneralData()
     console.log("getGeneralData: " + props.branchId)
   }
-}, [props])
+//}, [props])
   return (
     <CCardGroup columns className="cols-2">
       <CCard>
