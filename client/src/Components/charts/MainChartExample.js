@@ -193,8 +193,8 @@ const MainChartExample = (props) => {
             ticks: {
               beginAtZero: true,
               maxTicksLimit: 10,
-              stepSize: Math.ceil(30 / 10),
-              max: 30,
+              // stepSize: Math.ceil(500 / 10),
+              // max: 400,
             },
             scaleLabel: {
               labelString: "Machine quantity",
