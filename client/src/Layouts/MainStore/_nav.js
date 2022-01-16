@@ -14,16 +14,10 @@ const _nav = [
     //   text: NEW,
     // },
   },
-  {
-    _tag: "CSidebarNavItem",
-    name: "General Sales",
-    to: "/sales/oflist",
-    icon: "cil-star",
-  },
   // Machines Managment and controlling
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Machine-Managment"],
+    _children: ["Machine-Controlling"],
   },
   {
     _tag: "CSidebarNavItem",
@@ -41,7 +35,7 @@ const _nav = [
   // MRC Managment and controlling
   {
     _tag: "CSidebarNavTitle",
-    _children: ["MRC-Managment"],
+    _children: ["MRC-Controlling"],
   },
 
   {
@@ -60,7 +54,7 @@ const _nav = [
   // Spares Managment and controlling
   {
     _tag: "CSidebarNavTitle",
-    _children: ["SIM card-Managment"],
+    _children: ["SIM Card-Controlling"],
   },
   {
     _tag: "CSidebarNavItem",
@@ -82,10 +76,16 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Feedbacks",
-    to: "/feedbacks",
-    icon: "cil-speech",
+    name: "Sales List",
+    to: "/sales/oflist",
+    icon: "cil-star",
   },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Feedbacks",
+  //   to: "/feedbacks",
+  //   icon: "cil-speech",
+  // },
   {
     _tag: "CSidebarNavItem",
     name: "Jupiter Branchs",

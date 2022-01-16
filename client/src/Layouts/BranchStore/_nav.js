@@ -8,37 +8,52 @@ const _nav = [
     _tag: "CSidebarNavItem",
     name: "Dashboard",
     to: "/dashboard",
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+    icon: <CIcon name="cil-applications" customClasses="c-sidebar-nav-icon" />,
+    // badge: {
+    //   color: "info",
+    //   text: NEW,
+    // },
   },
-
+  // Machines Controlling and controlling
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Machine-Controlling"],
+  },
   {
     _tag: "CSidebarNavItem",
-    name: "Branch Sales",
-    to: "/sales/oflist",
-    icon: "cil-star",
-  },
-  // Machines Managment and controlling
-  {
-    _tag: "CSidebarNavItem",
-    name: "List of machines",
+    name: "List of Machines",
     to: "/machines/list",
     icon: "cil-print",
   },
-  // MRC Managment and controlling
-
   {
     _tag: "CSidebarNavItem",
-    name: "List of  MRC",
+    name: "Maintenance List",
+    to: "/maintenance/list",
+    icon: "cil-memory",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Withdrawal List",
+    to: "/machine/return/list",
+    icon: "cil-recycle",
+  },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["MRC/SIM-Controlling"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "MRCs List",
     to: "/mrcs/list",
     icon: "cil-asterisk-circle",
   },
+
   {
     _tag: "CSidebarNavItem",
-    name: "SIM-Card List",
-    to: "/branch_simcards/list",
+    name: "SIM Cards List",
+    to: "/simcard/list",
     icon: "cil-file",
   },
-
   // others
   {
     _tag: "CSidebarNavTitle",
@@ -46,14 +61,14 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Feedbacks",
-    to: "/feedbacks",
-    icon: "cil-speech",
+    name: "Sales List",
+    to: "/sales/oflist",
+    icon: "cil-money",
   },
   {
     _tag: "CSidebarNavItem",
     name: "Jupiter Branchs",
-    to: "/Branch/List",
+    to: "/branchs/list",
     icon: "cil-bank",
   },
 ];

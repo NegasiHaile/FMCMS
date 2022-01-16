@@ -59,13 +59,13 @@ const Header = () => {
 
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
+          <CHeaderNavLink to="/sales/oflist">Sales</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/machines/list">Machines</CHeaderNavLink>
+          <CHeaderNavLink to="/maintenance/list">Maintenances</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/client/register">Clients</CHeaderNavLink>
+          <CHeaderNavLink to="/machine/return/list">Withdrawals</CHeaderNavLink>
         </CHeaderNavItem>
       </CHeaderNav>
 
@@ -82,19 +82,19 @@ const Header = () => {
           routes={routes}
         />
         <div className="d-md-down-none mfe-2 c-subheader-nav">
-          <CLink className="c-subheader-nav-link" href="#">
+          {/* <CLink className="c-subheader-nav-link" href="#">
             <CIcon name="cil-speech" alt="Settings" />
-          </CLink>
-          <CLink
+          </CLink> */}
+          {/* <CLink
             className="c-subheader-nav-link"
             aria-current="page"
             to="/machine/inventory"
           >
             <CIcon name="cil-graph" alt="Branch Inventory" />
             &nbsp;Inventory
-          </CLink>
+          </CLink> */}
           <CLink className="c-subheader-nav-link" to="/branchs/list">
-            <CIcon name="cil-Building" alt="OM" />
+            <CIcon name="cil-bank" alt="OM" />
             &nbsp;Jupiter-Branchs
           </CLink>
         </div>

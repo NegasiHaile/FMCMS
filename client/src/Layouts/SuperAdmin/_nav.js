@@ -16,13 +16,19 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
+    name: "Sales List",
+    to: "/sales/oflist",
+    icon: "cil-money",
+  },
+  {
+    _tag: "CSidebarNavItem",
     name: "Branchs-List",
     to: "/branchs/list",
     icon: "cil-bank",
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Employees-Managment"],
+    _children: ["Employees-Management"],
   },
   {
     _tag: "CSidebarNavItem",
@@ -38,19 +44,13 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Machine's-Managment"],
+    _children: ["Machine's-Management"],
   },
   {
     _tag: "CSidebarNavItem",
     name: "All Machines",
     to: "/machines/list",
     icon: "cil-print",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "General Sales",
-    to: "/sales/oflist",
-    icon: "cil-money",
   },
   {
     _tag: "CSidebarNavItem",
@@ -67,7 +67,7 @@ const _nav = [
 
   {
     _tag: "CSidebarNavTitle",
-    _children: ["MRC/SIM-Managment"],
+    _children: ["MRC/SIM-Management"],
   },
   {
     _tag: "CSidebarNavItem",
@@ -84,7 +84,7 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Client's-Managment"],
+    _children: ["Client-Management"],
   },
   {
     _tag: "CSidebarNavItem",

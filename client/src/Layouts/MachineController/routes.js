@@ -58,6 +58,13 @@ const MachineReturningLists = lazy(() =>
   import("../../Components/MachineReturn/MachineReturningLists")
 );
 
+// Importing MRC related routes
+const MrcsList = lazy(() => import("../../Components/MRC/MrcsList"));
+// Importing SIM cards related routes
+const SimCardsList = lazy(() =>
+  import("../../Components/SIMCard/SimCardsList")
+);
+
 // Importing of Sales ralted pages
 const SalesList = lazy(() => import("../../Components/Sales/SalesList"));
 const SalesDetail = lazy(() => import("../../Components/Sales/SalesDetail"));
@@ -145,6 +152,20 @@ const routes = [
     exact: true,
     name: "Machine-Returning-List",
     component: ReturningList,
+  },
+  // MRC
+  {
+    path: "/mrcs/list",
+    exact: true,
+    name: "Mrc-List",
+    component: MrcsList,
+  },
+  // SIM cards
+  {
+    path: "/simcard/list",
+    exact: true,
+    name: "SIM-Card-List",
+    component: SimCardsList,
   },
   // Maintenance
   {

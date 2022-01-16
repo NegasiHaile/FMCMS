@@ -6,7 +6,7 @@ import CIcon from "@coreui/icons-react";
 const _nav = [
   {
     _tag: "CSidebarNavItem",
-    name: "Branch Dashboard",
+    name: "Dashboard",
     to: "/dashboard",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
     // badge: {
@@ -16,25 +16,25 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Branch Employees",
+    name: "Employees",
     to: "/Employee/List",
     icon: "cil-group",
   },
   {
+    _tag: "CSidebarNavItem",
+    name: "Sales List",
+    to: "/sales/oflist",
+    icon: "cil-money",
+  },
+  {
     _tag: "CSidebarNavTitle",
-    _children: ["Machines-Managment"],
+    _children: ["Machines-Management"],
   },
   {
     _tag: "CSidebarNavItem",
     name: "All Machines",
     to: "/machines/list",
     icon: "cil-print",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Branch Sales",
-    to: "/sales/oflist",
-    icon: "cil-money",
   },
   {
     _tag: "CSidebarNavItem",
@@ -50,7 +50,24 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Client-Managment"],
+    _children: ["MRC/SIM-Management"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "MRCs List",
+    to: "/mrcs/list",
+    icon: "cil-asterisk-circle",
+  },
+
+  {
+    _tag: "CSidebarNavItem",
+    name: "SIM Cards List",
+    to: "/simcard/list",
+    icon: "cil-file",
+  },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Client-Management"],
   },
   {
     _tag: "CSidebarNavItem",
@@ -68,24 +85,24 @@ const _nav = [
     _tag: "CSidebarNavTitle",
     _children: ["Others"],
   },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Branch Inventory",
-    to: "/machine/inventory",
-    icon: "cil-shield-alt",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Branch Backup",
-    to: "/system/backup",
-    icon: "cil-graph",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Feedbacks",
-    to: "/feedbacks",
-    icon: "cil-speech",
-  },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Branch Inventory",
+  //   to: "/machine/inventory",
+  //   icon: "cil-shield-alt",
+  // },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Branch Backup",
+  //   to: "/system/backup",
+  //   icon: "cil-graph",
+  // },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Feedbacks",
+  //   to: "/feedbacks",
+  //   icon: "cil-speech",
+  // },
   {
     _tag: "CSidebarNavItem",
     name: "Jupiter Branchs",

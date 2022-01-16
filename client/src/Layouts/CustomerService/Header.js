@@ -62,10 +62,7 @@ const Header = () => {
           <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/machines/list">Machines</CHeaderNavLink>
-        </CHeaderNavItem>
-        <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/client/register">Clients</CHeaderNavLink>
+          <CHeaderNavLink to="/sales/oflist">Sales</CHeaderNavLink>
         </CHeaderNavItem>
       </CHeaderNav>
 
@@ -82,7 +79,7 @@ const Header = () => {
           routes={routes}
         />
         <div className="d-md-down-none mfe-2 c-subheader-nav">
-          <CLink className="c-subheader-nav-link" href="#">
+          {/* <CLink className="c-subheader-nav-link" href="#">
             <CIcon name="cil-speech" alt="Settings" />
           </CLink>
           <CLink
@@ -92,9 +89,9 @@ const Header = () => {
           >
             <CIcon name="cil-graph" alt="Branch Inventory" />
             &nbsp;Inventory
-          </CLink>
+          </CLink> */}
           <CLink className="c-subheader-nav-link" to="/branchs/list">
-            <CIcon name="cil-Building" alt="Main-Store" />
+            <CIcon name="cil-Bank" alt="Main-Store" />
             &nbsp;Jupiter-Branchs
           </CLink>
         </div>

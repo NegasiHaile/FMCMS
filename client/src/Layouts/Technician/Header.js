@@ -62,7 +62,10 @@ const SuperAdminHeader = () => {
           <CHeaderNavLink to="/machines/list">Machines</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/business/list">Businesses</CHeaderNavLink>
+          <CHeaderNavLink to="/maintenance/list">Maintenances</CHeaderNavLink>
+        </CHeaderNavItem>
+        <CHeaderNavItem className="px-3">
+          <CHeaderNavLink to="/machine/return/list">Withdrawals</CHeaderNavLink>
         </CHeaderNavItem>
       </CHeaderNav>
 
@@ -79,14 +82,14 @@ const SuperAdminHeader = () => {
           routes={routes}
         />
         <div className="d-md-down-none mfe-2 c-subheader-nav">
-          <CLink
+          {/* <CLink
             className="c-subheader-nav-link"
             aria-current="page"
             to="/machine/inventory"
           >
             <CIcon name="cil-graph" alt="Branch Inventory" />
             &nbsp;Inventory
-          </CLink>
+          </CLink> */}
           <CLink className="c-subheader-nav-link" to="/branchs/list">
             <CIcon name="cil-Building" alt="Branchs" />
             &nbsp;Jupiter-Branchs

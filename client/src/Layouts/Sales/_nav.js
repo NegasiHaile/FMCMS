@@ -17,32 +17,31 @@ const _nav = [
     icon: "cil-star",
   },
   {
-    _tag: "CSidebarNavDropdown",
-    name: "Machine Controlling",
-    route: "/Machine",
+    _tag: "CSidebarNavTitle",
+    _children: ["Machine Controlling"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Machines List",
+    to: "/machines/list",
     icon: "cil-print",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "Machines List",
-        to: "/machines/list",
-      },
-      // {
-      //   _tag: "CSidebarNavItem",
-      //   name: "Assigne Machine",
-      //   to: "/machine/distribute",
-      // },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Maintenance List",
-        to: "/maintenance/list",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Withdrawal List",
-        to: "/machine/return/list",
-      },
-    ],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Maintenance List",
+    to: "/maintenance/list",
+    icon: "cil-memory",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Withdrawal List",
+    to: "/machine/return/list",
+    icon: "cil-recycle",
+  },
+  
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Client Management"],
   },
   {
     _tag: "CSidebarNavItem",

@@ -181,7 +181,7 @@ function SimCardsList() {
             Actions: (simCard) => (
               <td className="d-flex justify-content-between">
                 {(user.userRole === "main-store" ||
-                  user.userRole === "technician") && (
+                  user.userRole === "technician") && simCard.status === "free" && (
                   <CLink
                     className="text-success"
                     onClick={() => {

@@ -6,7 +6,7 @@ import CIcon from "@coreui/icons-react";
 const _nav = [
   {
     _tag: "CSidebarNavItem",
-    name: "Branch Dashboard",
+    name: "Dashboard",
     to: "/dashboard",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
     // badge: {
@@ -17,15 +17,15 @@ const _nav = [
 
   {
     _tag: "CSidebarNavItem",
-    name: "Machine Sales",
+    name: "Sales List",
     to: "/sales/oflist",
     icon: "cil-star",
   },
 
-  // Machine-Managment
+  // Machine-Controlling
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Machine-Managment"],
+    _children: ["Machine-Controlling"],
   },
   {
     _tag: "CSidebarNavItem",
@@ -45,11 +45,27 @@ const _nav = [
     name: "Withdrawal List",
     to: "/machine/return/list",
     icon: "cil-recycle",
+  }, {
+    _tag: "CSidebarNavTitle",
+    _children: ["MRC/SIM-Management"],
   },
-  // Client-Managment
+  {
+    _tag: "CSidebarNavItem",
+    name: "MRCs List",
+    to: "/mrcs/list",
+    icon: "cil-asterisk-circle",
+  },
+
+  {
+    _tag: "CSidebarNavItem",
+    name: "SIM Cards List",
+    to: "/simcard/list",
+    icon: "cil-file",
+  },
+  // Client-Controlling
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Client-Managment"],
+    _children: ["Client-Controlling"],
   },
 
   {
@@ -70,12 +86,12 @@ const _nav = [
     _tag: "CSidebarNavTitle",
     _children: ["Others"],
   },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Feedbacks",
-    to: "/feedbacks",
-    icon: "cil-speech",
-  },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Feedbacks",
+  //   to: "/feedbacks",
+  //   icon: "cil-speech",
+  // },
   {
     _tag: "CSidebarNavItem",
     name: "Jupiter Branchs",

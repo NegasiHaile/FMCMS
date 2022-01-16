@@ -19,8 +19,6 @@ import CIcon from "@coreui/icons-react";
 import routes from "./routes";
 
 import TheHeaderDropdown from "../../Components/HeaderDropDowns/TheHeaderDropdown";
-// import TheHeaderDropdownMssg from "../../Components/HeaderDropDowns/TheHeaderDropdownMssg";
-import TheHeaderDropdownMaint from "../../Components/HeaderDropDowns/TheHeaderDropdownMaint";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -64,13 +62,14 @@ const Header = () => {
           <CHeaderNavLink to="/machines/list">Machines</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/mrc/list">MRC</CHeaderNavLink>
+          <CHeaderNavLink to="/mrcs/list">MRC</CHeaderNavLink>
+        </CHeaderNavItem>
+        <CHeaderNavItem className="px-3">
+          <CHeaderNavLink to="/simcard/list">SIM Cards</CHeaderNavLink>
         </CHeaderNavItem>
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <TheHeaderDropdownMaint />
-        {/* <TheHeaderDropdownMssg /> */}
         <TheHeaderDropdown />
       </CHeaderNav>
 

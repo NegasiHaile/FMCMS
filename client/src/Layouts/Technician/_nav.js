@@ -6,9 +6,9 @@ import CIcon from "@coreui/icons-react";
 const _nav = [
   {
     _tag: "CSidebarNavItem",
-    name: "Home",
+    name: "Dashboard",
     to: "/dashboard",
-    icon: <CIcon name="cil-home" customClasses="c-sidebar-nav-icon" />,
+    icon: <CIcon name="cil-applications" customClasses="c-sidebar-nav-icon" />,
     // badge: {
     //   color: "success",
     //   text: NEW,
@@ -16,7 +16,7 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Machines-Managment"],
+    _children: ["Machines-Controlling"],
   },
   {
     _tag: "CSidebarNavItem",
@@ -39,7 +39,7 @@ const _nav = [
 
   {
     _tag: "CSidebarNavTitle",
-    _children: ["MRC & SIM"],
+    _children: ["MRC & SIM Controlling"],
   },
   {
     _tag: "CSidebarNavItem",
@@ -55,7 +55,7 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Client-Managment"],
+    _children: ["Client-Controlling"],
   },
   {
     _tag: "CSidebarNavItem",
@@ -73,17 +73,24 @@ const _nav = [
     _tag: "CSidebarNavTitle",
     _children: ["Others"],
   },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Branch Inventory",
+  //   to: "/machine/inventory",
+  //   icon: "cil-shield-alt",
+  // },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Feedbacks",
+  //   to: "/feedbacks",
+  //   icon: "cil-speech",
+  // },
+  
   {
     _tag: "CSidebarNavItem",
-    name: "Branch Inventory",
-    to: "/machine/inventory",
-    icon: "cil-shield-alt",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Feedbacks",
-    to: "/feedbacks",
-    icon: "cil-speech",
+    name: "Sales List",
+    to: "/sales/oflist",
+    icon: "cil-money",
   },
   {
     _tag: "CSidebarNavItem",

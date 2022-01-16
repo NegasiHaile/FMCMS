@@ -20,7 +20,6 @@ import routes from "./routes";
 
 import TheHeaderDropdownSales from "../../Components/HeaderDropDowns/TheHeaderDropdownSales";
 import TheHeaderDropdown from "../../Components/HeaderDropDowns/TheHeaderDropdown";
-import TheHeaderDropdownMssg from "../../Components/HeaderDropDowns/TheHeaderDropdownMssg";
 import TheHeaderDropdownMaint from "../../Components/HeaderDropDowns/TheHeaderDropdownMaint";
 
 const SuperAdminHeader = () => {
@@ -62,7 +61,7 @@ const SuperAdminHeader = () => {
           <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/machines/list">Machines</CHeaderNavLink>
+          <CHeaderNavLink to="/sales/oflist">Sales</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
           <CHeaderNavLink to="/client/register">Clients</CHeaderNavLink>
@@ -72,7 +71,6 @@ const SuperAdminHeader = () => {
       <CHeaderNav className="px-3">
         <TheHeaderDropdownSales />
         <TheHeaderDropdownMaint />
-        <TheHeaderDropdownMssg />
         <TheHeaderDropdown />
       </CHeaderNav>
 
@@ -82,7 +80,7 @@ const SuperAdminHeader = () => {
           routes={routes}
         />
         <div className="d-md-down-none mfe-2 c-subheader-nav">
-          <CLink className="c-subheader-nav-link" href="#">
+          {/* <CLink className="c-subheader-nav-link" href="#">
             <CIcon name="cil-speech" alt="Settings" />
           </CLink>
           <CLink
@@ -92,9 +90,9 @@ const SuperAdminHeader = () => {
           >
             <CIcon name="cil-graph" alt="Branch Inventory" />
             &nbsp;Inventory
-          </CLink>
+          </CLink> */}
           <CLink className="c-subheader-nav-link" to="/branchs/list">
-            <CIcon name="cil-Building" alt="Branchs" />
+            <CIcon name="cil-Bank" alt="Branchs" />
             &nbsp;Jupiter-Branchs
           </CLink>
         </div>
