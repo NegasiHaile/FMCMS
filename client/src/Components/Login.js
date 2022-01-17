@@ -137,8 +137,7 @@ const Login = () => {
                       <CCol sm="12" md="12">
                         <CButton
                           type="submit"
-                          color="light"
-                          className="px-4 w-100"
+                          className="px-4 w-100 jptr-btn"
                         >
                           <CIcon name="cil-blind" /> Login
                         </CButton>
