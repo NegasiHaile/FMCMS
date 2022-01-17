@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import {
   CButton,
@@ -23,7 +23,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-const [passwordSecure, setPasswordSecure] = useState(true)
+  const [passwordSecure, setPasswordSecure] = useState(true);
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
@@ -104,8 +104,8 @@ const [passwordSecure, setPasswordSecure] = useState(true)
                         </CInputGroupText>
                       </CInputGroupPrepend>
                       <CInput
-                      className = "r-b-none"
-                        type= {passwordSecure ? "password" : "text"}
+                        className="r-b-none"
+                        type={passwordSecure ? "password" : "text"}
                         name="password"
                         placeholder="Password"
                         autoComplete="current-password"
@@ -114,19 +114,23 @@ const [passwordSecure, setPasswordSecure] = useState(true)
                         required
                       />
                       <CInputGroupAppend>
-          <CInputGroupText className="l-b-none" 
-          style={{backgroundColor: "transparent", cursor: "pointer"}} 
-          onClick={() => setPasswordSecure(!passwordSecure)}>
-            <CIcon  name= {passwordSecure ? "cil-sun" : "cil-low-vision"}/>
-          </CInputGroupText>
-        </CInputGroupAppend>
+                        <CInputGroupText
+                          className="l-b-none"
+                          style={{
+                            backgroundColor: "transparent",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => setPasswordSecure(!passwordSecure)}
+                        >
+                          <CIcon
+                            name={passwordSecure ? "cil-sun" : "cil-low-vision"}
+                          />
+                        </CInputGroupText>
+                      </CInputGroupAppend>
                     </CInputGroup>
                     <CCol className="col-12 mt-1 d-flex justify-content-end">
-                      <Link
-                        to="/forgotpassword"
-                        className="text-info"
-                      >
-                        Forgot password?
+                      <Link to="/forgotpassword" className="text-info">
+                        Forgotten password?
                       </Link>
                     </CCol>
                     <CRow className="mt-2">

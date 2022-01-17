@@ -222,7 +222,7 @@ const userCntrl = {
       const user = await Users.findOne({ email });
       if (!user)
         return res.status(400).json({
-          msg: "There is no account with eamil, please insert your email carefully!",
+          msg: "There is no account with this email, please insert your email correctly!",
         });
 
       const newPassword = generatePassword();
@@ -242,7 +242,12 @@ const userCntrl = {
       };
       sendMailToUser(mailDetail);
 
-      res.json({ msg: "We have sent new password this email!" });
+      res.json({
+        msg:
+          "An email with new password is sent to " +
+          email +
+          ", Please check your email!",
+      });
     } catch (error) {
       res.status(500).json({ meg: error.message });
     }
@@ -313,7 +318,7 @@ const generatePassword = () => {
 
 const sendMailToUser = (mailDetail) => {
   var transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
+    host: "smtp.gmail.com",
     port: 465,
     secure: true,
     auth: {
@@ -321,9 +326,9 @@ const sendMailToUser = (mailDetail) => {
       pass: "Negasi@DevelopmentEmail", // Thepassword of the mailer
     },
     tls: {
-        // do not fail on invalid certs
-        rejectUnauthorized: false
-    }
+      // do not fail on invalid certs
+      rejectUnauthorized: false,
+    },
   });
 
   console.log(mailDetail);
@@ -333,7 +338,7 @@ const sendMailToUser = (mailDetail) => {
     subject: mailDetail.subject,
     text: mailDetail.text + mailDetail.passwordToMail,
   };
-  transporter.sendMail(mailOptions,  (error, info) => {
+  transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log(error);
     } else {
