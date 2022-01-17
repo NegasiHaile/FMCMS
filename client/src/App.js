@@ -26,7 +26,10 @@ const SuperAdminLayout = lazy(() => import("./Layouts/SuperAdmin/Layout"));
 
 // Public pages
 const Login = lazy(() => import("./Components/Login"));
-const ForgotPassword = lazy(() => import("./Components/UserAccount/ForgotPassword"))
+const ForgotPassword = lazy(() => import("./Components/UserAccount/ForgotPassword"));
+const ResetPassword = lazy(() => import("./Components/UserAccount/ResetPassword"));
+
+
 const Page404 = lazy(() => import("./Components/Utils/page404/Page404"));
 const Page500 = lazy(() => import("./Components/Utils/page500/Page500"));
 
@@ -154,6 +157,11 @@ function App() {
               name="Forgot Password"
               render={(props) => <ForgotPassword {...props} />}
             />
+            <Route
+path="/resetpassword"
+name="Reset Password"
+render={(props) => <ResetPassword {...props} />}
+/>
             <Route
               exact
               path="*"
