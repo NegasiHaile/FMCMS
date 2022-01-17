@@ -219,7 +219,11 @@ const userCntrl = {
   forgotPassword: async (req, res) => {
     try {
       const { email } = req.body;
-      const user = await Users.findOne({ email });
+      const user = await Users.findOne({
+        email: {
+          $regex: new RegExp(email, "i"),
+        },
+      });
       if (!user)
         return res.status(400).json({
           msg: "There is no account with this email, please insert your email correctly!",
@@ -245,7 +249,7 @@ const userCntrl = {
       res.json({
         msg:
           "An email with new password is sent to " +
-          email +
+          user.email +
           ", Please check your email!",
       });
     } catch (error) {
