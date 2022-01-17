@@ -49,9 +49,13 @@ const Login = () => {
       });
     }
   };
+  const circleLogo = {
+    borderRadius: "50%",
+    height: "75px",
+  }
   return (
     <>
-      <div className="c-app c-default-layout flex-row align-items-center">
+      <div className="c-app c-default-layout flex-row align-items-center" >
         <CContainer className="mt-5">
           <CRow className="justify-content-center">
             <CCol
@@ -63,10 +67,7 @@ const Login = () => {
                 <CCol md="11">
                   <CRow className="justify-content-center">
                     <img
-                      style={{
-                        borderRadius: "50%",
-                        height: "75px",
-                      }}
+                      style={circleLogo}
                       className=" bg-white p-2 border"
                       alt="Logo"
                       src="/logo/smalllogo.png"
@@ -115,11 +116,7 @@ const Login = () => {
                       />
                       <CInputGroupAppend>
                         <CInputGroupText
-                          className="l-b-none"
-                          style={{
-                            backgroundColor: "transparent",
-                            cursor: "pointer",
-                          }}
+                          className="l-b-none pw-show-hide"
                           onClick={() => setPasswordSecure(!passwordSecure)}
                         >
                           <CIcon
