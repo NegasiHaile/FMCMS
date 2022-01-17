@@ -26,6 +26,7 @@ const SuperAdminLayout = lazy(() => import("./Layouts/SuperAdmin/Layout"));
 
 // Public pages
 const Login = lazy(() => import("./Components/Login"));
+const ForgotPassword = lazy(() => import("./Components/UserAccount/ForgotPassword"))
 const Page404 = lazy(() => import("./Components/Utils/page404/Page404"));
 const Page500 = lazy(() => import("./Components/Utils/page500/Page500"));
 
@@ -131,7 +132,8 @@ function App() {
    else {
     userLayout = (
       <Route
-        path="/"
+        path="/" 
+        exact
         name="Login Page"
         render={(props) => <Login {...props} />}
       />
@@ -144,39 +146,14 @@ function App() {
         <Suspense fallback={loading}>
           <Switch>
             {userLayout}
-            {/* {isLogged ? 
-            <> {user.userRole === "super-admin" ? 
-            <Route
-            path="/"
-            name="S-A"
-            render={(props) => <SuperAdminLayout {...props} />}
-          />: 
-          user.userRole === "branch-admin" ? 
-          <Route
-            path="/"
-            name="B-A"
-            render={(props) => <BranchAdminLayout {...props} />}
-          /> : 
-          user.userRole === "sales" ?
-          <Route
-          path="/"
-          name="Sales"
-          render={(props) => <SlaesLayout {...props} />}
-        />:
-        <Route
-              exact
-              path="*"
-              name="Page 404"
-              render={(props) => <Page404 {...props} />}
-            />
-        } </>: 
-            <Route
-            path="/"
-            name="Login Page"
-            render={(props) => <Login {...props} />}
-          />} */}
 
-          
+
+            <Route
+              exact
+              path="/forgotpassword"
+              name="Forgot Password"
+              render={(props) => <ForgotPassword {...props} />}
+            />
             <Route
               exact
               path="*"

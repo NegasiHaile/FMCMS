@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {Link} from "react-router-dom"
 
 import {
   CButton,
@@ -121,12 +122,12 @@ const [passwordSecure, setPasswordSecure] = useState(true)
         </CInputGroupAppend>
                     </CInputGroup>
                     <CCol className="col-12 mt-1 d-flex justify-content-end">
-                      <a
-                        href="http://jupiter-tradingeth.com/"
+                      <Link
+                        to="/forgotpassword"
                         className="text-info"
                       >
                         Forgot password?
-                      </a>
+                      </Link>
                     </CCol>
                     <CRow className="mt-2">
                       <CCol sm="12" md="12">
