@@ -17,7 +17,19 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 function ForgotPassword() {
-  const [accountEmail, setAccountEmail] = useState();
+  const [accountEmail, setAccountEmail] = useState("");
+
+  const sweetAlert = (type, text) => {
+    Swal.fire({
+      position: "center",
+      background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+      icon: type,
+      text: text,
+      confirmButtonColor: "#3C4B64",
+      showConfirmButton: true,
+      // timer: 1500,
+    });
+  };
 
   const onsubmitForgotPassword = async (e) => {
     e.preventDefault();
@@ -25,9 +37,10 @@ function ForgotPassword() {
       const res = await axios.put("/user/forgot_Password", {
         email: accountEmail,
       });
-      alert(res.data.msg);
+      sweetAlert("success", res.data.msg);
+      setAccountEmail("");
     } catch (error) {
-      alert(error.response.data.msg);
+      sweetAlert("error", error.response.data.msg);
     }
   };
   return (
