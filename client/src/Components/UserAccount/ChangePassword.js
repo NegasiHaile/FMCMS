@@ -123,11 +123,7 @@ const ChangePassword = () => {
                 />
                 <CInputGroupAppend>
                   <CInputGroupText
-                    className="l-b-none"
-                    style={{
-                      backgroundColor: "transparent",
-                      cursor: "pointer",
-                    }}
+                    className="l-b-none pw-show-hide"
                     onClick={() => setOldPasswordSecure(!oldPasswordSecure)}
                   >
                     <CIcon
@@ -156,11 +152,7 @@ const ChangePassword = () => {
                   />
                   <CInputGroupAppend>
                     <CInputGroupText
-                      className="l-b-none"
-                      style={{
-                        backgroundColor: "transparent",
-                        cursor: "pointer",
-                      }}
+                      className="l-b-none pw-show-hide"
                       onClick={() => setNewPasswordSecure(!newPasswordSecure)}
                     >
                       <CIcon
@@ -197,11 +189,7 @@ const ChangePassword = () => {
                   />
                   <CInputGroupAppend>
                     <CInputGroupText
-                      className="l-b-none"
-                      style={{
-                        backgroundColor: "transparent",
-                        cursor: "pointer",
-                      }}
+                      className="l-b-none pw-show-hide"
                       onClick={() =>
                         setRetypeNewOldPasswordSecure(!retypeNewPasswordSecure)
                       }
@@ -224,7 +212,7 @@ const ChangePassword = () => {
 
               <CButton
                 type="submit"
-                color="primary"
+                className="jptr-btn"
                 block
                 disabled={
                   Password.oldPassword !== "" &&
