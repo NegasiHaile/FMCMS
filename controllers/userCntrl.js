@@ -273,7 +273,7 @@ const userCntrl = {
         return res.status(400).json({ msg: "Invalid session or expired!" });
       }
       else {
-        if ((req.body.newPassword).lenght > 6) {
+        if ((req.body.newPassword).length >= 6) {
           if (user.expireToken < Date.now()) {
             return res.status(400).json({
               msg: "Session has been expired, please forgot password again!"
@@ -290,7 +290,8 @@ const userCntrl = {
           res.json({msg: "Password has been reseted successfully!"})
           }
         } else {
-          
+          return res.status(400).json({
+            msg: "Password must be lengthen 6 characters"});
         }
       }
     } catch (error) {
