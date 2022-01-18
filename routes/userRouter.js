@@ -32,6 +32,8 @@ router.post("/change_password/:id", auth, userCntrl.changePassword);
 
 router.put("/forgot_Password", userCntrl.forgotPassword);
 
+router.put("/reset_Password/:resetToken", userCntrl.resetPassword);
+
 router.put("/block_account/:id", userCntrl.blockAccount);
 
 router.put("/activate_account/:id", userCntrl.activateAccount);

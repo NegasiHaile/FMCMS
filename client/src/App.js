@@ -158,7 +158,7 @@ function App() {
               render={(props) => <ForgotPassword {...props} />}
             />
             <Route
-path="/resetpassword"
+path="/resetpassword/:resetToken"
 name="Reset Password"
 render={(props) => <ResetPassword {...props} />}
 />

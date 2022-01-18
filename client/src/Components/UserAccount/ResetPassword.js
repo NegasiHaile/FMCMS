@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import {Link} from "react-router-dom"
 
+import { GlobalState } from "../../GlobalState";
 import {
   CButton,
   CCol,
@@ -18,16 +20,47 @@ import Swal from "sweetalert2";
 
 import CIcon from "@coreui/icons-react";
 
-
 function ResetPassword() {
-    const [newPassword, setNewPassword] = useState("")
-    const [retypeNewPassword, setRetypeNewPassword] = useState("")
+  const state = useContext(GlobalState);
+  const [allUsers] = state.UsersAPI.users;
+  const params = useParams();
+  const [newPassword, setNewPassword] = useState("")
+  const [retypeNewPassword, setRetypeNewPassword] = useState("")
 
-    const [newPasswordSecure, setNewPasswordSecure] = useState(true)
-    const [retypeNewPasswordSecure, setRetypeNewPasswordSecure] = useState(true)
+  const [newPasswordSecure, setNewPasswordSecure] = useState(true)
+  const [retypeNewPasswordSecure, setRetypeNewPasswordSecure] = useState(true)
+  
+  const [account, setAccount] = useState([])
 
+    useEffect(() => {
+      setAccount(allUsers[0])
+    }, [params.resetToken])
+  
+    const sweetAlert = (type, text) => {
+      Swal.fire({
+        position: "center",
+        background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+        icon: type,
+        text: text,
+        confirmButtonColor: "#3C4B64",
+        showConfirmButton: true,
+        // timer: 1500,
+      });
+  };
+  
 const onSubmitResetPassword = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  try {
+    // alert(params.resetToken)
+    const res = await axios.put(`/user/reset_password/${params.resetToken}`, {
+      newPassword : newPassword,
+    })
+    setNewPassword("");
+    setRetypeNewPassword("");
+    sweetAlert("success", res.data.msg)
+  } catch (error) {
+    sweetAlert("error", error.response.data.msg)
+  }
     
   };
     return (
@@ -76,8 +109,7 @@ const onSubmitResetPassword = async (e) => {
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                         required
-                                            min={10}
-                                            max={10}
+                        minLength={6}
                       />
                       <CInputGroupAppend>
           <CInputGroupText className="l-b-none pw-show-hide"
@@ -101,6 +133,7 @@ const onSubmitResetPassword = async (e) => {
                         value={retypeNewPassword}
                         onChange={(e) => setRetypeNewPassword(e.target.value)}
                         required
+                        minLength={6}
                       />
                       <CInputGroupAppend>
           <CInputGroupText className="l-b-none pw-show-hide" 
@@ -121,10 +154,10 @@ const onSubmitResetPassword = async (e) => {
                                         
                     
                                         <CCol className="col-12 mt-4">
-                                            <p className="mb-0  text-center">
+                                            <div className="mb-0  text-center">
                                                 <Link to="/" className="text-info">
                         <h6>Sign In</h6>
-                      </Link></p>
+                      </Link></div>
                         <p className="mb-0 text-center">
                           <small>
                             &copy; Copyright 2021{" "}

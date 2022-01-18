@@ -53,7 +53,7 @@ const userCntrl = {
         userRole,
       });
 
-      await newUser.save();
+      // await newUser.save();
 
       const mailDetail = {
         emailToMail: email,
@@ -229,26 +229,36 @@ const userCntrl = {
           msg: "There is no account with this email, please insert your email correctly!",
         });
 
-      const newPassword = generatePassword();
+      const resetToken = createAccessToken({ id: user._id })
+      const expireToken = Date.now() + 3600000
 
       await Users.findOneAndUpdate(
         { _id: user.id },
         {
-          password: await bcrypt.hash(newPassword, 10),
+          resetToken: resetToken,
+          expireToken: expireToken,
         }
       );
 
       const mailDetail = {
         emailToMail: email,
-        passwordToMail: newPassword,
-        subject: "New passowrd to your JuPiTeR FMCMS Account",
-        text: "New Password: ",
+        subject: "FMCMS-JuPiTeR-Trading password reset link",
+        html: `<h4> Password reset request for your FMCMS-JuPiTeR-Trading account. </h4>
+        <p> Click 
+        <a href="${process.env.RESET_PASSWORD_URL}/${resetToken}"
+        target="_blank"
+        rel="noopener noreferrer">HERE</a> 
+        to reset your password or copy the following link and past it new tab.  <p/> 
+        <br> 
+        <a href="${process.env.RESET_PASSWORD_URL}/${resetToken}"
+        target="_blank"
+        rel="noopener noreferrer">${process.env.RESET_PASSWORD_URL}/${resetToken}</a>`
       };
       sendMailToUser(mailDetail);
 
       res.json({
-        msg:
-          "An email with new password is sent to " +
+          msg:
+          "An email with password reset link is sent to " +
           user.email +
           ", Please check your email!",
       });
@@ -256,7 +266,37 @@ const userCntrl = {
       res.status(500).json({ meg: error.message });
     }
   },
-
+  resetPassword: async (req, res) => {
+    try {
+      const user = await Users.findOne({ resetToken: req.params.resetToken })
+      if (!user) {
+        return res.status(400).json({ msg: "Invalid session or expired!" });
+      }
+      else {
+        if ((req.body.newPassword).lenght > 6) {
+          if (user.expireToken < Date.now()) {
+            return res.status(400).json({
+              msg: "Session has been expired, please forgot password again!"
+                + 1642497534091 + "/" + Date.now()});
+          } else {
+            await Users.findOneAndUpdate(
+              { _id: user.id  },
+              {
+                password: await bcrypt.hash(req.body.newPassword, 10),
+                resetToken: undefined,
+                expireToken: undefined,
+              }
+            );
+          res.json({msg: "Password has been reseted successfully!"})
+          }
+        } else {
+          
+        }
+      }
+    } catch (error) {
+      res.status(500).json({msg: error.message})
+  }
+},
   blockAccount: async (req, res) => {
     try {
       await Users.findOneAndUpdate(
@@ -335,19 +375,19 @@ const sendMailToUser = (mailDetail) => {
     },
   });
 
-  console.log(mailDetail);
+  // console.log(mailDetail);
   var mailOptions = {
     from: "negasihaile19@gmail.com",
     to: mailDetail.emailToMail,
     subject: mailDetail.subject,
     text: mailDetail.text + mailDetail.passwordToMail,
+    html : mailDetail.html
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.log(error);
+      console.log("Email not sent : " + error);
     } else {
       console.log("Email sent to: " + mailDetail.emailToMail + info.response);
-      res.json({ msg: "User password is sent to his email!!" });
     }
   });
 };
