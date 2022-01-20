@@ -15,6 +15,11 @@ import {
   CInputGroupAppend,
   CInputGroupText,
   CRow,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
 } from "@coreui/react";
 import Swal from "sweetalert2";
 
@@ -29,6 +34,8 @@ function ResetPassword() {
 
   const [newPasswordSecure, setNewPasswordSecure] = useState(true)
   const [retypeNewPasswordSecure, setRetypeNewPasswordSecure] = useState(true)
+
+  const [showModal, setShowModal] = useState(false);
   
   const [account, setAccount] = useState([])
 
@@ -47,22 +54,34 @@ function ResetPassword() {
         // timer: 1500,
       });
   };
-  
 const onSubmitResetPassword = async (e) => {
   e.preventDefault();
+  const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})");
+  
   try {
-    // alert(params.resetToken)
-    const res = await axios.put(`/user/reset_password/${params.resetToken}`, {
-      newPassword : newPassword,
-    })
-    setNewPassword("");
-    setRetypeNewPassword("");
-    sweetAlert("success", res.data.msg)
+    if (newPassword === retypeNewPassword) {
+      if (strongRegex.test(newPassword)) {
+        // alert(params.resetToken)
+        const res = await axios.put(`/user/reset_password/${params.resetToken}`, {
+          newPassword : newPassword,
+        })
+        setNewPassword("");
+        setRetypeNewPassword("");
+        sweetAlert("success", res.data.msg)
+      }
+      else {
+        setShowModal(true)
+      }
+    } else {
+      sweetAlert("error", "New password and Retype password must be equal!")
+    }
   } catch (error) {
     sweetAlert("error", error.response.data.msg)
   }
-    
   };
+  const pw_strength_modal = {
+    borderColor: "#999900"
+  }
     return (
         <div className="c-app c-default-layout flex-row align-items-center">
         <CContainer className="mt-5">
@@ -142,6 +161,11 @@ const onSubmitResetPassword = async (e) => {
           </CInputGroupText>
         </CInputGroupAppend>
                     </CInputGroup>
+                  <CCol className="col-12 mt-1 d-flex justify-content-end">
+                      <a className="text-info pointer" role="button" onClick={() => setShowModal(!showModal)}>
+                        Strong password?
+                      </a>
+                    </CCol>
                     <CRow className="mt-2">
                       <CCol sm="12" md="12">
                         <CButton
@@ -180,7 +204,30 @@ const onSubmitResetPassword = async (e) => {
               </CRow>
             </CCol>
           </CRow>
+          <CModal
+          show={showModal}
+          onClose={() => setShowModal(!showModal)}
+          style={pw_strength_modal}
+        >
+          <CModalHeader closeButton 
+          className="jptr-bg">
+            <h6 className="text-light">Rules to creating strong password.</h6>
+          </CModalHeader>
+          <CModalBody>
+            <h6>Your password must contain:-</h6>
+            <ol >
+              <li >At least 1 lowercase alphabetical character.</li>
+              <li >At least 1 uppercase alphabetical character.</li>
+              <li >At least 1 numeric character.</li>
+              <li >At least one special character.</li>
+              <li >At least 6 characters longer.</li>
+            </ol>
+            <p > Also New password and Retype password fields must be filled equaly.</p>
+            </CModalBody>
+        </CModal>
         </CContainer>
+
+        
       </div>
     )
 }
