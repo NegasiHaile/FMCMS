@@ -16,6 +16,9 @@ import {
   CInputGroupAppend,
   CInputGroupText,
   CRow,
+  CModal,
+  CModalHeader,
+  CModalBody,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 const ChangePassword = () => {
@@ -33,6 +36,8 @@ const ChangePassword = () => {
   const [retypeNewPasswordSecure, setRetypeNewOldPasswordSecure] =
     useState(true);
 
+  const [showModal, setShowModal] = useState(false);
+
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     setPassword({ ...Password, [name]: value });
@@ -40,25 +45,32 @@ const ChangePassword = () => {
 
   const onSubmitChangePassword = async (e) => {
     e.preventDefault();
+  const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})");
+  
     try {
       if (Password.newPassword === Password.retypeNewPassword) {
         if (Password.oldPassword !== Password.newPassword) {
-          const res = await axios.post(
-            `/user/change_password/${user._id}`,
-            {
-              ...Password,
-            },
-            { headers: { Authorization: token } }
-          );
-          Swal.fire({
-            position: "center",
-            background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
-            icon: "success",
-            text: res.data.msg,
-            confirmButtonColor: "#1E263C",
-            showConfirmButton: false,
-            // timer: 1500,
-          });
+          
+          if (strongRegex.test(Password.newPassword)) {
+            const res = await axios.post(
+              `/user/change_password/${user._id}`,
+              {
+                ...Password,
+              },
+              { headers: { Authorization: token } }
+            );
+            Swal.fire({
+              position: "center",
+              background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+              icon: "success",
+              text: res.data.msg,
+              confirmButtonColor: "#1E263C",
+              showConfirmButton: false,
+              // timer: 1500,
+            });
+          } else {
+            setShowModal(true)
+          }
         } else {
           Swal.fire({
             position: "center",
@@ -94,6 +106,9 @@ const ChangePassword = () => {
     }
   };
 
+  const pw_strength_modal = {
+    borderColor: "#999900"
+  }
   return (
     <CRow className="d-flex justify-content-center">
       <CCol xs="12" md="9" lg="7" xl="6">
@@ -149,6 +164,7 @@ const ChangePassword = () => {
                     onChange={onChangeInput}
                     value={Password.newPassword}
                     required
+                    minLength ={6}
                   />
                   <CInputGroupAppend>
                     <CInputGroupText
@@ -186,6 +202,7 @@ const ChangePassword = () => {
                     onChange={onChangeInput}
                     value={Password.retypeNewPassword}
                     required
+                    minLength ={6}
                   />
                   <CInputGroupAppend>
                     <CInputGroupText
@@ -214,13 +231,6 @@ const ChangePassword = () => {
                 type="submit"
                 className="jptr-btn"
                 block
-                disabled={
-                  Password.oldPassword !== "" &&
-                  Password.newPassword.length >= 6 &&
-                  Password.newPassword === Password.retypeNewPassword
-                    ? false
-                    : true
-                }
               >
                 Change Password
               </CButton>
@@ -229,6 +239,29 @@ const ChangePassword = () => {
           <CCardFooter className="p-4"></CCardFooter>
         </CCard>
       </CCol>
+
+      
+      <CModal
+          show={showModal}
+          onClose={() => setShowModal(!showModal)}
+          style={pw_strength_modal}
+        >
+          <CModalHeader closeButton 
+          className="jptr-bg">
+            <h6 className="text-light">Rules to create strong password.</h6>
+          </CModalHeader>
+          <CModalBody>
+            <h6>Your password must contain:-</h6>
+            <ol >
+              <li >At least 1 lowercase alphabetical character.</li>
+              <li >At least 1 uppercase alphabetical character.</li>
+              <li >At least 1 numeric character.</li>
+              <li >At least one special character.</li>
+              <li >At least 6 characters longer.</li>
+            </ol>
+            <p > Also New password and Retype password fields must be filled equaly.</p>
+            </CModalBody>
+        </CModal>
     </CRow>
   );
 };
