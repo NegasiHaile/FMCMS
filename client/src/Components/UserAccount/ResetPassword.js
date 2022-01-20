@@ -17,9 +17,7 @@ import {
   CRow,
   CModal,
   CModalHeader,
-  CModalTitle,
   CModalBody,
-  CModalFooter,
 } from "@coreui/react";
 import Swal from "sweetalert2";
 
@@ -211,7 +209,7 @@ const onSubmitResetPassword = async (e) => {
         >
           <CModalHeader closeButton 
           className="jptr-bg">
-            <h6 className="text-light">Rules to creating strong password.</h6>
+            <h6 className="text-light">Rules to create strong password.</h6>
           </CModalHeader>
           <CModalBody>
             <h6>Your password must contain:-</h6>
