@@ -62,7 +62,7 @@ const BranchAdminHeader = () => {
           <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/machines/list">Machines</CHeaderNavLink>
+          <CHeaderNavLink to="/Employee/List">Employees</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
           <CHeaderNavLink to="/client/register">Clients</CHeaderNavLink>
@@ -82,18 +82,19 @@ const BranchAdminHeader = () => {
           routes={routes}
         />
         <div className="d-md-down-none mfe-2 c-subheader-nav">
-          <CLink className="c-subheader-nav-link" href="#">
+          {/* <CLink className="c-subheader-nav-link" href="#">
             <CIcon name="cil-speech" alt="Settings" />
-          </CLink>
+          </CLink> */}
           <CLink
             className="c-subheader-nav-link"
             aria-current="page"
-            to="/machine/inventory"
+            to="/pricing"
           >
-            <CIcon name="cil-graph" alt="Machine Inventory" />
-            &nbsp;Inventory
+            <CIcon name="cil-dollar" alt="Machine Inventory" />
+            &nbsp;Pricing
           </CLink>
-          <CLink className="c-subheader-nav-link" href="#">
+          <CLink className="c-subheader-nav-link" 
+            to="/system/setting">
             <CIcon name="cil-settings" alt="Settings" />
             &nbsp;Settings
           </CLink>

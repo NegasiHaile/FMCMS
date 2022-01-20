@@ -109,28 +109,28 @@ const _nav = [
     to: "/pricing",
     icon: "cil-dollar",
   },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Feedbacks",
-    to: "/feedbacks",
-    icon: "cil-speech",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Inventory",
-    to: "/machine/inventory",
-    icon: "cil-graph",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "System Backup",
-    to: "/system/backup",
-    icon: "cil-shield-alt",
-  },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Feedbacks",
+  //   to: "/feedbacks",
+  //   icon: "cil-speech",
+  // },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Inventory",
+  //   to: "/machine/inventory",
+  //   icon: "cil-graph",
+  // },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "System Backup",
+  //   to: "/system/backup",
+  //   icon: "cil-shield-alt",
+  // },
   {
     _tag: "CSidebarNavItem",
     name: "System Setting",
-    to: "/system/setting",
+    to: "/system/settings",
     icon: "cil-settings",
   },
 ];
