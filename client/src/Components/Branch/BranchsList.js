@@ -1,6 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { GlobalState } from "../../GlobalState";
+
+import Loader from "../Utils/Commons/Loader";
 import {
   CButton,
   CCard,
@@ -46,6 +48,14 @@ function BranchsList() {
   const [activeBranch, setActiveBranch] = useState("none");
   const [showModal, setShowModal] = useState(false);
 
+  const [loader, setLoder] = useState(false);
+  useEffect(() => {
+    setLoder(true);
+    const timing = setTimeout(() => {
+      setLoder(false);
+    }, 1000);
+    return () => clearTimeout(timing);
+  }, []);
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     if (name === "telephone") {
@@ -155,38 +165,46 @@ function BranchsList() {
           )}
         </CCardHeader>
         <CCardBody>
-          <CDataTable
-            items={branchs}
-            fields={branchTableFields}
-            tableFilter
-            itemsPerPageSelect
-            itemsPerPage={5}
-            hover
-            cleaner
-            sorter
-            pagination
-            scopedSlots={{
-              Actions: (branch) => (
-                <td className="d-flex justify-content-between">
-                  {user.userRole === "super-admin" && (
-                    <>
-                      {" "}
-                      <CLink
-                        className="text-success"
-                        onClick={() => {
-                          setBranch({ branch, ...branch });
-                          setActiveBranch(branch._id);
-                          setShowModal(!showModal);
-                        }}
-                      >
-                        <CTooltip
-                          content={`Edit the  - ${branch.branchName}- branch detail.`}
+          {loader ? (
+            <div className="d-flex justify-content-center">
+              <div class="lds-ripple">
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          ) : (
+            <CDataTable
+              items={branchs}
+              fields={branchTableFields}
+              tableFilter
+              itemsPerPageSelect
+              itemsPerPage={5}
+              hover
+              cleaner
+              sorter
+              pagination
+              scopedSlots={{
+                Actions: (branch) => (
+                  <td className="d-flex justify-content-between">
+                    {user.userRole === "super-admin" && (
+                      <>
+                        {" "}
+                        <CLink
+                          className="text-success"
+                          onClick={() => {
+                            setBranch({ branch, ...branch });
+                            setActiveBranch(branch._id);
+                            setShowModal(!showModal);
+                          }}
                         >
-                          <CIcon name="cil-pencil" />
-                        </CTooltip>
-                      </CLink>
-                      <span className="text-muted">|</span>
-                      {/* <CLink
+                          <CTooltip
+                            content={`Edit the  - ${branch.branchName}- branch detail.`}
+                          >
+                            <CIcon name="cil-pencil" />
+                          </CTooltip>
+                        </CLink>
+                        <span className="text-muted">|</span>
+                        {/* <CLink
                         className="text-danger"
                         onClick={() => deleteBranch(branch._id)}
                       >
@@ -197,23 +215,24 @@ function BranchsList() {
                         </CTooltip>
                       </CLink>
                       <span className="text-muted">|</span> */}
-                    </>
-                  )}
+                      </>
+                    )}
 
-                  <CLink
-                    className="text-primary"
-                    to={`/branch/indetail/${branch._id}`}
-                  >
-                    <CTooltip
-                      content={`See detail of - ${branch.branchName}- branch.`}
+                    <CLink
+                      className="text-primary"
+                      to={`/branch/indetail/${branch._id}`}
                     >
-                      <CIcon name="cil-fullscreen" />
-                    </CTooltip>
-                  </CLink>
-                </td>
-              ),
-            }}
-          />
+                      <CTooltip
+                        content={`See detail of - ${branch.branchName}- branch.`}
+                      >
+                        <CIcon name="cil-fullscreen" />
+                      </CTooltip>
+                    </CLink>
+                  </td>
+                ),
+              }}
+            />
+          )}
         </CCardBody>
 
         <CModal
