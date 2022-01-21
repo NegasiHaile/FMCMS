@@ -217,10 +217,10 @@ const onSubmitResetPassword = async (e) => {
               <li >At least 1 lowercase alphabetical character.</li>
               <li >At least 1 uppercase alphabetical character.</li>
               <li >At least 1 numeric character.</li>
-              <li >At least one special character.</li>
+              <li >At least 1 special character.</li>
               <li >At least 6 characters longer.</li>
             </ol>
-            <p > Also New password and Retype password fields must be filled equaly.</p>
+            <p > Also, The New password and Retype password fields must be filled equally.</p>
             </CModalBody>
         </CModal>
         </CContainer>
