@@ -26,14 +26,17 @@ const SuperAdminLayout = lazy(() => import("./Layouts/SuperAdmin/Layout"));
 
 // Public pages
 const Login = lazy(() => import("./Components/Login"));
-const ForgotPassword = lazy(() => import("./Components/UserAccount/ForgotPassword"));
-const ResetPassword = lazy(() => import("./Components/UserAccount/ResetPassword"));
-
+const ForgotPassword = lazy(() =>
+  import("./Components/UserAccount/ForgotPassword")
+);
+const ResetPassword = lazy(() =>
+  import("./Components/UserAccount/ResetPassword")
+);
 
 const Page404 = lazy(() => import("./Components/Utils/page404/Page404"));
 const Page500 = lazy(() => import("./Components/Utils/page500/Page500"));
 
-const Loader = lazy(() => import("./Components/Utils/Commons/Loader"))
+const Loader = lazy(() => import("./Components/Utils/Commons/Loader"));
 
 function App() {
   const state = useContext(GlobalState);
@@ -44,8 +47,8 @@ function App() {
 
   var isThereAUser = localStorage.getItem("firstLogin");
   let userLayout;
-  if(isThereAUser){
-    if(isLogged && user){
+  if (isThereAUser) {
+    if (isLogged && user) {
       if (user.userRole === "client") {
         userLayout = (
           <Route
@@ -127,15 +130,13 @@ function App() {
           />
         ); // super admin Layout
       }
+    } else {
+      userLayout = <Loader />;
     }
-    else{
-      userLayout = <Loader />
-    }
-  }
-   else {
+  } else {
     userLayout = (
       <Route
-        path="/" 
+        path="/"
         exact
         name="Login Page"
         render={(props) => <Login {...props} />}
@@ -150,7 +151,6 @@ function App() {
           <Switch>
             {userLayout}
 
-
             <Route
               exact
               path="/forgotpassword"
@@ -158,10 +158,10 @@ function App() {
               render={(props) => <ForgotPassword {...props} />}
             />
             <Route
-path="/resetpassword/:resetToken"
-name="Reset Password"
-render={(props) => <ResetPassword {...props} />}
-/>
+              path="/resetpassword/:resetToken"
+              name="Reset Password"
+              render={(props) => <ResetPassword {...props} />}
+            />
             <Route
               exact
               path="*"

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, Suspense } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -77,7 +77,16 @@ function SalesList() {
     },
   ];
   return (
-    <>
+    <Suspense
+      fallback={
+        <div className="d-flex justify-content-center">
+          <div class="lds-ripple">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      }
+    >
       <CCard className=" shadow-sm">
         <CCardBody>
           <CDataTable
@@ -158,7 +167,7 @@ function SalesList() {
           />
         </CCardBody>
       </CCard>
-    </>
+    </Suspense>
   );
 }
 

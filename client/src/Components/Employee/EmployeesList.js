@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, Suspense } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -133,150 +133,150 @@ const EmployeeList = () => {
     },
   ];
   return (
-    <>
-      {employees.length < 1 ? (
+    <Suspense
+      fallback={
         <div className="d-flex justify-content-center">
           <div class="lds-ripple">
             <div></div>
             <div></div>
           </div>
         </div>
-      ) : (
-        <CCard className=" shadow-sm">
-          {user.userRole === "super-admin" && (
-            <CCardHeader className="d-flex justify-content-between">
-              <CLabel>List of employees {employees.length}</CLabel>
-              <CButton
-                to="/Employee/register"
-                size="sm"
-                variant="outline"
-                color="dark"
-              >
-                <CIcon name="cil-plus" /> Add Employee
-              </CButton>
-            </CCardHeader>
-          )}
-          <CCardBody>
-            <CDataTable
+      }
+    >
+      <CCard className=" shadow-sm">
+        {user.userRole === "super-admin" && (
+          <CCardHeader className="d-flex justify-content-between">
+            <CLabel>List of employees {employees.length}</CLabel>
+            <CButton
+              to="/Employee/register"
               size="sm"
-              items={employees.filter(
-                (user) =>
-                  user.userRole !== "super-admin" && user.userRole !== "client"
-              )}
-              fields={employeeTableFields}
-              tableFilter
-              columnFilter
-              itemsPerPageSelect
-              itemsPerPage={10}
-              hover
-              footer
-              cleaner
-              sorter
-              pagination
-              scopedSlots={{
-                status: (employee) => (
-                  <td className="justify-content-between">
-                    <CButton
-                      size="sm"
-                      variant="ghost"
-                      color={employee.status === "ON" ? "danger" : "primary"}
-                      disabled={
-                        user.userRole === "super-admin" ||
-                        user.userRole === "branch-admin"
-                          ? false
-                          : true
+              variant="outline"
+              color="dark"
+            >
+              <CIcon name="cil-plus" /> Add Employee
+            </CButton>
+          </CCardHeader>
+        )}
+        <CCardBody>
+          <CDataTable
+            size="sm"
+            items={employees.filter(
+              (user) =>
+                user.userRole !== "super-admin" && user.userRole !== "client"
+            )}
+            fields={employeeTableFields}
+            tableFilter
+            columnFilter
+            itemsPerPageSelect
+            itemsPerPage={10}
+            hover
+            footer
+            cleaner
+            sorter
+            pagination
+            scopedSlots={{
+              status: (employee) => (
+                <td className="justify-content-between">
+                  <CButton
+                    size="sm"
+                    variant="ghost"
+                    color={employee.status === "ON" ? "danger" : "primary"}
+                    disabled={
+                      user.userRole === "super-admin" ||
+                      user.userRole === "branch-admin"
+                        ? false
+                        : true
+                    }
+                    onClick={() => {
+                      if (employee.status === "ON") {
+                        switchUserAccount(
+                          "disable",
+                          employee.fName,
+                          employee.mName,
+                          employee.status,
+                          employee._id
+                        );
+                      } else {
+                        switchUserAccount(
+                          "activate",
+                          employee.fName,
+                          employee.mName,
+                          employee.status,
+                          employee._id
+                        );
                       }
-                      onClick={() => {
-                        if (employee.status === "ON") {
-                          switchUserAccount(
-                            "disable",
-                            employee.fName,
-                            employee.mName,
-                            employee.status,
-                            employee._id
-                          );
-                        } else {
-                          switchUserAccount(
-                            "activate",
-                            employee.fName,
-                            employee.mName,
-                            employee.status,
-                            employee._id
-                          );
-                        }
-                      }}
-                    >
-                      {" "}
-                      {employee.status}{" "}
-                    </CButton>
-                  </td>
-                ),
-                branch: (employee) => (
-                  <td>
-                    {branchs
-                      .filter((brnc) => brnc._id === employee.branch)
-                      .map((filteredBranch) => filteredBranch.branchName)}
-                  </td>
-                ),
-                Actions: (employee) => (
-                  <td className="d-flex justify-content-between">
-                    {user.userRole === "super-admin" && (
-                      <>
-                        <CLink
-                          className="text-success"
-                          to={{
-                            pathname: `/Employee/Edit/${employee._id}`,
-                            state: employee,
-                          }}
-                        >
-                          <CTooltip
-                            content={`Edit the  - ${employee.fName} ${employee.mName}- employee detail.`}
-                          >
-                            <CIcon name="cil-pencil" />
-                          </CTooltip>
-                        </CLink>
-
-                        <span className="text-muted">|</span>
-
-                        <CLink
-                          className="text-danger"
-                          onClick={() =>
-                            deleteEmloyee(
-                              employee._id,
-                              employee.fName,
-                              employee.mName
-                            )
-                          }
-                        >
-                          <CTooltip
-                            content={`Delete - ${employee.fName} ${employee.mName}- employee.`}
-                          >
-                            <CIcon name="cil-trash" />
-                          </CTooltip>
-                        </CLink>
-
-                        <span className="text-muted">|</span>
-                      </>
-                    )}
-
-                    <CLink
-                      className="text-primary"
-                      to={`/user/profile/${employee._id}`}
-                    >
-                      <CTooltip
-                        content={`See detail of - ${employee.fName} ${employee.mName}- employee.`}
+                    }}
+                  >
+                    {" "}
+                    {employee.status}{" "}
+                  </CButton>
+                </td>
+              ),
+              branch: (employee) => (
+                <td>
+                  {branchs
+                    .filter((brnc) => brnc._id === employee.branch)
+                    .map((filteredBranch) => filteredBranch.branchName)}
+                </td>
+              ),
+              Actions: (employee) => (
+                <td className="d-flex justify-content-between">
+                  {user.userRole === "super-admin" && (
+                    <>
+                      <CLink
+                        className="text-success"
+                        to={{
+                          pathname: `/Employee/Edit/${employee._id}`,
+                          state: employee,
+                        }}
                       >
-                        <CIcon name="cil-fullscreen" />
-                      </CTooltip>
-                    </CLink>
-                  </td>
-                ),
-              }}
-            />
-          </CCardBody>
-        </CCard>
-      )}
-    </>
+                        <CTooltip
+                          content={`Edit the  - ${employee.fName} ${employee.mName}- employee detail.`}
+                        >
+                          <CIcon name="cil-pencil" />
+                        </CTooltip>
+                      </CLink>
+
+                      <span className="text-muted">|</span>
+
+                      <CLink
+                        className="text-danger"
+                        onClick={() =>
+                          deleteEmloyee(
+                            employee._id,
+                            employee.fName,
+                            employee.mName
+                          )
+                        }
+                      >
+                        <CTooltip
+                          content={`Delete - ${employee.fName} ${employee.mName}- employee.`}
+                        >
+                          <CIcon name="cil-trash" />
+                        </CTooltip>
+                      </CLink>
+
+                      <span className="text-muted">|</span>
+                    </>
+                  )}
+
+                  <CLink
+                    className="text-primary"
+                    to={`/user/profile/${employee._id}`}
+                  >
+                    <CTooltip
+                      content={`See detail of - ${employee.fName} ${employee.mName}- employee.`}
+                    >
+                      <CIcon name="cil-fullscreen" />
+                    </CTooltip>
+                  </CLink>
+                </td>
+              ),
+            }}
+          />
+        </CCardBody>
+      </CCard>
+    </Suspense>
   );
 };
 
