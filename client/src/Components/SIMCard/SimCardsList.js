@@ -180,8 +180,9 @@ function SimCardsList() {
           scopedSlots={{
             Actions: (simCard) => (
               <td className="d-flex justify-content-between">
-                {(user.userRole === "main-store" ||
-                  user.userRole === "technician") && simCard.status === "free" && (
+                {((user.userRole === "main-store" &&
+                  simCard.availableIn === "main-store") ||
+                  user.userRole === "technician") && (
                   <CLink
                     className="text-success"
                     onClick={() => {
