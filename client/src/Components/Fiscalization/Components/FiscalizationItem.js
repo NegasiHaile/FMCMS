@@ -439,29 +439,29 @@ function FiscalizationOperations() {
   }, [Sales, setSalesDetail]);
 
   const onSubmitFiscalizationDone = async (saleId, machineId) => {
-    try {
-      Swal.fire({
-        title: "",
-        text: "Are you sure this fiscalization is completed and it's ready to pass to controller?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3C4B64",
-        cancelButtonColor: "#d33",
-        confirmButtonSize: "sm",
-        confirmButtonText: "Yes, Completed!",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
+    Swal.fire({
+      title: "",
+      text: "Are you sure this fiscalization is completed and it's ready to pass to controller?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3C4B64",
+      cancelButtonColor: "#d33",
+      confirmButtonSize: "sm",
+      confirmButtonText: "Yes, Completed!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
           const res = await axios.put(
             `/sales/fiscalization/${saleId}/${machineId}`
           );
           Swal.fire("Done!", res.data.msg, "success");
           setCallbackSales(!callbackSales);
           setCallbackMachines(!callbackMachines);
+        } catch (error) {
+          sweetAlert("error", error.response.data.msg);
         }
-      });
-    } catch (error) {
-      sweetAlert("error", error.response.data.msg);
-    }
+      }
+    });
   };
   const onclickRequestForDelivery = async (saleId) => {
     try {
