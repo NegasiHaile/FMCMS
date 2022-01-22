@@ -53,7 +53,7 @@ const userCntrl = {
         userRole,
       });
 
-      // await newUser.save();
+      await newUser.save();
 
       const mailDetail = {
         emailToMail: email,
@@ -229,8 +229,8 @@ const userCntrl = {
           msg: "There is no account with this email, please insert your email correctly!",
         });
 
-      const resetToken = createAccessToken({ id: user._id })
-      const expireToken = Date.now() + 3600000
+      const resetToken = createAccessToken({ id: user._id });
+      const expireToken = Date.now() + 3600000;
 
       await Users.findOneAndUpdate(
         { _id: user.id },
@@ -252,12 +252,12 @@ const userCntrl = {
         <br> 
         <a href="${process.env.RESET_PASSWORD_URL}/${resetToken}"
         target="_blank"
-        rel="noopener noreferrer">${process.env.RESET_PASSWORD_URL}/${resetToken}</a>`
+        rel="noopener noreferrer">${process.env.RESET_PASSWORD_URL}/${resetToken}</a>`,
       };
       sendMailToUser(mailDetail);
 
       res.json({
-          msg:
+        msg:
           "An email with password reset link is sent to " +
           user.email +
           ", Please check your email!",
@@ -268,36 +268,40 @@ const userCntrl = {
   },
   resetPassword: async (req, res) => {
     try {
-      const user = await Users.findOne({ resetToken: req.params.resetToken })
+      const user = await Users.findOne({ resetToken: req.params.resetToken });
       if (!user) {
         return res.status(400).json({ msg: "Invalid session or expired!" });
-      }
-      else {
-        if ((req.body.newPassword).length >= 6) {
+      } else {
+        if (req.body.newPassword.length >= 6) {
           if (user.expireToken < Date.now()) {
             return res.status(400).json({
-              msg: "Session has been expired, please forgot password again!"
-                + 1642497534091 + "/" + Date.now()});
+              msg:
+                "Session has been expired, please forgot password again!" +
+                1642497534091 +
+                "/" +
+                Date.now(),
+            });
           } else {
             await Users.findOneAndUpdate(
-              { _id: user.id  },
+              { _id: user.id },
               {
                 password: await bcrypt.hash(req.body.newPassword, 10),
                 resetToken: undefined,
                 expireToken: undefined,
               }
             );
-          res.json({msg: "Password has been reseted successfully!"})
+            res.json({ msg: "Password has been reseted successfully!" });
           }
         } else {
           return res.status(400).json({
-            msg: "Password must be lengthen 6 characters"});
+            msg: "Password must be lengthen 6 characters",
+          });
         }
       }
     } catch (error) {
-      res.status(500).json({msg: error.message})
-  }
-},
+      res.status(500).json({ msg: error.message });
+    }
+  },
   blockAccount: async (req, res) => {
     try {
       await Users.findOneAndUpdate(
@@ -382,7 +386,7 @@ const sendMailToUser = (mailDetail) => {
     to: mailDetail.emailToMail,
     subject: mailDetail.subject,
     text: mailDetail.text + mailDetail.passwordToMail,
-    html : mailDetail.html
+    html: mailDetail.html,
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
