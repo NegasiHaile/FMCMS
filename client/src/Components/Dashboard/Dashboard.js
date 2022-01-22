@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, {Suspense, useContext, useState } from "react";
 
 import { GlobalState } from "../../GlobalState";
 
@@ -33,7 +33,16 @@ const BranchAdminDashboard = () => {
     return workyears;
   };
   return (
-    <>
+    <Suspense
+      fallback={
+        <div className="d-flex justify-content-center">
+          <div class="lds-ripple">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      }
+    >
       <WidgetsDropdown branchId={user.branch} />
       <CSelect
         aria-label="Default select example"
@@ -60,7 +69,7 @@ const BranchAdminDashboard = () => {
       {/* <WidgetsBrand withCharts  branchId = {user.branch}/> */}
       <RecentEvents branchId={user.branch} />
       <EmployeesList />
-    </>
+    </Suspense>
   );
 };
 

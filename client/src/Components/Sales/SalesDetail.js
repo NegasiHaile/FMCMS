@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, {Suspense, useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { GlobalState } from "../../GlobalState";
 import BadRouting from "../Utils/routing/BadRouting";
@@ -98,7 +98,16 @@ function SalesDetail() {
     }
   };
   return (
-    <div>
+    <Suspense
+      fallback={
+        <div className="d-flex justify-content-center">
+          <div class="lds-ripple">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      }
+    >
       {salesDetail ? (
         <CCard className="card">
           <CCardBody className="card-body">
@@ -183,7 +192,7 @@ function SalesDetail() {
       ) : (
         <BadRouting text="Bad routing! Please go back to sales list page and click the see-detail button of you need to see it's detail." />
       )}
-    </div>
+    </Suspense>
   );
 }
 
