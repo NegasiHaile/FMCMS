@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 import { GlobalState } from "../../../GlobalState";
 import BadRouting from "../../Utils/routing/BadRouting";
 
+import FilterMRC from "../../Utils/Filters/FilterMRC";
+import FilterSIMCard from "../../Utils/Filters/FilterSIMCard";
+
 import PdfViewer from "../../Utils/PdfViewer/PdfViewer";
 import {
   CButton,
@@ -239,7 +242,8 @@ function MachinePickupDetail() {
                           <h6>MRC :</h6>
                         </CCol>
                         <CCol className="col-8 border-bottom">
-                          <h6>{pickup[0].machineMRC}</h6>
+                          <h6><FilterMRC mrcId={pickup[0].machineMRC}
+                            filterType="mrcNumber" /></h6>
                         </CCol>
                       </CRow>
                       <CRow className="mb-2">
@@ -247,7 +251,11 @@ function MachinePickupDetail() {
                           <h6>SIM :</h6>
                         </CCol>
                         <CCol className="col-8 border-bottom">
-                          <h6>{pickup[0].machineSIM}</h6>
+                          <h6>
+                            <FilterSIMCard
+                            simId={pickup[0].machineSIM}
+                            filterType="simNumber"
+                          /></h6>
                         </CCol>
                       </CRow>
                     </CCol>
