@@ -218,7 +218,7 @@ const salesCntrl = {
     try {
       const machine = await machines.findById({ _id: req.params.machineId });
       const thisDay = new Date().getDate();
-      const thisMonth = new Date().getMonth();
+      const thisMonth = new Date().getMonth() + 1;
       const thisYear = new Date().getFullYear();
 
       await machines.findOneAndUpdate(

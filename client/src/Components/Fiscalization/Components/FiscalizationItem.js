@@ -464,10 +464,10 @@ function FiscalizationOperations() {
     });
   };
   const onclickRequestForDelivery = async (saleId) => {
-    try {
+    
       Swal.fire({
         title: "",
-        text: "Are you want to request this machine for delovery to customer service?",
+        text: "Are you want to request this machine to customer service for delivery?",
         icon: "question",
         showCancelButton: true,
         confirmButtonColor: "#3C4B64",
@@ -476,17 +476,19 @@ function FiscalizationOperations() {
         confirmButtonText: "Yes, request it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
+          try {
           const res = await axios.put(`/sales/request_for_delivery/${saleId}`);
           Swal.fire("Done!", res.data.msg, "success");
           setCallbackSales(!callbackSales);
+        } catch (error) {
+          sweetAlert("error", error.response.data.msg);
+        }
         }
       });
-    } catch (error) {
-      sweetAlert("error", error.response.data.msg);
-    }
+    
   };
   const onclickComplateDelivery = async (saleId, machineId) => {
-    try {
+
       Swal.fire({
         title: "",
         text: "Are you this machine sales is delivered to the client?",
@@ -510,9 +512,6 @@ function FiscalizationOperations() {
           }
         }
       });
-    } catch (error) {
-      sweetAlert("error", error.response.data.msg);
-    }
   };
   return (
     <>
