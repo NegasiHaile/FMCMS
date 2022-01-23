@@ -23,11 +23,11 @@ const PickupDetail = () => {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-
+const style = { overflowX: "scroll" }
   return (
     <div>
       <div
-        style={{ overflowX: "scroll" }}
+        style={style}
         className="rounded px-3"
         // 3C4B64: sidebar-color, EBEDEF: Background-color
       >

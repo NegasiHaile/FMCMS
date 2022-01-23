@@ -1,95 +1,54 @@
-import React, { useState, useContext, useEffect } from "react";
-import { GlobalState } from "../../GlobalState";
-import { CCard, CCardBody, CDataTable, CLink, CTooltip } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
+import React, { useContext, useRef } from "react";
 
-const machinePickupsFields = [
-  "tradeName",
-  "serialNumber",
-  "machineModel",
-  "category",
-  "createdAt",
-  "branchName",
-  "status",
-  {
-    key: "Actions",
-    label: "Actions",
-    // _style: { width: "1%" },
-    sorter: false,
-    filter: false,
-  },
-];
-function MaintenanceList() {
+import MaintenanceListTable from "./Components/MaintenanceListTable";
+import { GlobalState } from "../../GlobalState";
+import {
+  CButton,
+} from "@coreui/react";
+
+import { useReactToPrint } from "react-to-print";
+
+class ComponentToPrint extends React.Component {
+  render() {
+    return (
+      <div>
+        <MaintenanceListTable />
+      </div>
+    );
+  }
+}
+
+const MaintenanceList = () => {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
-  const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
-  const [maintenances, setMaintenances] = useState([]);
-  const [callbackMachinePickup, setCallbackMachinePickup] =
-    state.MachinePickUpAPI.callback;
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
-  useEffect(() => {
-    if (pickupMachines.length > 0) {
-      if (user.userRole === "super-admin" || user.userRole === "main-store") {
-        setMaintenances(
-          pickupMachines.filter(
-            (filteredPickUp) =>
-              filteredPickUp.category === "annual" ||
-              filteredPickUp.category === "incident" ||
-              filteredPickUp.category === "information_change"
-          )
-        );
-      } else {
-        setMaintenances(
-          pickupMachines.filter(
-            (filteredPickUp) =>
-              (filteredPickUp.category === "annual" ||
-                filteredPickUp.category === "incident" ||
-                filteredPickUp.category === "information_change") &&
-              filteredPickUp.branchId === user.branch
-          )
-        );
-      }
-    }
-  }, [user, pickupMachines, setMaintenances]);
+  const style = { overflowX: "scroll" }
   return (
-    <>
-      <CCard className=" shadow-sm">
-        <CCardBody>
-          <CDataTable
-            size="sm"
-            items={maintenances}
-            fields={machinePickupsFields}
-            tableFilter
-            columnFilter
-            itemsPerPageSelect
-            itemsPerPage={10}
-            hover
-            cleaner
-            sorter
-            pagination
-            scopedSlots={{
-              Actions: (pickup) => (
-                <td className="d-flex justify-content-between">
-                  <>
-                    <CLink
-                      className="text-info"
-                      to={`/pickup/detail/${pickup._id}`}
-                    >
-                      <CTooltip
-                        content={`See detail of this ${pickup.category} maintenance.`}
-                      >
-                        <CIcon name="cil-align-center" />
-                      </CTooltip>
-                    </CLink>
-                  </>
-                </td>
-              ),
-            }}
-          />
-        </CCardBody>
-      </CCard>
-    </>
+    <div>
+      <div
+        style={style}
+        className="rounded px-3"
+        // 3C4B64: sidebar-color, EBEDEF: Background-color
+      >
+        <ComponentToPrint ref={componentRef} />
+      </div>
+      <div className="d-flex justify-content-end">
+        <div>
+        {(user.userRole === "machine-controller" ||
+          user.userRole === "branch-store" ||
+          user.userRole === "technician" ||
+          user.userRole === "customer-service") &&
+          < >
+            <CButton size="sm" className="jptr-btn" onClick={handlePrint} > Print this out!</CButton>
+        </>}
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
 export default MaintenanceList;

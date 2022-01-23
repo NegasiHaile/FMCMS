@@ -11,8 +11,8 @@ function PrintButton(props) {
         <CButton
           className="mr-2"
           size="sm"
-          color="primary"
           onClick={props.handlePrint}
+          className="jptr-btn"
         >
           <CIcon name="cil-print"></CIcon> Print this out!
         </CButton>
