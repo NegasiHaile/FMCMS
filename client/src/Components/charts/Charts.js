@@ -218,7 +218,7 @@ const Charts = (props) => {
   return (
     <CCardGroup columns className="cols-2">
       <CCard>
-        <CCardHeader>Clients & Sales of {props.theYear} </CCardHeader>
+        <CCardHeader>Clients & Sales on {props.theYear} </CCardHeader>
         <CCardBody>
           <CChartLine
             datasets={[
@@ -256,7 +256,7 @@ const Charts = (props) => {
       </CCard>
 
       <CCard>
-        <CCardHeader>Sales status of {props.theYear}</CCardHeader>
+        <CCardHeader>Sales status on {props.theYear}</CCardHeader>
         <CCardBody>
           <CChartDoughnut
             datasets={[
@@ -276,7 +276,7 @@ const Charts = (props) => {
       </CCard>
 
       <CCard>
-        <CCardHeader>Received machines of {props.theYear}</CCardHeader>
+        <CCardHeader>Received machines on {props.theYear}</CCardHeader>
         <CCardBody>
           <CChartBar
             datasets={[
@@ -309,7 +309,7 @@ const Charts = (props) => {
       </CCard>
 
       <CCard>
-        <CCardHeader>Annual service of {props.theYear}</CCardHeader>
+        <CCardHeader>Annual service on {props.theYear}</CCardHeader>
         <CCardBody>
           <CChartPie
             datasets={[
