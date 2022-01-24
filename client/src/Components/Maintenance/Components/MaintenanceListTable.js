@@ -15,7 +15,7 @@ import {
   CButton,
   CDataTable,
   CLink,
-  CTooltip
+  CTooltip,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
@@ -44,19 +44,26 @@ function MaintenanceListTable() {
   const [technicians, setTechnicians] = useState([]);
   const [technicianId, setTechnicianId] = useState("");
   const [maintenanceDateFrom, setMaintenanceDateFrom] = useState("");
-  const [maintenanceDateTo, setMaintenanceDateTo] = useState(new Date().toISOString().substr(0, 10));
+  const [maintenanceDateTo, setMaintenanceDateTo] = useState(
+    new Date().toISOString().substr(0, 10)
+  );
 
-  
   useEffect(() => {
     if (user) {
       if (user.userRole === "super-admin" || user.userRole === "main-store") {
-        setTechnicians(allUsers.filter(
-          (filteredEmployee) => filteredEmployee.userRole === "technician"
-        ))
+        setTechnicians(
+          allUsers.filter(
+            (filteredEmployee) => filteredEmployee.userRole === "technician"
+          )
+        );
       } else {
-        setTechnicians(allUsers.filter(
-          (filteredEmployee) => filteredEmployee.userRole === "technician" && filteredEmployee.branch == user.branch
-        ))
+        setTechnicians(
+          allUsers.filter(
+            (filteredEmployee) =>
+              filteredEmployee.userRole === "technician" &&
+              filteredEmployee.branch == user.branch
+          )
+        );
       }
     }
   }, [user, allUsers]);
@@ -64,168 +71,174 @@ function MaintenanceListTable() {
   useEffect(() => {
     if (pickupMachines.length > 0) {
       if (user.userRole === "super-admin" || user.userRole === "main-store") {
-          if (technicianId) {
-              if (maintenanceDateFrom) {
-                setMaintenances(
-                  pickupMachines.filter(
-                    (filteredPickUp) =>
-                      (filteredPickUp.category === "annual" ||
-                      filteredPickUp.category === "incident" ||
-                        filteredPickUp.category === "information_change") && 
-                        filteredPickUp.technician === technicianId && 
-                        filteredPickUp.createdAt  > maintenanceDateFrom && 
-                        filteredPickUp.createdAt  <= maintenanceDateTo
-                  )
-                );
-                
-              } else {
-                setMaintenances(
-                  pickupMachines.filter(
-                    (filteredPickUp) =>
-                      (filteredPickUp.category === "annual" ||
-                      filteredPickUp.category === "incident" ||
-                        filteredPickUp.category === "information_change") && 
-                        filteredPickUp.technician === technicianId
-                  )
-                );
-                  
-            }
+        if (technicianId) {
+          if (maintenanceDateFrom) {
+            setMaintenances(
+              pickupMachines.filter(
+                (filteredPickUp) =>
+                  (filteredPickUp.category === "annual" ||
+                    filteredPickUp.category === "incident" ||
+                    filteredPickUp.category === "information_change") &&
+                  filteredPickUp.technician === technicianId &&
+                  filteredPickUp.createdAt > maintenanceDateFrom &&
+                  filteredPickUp.createdAt <= maintenanceDateTo
+              )
+            );
+          } else {
+            setMaintenances(
+              pickupMachines.filter(
+                (filteredPickUp) =>
+                  (filteredPickUp.category === "annual" ||
+                    filteredPickUp.category === "incident" ||
+                    filteredPickUp.category === "information_change") &&
+                  filteredPickUp.technician === technicianId
+              )
+            );
+          }
         } else {
-              if (maintenanceDateFrom) {
-                console.log( new Date(maintenanceDateFrom)  > new Date(maintenanceDateTo));
-                setMaintenances(
-                  pickupMachines.filter(
-                    (filteredPickUp) =>
-                      (filteredPickUp.category === "annual" ||
-                              filteredPickUp.category === "incident" ||
-                              filteredPickUp.category === "information_change") && 
-                      filteredPickUp.createdAt  > maintenanceDateFrom && 
-                      filteredPickUp.createdAt  <= maintenanceDateTo
-                  )
-                );
-            } else {
-                setMaintenances(
-                  pickupMachines.filter(
-                    (filteredPickUp) =>
-                      filteredPickUp.category === "annual" ||
-                      filteredPickUp.category === "incident" ||
-                      filteredPickUp.category === "information_change"
-                  )
-                );
-            }
+          if (maintenanceDateFrom) {
+            console.log(
+              new Date(maintenanceDateFrom) > new Date(maintenanceDateTo)
+            );
+            setMaintenances(
+              pickupMachines.filter(
+                (filteredPickUp) =>
+                  (filteredPickUp.category === "annual" ||
+                    filteredPickUp.category === "incident" ||
+                    filteredPickUp.category === "information_change") &&
+                  filteredPickUp.createdAt > maintenanceDateFrom &&
+                  filteredPickUp.createdAt <= maintenanceDateTo
+              )
+            );
+          } else {
+            setMaintenances(
+              pickupMachines.filter(
+                (filteredPickUp) =>
+                  filteredPickUp.category === "annual" ||
+                  filteredPickUp.category === "incident" ||
+                  filteredPickUp.category === "information_change"
+              )
+            );
+          }
         }
       } else {
-          if (technicianId) {
-            if (maintenanceDateFrom) {
-                setMaintenances(
-                  pickupMachines.filter(
-                    (filteredPickUp) =>
-                      (filteredPickUp.category === "annual" ||
-                      filteredPickUp.category === "incident" ||
-                        filteredPickUp.category === "information_change") && 
-                        filteredPickUp.branchId === user.branch &&
-                        filteredPickUp.technician === technicianId && 
-                        filteredPickUp.createdAt  > maintenanceDateFrom && 
-                        filteredPickUp.createdAt  <= maintenanceDateTo
-                  )
-                );
-                
-              } else {
-                setMaintenances(
-                  pickupMachines.filter(
-                    (filteredPickUp) =>
-                      (filteredPickUp.category === "annual" ||
-                      filteredPickUp.category === "incident" ||
-                        filteredPickUp.category === "information_change") && 
-                        filteredPickUp.branchId === user.branch &&
-                        filteredPickUp.technician === technicianId
-                  )
-                );
-                  
-            }
+        if (technicianId) {
+          if (maintenanceDateFrom) {
+            setMaintenances(
+              pickupMachines.filter(
+                (filteredPickUp) =>
+                  (filteredPickUp.category === "annual" ||
+                    filteredPickUp.category === "incident" ||
+                    filteredPickUp.category === "information_change") &&
+                  filteredPickUp.branchId === user.branch &&
+                  filteredPickUp.technician === technicianId &&
+                  filteredPickUp.createdAt > maintenanceDateFrom &&
+                  filteredPickUp.createdAt <= maintenanceDateTo
+              )
+            );
           } else {
-              
-            if (maintenanceDateFrom) {
-                setMaintenances(
-                  pickupMachines.filter(
-                    (filteredPickUp) =>
-                      (filteredPickUp.category === "annual" ||
-                              filteredPickUp.category === "incident" ||
-                              filteredPickUp.category === "information_change") &&
-                              filteredPickUp.branchId === user.branch && 
-                      filteredPickUp.createdAt  > maintenanceDateFrom && 
-                      filteredPickUp.createdAt  <= maintenanceDateTo
-                  )
-                );
-            } else {
-                setMaintenances(
-                  pickupMachines.filter(
-                    (filteredPickUp) =>
-                      filteredPickUp.category === "annual" ||
-                      filteredPickUp.category === "incident" ||
-                      filteredPickUp.category === "information_change" &&
-                      filteredPickUp.branchId === user.branch
-                  )
-                );
-            }
+            setMaintenances(
+              pickupMachines.filter(
+                (filteredPickUp) =>
+                  (filteredPickUp.category === "annual" ||
+                    filteredPickUp.category === "incident" ||
+                    filteredPickUp.category === "information_change") &&
+                  filteredPickUp.branchId === user.branch &&
+                  filteredPickUp.technician === technicianId
+              )
+            );
+          }
+        } else {
+          if (maintenanceDateFrom) {
+            setMaintenances(
+              pickupMachines.filter(
+                (filteredPickUp) =>
+                  (filteredPickUp.category === "annual" ||
+                    filteredPickUp.category === "incident" ||
+                    filteredPickUp.category === "information_change") &&
+                  filteredPickUp.branchId === user.branch &&
+                  filteredPickUp.createdAt > maintenanceDateFrom &&
+                  filteredPickUp.createdAt <= maintenanceDateTo
+              )
+            );
+          } else {
+            setMaintenances(
+              pickupMachines.filter(
+                (filteredPickUp) =>
+                  filteredPickUp.category === "annual" ||
+                  filteredPickUp.category === "incident" ||
+                  (filteredPickUp.category === "information_change" &&
+                    filteredPickUp.branchId === user.branch)
+              )
+            );
+          }
         }
       }
     }
-  }, [user, pickupMachines, technicianId, maintenanceDateFrom, maintenanceDateTo]);
+  }, [
+    user,
+    pickupMachines,
+    technicianId,
+    maintenanceDateFrom,
+    maintenanceDateTo,
+  ]);
   return (
     <>
       <CCard className="shadow-sm table-responsive">
         <CCardHeader>
           <CRow>
-          <CCol sm={4} md={2}   className="mb-1">
-            <h6> Filter Maintenances </h6>
+            <CCol className="col-2 mb-1">
+              <h6> Filter Maintenances </h6>
             </CCol>
-            <CCol sm={8} md={4}   className="mb-1">
-            <CSelect
-                    aria-label="Default select example"
-                    id="technicianId"
+            <CCol className="col-4 mb-1">
+              <CSelect
+                aria-label="Default select example"
+                id="technicianId"
                 name="technicianId"
                 value={technicianId}
-                onChange={(e)=> setTechnicianId(e.target.value)}
-                  >
+                onChange={(e) => setTechnicianId(e.target.value)}
+              >
                 <option value="">Select technician Name</option>
-                {technicians.map((technician, index) =>
+                {technicians.map((technician, index) => (
                   <option key={index} value={technician._id}>
-                    {technician.fName + " " + technician.mName}</option>)}
-            </CSelect>
+                    {technician.fName + " " + technician.mName}
+                  </option>
+                ))}
+              </CSelect>
             </CCol>
-            <CCol sm={6} md={3}  className="mb-1">
-              <CInputGroup> 
+            <CCol className="col-3 mb-1">
+              <CInputGroup>
                 <CInputGroupPrepend>
-                  <CInputGroupText>
-                  From
-                  </CInputGroupText>
+                  <CInputGroupText>From</CInputGroupText>
                 </CInputGroupPrepend>
-              <CInput type="date" placeholder="Select date" 
-                id="maintenanceDateFrom"
-                name="maintenanceDateFrom"
-                value={maintenanceDateFrom}
-                onChange={(e) => setMaintenanceDateFrom(e.target.value)}
-              placeholder="From"/>
+                <CInput
+                  type="date"
+                  placeholder="Select date"
+                  id="maintenanceDateFrom"
+                  name="maintenanceDateFrom"
+                  value={maintenanceDateFrom}
+                  onChange={(e) => setMaintenanceDateFrom(e.target.value)}
+                  placeholder="From"
+                />
               </CInputGroup>
             </CCol>
-            <CCol sm={6} md={3}  className="mb-1">
-            <CInputGroup> 
+            <CCol className="col-3 mb-1">
+              <CInputGroup>
                 <CInputGroupPrepend>
-                  <CInputGroupText>
-                  To
-                  </CInputGroupText>
+                  <CInputGroupText>To</CInputGroupText>
                 </CInputGroupPrepend>
-              <CInput type="date" placeholder="Select date" 
-                id="maintenanceDateTo"
-                name="maintenanceDateTo"
-                value={maintenanceDateTo}
-                onChange={(e) => setMaintenanceDateTo(e.target.value)}
-                placeholder="To"/>
+                <CInput
+                  type="date"
+                  placeholder="Select date"
+                  id="maintenanceDateTo"
+                  name="maintenanceDateTo"
+                  value={maintenanceDateTo}
+                  onChange={(e) => setMaintenanceDateTo(e.target.value)}
+                  placeholder="To"
+                />
               </CInputGroup>
             </CCol>
           </CRow>
-        
         </CCardHeader>
         <CCardBody>
           <CDataTable
@@ -240,7 +253,7 @@ function MaintenanceListTable() {
             pagination
             scopedSlots={{
               Actions: (pickup) => (
-                <td className="d-flex justify-content-between">
+                <td className="d-flex justify-content-between d-print-none">
                   <>
                     <CLink
                       className="text-info"

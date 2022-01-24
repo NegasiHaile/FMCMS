@@ -2,16 +2,14 @@ import React, { useContext, useRef } from "react";
 
 import MaintenanceListTable from "./Components/MaintenanceListTable";
 import { GlobalState } from "../../GlobalState";
-import {
-  CButton,
-} from "@coreui/react";
+import { CButton } from "@coreui/react";
 
 import { useReactToPrint } from "react-to-print";
-
+const MaintenanceListTableStyle = { marginTop: "30px" };
 class ComponentToPrint extends React.Component {
   render() {
     return (
-      <div>
+      <div style={MaintenanceListTableStyle}>
         <MaintenanceListTable />
       </div>
     );
@@ -26,7 +24,7 @@ const MaintenanceList = () => {
     content: () => componentRef.current,
   });
 
-  const style = { overflowX: "scroll" }
+  const style = { overflowX: "scroll" };
   return (
     <div>
       <div
@@ -38,13 +36,17 @@ const MaintenanceList = () => {
       </div>
       <div className="d-flex justify-content-end">
         <div>
-        {(user.userRole === "machine-controller" ||
-          user.userRole === "branch-store" ||
-          user.userRole === "technician" ||
-          user.userRole === "customer-service") &&
-          < >
-            <CButton size="sm" className="jptr-btn" onClick={handlePrint} > Print this out!</CButton>
-        </>}
+          {(user.userRole === "machine-controller" ||
+            user.userRole === "branch-store" ||
+            user.userRole === "technician" ||
+            user.userRole === "customer-service") && (
+            <>
+              <CButton size="sm" className="jptr-btn" onClick={handlePrint}>
+                {" "}
+                Print this out!
+              </CButton>
+            </>
+          )}
         </div>
       </div>
     </div>
