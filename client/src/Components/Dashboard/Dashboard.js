@@ -1,4 +1,4 @@
-import React, {Suspense, useContext, useState } from "react";
+import React, { Suspense, useContext, useState } from "react";
 
 import { GlobalState } from "../../GlobalState";
 

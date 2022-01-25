@@ -1,6 +1,5 @@
-
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   CCreateElement,
   CSidebar,
@@ -12,21 +11,21 @@ import {
   CSidebarMinimizer,
   CSidebarNavDropdown,
   CSidebarNavItem,
-} from '@coreui/react'
+} from "@coreui/react";
 
-import CIcon from '@coreui/icons-react'
+import CIcon from "@coreui/icons-react";
 
 // sidebar nav config
-import navigation from './_nav'
+import navigation from "./_nav";
 
 const BranchAdminSidbar = () => {
-  const dispatch = useDispatch()
-  const show = useSelector(state => state.sidebarShow)
+  const dispatch = useDispatch();
+  const show = useSelector((state) => state.sidebarShow);
 
   return (
     <CSidebar
       show={show}
-      onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
+      onShowChange={(val) => dispatch({ type: "set", sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
         <CImg
@@ -43,20 +42,38 @@ const BranchAdminSidbar = () => {
         />
       </CSidebarBrand>
       <CSidebarNav>
-
         <CCreateElement
           items={navigation}
           components={{
             CSidebarNavDivider,
             CSidebarNavDropdown,
             CSidebarNavItem,
-            CSidebarNavTitle
+            CSidebarNavTitle,
           }}
         />
-      </CSidebarNav>
-      <CSidebarMinimizer className="c-d-md-down-none"/>
-    </CSidebar>
-  )
-}
 
-export default React.memo(BranchAdminSidbar)
+        <div
+          role="button"
+          style={{
+            position: "fixed",
+            backgroundColor: "#999900",
+            border: "none",
+            borderRadius: "50px",
+            left: "5px",
+            bottom: "7px",
+            zIndex: "1",
+          }}
+        >
+          <h4
+            style={{ padding: "0px 11px", color: "#fff", textAlign: "center" }}
+          >
+            <CIcon name="cil-speech" alt="Chat" />
+          </h4>
+        </div>
+      </CSidebarNav>
+      <CSidebarMinimizer className="c-d-md-down-none" />
+    </CSidebar>
+  );
+};
+
+export default React.memo(BranchAdminSidbar);
