@@ -1,5 +1,7 @@
 import React, { Suspense, useContext, useState } from "react";
 
+import CIcon from "@coreui/icons-react";
+
 import { GlobalState } from "../../GlobalState";
 
 import { CSelect } from "@coreui/react";
@@ -31,6 +33,20 @@ const BranchAdminDashboard = () => {
     }
     console.log("the work years:" + workyears);
     return workyears;
+  };
+  const cahtappstyle = {
+    position: "fixed",
+    backgroundColor: "#999900",
+    border: "none",
+    borderRadius: "50px",
+    right: "5px",
+    bottom: "50px",
+    zIndex: "1",
+  };
+  const chaticonstyle = {
+    padding: "0px 11px",
+    color: "#fff",
+    textAlign: "center",
   };
   return (
     <Suspense
@@ -69,6 +85,12 @@ const BranchAdminDashboard = () => {
       {/* <WidgetsBrand withCharts  branchId = {user.branch}/> */}
       <RecentEvents branchId={user.branch} />
       <EmployeesList />
+
+      <div role="button" style={cahtappstyle}>
+        <h4 style={chaticonstyle}>
+          <CIcon name="cil-speech" alt="Chat" />
+        </h4>
+      </div>
     </Suspense>
   );
 };
