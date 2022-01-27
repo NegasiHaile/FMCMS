@@ -264,7 +264,8 @@ const WidgetsDropdown = (props) => {
                   {props.branchId
                     ? allMRCs.filter(
                         (MRC) =>
-                          MRC.branch === props.branchId && MRC.status === "taken"
+                          MRC.branch === props.branchId &&
+                          MRC.status === "taken"
                       ).length
                     : allMRCs.filter((MRC) => MRC.status === "taken").length}
                 </span>
@@ -379,8 +380,9 @@ const WidgetsDropdown = (props) => {
         <CWidgetDropdown
           color="gradient-danger"
           header={(props.branchId
-            ? pickupMachines.filter((pickup) => pickup.branchId === props.branchId)
-                .length
+            ? pickupMachines.filter(
+                (pickup) => pickup.branchId === props.branchId
+              ).length
             : pickupMachines.length
           ).toString()}
           text="Received Machines"
