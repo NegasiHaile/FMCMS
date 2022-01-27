@@ -1,9 +1,10 @@
-import React, {Suspense, useContext, useState, useEffect } from "react";
+import React, { Suspense, useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { GlobalState } from "../../GlobalState";
 import BadRouting from "../Utils/routing/BadRouting";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { format } from "timeago.js";
 import { CButton, CCard, CCardBody, CLink, CRow, CCol } from "@coreui/react";
 
 function SalesDetail() {
@@ -131,19 +132,25 @@ function SalesDetail() {
                 </CLink>
               </CCol>
               <CCol sm="6" md="4" lg="3" className="border shadow-sm p-4">
-                <h6 className="text-center text-muted">Ordered Date</h6>
-                <span color="info">
-                  <h6 className="text-center text-info">
+                <h6 className="text-center text-muted">Order Date</h6>
+                <h6 className="text-center">
+                  <span className=" text-info">
                     {formatDate(salesDetail.createdAt)}
-                  </h6>
-                </span>
+                  </span>
+                  <p>
+                    <small>{format(salesDetail.createdAt)}</small>
+                  </p>
+                </h6>
               </CCol>
               <CCol sm="6" md="4" lg="3" className="border shadow-sm p-4">
                 <h6 className="text-center text-muted">
-                  Sales status:{" "}
+                  Sales status:
                   <span className="text-center text-danger">
                     {salesDetail.status}
                   </span>
+                  <p>
+                    <small> {format(salesDetail.updatedAt)}</small>
+                  </p>
                 </h6>
 
                 {salesDetail.status === "unapproved" &&

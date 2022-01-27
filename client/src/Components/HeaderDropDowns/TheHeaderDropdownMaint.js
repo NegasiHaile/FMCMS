@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { format } from "timeago.js";
 import { GlobalState } from "../../GlobalState";
 import {
   CBadge,
@@ -133,7 +134,9 @@ const TheHeaderDropdownMaint = () => {
                             : "Technician Assigned!"
                           : pickup.status}
                       </small>
-                      <small className=" float-right mt-1">Just now</small>
+                      <small className=" float-right mt-1">
+                        {format(pickup.updatedAt)}
+                      </small>
                     </div>
                     <div
                       className="text-truncate font-weight-bold"

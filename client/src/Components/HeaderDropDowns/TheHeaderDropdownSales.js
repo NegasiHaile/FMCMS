@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { format } from "timeago.js";
 import { GlobalState } from "../../GlobalState";
 import {
   CBadge,
@@ -80,7 +81,11 @@ function TheHeaderDropdownSales() {
       user.userRole === "main-store"
     ) {
       setSalesAlert(
-        Sales.filter((filteredSale) => filteredSale.status !== "completed")
+        Sales.filter(
+          (filteredSale) =>
+            filteredSale.status !== "completed" &&
+            filteredSale.status !== "canceled"
+        )
       );
       setAlertLable(" sales ");
     }
@@ -142,7 +147,9 @@ function TheHeaderDropdownSales() {
                             : sale.status}
                         </small>
                         {/* <small> {sale.status}</small> */}
-                        <small className=" float-right mt-1">Just now</small>
+                        <small className=" float-right mt-1">
+                          {format(sale.updatedAt)}
+                        </small>
                       </div>
                       <div
                         className="text-truncate font-weight-bold"
