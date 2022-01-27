@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CCard,
   CCardBody,
   CCardGroup,
   CCardHeader,
+  CForm,
   CButton,
-  CRow,
-  CCol,
   CInput,
   CInputGroup,
   CInputGroupAppend,
@@ -17,6 +16,11 @@ import {
 import CIcon from "@coreui/icons-react";
 
 function SystemSetting() {
+  const [senderEmail, setSenderEmail] = useState("");
+  const onSubmitAddEmail = (e) => {
+    e.preventDefault();
+    alert(senderEmail);
+  };
   return (
     <CCardGroup columns className="cols-2">
       <CCard>
@@ -29,7 +33,7 @@ function SystemSetting() {
               <tbody>
                 <tr>
                   <td>NegasiHaile19@gmail.com</td>
-                  <td>Primary</td>
+                  <td className="text-success">Primary</td>
                   <td className="d-flex justify-content-end">
                     <span>
                       <CLink className="text-danger">
@@ -43,7 +47,9 @@ function SystemSetting() {
                 <tr>
                   <td>Negasi.Haile@Horizontech.com</td>
                   <td>
-                    <CButton className="ghost">Make Primary</CButton>
+                    <CButton size="sm" color="primary" variant="ghost">
+                      Make Primary
+                    </CButton>
                   </td>
                   <td className="d-flex justify-content-end">
                     <span>
@@ -57,14 +63,29 @@ function SystemSetting() {
                 </tr>
               </tbody>
             </table>
-            <CInputGroup className="mb-4" size="sm">
-              <CInput className="r-b-none" required />
-              <CInputGroupAppend>
-                <CInputGroupText className="jptr-btn" role="button">
-                  <CIcon name="cil-plus" /> Add email
-                </CInputGroupText>
-              </CInputGroupAppend>
-            </CInputGroup>
+            <CForm onSubmit={onSubmitAddEmail}>
+              <CInputGroup className="mb-4">
+                <CInput
+                  className="r-b-none"
+                  name="senderEmail"
+                  type="email"
+                  placeholder="Enter sender email?"
+                  required
+                  value={senderEmail}
+                  onChange={(e) => setSenderEmail(e.target.value)}
+                />
+                <CInputGroupAppend>
+                  <CButton
+                    className="jptr-btn"
+                    size="sm"
+                    role="button"
+                    type="submit"
+                  >
+                    <CIcon name="cil-plus" /> Add email
+                  </CButton>
+                </CInputGroupAppend>
+              </CInputGroup>
+            </CForm>
           </div>
         </CCardBody>
       </CCard>
