@@ -242,8 +242,12 @@ function MachinePickupDetail() {
                           <h6>MRC :</h6>
                         </CCol>
                         <CCol className="col-8 border-bottom">
-                          <h6><FilterMRC mrcId={pickup[0].machineMRC}
-                            filterType="mrcNumber" /></h6>
+                          <h6>
+                            <FilterMRC
+                              mrcId={pickup[0].machineMRC}
+                              filterType="mrcNumber"
+                            />
+                          </h6>
                         </CCol>
                       </CRow>
                       <CRow className="mb-2">
@@ -253,9 +257,10 @@ function MachinePickupDetail() {
                         <CCol className="col-8 border-bottom">
                           <h6>
                             <FilterSIMCard
-                            simId={pickup[0].machineSIM}
-                            filterType="simNumber"
-                          /></h6>
+                              simId={pickup[0].machineSIM}
+                              filterType="simNumber"
+                            />
+                          </h6>
                         </CCol>
                       </CRow>
                     </CCol>
@@ -700,13 +705,11 @@ function MachinePickupDetail() {
                       : "Receiving Summery"}
                   </h4>
                   <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
-                    This machine with <b> 1000949382773</b> serial number is
-                    assigned to the company{" "}
-                    <b> Edna Mall privated Limited Company</b> and fiscalized
-                    with MRC of <b> CLC10008768 </b>
-                    and SIM <b> 0987664321 </b> in{" "}
-                    <b> {pickup[0].branchName}</b>, and recieved for{" "}
-                    {pickup[0].category}{" "}
+                    This machine with <b> {pickup[0].serialNumber}</b> serial
+                    number is assigned to the company{" "}
+                    <b> {pickup[0].tradeName}</b> and fiscalized with above
+                    machine detail in <b> {pickup[0].branchName}</b> of jupiter
+                    tradingeth, and recieved for {pickup[0].category}{" "}
                     {pickup[0].category === "annual" ||
                     pickup[0].category === "incident"
                       ? " maintenance "
