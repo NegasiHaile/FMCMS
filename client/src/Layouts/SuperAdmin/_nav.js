@@ -130,7 +130,7 @@ const _nav = [
   {
     _tag: "CSidebarNavItem",
     name: "System Setting",
-    to: "/system/settings",
+    to: "/system/setting",
     icon: "cil-settings",
   },
 ];
