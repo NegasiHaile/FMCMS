@@ -219,13 +219,13 @@ function BranchsList() {
                     )}
 
                     <CLink
-                      className="text-primary"
+                      className="text-info"
                       to={`/branch/indetail/${branch._id}`}
                     >
                       <CTooltip
                         content={`See detail of - ${branch.branchName}- branch.`}
                       >
-                        <CIcon name="cil-fullscreen" />
+                        <CIcon name="cil-align-center" />
                       </CTooltip>
                     </CLink>
                   </td>

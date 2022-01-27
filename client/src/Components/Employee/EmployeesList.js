@@ -261,13 +261,13 @@ const EmployeeList = () => {
                   )}
 
                   <CLink
-                    className="text-primary"
+                    className="text-info"
                     to={`/user/profile/${employee._id}`}
                   >
                     <CTooltip
                       content={`See detail of - ${employee.fName} ${employee.mName}- employee.`}
                     >
-                      <CIcon name="cil-fullscreen" />
+                      <CIcon name="cil-align-center" />
                     </CTooltip>
                   </CLink>
                 </td>

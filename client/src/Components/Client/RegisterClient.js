@@ -223,13 +223,13 @@ function RegisterClient() {
                   )}
 
                   <CLink
-                    className="text-primary"
+                    className="text-info"
                     to={`/client/detail/${client._id}`}
                   >
                     <CTooltip
                       content={`See detail of - ${client.fName} ${client.mName}- client.`}
                     >
-                      <CIcon name="cil-fullscreen" />
+                      <CIcon name="cil-align-center" />
                     </CTooltip>
                   </CLink>
                 </td>

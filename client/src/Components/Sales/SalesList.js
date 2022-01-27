@@ -157,7 +157,7 @@ function SalesList() {
                       to={`/sales/detail/${sales.saleId}`}
                     >
                       <CTooltip content={`See detail of this sales.`}>
-                        <CIcon name="cil-notes" />
+                        <CIcon name="cil-align-center" />
                       </CTooltip>
                     </CLink>
                   </td>

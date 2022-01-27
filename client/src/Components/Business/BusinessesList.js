@@ -154,13 +154,13 @@ const BusinessesList = () => {
                   )}
 
                   <CLink
-                    className="text-primary"
+                    className="text-info"
                     to={`/business/Detail/${business._id}`}
                   >
                     <CTooltip
                       content={`See detail of - ${business.tradeName}- business.`}
                     >
-                      <CIcon name="cil-fullscreen" />
+                      <CIcon name="cil-align-center" />
                     </CTooltip>
                   </CLink>
                 </td>
