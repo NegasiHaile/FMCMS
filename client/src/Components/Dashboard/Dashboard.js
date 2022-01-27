@@ -86,11 +86,11 @@ const BranchAdminDashboard = () => {
       <RecentEvents branchId={user.branch} />
       <EmployeesList />
 
-      <div role="button" style={cahtappstyle}>
+      {/* <div role="button" style={cahtappstyle}>
         <h4 style={chaticonstyle}>
           <CIcon name="cil-speech" alt="Chat" />
         </h4>
-      </div>
+      </div> */}
     </Suspense>
   );
 };
