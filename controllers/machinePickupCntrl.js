@@ -115,6 +115,7 @@ const machinePickupCntrl = {
           telephone: pickup.business[0].telephone,
           status: pickup.status,
           createdAt: pickup.createdAt,
+          updatedAt: pickup.updatedAt,
 
           memoryKey: pickup.memoryKey,
           drawer: pickup.drawer,
