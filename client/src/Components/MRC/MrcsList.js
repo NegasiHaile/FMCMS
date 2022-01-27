@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
+import FilterMachine from "../Utils/Filters/FilterMachine";
 import { GlobalState } from "../../GlobalState";
 import {
   CButton,
@@ -187,11 +188,11 @@ function MrcsList() {
                         <span className="text-muted">|</span>
                       </>
                     )}
-                    <CLink className="text-info" to={`/mrc/detail/${mrc._id}`}>
-                      <CTooltip content={`See detail of  - ${mrc.MRC} - MRC.`}>
-                        <CIcon name="cil-align-center" />
-                      </CTooltip>
-                    </CLink>
+                    {
+                      <p>
+                        <FilterMachine mrcId={mrc._id} filterBy="mrc" />
+                      </p>
+                    }
                   </td>
                 </>
               ),

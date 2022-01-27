@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { GlobalState } from "../../GlobalState";
+import FilterMachine from "../Utils/Filters/FilterMachine";
 import NewArrivals from "./Components/NewArrivals";
 import {
   CButton,
@@ -211,16 +212,9 @@ function SimCardsList() {
                       </CTooltip>
                     </CLink>
                   )}
-                <CLink
-                  className="text-info"
-                  to={`/machine/indetail/${simCard._id}`}
-                >
-                  <CTooltip
-                    content={`See detail of  - ${simCard.simNumber}- SIM card.`}
-                  >
-                    <CIcon name="cil-align-center" />
-                  </CTooltip>
-                </CLink>
+                <p>
+                  <FilterMachine simCardId={simCard._id} filterBy="sim" />
+                </p>
               </td>
             ),
           }}
