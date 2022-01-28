@@ -76,7 +76,7 @@ function ReturningList() {
                       <CTooltip
                         content={`See detail of this ${pickup.category}.`}
                       >
-                        <CIcon name="cil-align-center" />
+                        <CIcon name="cil-arrow-right" />
                       </CTooltip>
                     </CLink>
                   </>

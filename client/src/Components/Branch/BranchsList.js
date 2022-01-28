@@ -225,7 +225,7 @@ function BranchsList() {
                       <CTooltip
                         content={`See detail of - ${branch.branchName}- branch.`}
                       >
-                        <CIcon name="cil-align-center" />
+                        <CIcon name="cil-arrow-right" />
                       </CTooltip>
                     </CLink>
                   </td>

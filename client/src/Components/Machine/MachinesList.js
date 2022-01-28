@@ -338,7 +338,7 @@ const MachinesList = () => {
                         <CTooltip
                           content={`See detail of  - ${machine.serialNumber}- machine.`}
                         >
-                          <CIcon name="cil-align-center" />
+                          <CIcon name="cil-arrow-right" />
                         </CTooltip>
                       </CLink>
                     </>

@@ -141,7 +141,7 @@ function MaintenanceListPerMachine({ machineId }) {
                           to={`/pickup/detail/${maintenance._id}`}
                         >
                           <CTooltip content={`See detail of machine pickup!`}>
-                            <CIcon name="cil-align-center" />
+                            <CIcon name="cil-arrow-right" />
                           </CTooltip>
                         </CLink>
                       </>

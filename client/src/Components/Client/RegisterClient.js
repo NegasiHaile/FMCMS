@@ -229,7 +229,7 @@ function RegisterClient() {
                     <CTooltip
                       content={`See detail of - ${client.fName} ${client.mName}- client.`}
                     >
-                      <CIcon name="cil-align-center" />
+                      <CIcon name="cil-arrow-right" />
                     </CTooltip>
                   </CLink>
                 </td>

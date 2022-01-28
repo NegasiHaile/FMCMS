@@ -160,7 +160,7 @@ const BusinessesList = () => {
                     <CTooltip
                       content={`See detail of - ${business.tradeName}- business.`}
                     >
-                      <CIcon name="cil-align-center" />
+                      <CIcon name="cil-arrow-right" />
                     </CTooltip>
                   </CLink>
                 </td>

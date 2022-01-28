@@ -267,7 +267,7 @@ const EmployeeList = () => {
                     <CTooltip
                       content={`See detail of - ${employee.fName} ${employee.mName}- employee.`}
                     >
-                      <CIcon name="cil-align-center" />
+                      <CIcon name="cil-arrow-right" />
                     </CTooltip>
                   </CLink>
                 </td>

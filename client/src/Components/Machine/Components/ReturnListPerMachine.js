@@ -143,7 +143,7 @@ function ReturnListPerMachine({ machineId }) {
                           to={`/pickup/detail/${rtrn._id}`}
                         >
                           <CTooltip content={`See detail of this withdrawal!`}>
-                            <CIcon name="cil-align-center" />
+                            <CIcon name="cil-arrow-right" />
                           </CTooltip>
                         </CLink>
                       </>

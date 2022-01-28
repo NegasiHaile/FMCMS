@@ -72,7 +72,7 @@ function FiscalizationsPerMachine({ machineId }) {
                       to={`/fiscalization/detail/${sale.saleId}`}
                     >
                       <CTooltip content={`See detail fiscalization detail!`}>
-                        <CIcon name="cil-align-center" />
+                        <CIcon name="cil-arrow-right" />
                       </CTooltip>
                     </CLink>
                   </td>

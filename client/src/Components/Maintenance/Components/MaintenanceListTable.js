@@ -262,7 +262,7 @@ function MaintenanceListTable() {
                       <CTooltip
                         content={`See detail of this ${pickup.category} maintenance.`}
                       >
-                        <CIcon name="cil-align-center" />
+                        <CIcon name="cil-arrow-right" />
                       </CTooltip>
                     </CLink>
                   </>
