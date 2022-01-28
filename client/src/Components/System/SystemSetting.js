@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import {
   CCard,
   CCardBody,
@@ -17,9 +18,40 @@ import CIcon from "@coreui/icons-react";
 
 function SystemSetting() {
   const [senderEmail, setSenderEmail] = useState("");
+
+  const sweetAlert = (type, text) => {
+    Swal.fire({
+      position: "center",
+      background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+      icon: type,
+      text: text,
+      confirmButtonColor: "#3C4B64",
+      showConfirmButton: true,
+      // timer: 1500,
+    });
+  };
   const onSubmitAddEmail = (e) => {
     e.preventDefault();
-    alert(senderEmail);
+    sweetAlert("success", "res.data.msg");
+  };
+
+  const removeSenderEmail = (e) => {
+    Swal.fire({
+      text: "Are you sure you want to remove this email?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3C4B64",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Remove it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          sweetAlert("success", "Sender email successfuly removed!");
+        } catch (error) {
+          sweetAlert("error", error.response.data.msg);
+        }
+      }
+    });
   };
   return (
     <CCardGroup columns className="cols-2">
@@ -35,13 +67,14 @@ function SystemSetting() {
                   <td>NegasiHaile19@gmail.com</td>
                   <td className="text-success">Primary</td>
                   <td className="d-flex justify-content-end">
-                    <span>
-                      <CLink className="text-danger">
-                        <CTooltip content={`Remove this email.`}>
-                          <CIcon name="cil-x" />
-                        </CTooltip>
-                      </CLink>
-                    </span>
+                    <CLink
+                      className="text-danger"
+                      onClick={() => removeSenderEmail()}
+                    >
+                      <CTooltip content={`Remove this sender email.`}>
+                        <CIcon name="cil-trash" />
+                      </CTooltip>
+                    </CLink>
                   </td>
                 </tr>
                 <tr>
@@ -52,13 +85,14 @@ function SystemSetting() {
                     </CButton>
                   </td>
                   <td className="d-flex justify-content-end">
-                    <span>
-                      <CLink className="text-danger">
-                        <CTooltip content={`Remove this email.`}>
-                          <CIcon name="cil-x" />
-                        </CTooltip>
-                      </CLink>
-                    </span>
+                    <CLink
+                      className="text-danger"
+                      onClick={() => removeSenderEmail()}
+                    >
+                      <CTooltip content={`Remove this sender email.`}>
+                        <CIcon name="cil-trash" />
+                      </CTooltip>
+                    </CLink>
                   </td>
                 </tr>
               </tbody>
