@@ -1,4 +1,5 @@
 const Users = require("../models/userModel");
+const SenderEmails = require("../models/senderEmailModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const generator = require("generate-password");
@@ -27,6 +28,9 @@ const userCntrl = {
       const newpassword = generatePassword();
 
       const user = await Users.findOne({ email });
+      const primaryEmail = await SenderEmails.findOne({
+        primary: true,
+      });
 
       if (user)
         return res
@@ -53,28 +57,25 @@ const userCntrl = {
         userRole,
       });
 
-      await newUser.save();
-
-      const mailDetail = {
-        emailToMail: email,
-        passwordToMail: newpassword,
-        subject: "Password to your JuPiTeR FMCMS Account",
-        text: "Password for your jupiter FMCMS account: ",
-      };
-      sendMailToUser(mailDetail);
-
-      // Then create jsonwebtoken to authentication
-      // const accesstoken = createAccessToken({ id: newUser._id })
-      // const refreshtoken = createRefreshToken({ id: newUser._id })
-
-      // res.cookie('refreshtoken', refreshtoken, {
-      //     httpOnly: true,
-      //     path: '/user/refresh_token',
-      // })
-
-      res.json({
-        msg: "User has been successfuly registered, and we have sent a password to the email!",
-      });
+      if (primaryEmail) {
+        await newUser.save();
+        const mailDetail = {
+          emailToMail: email,
+          primaryMailer: primaryEmail.email,
+          primaryMailerPassword: primaryEmail.password,
+          passwordToMail: newpassword,
+          subject: "Password to your JuPiTeR FMCMS Account",
+          text: "Password for your jupiter FMCMS account: ",
+        };
+        sendMailToUser(mailDetail);
+        res.json({
+          msg: "User has been successfuly registered, and we have sent a password to the email!",
+        });
+      } else {
+        return res.status(400).json({
+          msg: "Primary email not exist, Please go to system setting and set your primary sender email ",
+        });
+      }
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
@@ -224,6 +225,10 @@ const userCntrl = {
           $regex: new RegExp(email, "i"),
         },
       });
+      const primaryEmail = await SenderEmails.findOne({
+        primary: true,
+      });
+
       if (!user)
         return res.status(400).json({
           msg: "There is no account with this email, please insert your email correctly!",
@@ -232,18 +237,21 @@ const userCntrl = {
       const resetToken = createAccessToken({ id: user._id });
       const expireToken = Date.now() + 3600000;
 
-      await Users.findOneAndUpdate(
-        { _id: user.id },
-        {
-          resetToken: resetToken,
-          expireToken: expireToken,
-        }
-      );
+      if (primaryEmail) {
+        await Users.findOneAndUpdate(
+          { _id: user.id },
+          {
+            resetToken: resetToken,
+            expireToken: expireToken,
+          }
+        );
 
-      const mailDetail = {
-        emailToMail: email,
-        subject: "FMCMS-JuPiTeR-Trading password reset link",
-        html: `<h4> Password reset request for your FMCMS-JuPiTeR-Trading account. </h4>
+        const mailDetail = {
+          emailToMail: email,
+          primaryMailer: primaryEmail.email,
+          primaryMailerPassword: primaryEmail.password,
+          subject: "FMCMS-JuPiTeR-Trading password reset link",
+          html: `<h4> Password reset request for your FMCMS-JuPiTeR-Trading account. </h4>
         <p> Click 
         <a href="${process.env.RESET_PASSWORD_URL}/${resetToken}"
         target="_blank"
@@ -253,15 +261,20 @@ const userCntrl = {
         <a href="${process.env.RESET_PASSWORD_URL}/${resetToken}"
         target="_blank"
         rel="noopener noreferrer">${process.env.RESET_PASSWORD_URL}/${resetToken}</a>`,
-      };
-      sendMailToUser(mailDetail);
+        };
+        sendMailToUser(mailDetail);
 
-      res.json({
-        msg:
-          "An email with password reset link is sent to " +
-          user.email +
-          ", Please check your email!",
-      });
+        res.json({
+          msg:
+            "An email with password reset link is sent to " +
+            user.email +
+            ", Please check your email!",
+        });
+      } else {
+        return res.status(400).json({
+          msg: "Primary email not exist, Please go to system setting and set your primary sender email ",
+        });
+      }
     } catch (error) {
       res.status(500).json({ meg: error.message });
     }
@@ -371,8 +384,8 @@ const sendMailToUser = (mailDetail) => {
     port: 465,
     secure: true,
     auth: {
-      user: "negasihaile19@gmail.com",
-      pass: "Negasi@DevelopmentEmail", // Thepassword of the mailer
+      user: mailDetail.primaryMailer,
+      pass: mailDetail.primaryMailerPassword, // Thepassword of the mailer
     },
     tls: {
       // do not fail on invalid certs
@@ -382,7 +395,7 @@ const sendMailToUser = (mailDetail) => {
 
   // console.log(mailDetail);
   var mailOptions = {
-    from: "negasihaile19@gmail.com",
+    from: mailDetail.primaryMailer,
     to: mailDetail.emailToMail,
     subject: mailDetail.subject,
     text: mailDetail.text + mailDetail.passwordToMail,
