@@ -4,20 +4,34 @@ import axios from "axios";
 
 import { CButton, CCol, CContainer, CRow } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import Swal from "sweetalert2";
 
 function SenderEmailVerification() {
   const params = useParams();
   const [verifiying, setVefiying] = useState([]);
 
   useEffect(() => {}, [params.verificationToken]);
+
+  const sweetAlert = (type, text) => {
+    Swal.fire({
+      position: "center",
+      background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+      icon: type,
+      text: text,
+      confirmButtonColor: "#3C4B64",
+      showConfirmButton: true,
+      // timer: 1500,
+    });
+  };
+
   const emailVerification = async () => {
     try {
       const res = await axios.put(
         `/system/email_verification/${params.verificationToken}`
       );
-      alert(res.data.msg);
+      sweetAlert("success", res.data.msg);
     } catch (error) {
-      alert(error.response.data.msg);
+      sweetAlert("error", error.response.data.msg);
     }
   };
   return (
