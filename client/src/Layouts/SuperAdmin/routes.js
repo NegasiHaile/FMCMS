@@ -87,6 +87,9 @@ const SystemBackup = lazy(() => import("../../Components/System/SystemBackup"));
 const SystemSetting = lazy(() =>
   import("../../Components/System/SystemSetting")
 );
+const SenderEmailVerification = lazy(() =>
+  import("../../Components/System/Components/SenderEmailVerification")
+);
 // Pricing
 const Pricing = lazy(() => import("../../Components/Pricing/Pricing"));
 
@@ -289,6 +292,12 @@ const routes = [
     exact: true,
     name: "System-Setting",
     component: SystemSetting,
+  },
+  {
+    path: "/system/setting/email/verification/:verificationToken",
+    exact: true,
+    name: "System-Setting-Email-Verification",
+    component: SenderEmailVerification,
   },
 ];
 
