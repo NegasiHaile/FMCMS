@@ -29,7 +29,19 @@ function SenderEmailVerification() {
       const res = await axios.put(
         `/system/email_verification/${params.verificationToken}`
       );
-      sweetAlert("success", res.data.msg);
+      Swal.fire({
+        position: "center",
+        background: "#EBEDEF", // 2EB85C success // E55353 danger // 1E263C sidebar
+        icon: "success",
+        text: res.data.msg,
+        confirmButtonColor: "#3C4B64",
+        showConfirmButton: true,
+        // timer: 1500,
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/system/setting";
+        }
+      });
     } catch (error) {
       sweetAlert("error", error.response.data.msg);
     }
