@@ -129,6 +129,19 @@ const systemSettingCntrl = {
     //   res.status(500).json({ msg: error.message });
     // }
   },
+  editSenderEmailPassword: async (req, res) => {
+    try {
+      await SenderEmails.findByIdAndUpdate(
+        { _id: req.body.id },
+        { password: req.body.password }
+      );
+      res.status(200).json({
+        msg: "Sender email password changed successfully!",
+      });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
 };
 const createAccessToken = (email) => {
   return jwt.sign(email, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10m" });

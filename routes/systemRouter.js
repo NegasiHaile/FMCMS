@@ -12,5 +12,9 @@ router.put(
   "/make_primary_sender_email/:id",
   systemSettingCntrl.makePrimaryEmailSender
 );
+router.put(
+  "/edit_sender_email_password",
+  systemSettingCntrl.editSenderEmailPassword
+);
 
 module.exports = router;

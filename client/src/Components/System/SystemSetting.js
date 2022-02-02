@@ -25,7 +25,7 @@ function SystemSetting() {
   const [emailPassword, setEmailPassword] = useState("");
   const [senderEmails, setSenderEmails] = useState([]);
   const [onEdit, setOnEdit] = useState(false);
-  const [onEditPrimary, setOnEditPrimary] = useState(false);
+  const [edittingId, setEdittingId] = useState("");
   const [showHelpModal, setShowHelpModal] = useState(false);
 
   const sweetAlert = (type, text) => {
@@ -59,12 +59,15 @@ function SystemSetting() {
     e.preventDefault();
     try {
       if (onEdit) {
+        const res = await axios.put("/system/edit_sender_email_password", {
+          id: edittingId,
+          password: emailPassword,
+        });
         fetchSenderEmails();
         setSenderEmail("");
         setEmailPassword("");
-        setOnEditPrimary(false);
         setOnEdit(false);
-        sweetAlert("success", "Mailer successfully edited!");
+        sweetAlert("success", res.data.msg);
       } else {
         const res = await axios.post("/system/add_sender_email", {
           senderEmail: senderEmail,
@@ -73,7 +76,6 @@ function SystemSetting() {
         fetchSenderEmails();
         setSenderEmail("");
         setEmailPassword("");
-        setOnEditPrimary(false);
         setOnEdit(false);
         sweetAlert("success", res.data.msg);
       }
@@ -83,7 +85,6 @@ function SystemSetting() {
   };
 
   const makePrimaryEmailSender = async (id) => {
-    setOnEditPrimary(false);
     setOnEdit(false);
     setSenderEmail("");
     setEmailPassword("");
@@ -112,7 +113,6 @@ function SystemSetting() {
   };
 
   const removeSenderEmail = (id) => {
-    setOnEditPrimary(false);
     setOnEdit(false);
     setSenderEmail("");
     setEmailPassword("");
@@ -185,7 +185,7 @@ function SystemSetting() {
                                 setSenderEmail("");
                                 setEmailPassword("");
                                 setOnEdit(false);
-                                setOnEditPrimary(false);
+                                setEdittingId("");
                                 setShowHelpModal(true);
                               }}
                             >
@@ -264,12 +264,12 @@ function SystemSetting() {
                           className="text-success"
                           onClick={() => {
                             setOnEdit(true);
+                            setEdittingId(email._id);
                             setSenderEmail(email.email);
                             setEmailPassword(email.password);
-                            setOnEditPrimary(email.primary);
                           }}
                         >
-                          <CTooltip content={`Edit this sender email.`}>
+                          <CTooltip content={`Change password of this email.`}>
                             <CIcon name="cil-pencil" />
                           </CTooltip>
                         </CLink>
