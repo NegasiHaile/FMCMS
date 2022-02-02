@@ -11,9 +11,12 @@ import {
   CInput,
   CInputGroup,
   CInputGroupAppend,
-  CInputGroupText,
   CLink,
   CTooltip,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
@@ -23,6 +26,7 @@ function SystemSetting() {
   const [senderEmails, setSenderEmails] = useState([]);
   const [onEdit, setOnEdit] = useState(false);
   const [onEditPrimary, setOnEditPrimary] = useState(false);
+  const [showHelpModal, setShowHelpModal] = useState(false);
 
   const sweetAlert = (type, text) => {
     Swal.fire({
@@ -99,6 +103,7 @@ function SystemSetting() {
           );
           fetchSenderEmails();
           sweetAlert("success", res.data.msg);
+          setShowHelpModal(true);
         } catch (error) {
           sweetAlert("error", error.response.data.msg);
         }
@@ -135,7 +140,9 @@ function SystemSetting() {
     <CCardGroup columns className="cols-2">
       <CCard>
         <CCardHeader className="d-flex justify-content-between">
-          <h6>Sender email {senderEmails.length}</h6>
+          <h6>
+            Sender emails : <b>{senderEmails.length}</b>
+          </h6>
         </CCardHeader>
         <CCardBody>
           <div className=" table-responsive">
@@ -171,7 +178,78 @@ function SystemSetting() {
                       </td>
                       <td className="d-flex justify-content-between">
                         {email.primary ? (
-                          "Mailer"
+                          <>
+                            <CLink
+                              className="text-info"
+                              onClick={() => {
+                                setSenderEmail("");
+                                setEmailPassword("");
+                                setOnEdit(false);
+                                setOnEditPrimary(false);
+                                setShowHelpModal(true);
+                              }}
+                            >
+                              <CTooltip content={`Help for primary email!.`}>
+                                <CIcon name="cil-speak" />
+                              </CTooltip>
+                            </CLink>
+                            <CModal
+                              show={showHelpModal}
+                              onClose={() => setShowHelpModal(false)}
+                            >
+                              <CModalHeader
+                                size="sm"
+                                className="jptr-bg"
+                                closeButton
+                              >
+                                <span>Help</span>
+                              </CModalHeader>
+                              <CModalBody>
+                                <h6>
+                                  {" "}
+                                  Do the following three steps to{" "}
+                                  <b>
+                                    <i>{email.email}</i>
+                                  </b>{" "}
+                                  email. Else this email will not enable to send
+                                  an email.
+                                </h6>
+                                <p>
+                                  1,{" "}
+                                  <a
+                                    href="https://accounts.google.com/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-info"
+                                  >
+                                    Log in to {email.email}.
+                                  </a>{" "}
+                                </p>
+                                <p>
+                                  2,{" "}
+                                  <a
+                                    href="https://myaccount.google.com/lesssecureapps"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-info"
+                                  >
+                                    Make the sender email less secure.
+                                  </a>{" "}
+                                </p>
+                                <p>
+                                  3,{" "}
+                                  <a
+                                    href="https://accounts.google.com/b/0/displayunlockcaptcha"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-info"
+                                  >
+                                    Disable Captcha so an email can be sent.
+                                  </a>
+                                </p>
+                              </CModalBody>
+                            </CModal>
+                          </>
                         ) : (
                           <CLink
                             className="text-danger"
@@ -216,7 +294,7 @@ function SystemSetting() {
                   placeholder="Enter sender email!"
                   required
                   value={senderEmail}
-                  disabled={onEditPrimary}
+                  disabled={onEdit}
                   onChange={(e) => setSenderEmail(e.target.value)}
                 />
                 <CInputGroupAppend>
