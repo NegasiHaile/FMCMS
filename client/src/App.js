@@ -166,7 +166,7 @@ function App() {
               exact
               path="*"
               name="Page 404"
-              render={(props) => <Page404 {...props} />}
+              render={(props) => <Login {...props} />}
             />
             <Route
               exact
