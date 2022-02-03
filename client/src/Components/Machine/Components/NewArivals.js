@@ -57,7 +57,7 @@ function NewArivals({ newArivals }) {
             color="danger"
             onClick={() => approveMachineFromBranchStore("all", user.branch)}
           >
-            Approve all in once
+            Approve all in one
           </CButton>
         )}
       </div>

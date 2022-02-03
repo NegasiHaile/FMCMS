@@ -53,6 +53,7 @@ const machinePickupCntrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
+
   getList: async (req, res) => {
     try {
       const allPickups = await MachinePickups.aggregate([
@@ -154,6 +155,7 @@ const machinePickupCntrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
+
   deletePickup: async (req, res) => {
     try {
       const pickup = await MachinePickups.findById(req.params.id);
@@ -316,6 +318,7 @@ const machinePickupCntrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
+
   eidtMachine_withdrawal: async (req, res) => {
     try {
       var withdrawalDetail = ({
@@ -377,6 +380,7 @@ const machinePickupCntrl = {
       res.status(500).json({ msg: error.message });
     }
   },
+
   maintenanceProcessing: async (req, res) => {
     try {
       const pickupDetail = await MachinePickups.findById(req.body._id);
@@ -403,7 +407,7 @@ const machinePickupCntrl = {
       } else if (req.body.request === "maintaining") {
         if (pickupDetail.technician === "") {
           return res.status(400).json({
-            msg: "This maintenance hasn't assigned a technician yet, Please contact the customer service to assign!",
+            msg: "This maintenance hasn't assigned a technician yet, Please contact the customer service for assignment!",
           });
         } else {
           await machines.findOneAndUpdate(
@@ -424,7 +428,7 @@ const machinePickupCntrl = {
 
       return res.json({
         msg:
-          "Receiving machine has been requested for " + req.body.request + "!",
+          "Received machine has been requested for " + req.body.request + "!",
       });
     } catch (error) {
       res.status(500).json({ msg: error.message });

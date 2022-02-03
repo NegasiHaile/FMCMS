@@ -165,10 +165,10 @@ function MaintenanceListTable() {
             setMaintenances(
               pickupMachines.filter(
                 (filteredPickUp) =>
-                  filteredPickUp.category === "annual" ||
-                  filteredPickUp.category === "incident" ||
-                  (filteredPickUp.category === "information_change" &&
-                    filteredPickUp.branchId === user.branch)
+                  (filteredPickUp.category === "annual" ||
+                    filteredPickUp.category === "incident" ||
+                    filteredPickUp.category === "information_change") &&
+                  filteredPickUp.branchId === user.branch
               )
             );
           }

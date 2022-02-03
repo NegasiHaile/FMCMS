@@ -196,7 +196,7 @@ const salesCntrl = {
 
       if (sale.technician === "")
         return res.status(400).json({
-          msg: "This sales hasn't assigned technician for fiscalization, Please contact the customer service to assign!!",
+          msg: "This sales hasn't assigned technician for fiscalization, Please contact the customer service for technician assignment!!",
         });
 
       await Sales.findOneAndUpdate(

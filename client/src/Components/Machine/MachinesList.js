@@ -64,7 +64,9 @@ const MachinesList = () => {
     if (user.userRole !== "super-admin" && user.userRole !== "main-store") {
       setMachines(
         allMachines.filter(
-          (filteredMachine) => filteredMachine.branch == user.branch
+          (filteredMachine) =>
+            filteredMachine.branch == user.branch &&
+            filteredMachine.availableIn !== "main-store"
         )
       );
       setNewArivals(
