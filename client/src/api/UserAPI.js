@@ -9,15 +9,15 @@ function UserAPI(token) {
     if (token) {
       const getUser = async () => {
         try {
-        const res = await axios.get("/user/profile", {
-          headers: { Authorization: token },
-        });
+          const res = await axios.get("/user/profile", {
+            headers: { Authorization: token },
+          });
 
-        setUser(res.data);
-        setIsLogged(true);
-      } catch (err) {
-        alert(err.response.data.msg)
-    }
+          setUser(res.data);
+          setIsLogged(true);
+        } catch (err) {
+          alert(err.response.data.msg);
+        }
       };
 
       getUser();

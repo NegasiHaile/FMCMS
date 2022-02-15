@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import {
   CButton,
+  CSpinner,
   CCol,
   CContainer,
   CForm,
@@ -23,6 +24,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [btnLoginLoading, setBtnLoading] = useState(false);
   const [passwordSecure, setPasswordSecure] = useState(true);
   const onChangeInput = (e) => {
     const { name, value } = e.target;
@@ -31,6 +33,7 @@ const Login = () => {
 
   const loginSubmit = async (e) => {
     e.preventDefault();
+    setBtnLoading(true);
     try {
       await axios.post("/user/login", { ...user });
 
@@ -47,15 +50,16 @@ const Login = () => {
         showConfirmButton: true,
         // timer: 1500,
       });
+      setBtnLoading(false);
     }
   };
   const circleLogo = {
     borderRadius: "50%",
     height: "75px",
-  }
+  };
   return (
     <>
-      <div className="c-app c-default-layout flex-row align-items-center" >
+      <div className="c-app c-default-layout flex-row align-items-center">
         <CContainer className="mt-5">
           <CRow className="justify-content-center">
             <CCol
@@ -134,9 +138,18 @@ const Login = () => {
                       <CCol sm="12" md="12">
                         <CButton
                           type="submit"
-                          className="px-4 w-100 jptr-btn"
+                          className="px-4 w-100 jptr-btn btn-loading"
                         >
-                          <CIcon name="cil-blind" /> Login
+                          {btnLoginLoading ? (
+                            <CSpinner
+                              component="span"
+                              size="sm"
+                              aria-hidden="true"
+                            />
+                          ) : (
+                            <CIcon name="cil-blind" />
+                          )}
+                          Login
                         </CButton>
                       </CCol>
                       <CCol className="col-12 mt-3">
