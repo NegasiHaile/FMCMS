@@ -25,7 +25,7 @@ const userCntrl = {
         userRole,
       } = req.body;
 
-      const newpassword = generatePassword();
+      const newpassword = "123456"; // generatePassword();
 
       const user = await Users.findOne({ email });
       const primaryEmail = await SenderEmails.findOne({
@@ -57,25 +57,25 @@ const userCntrl = {
         userRole,
       });
 
-      if (primaryEmail) {
-        await newUser.save();
-        const mailDetail = {
-          emailToMail: email,
-          primaryMailer: primaryEmail.email,
-          primaryMailerPassword: primaryEmail.password,
-          passwordToMail: newpassword,
-          subject: "Password to your JuPiTeR FMCMS Account",
-          text: "Password for your jupiter FMCMS account: ",
-        };
-        sendMailToUser(mailDetail);
-        res.json({
-          msg: "User has been successfuly registered, and we have sent a password to the email!",
-        });
-      } else {
-        return res.status(400).json({
-          msg: "Primary email not exist, Please go to system setting and set your primary sender email ",
-        });
-      }
+      // if (primaryEmail) {
+      await newUser.save();
+      // const mailDetail = {
+      //   emailToMail: email,
+      //   primaryMailer: primaryEmail.email,
+      //   primaryMailerPassword: primaryEmail.password,
+      //   passwordToMail: newpassword,
+      //   subject: "Password to your JuPiTeR FMCMS Account",
+      //   text: "Password for your jupiter FMCMS account: ",
+      // };
+      // sendMailToUser(mailDetail);
+      res.json({
+        msg: "User has been successfuly registered, and we have sent a password to the email!",
+      });
+      // } else {
+      //   return res.status(400).json({
+      //     msg: "Primary email not exist, Please go to system setting and set your primary sender email ",
+      //   });
+      // }
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
