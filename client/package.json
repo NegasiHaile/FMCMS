@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Jupiter Tarading Fiscal Machine Controlling Managment System",
   "author": {
-    "name": "HorizonTech ICT Solution",
-    "url": "https://Horizontechict.com"
+    "name": "Negasi Haile",
+    "url": "https://github.com/NegasiHaile"
   },
   "dependencies": {
     "@coreui/chartjs": "^2.0.0",
@@ -68,6 +68,5 @@
   "engines": {
     "node": ">=10",
     "npm": ">=6"
-  },
-  "proxy": "http://localhost:5000/"
+  }
 }

@@ -16,9 +16,11 @@ import {
   CTooltip,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import { getConfig } from "../../config";
 
 const EmployeeList = () => {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [token] = state.token;
   const [allUsers] = state.UsersAPI.users;
@@ -68,7 +70,7 @@ const EmployeeList = () => {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.delete(`/user/delete/${_id}`, {
+          const res = await axios.delete(`${apiUrl}/user/delete/${_id}`, {
             headers: { Authorization: token },
           });
           Swal.fire("Deleted!", res.data.msg, "success");
@@ -99,10 +101,12 @@ const EmployeeList = () => {
       }).then(async (result) => {
         if (result.isConfirmed) {
           if (status === "ON") {
-            const res = await axios.put(`/user/block_account/${_id}`);
+            const res = await axios.put(`${apiUrl}/user/block_account/${_id}`);
             sweetAlert("success", res.data.msg);
           } else if (status === "OFF") {
-            const res = await axios.put(`/user/activate_account/${_id}`);
+            const res = await axios.put(
+              `${apiUrl}/user/activate_account/${_id}`
+            );
             sweetAlert("success", res.data.msg);
           } else {
             sweetAlert("error", "Nothing to change");

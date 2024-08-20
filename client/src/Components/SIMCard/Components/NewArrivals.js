@@ -5,9 +5,11 @@ import { GlobalState } from "../../../GlobalState";
 import BadRouting from "../../Utils/routing/BadRouting";
 import { CButton } from "@coreui/react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../../config";
 
 function NewArrivals({ newArrivals }) {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [callback, setCallback] = state.SIMCardAPI.callback;
 
@@ -35,7 +37,7 @@ function NewArrivals({ newArrivals }) {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const res = await axios.put(
-            `/sim_card/approve_from_branch_store/${id}/${branchId}`
+            `${apiUrl}/sim_card/approve_from_branch_store/${id}/${branchId}`
           );
           Swal.fire("Approved!", res.data.msg, "success");
           setCallback(!callback);

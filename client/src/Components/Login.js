@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { getConfig } from "../config";
 
 import {
   CButton,
@@ -20,6 +21,7 @@ import Swal from "sweetalert2";
 import CIcon from "@coreui/icons-react";
 
 const Login = () => {
+  const { apiUrl } = getConfig();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -35,7 +37,7 @@ const Login = () => {
     e.preventDefault();
     setBtnLoading(true);
     try {
-      await axios.post("/user/login", { ...user });
+      await axios.post(`${apiUrl}/user/login`, { ...user });
 
       localStorage.setItem("firstLogin", true);
 
@@ -65,7 +67,7 @@ const Login = () => {
             <CCol
               md="6"
               lg="5"
-              className="shadow-lg p-3 mb-5 mx-3 bg-white rounded"
+              className="shadow-lg p-5 mb-5 mx-3 bg-white rounded"
             >
               <CRow className="justify-content-center mt-3 mb-4">
                 <CCol md="11">
@@ -78,13 +80,13 @@ const Login = () => {
                     />
                   </CRow>
                 </CCol>
-                <CCol md="11" className="mt-2">
+                <CCol md="11" className="mt-3">
                   <h5 className="text-center text-muted">WELCOME</h5>
                   <p className="text-center  text-muted">
-                    Jupiter-Trading-FMCMS Sign in!
+                    JuPiTeR-Trading-FMCMS Sign in!
                   </p>
                 </CCol>
-                <CCol md="11" className="my-4">
+                <CCol md="11" className="my-5">
                   <CForm onSubmit={loginSubmit}>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -129,7 +131,7 @@ const Login = () => {
                         </CInputGroupText>
                       </CInputGroupAppend>
                     </CInputGroup>
-                    <CCol className="col-12 mt-1 d-flex justify-content-end">
+                    <CCol className="col-12 mt-5 d-flex justify-content-end">
                       <Link to="/forgotpassword" className="text-info">
                         Forgotten password?
                       </Link>
@@ -145,6 +147,7 @@ const Login = () => {
                               component="span"
                               size="sm"
                               aria-hidden="true"
+                              className="mr-1"
                             />
                           ) : (
                             <CIcon name="cil-blind" />

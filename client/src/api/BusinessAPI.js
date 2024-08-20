@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+
+import { getConfig } from "../config";
+
 function BusinessAPI() {
+  const { apiUrl } = getConfig();
   const [businesses, setBusinesses] = useState([]);
   const [callback, setCallback] = useState(false);
 
   useEffect(() => {
     const getBusinesses = async () => {
-      const res = await axios.get("/business/list");
+      const res = await axios.get(`${apiUrl}/business/list`);
       setBusinesses(res.data);
     };
 

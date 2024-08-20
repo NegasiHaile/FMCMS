@@ -18,6 +18,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../config";
 
 const userAttributes = {
   fName: "",
@@ -37,6 +38,7 @@ const userAttributes = {
 const RegisterEmployee = (props) => {
   const params = useParams();
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [token] = state.token;
   const [branchs] = state.branchAPI.branchs;
   const [callback, setCallback] = state.UsersAPI.callback;
@@ -79,7 +81,7 @@ const RegisterEmployee = (props) => {
     try {
       if (onEdit) {
         const res = await axios.put(
-          `/user/edit/${params.id}`,
+          `${apiUrl}/user/edit/${params.id}`,
           { ...user },
           {
             headers: { Authorization: token },
@@ -88,7 +90,7 @@ const RegisterEmployee = (props) => {
         setCallback(!callback);
         sweetAlert("success", res.data.msg);
       } else {
-        const res = await axios.post("/user/register", { ...user });
+        const res = await axios.post(`${apiUrl}/user/register`, { ...user });
         setCallback(!callback);
         sweetAlert("success", res.data.msg);
       }

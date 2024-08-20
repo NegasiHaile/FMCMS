@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { getConfig } from "../config";
 function MachineAPI() {
+  const { apiUrl } = getConfig();
   const [machines, setMachines] = useState([]);
   const [callback, setCallback] = useState(false);
 
   useEffect(() => {
     const getMachines = async () => {
-      const res = await axios.get("/machine/list");
+      const res = await axios.get(`${apiUrl}/machine/list`);
       setMachines(res.data);
     };
 

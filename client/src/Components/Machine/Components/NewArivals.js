@@ -5,9 +5,11 @@ import { GlobalState } from "../../../GlobalState";
 import BadRouting from "../../Utils/routing/BadRouting";
 import { CButton } from "@coreui/react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../../config";
 
 function NewArivals({ newArivals }) {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [callbackMachines, setCallbackMachines] = state.MachineAPI.callback;
 
@@ -35,7 +37,7 @@ function NewArivals({ newArivals }) {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const res = await axios.put(
-            `/machine/approve_machine_from_branch_store/${id}/${branchId}`
+            `${apiUrl}/machine/approve_machine_from_branch_store/${id}/${branchId}`
           );
           Swal.fire("Approved!", res.data.msg, "success");
 

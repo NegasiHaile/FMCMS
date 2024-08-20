@@ -5,9 +5,11 @@ import axios from "axios";
 import { CButton, CCol, CContainer, CRow } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../../config";
 
 function SenderEmailVerification() {
   const params = useParams();
+  const { apiUrl } = getConfig();
   const [verifiying, setVefiying] = useState([]);
 
   useEffect(() => {}, [params.verificationToken]);
@@ -27,7 +29,7 @@ function SenderEmailVerification() {
   const emailVerification = async () => {
     try {
       const res = await axios.put(
-        `/system/email_verification/${params.verificationToken}`
+        `${apiUrl}/system/email_verification/${params.verificationToken}`
       );
       Swal.fire({
         position: "center",

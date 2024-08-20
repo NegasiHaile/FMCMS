@@ -10,13 +10,15 @@ import {
   CImg,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import { getConfig } from "../../config";
 
 const TheHeaderDropdown = () => {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
 
   const logoutUser = async () => {
-    await axios.get("/user/logout");
+    await axios.get(`${apiUrl}/user/logout`);
 
     localStorage.removeItem("firstLogin");
 

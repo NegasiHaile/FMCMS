@@ -14,9 +14,11 @@ import {
   CTooltip,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import { getConfig } from "../../../config";
 
 function MaintenanceListPerMachine({ machineId }) {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [maintenances] = state.MachinePickUpAPI.machinePickups;
   const [maint_Per_Machine, setMaint_Per_Machine] = useState([]);
@@ -61,7 +63,7 @@ function MaintenanceListPerMachine({ machineId }) {
       }).then(async (result) => {
         try {
           if (result.isConfirmed) {
-            const res = await axios.delete(`/pickup/delete/${itmeId}`);
+            const res = await axios.delete(`${apiUrl}/pickup/delete/${itmeId}`);
             setCallbackMachinePickup(!callbackMachinePickup);
             sweetAlert("success", res.data.msg);
           }

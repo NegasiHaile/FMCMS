@@ -24,9 +24,11 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../../config";
 function MachinePickupDetail() {
   const params = useParams();
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [users] = state.UsersAPI.users;
   const [user] = state.UserAPI.User;
   const [machinePikups] = state.MachinePickUpAPI.machinePickups;
@@ -118,7 +120,7 @@ function MachinePickupDetail() {
         try {
           if (result.isConfirmed) {
             const res = await axios.put(
-              `/machine/problem_solved/${machineId}/${salesId}/${category}/${annualNextMaintenanceDate}`
+              `${apiUrl}/machine/problem_solved/${machineId}/${salesId}/${category}/${annualNextMaintenanceDate}`
             );
             setCallbackPickup(!callbackPickup);
             sweetAlert("success", res.data.msg);
@@ -903,6 +905,7 @@ function MachinePickupDetail() {
 function MachinePickupOperations() {
   const params = useParams();
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [machinePikups] = state.MachinePickUpAPI.machinePickups;
   const [callbackPickup, setCallbackPickup] = state.MachinePickUpAPI.callback;
@@ -949,14 +952,17 @@ function MachinePickupOperations() {
       }).then(async (result) => {
         try {
           if (result.isConfirmed) {
-            const res = await axios.put(`/pickup/maintenance_processing`, {
-              _id,
-              salesId,
-              machineId,
-              category,
-              request,
-              simCard,
-            });
+            const res = await axios.put(
+              `${apiUrl}/pickup/maintenance_processing`,
+              {
+                _id,
+                salesId,
+                machineId,
+                category,
+                request,
+                simCard,
+              }
+            );
             setCallbackPickup(!callbackPickup);
             setCallbackMachine(!callbackMachine);
             setCallbackSIMCard(!callbackSIMCard);

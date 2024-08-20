@@ -13,6 +13,8 @@ import MachinePickUpAPI from "./api/MachinePickupAPI";
 import PricingAPI from "./api/PricingAPI";
 // import MachineAPI from "./api/MachineAPI";
 
+import { getConfig } from "./config";
+
 import axios from "axios";
 
 export const GlobalState = createContext();
@@ -21,10 +23,11 @@ export const DataProvider = ({ children }) => {
   const [token, setToken] = useState(false);
 
   useEffect(() => {
+    const { apiUrl } = getConfig();
     const firstLogin = localStorage.getItem("firstLogin");
     if (firstLogin) {
       const refreshToken = async () => {
-        const res = await axios.get("/user/refresh_token");
+        const res = await axios.get(`${apiUrl}/user/refresh_token`);
 
         setToken(res.data.accesstoken);
 

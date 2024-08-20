@@ -8,9 +8,11 @@ import FilterMRC from "../../Utils/Filters/FilterMRC";
 import FilterSIMCard from "../../Utils/Filters/FilterSIMCard";
 
 import { CButton, CCard, CDataTable, CLink, CTooltip } from "@coreui/react";
+import { getConfig } from "../../../config";
 
 function BusinessMachines({ businessId }) {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [allSales] = state.SalesAPI.Sales;
 
@@ -54,7 +56,9 @@ function BusinessMachines({ businessId }) {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.put(`/sales/cancel_unapprove_sale/${saleId}`);
+          const res = await axios.put(
+            `${apiUrl}/sales/cancel_unapprove_sale/${saleId}`
+          );
           setCallbackSales(!callbackSales);
           setCallbackMachines(!callbackMachines);
           setCallbackBusiness(!callbackBusiness);

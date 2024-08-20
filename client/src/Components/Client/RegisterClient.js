@@ -24,6 +24,7 @@ import {
   CLink,
   CTooltip,
 } from "@coreui/react";
+import { getConfig } from "../../config";
 
 const branchTableFields = [
   "fName",
@@ -37,6 +38,7 @@ const branchTableFields = [
 
 function RegisterClient() {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [token] = state.token;
   const [user] = state.UserAPI.User;
   const [users] = state.UsersAPI.users;
@@ -94,7 +96,7 @@ function RegisterClient() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "/user/register",
+        `${apiUrl}/user/register`,
         { ...client },
         {
           headers: { Authorization: token },
@@ -112,7 +114,7 @@ function RegisterClient() {
     e.preventDefault();
     try {
       const res = await axios.put(
-        `/user/edit/${activeClientID}`,
+        `${apiUrl}/user/edit/${activeClientID}`,
         { ...client },
         {
           headers: { Authorization: token },
@@ -138,7 +140,7 @@ function RegisterClient() {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.delete(`/user/delete/${_id}`, {
+          const res = await axios.delete(`${apiUrl}/user/delete/${_id}`, {
             headers: { Authorization: token },
           });
           Swal.fire("Deleted!", res.data.msg, "success");

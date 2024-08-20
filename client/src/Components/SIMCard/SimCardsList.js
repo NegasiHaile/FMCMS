@@ -27,6 +27,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../config";
 const simCardDetail = {
   simNumber: "",
   branch: "none",
@@ -34,6 +35,7 @@ const simCardDetail = {
 };
 function SimCardsList() {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [showModal, setShowModal] = useState(false);
   const [allSIMCards] = state.SIMCardAPI.simCards;
@@ -85,13 +87,15 @@ function SimCardsList() {
     e.preventDefault();
     try {
       if (onEdit) {
-        const res = await axios.put(`/sim_card/edit/${simCard._id}`, {
+        const res = await axios.put(`${apiUrl}/sim_card/edit/${simCard._id}`, {
           ...simCard,
         });
         setCallback(!callback);
         sweetAlert("success", res.data.msg);
       } else {
-        const res = await axios.post("/sim_card/register", { ...simCard });
+        const res = await axios.post(`${apiUrl}/sim_card/register`, {
+          ...simCard,
+        });
         setCallback(!callback);
         sweetAlert("success", res.data.msg);
       }
@@ -111,7 +115,7 @@ function SimCardsList() {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.delete(`/sim_card/delete/${_id}`);
+          const res = await axios.delete(`${apiUrl}/sim_card/delete/${_id}`);
           Swal.fire("Deleted!", res.data.msg, "success");
           setCallback(!callback);
         }

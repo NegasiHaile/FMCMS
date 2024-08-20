@@ -39,11 +39,13 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { Worker } from "@react-pdf-viewer/core"; // install this library
 
 import BusinessMachines from "./components/BusinessMachines";
+import { getConfig } from "../../config";
 
 function BusinessDetail() {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const params = useParams();
   const [user] = state.UserAPI.User;
   const [businesses] = state.BusinessAPI.businesses;
@@ -127,7 +129,9 @@ function BusinessDetail() {
         confirmButtonText: "Yes, Accepte it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.put(`/business/accepte/${businessId}`);
+          const res = await axios.put(
+            `${apiUrl}/business/accepte/${businessId}`
+          );
           setCallbackBusiness(!callbackBusiness);
           Swal.fire("Accepted!", res.data.msg, "success");
         }
@@ -139,7 +143,7 @@ function BusinessDetail() {
   const rejectBusinessCredentails = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`/business/reject/${business._id}`, {
+      const res = await axios.put(`${apiUrl}/business/reject/${business._id}`, {
         ...notification,
       });
       setCallbackBusiness(!callbackBusiness);
@@ -152,7 +156,7 @@ function BusinessDetail() {
   const onSubmitAssigneMachine = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/machine/distribute", {
+      const res = await axios.post(`${apiUrl}/machine/distribute`, {
         ...assigneMachine,
       });
       setCallback(!callback);
@@ -178,7 +182,7 @@ function BusinessDetail() {
         if (result.isConfirmed) {
           try {
             const res = await axios.put(
-              `/sales/request_for_approval/${params.id}`
+              `${apiUrl}/sales/request_for_approval/${params.id}`
             );
             setCallback(!callback);
             setCallbackBusiness(!callbackBusiness);

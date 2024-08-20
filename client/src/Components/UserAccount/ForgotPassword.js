@@ -16,7 +16,9 @@ import {
   CRow,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import { getConfig } from "../../config";
 function ForgotPassword() {
+  const { apiUrl } = getConfig();
   const [accountEmail, setAccountEmail] = useState("");
 
   const sweetAlert = (type, text) => {
@@ -34,7 +36,7 @@ function ForgotPassword() {
   const onsubmitForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put("/user/forgot_Password", {
+      const res = await axios.put(`${apiUrl}/user/forgot_Password`, {
         email: accountEmail,
       });
       sweetAlert("success", res.data.msg);

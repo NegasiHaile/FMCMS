@@ -19,8 +19,10 @@ import {
   CModalBody,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import { getConfig } from "../../config";
 
 function SystemSetting() {
+  const { apiUrl } = getConfig();
   const [senderEmail, setSenderEmail] = useState("");
   const [emailPassword, setEmailPassword] = useState("");
   const [senderEmails, setSenderEmails] = useState([]);
@@ -42,7 +44,7 @@ function SystemSetting() {
 
   const fetchSenderEmails = async () => {
     try {
-      const res = await axios.get("/system/fetch_sender_email");
+      const res = await axios.get(`${apiUrl}/system/fetch_sender_email`);
       setSenderEmails(res.data);
       console.log(res.data);
       console.log(senderEmails.length);
@@ -59,17 +61,20 @@ function SystemSetting() {
     e.preventDefault();
     try {
       if (onEdit) {
-        const res = await axios.put("/system/edit_sender_email_password", {
-          id: edittingId,
-          password: emailPassword,
-        });
+        const res = await axios.put(
+          `${apiUrl}/system/edit_sender_email_password`,
+          {
+            id: edittingId,
+            password: emailPassword,
+          }
+        );
         fetchSenderEmails();
         setSenderEmail("");
         setEmailPassword("");
         setOnEdit(false);
         sweetAlert("success", res.data.msg);
       } else {
-        const res = await axios.post("/system/add_sender_email", {
+        const res = await axios.post(`${apiUrl}/system/add_sender_email`, {
           senderEmail: senderEmail,
           emailPassword: emailPassword,
         });
@@ -100,7 +105,7 @@ function SystemSetting() {
       if (result.isConfirmed) {
         try {
           const res = await axios.put(
-            `/system/make_primary_sender_email/${id}`
+            `${apiUrl}/system/make_primary_sender_email/${id}`
           );
           fetchSenderEmails();
           sweetAlert("success", res.data.msg);
@@ -126,7 +131,9 @@ function SystemSetting() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await axios.delete(`/system/delete_sender_email/${id}`);
+          const res = await axios.delete(
+            `${apiUrl}/system/delete_sender_email/${id}`
+          );
           fetchSenderEmails();
           sweetAlert("success", res.data.msg);
         } catch (error) {

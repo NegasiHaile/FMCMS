@@ -21,8 +21,10 @@ import {
   CModalBody,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import { getConfig } from "../../config";
 const ChangePassword = () => {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [token] = state.token;
   const [Password, setPassword] = useState({
@@ -45,15 +47,16 @@ const ChangePassword = () => {
 
   const onSubmitChangePassword = async (e) => {
     e.preventDefault();
-  const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})");
-  
+    const strongRegex = new RegExp(
+      "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{6,})"
+    );
+
     try {
       if (Password.newPassword === Password.retypeNewPassword) {
         if (Password.oldPassword !== Password.newPassword) {
-          
           if (strongRegex.test(Password.newPassword)) {
             const res = await axios.post(
-              `/user/change_password/${user._id}`,
+              `${apiUrl}/user/change_password/${user._id}`,
               {
                 ...Password,
               },
@@ -69,7 +72,7 @@ const ChangePassword = () => {
               // timer: 1500,
             });
           } else {
-            setShowModal(true)
+            setShowModal(true);
           }
         } else {
           Swal.fire({
@@ -107,8 +110,8 @@ const ChangePassword = () => {
   };
 
   const pw_strength_modal = {
-    borderColor: "#999900"
-  }
+    borderColor: "#999900",
+  };
   return (
     <CRow className="d-flex justify-content-center">
       <CCol xs="12" md="9" lg="7" xl="6">
@@ -160,11 +163,10 @@ const ChangePassword = () => {
                     name="newPassword"
                     placeholder="New Password"
                     autoComplete="new-password"
-                    minLength="6"
                     onChange={onChangeInput}
                     value={Password.newPassword}
                     required
-                    minLength ={6}
+                    minLength={6}
                   />
                   <CInputGroupAppend>
                     <CInputGroupText
@@ -198,11 +200,10 @@ const ChangePassword = () => {
                     placeholder="Repeat new password"
                     autoComplete="new-password"
                     name="retypeNewPassword"
-                    minLength="6"
                     onChange={onChangeInput}
                     value={Password.retypeNewPassword}
                     required
-                    minLength ={6}
+                    minLength={6}
                   />
                   <CInputGroupAppend>
                     <CInputGroupText
@@ -227,11 +228,7 @@ const ChangePassword = () => {
                   )}
               </div>
 
-              <CButton
-                type="submit"
-                className="jptr-btn"
-                block
-              >
+              <CButton type="submit" className="jptr-btn" block>
                 Change Password
               </CButton>
             </CForm>
@@ -240,28 +237,30 @@ const ChangePassword = () => {
         </CCard>
       </CCol>
 
-      
       <CModal
-          show={showModal}
-          onClose={() => setShowModal(!showModal)}
-          style={pw_strength_modal}
-        >
-          <CModalHeader closeButton 
-          className="jptr-bg">
-            <h6 className="text-light">Rules to create strong password.</h6>
-          </CModalHeader>
-          <CModalBody>
-            <h6>Your password must contain:-</h6>
-            <ol >
-              <li >At least 1 lowercase alphabetical character.</li>
-              <li >At least 1 uppercase alphabetical character.</li>
-              <li >At least 1 numeric character.</li>
-              <li >At least 1 special character.</li>
-              <li >At least 6 characters longer.</li>
-            </ol>
-            <p > Also, The New password and Retype password fields must be filled equally.</p>
-            </CModalBody>
-        </CModal>
+        show={showModal}
+        onClose={() => setShowModal(!showModal)}
+        style={pw_strength_modal}
+      >
+        <CModalHeader closeButton className="jptr-bg">
+          <h6 className="text-light">Rules to create strong password.</h6>
+        </CModalHeader>
+        <CModalBody>
+          <h6>Your password must contain:-</h6>
+          <ol>
+            <li>At least 1 lowercase alphabetical character.</li>
+            <li>At least 1 uppercase alphabetical character.</li>
+            <li>At least 1 numeric character.</li>
+            <li>At least 1 special character.</li>
+            <li>At least 6 characters longer.</li>
+          </ol>
+          <p>
+            {" "}
+            Also, The New password and Retype password fields must be filled
+            equally.
+          </p>
+        </CModalBody>
+      </CModal>
     </CRow>
   );
 };

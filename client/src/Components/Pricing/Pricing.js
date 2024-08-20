@@ -24,6 +24,7 @@ import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
 
 import BadRouting from "../Utils/routing/BadRouting";
+import { getConfig } from "../../config";
 
 const pricingDetail = {
   pricingName: "",
@@ -33,6 +34,7 @@ const pricingDetail = {
 
 function Pricing() {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [pricing, setPricing] = useState(pricingDetail);
   const [pricings] = state.PricingAPI.pricings;
@@ -60,7 +62,9 @@ function Pricing() {
   const onSubmitSavePricing = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/pricing/register", { ...pricing });
+      const res = await axios.post(`${apiUrl}/pricing/register`, {
+        ...pricing,
+      });
       sweetAlert("success", res.data.msg);
       setShowModal(!showModal);
       setCallback(!callback);
@@ -72,7 +76,7 @@ function Pricing() {
   const editPricing = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`/pricing/edit/${activePricing}`, {
+      const res = await axios.put(`${apiUrl}/pricing/edit/${activePricing}`, {
         ...pricing,
       });
       sweetAlert("success", res.data.msg);

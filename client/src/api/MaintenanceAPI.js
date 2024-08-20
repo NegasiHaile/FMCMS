@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+
+import { getConfig } from "../config";
+
 function MaintenanceAPI() {
+  const { apiUrl } = getConfig();
   const [maintenances, setMaintenances] = useState([]);
   const [callback, setCallback] = useState(false);
 
   useEffect(() => {
     const getMaintenances = async () => {
-      const res = await axios.get("/maintenance/list");
+      const res = await axios.get(`${apiUrl}/maintenance/list`);
       setMaintenances(res.data);
     };
 

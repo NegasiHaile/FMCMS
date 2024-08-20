@@ -28,9 +28,11 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../config";
 
 const MachinesList = () => {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [token] = state.token;
   const [allMachines] = state.MachineAPI.machines;
@@ -101,7 +103,9 @@ const MachinesList = () => {
   const onSubmitRegisterMachine = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/machine/register", { ...machine });
+      const res = await axios.post(`${apiUrl}/machine/register`, {
+        ...machine,
+      });
       sweetAlert("success", res.data.msg);
       setCallback(!callback);
     } catch (error) {
@@ -112,7 +116,7 @@ const MachinesList = () => {
     e.preventDefault();
     try {
       const res = await axios.put(
-        `/machine/edit/${activemachine}`,
+        `${apiUrl}/machine/edit/${activemachine}`,
         { ...machine },
         {
           headers: { Authorization: token },
@@ -139,7 +143,7 @@ const MachinesList = () => {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.delete(`/machine/delete/${_id}`, {
+          const res = await axios.delete(`${apiUrl}/machine/delete/${_id}`, {
             headers: { Authorization: token },
           });
           Swal.fire("Deleted!", res.data.msg, "success");
@@ -154,7 +158,7 @@ const MachinesList = () => {
   const distributeMachine = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/machine/distribute", {
+      const res = await axios.post(`${apiUrl}/machine/distribute`, {
         ...machine,
         machineId: distributingMachineId,
       });

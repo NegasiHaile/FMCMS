@@ -17,10 +17,12 @@ import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
 
 import BadRouting from "../../Utils/routing/BadRouting";
+import { getConfig } from "../../../config";
 
 function FiscalizationItem() {
   const params = useParams();
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [Sales] = state.SalesAPI.Sales;
   const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
@@ -73,7 +75,7 @@ function FiscalizationItem() {
   };
   const editSalesTechnician = async (id) => {
     try {
-      const res = await axios.put(`/sales/assign_technician/${id}`, {
+      const res = await axios.put(`${apiUrl}/sales/assign_technician/${id}`, {
         technician: salesDetail.technician,
       });
       setCallbackSales(!callbackSales);
@@ -408,6 +410,7 @@ function FiscalizationItem() {
 function FiscalizationOperations() {
   const params = useParams();
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [Sales] = state.SalesAPI.Sales;
   const [salesDetail, setSalesDetail] = useState("");
@@ -452,7 +455,7 @@ function FiscalizationOperations() {
       if (result.isConfirmed) {
         try {
           const res = await axios.put(
-            `/sales/fiscalization/${saleId}/${machineId}`
+            `${apiUrl}/sales/fiscalization/${saleId}/${machineId}`
           );
           Swal.fire("Done!", res.data.msg, "success");
           setCallbackSales(!callbackSales);
@@ -464,54 +467,53 @@ function FiscalizationOperations() {
     });
   };
   const onclickRequestForDelivery = async (saleId) => {
-    
-      Swal.fire({
-        title: "",
-        text: "Are you want to request this machine to customer service for delivery?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3C4B64",
-        cancelButtonColor: "#d33",
-        confirmButtonSize: "sm",
-        confirmButtonText: "Yes, request it!",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          try {
-          const res = await axios.put(`/sales/request_for_delivery/${saleId}`);
+    Swal.fire({
+      title: "",
+      text: "Are you want to request this machine to customer service for delivery?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3C4B64",
+      cancelButtonColor: "#d33",
+      confirmButtonSize: "sm",
+      confirmButtonText: "Yes, request it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axios.put(
+            `${apiUrl}/sales/request_for_delivery/${saleId}`
+          );
           Swal.fire("Done!", res.data.msg, "success");
           setCallbackSales(!callbackSales);
         } catch (error) {
           sweetAlert("error", error.response.data.msg);
         }
-        }
-      });
-    
+      }
+    });
   };
   const onclickComplateDelivery = async (saleId, machineId) => {
-
-      Swal.fire({
-        title: "",
-        text: "Are you this machine sales is delivered to the client?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3C4B64",
-        cancelButtonColor: "#d33",
-        confirmButtonSize: "sm",
-        confirmButtonText: "Yes, it's delivered!",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          try {
-            const res = await axios.put(
-              `/sales/delivery_completing/${saleId}/${machineId}`
-            );
-            setCallbackSales(!callbackSales);
-            setCallbackMachines(!callbackMachines);
-            Swal.fire("Done!", res.data.msg, "success");
-          } catch (error) {
-            sweetAlert("error", error.response.data.msg);
-          }
+    Swal.fire({
+      title: "",
+      text: "Are you this machine sales is delivered to the client?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3C4B64",
+      cancelButtonColor: "#d33",
+      confirmButtonSize: "sm",
+      confirmButtonText: "Yes, it's delivered!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axios.put(
+            `${apiUrl}/sales/delivery_completing/${saleId}/${machineId}`
+          );
+          setCallbackSales(!callbackSales);
+          setCallbackMachines(!callbackMachines);
+          Swal.fire("Done!", res.data.msg, "success");
+        } catch (error) {
+          sweetAlert("error", error.response.data.msg);
         }
-      });
+      }
+    });
   };
   return (
     <>

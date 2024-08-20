@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { getConfig } from "../config";
 function SIMCardAPI() {
+  const { apiUrl } = getConfig();
   const [simCards, setSIMCards] = useState([]);
   const [callback, setCallback] = useState(false);
 
   useEffect(() => {
     const getSIMCards = async () => {
-      const res = await axios.get("/sim_card/list");
+      const res = await axios.get(`${apiUrl}/sim_card/list`);
       setSIMCards(res.data);
     };
 

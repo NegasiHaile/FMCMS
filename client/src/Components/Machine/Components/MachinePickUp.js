@@ -18,6 +18,7 @@ import {
   CLink,
   CTooltip,
 } from "@coreui/react";
+import { getConfig } from "../../../config";
 function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
   const pickupDetail = {
     branchId: user.branch,
@@ -57,6 +58,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
   };
 
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [maintenances] = state.MachinePickUpAPI.machinePickups;
   const [pricings] = state.PricingAPI.pricings;
   const [onEdit, setOnEdit] = useState(false);
@@ -148,11 +150,13 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     e.preventDefault();
     try {
       if (onEdit) {
-        const res = await axios.put(`/pickup/edit/${pickupId}`, { ...pickup });
+        const res = await axios.put(`${apiUrl}/pickup/edit/${pickupId}`, {
+          ...pickup,
+        });
         sweetAlert("success", res.data.msg);
         setCallbackMachinePickup(!callbackMachinePickup);
       } else {
-        const res = await axios.post("/pickup/machine", {
+        const res = await axios.post(`${apiUrl}/pickup/machine`, {
           ...pickup,
         });
         setCallbackMachinePickup(!callbackMachinePickup);
@@ -164,7 +168,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
   };
   const editmaintenanceTechnician = async (id) => {
     try {
-      const res = await axios.put(`/pickup/assign_technician/${id}`, {
+      const res = await axios.put(`${apiUrl}/pickup/assign_technician/${id}`, {
         technicianId: pickup.technician,
       });
       setCallbackMachinePickup(!callbackMachinePickup);
@@ -344,11 +348,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="memoryKey"
                             name="memoryKey"
                             value={pickup.memoryKey}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.memoryKey}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                       </CRow>
@@ -361,11 +364,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="drawer"
                             name="drawer"
                             value={pickup.drawer}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.drawer}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                       </CRow>
@@ -378,11 +380,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="paper"
                             name="paper"
                             value={pickup.paper}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.paper}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                       </CRow>
@@ -395,11 +396,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="terminal"
                             name="terminal"
                             value={pickup.terminal}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.terminal}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                       </CRow>
@@ -414,11 +414,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="terminalAdapte"
                             name="terminalAdapte"
                             value={pickup.terminalAdapte}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.terminalAdapte}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                       </CRow>
@@ -431,11 +430,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="machineMaterial"
                             name="machineMaterial"
                             value={pickup.machineMaterial}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.machineMaterial}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                       </CRow>
@@ -448,11 +446,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="SBookTerminal"
                             name="SBookTerminal"
                             value={pickup.SBookTerminal}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.SBookTerminal}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                       </CRow>
@@ -465,11 +462,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="SbookMachine"
                             name="SbookMachine"
                             value={pickup.SbookMachine}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.SbookMachine}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                       </CRow>
@@ -484,11 +480,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="paperRoller"
                             name="paperRoller"
                             value={pickup.paperRoller}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.paperRoller}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                       </CRow>
@@ -501,11 +496,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="paperCover"
                             name="paperCover"
                             value={pickup.paperCover}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.paperCover}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                       </CRow>
@@ -518,11 +512,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="machineAdapter"
                             name="machineAdapter"
                             value={pickup.machineAdapter}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.machineAdapter}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                       </CRow>
@@ -535,11 +528,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="FDForm"
                             name="FDForm"
                             value={pickup.FDForm}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.FDForm}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                       </CRow>
@@ -553,11 +545,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="sealNumber"
                             name="sealNumber"
                             value={pickup.sealNumber}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.sealNumber}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                         <CCol className="col-3 d-flex justify-content-between">
@@ -566,11 +557,10 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             id="MRCNumber"
                             name="MRCNumber"
                             value={pickup.MRCNumber}
-                            className="p-3"
+                            className="p-3 jptr_checkBox"
                             type="checkbox"
                             checked={pickup.MRCNumber}
                             onChange={handleCheckboxChange}
-                            className="jptr_checkBox"
                           />
                         </CCol>
                         <CCol className="d-flex justify-content-between">
@@ -777,7 +767,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
                             </CFormGroup>
                           </CCol>
 
-                          <CCol className="col-2" className="pt-3">
+                          <CCol className="col-2 pt-3">
                             <CButton
                               size="sm"
                               color="dark"

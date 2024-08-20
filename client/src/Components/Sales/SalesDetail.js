@@ -6,10 +6,12 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { format } from "timeago.js";
 import { CButton, CCard, CCardBody, CLink, CRow, CCol } from "@coreui/react";
+import { getConfig } from "../../config";
 
 function SalesDetail() {
   const params = useParams();
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [Sales] = state.SalesAPI.Sales;
   const [salesDetail, setSalesDetail] = useState("");
@@ -55,7 +57,7 @@ function SalesDetail() {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const res = await axios.put(
-            `/sales/Approve_sales_Request/${saleId}/${machineId}/${businessId}`
+            `${apiUrl}/sales/Approve_sales_Request/${saleId}/${machineId}/${businessId}`
           );
           setCallbackMachines(callbackMachines);
           setCallbackSales(!callbackSales);
@@ -83,7 +85,7 @@ function SalesDetail() {
         try {
           if (result.isConfirmed) {
             const res = await axios.put(
-              `/sales/request_for_fiscalization/${saleId}/${machineId}`
+              `${apiUrl}/sales/request_for_fiscalization/${saleId}/${machineId}`
             );
             setCallbackMachines(callbackMachines);
             setCallbackSales(!callbackSales);

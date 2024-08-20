@@ -15,6 +15,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../config";
 function DistributeSIMCard() {
   const simCardDistributionFields = {
     branchId: "",
@@ -25,7 +26,7 @@ function DistributeSIMCard() {
   );
 
   const state = useContext(GlobalState);
-  const [user] = state.UserAPI.User;
+  const { apiUrl } = getConfig();
   const [allSIMCards] = state.SIMCardAPI.simCards;
   const [undistributedSIMCards, setUndistributedSIMCards] = useState([]);
 
@@ -59,7 +60,7 @@ function DistributeSIMCard() {
   const onSubmitSIMCardDistribution = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put("/sim_card/distribution", {
+      const res = await axios.put(`${apiUrl}/sim_card/distribution`, {
         ...simCardDistribution,
       });
       sweetAlert("success", res.data.msg);

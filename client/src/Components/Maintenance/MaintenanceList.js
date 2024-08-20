@@ -6,25 +6,26 @@ import { CButton } from "@coreui/react";
 
 import { useReactToPrint } from "react-to-print";
 const MaintenanceListTableStyle = { marginTop: "30px" };
-class ComponentToPrint extends React.Component {
-  render() {
-    return (
-      <div style={MaintenanceListTableStyle}>
-        <MaintenanceListTable />
-      </div>
-    );
-  }
-}
+
+const ComponentToPrint = () => {
+  return (
+    <div style={MaintenanceListTableStyle}>
+      <MaintenanceListTable />
+    </div>
+  );
+};
 
 const MaintenanceList = () => {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const componentRef = useRef();
+
+  const style = { overflowX: "scroll" };
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
 
-  const style = { overflowX: "scroll" };
   return (
     <div>
       <div
@@ -42,7 +43,6 @@ const MaintenanceList = () => {
             user.userRole === "customer-service") && (
             <>
               <CButton size="sm" className="jptr-btn" onClick={handlePrint}>
-                {" "}
                 Print this out!
               </CButton>
             </>

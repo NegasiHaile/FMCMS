@@ -26,10 +26,12 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../config";
 
 const BusinessRegistration = () => {
   const state = useContext(GlobalState);
   const params = useParams();
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
 
   const businessDetail = {
@@ -131,7 +133,7 @@ const BusinessRegistration = () => {
     try {
       if (onEdit) {
         const res = await axios.put(
-          `/business/edit/${params.businessId}`,
+          `${apiUrl}/business/edit/${params.businessId}`,
           formData
         );
         SweetAlert("success", res.data.msg);
@@ -145,7 +147,7 @@ const BusinessRegistration = () => {
         );
 
         if (newBusiness.length === 0) {
-          const res = await axios.post("/business/register", formData);
+          const res = await axios.post(`${apiUrl}/business/register`, formData);
           SweetAlert("success", res.data.msg);
           setCallback(!callback);
         } else {

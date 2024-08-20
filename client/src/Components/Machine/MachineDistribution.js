@@ -17,9 +17,11 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../config";
 
 function MachineDistribution() {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [allMachines] = state.MachineAPI.machines;
   const [machineBrands, setMachineBrands] = useState("");
@@ -61,7 +63,7 @@ function MachineDistribution() {
   const onSubmitMachineDistribution = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/machine/distribution", {
+      const res = await axios.post(`${apiUrl}/machine/distribution`, {
         ...machineDistribution,
       });
       setmachineDistribution(distributingDetail);

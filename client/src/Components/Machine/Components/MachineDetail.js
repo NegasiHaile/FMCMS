@@ -31,9 +31,11 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../../config";
 
 function MachineDetail({ id }) {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [machines] = state.MachineAPI.machines;
   const [branchs] = state.branchAPI.branchs;
@@ -98,14 +100,14 @@ function MachineDetail({ id }) {
   const assignMRCorSIM = async (e) => {
     e.preventDefault();
     if (onMRCEdit) {
-      const res = await axios.put(`/machine/assigne_mrc/${id}`, {
+      const res = await axios.put(`${apiUrl}/machine/assigne_mrc/${id}`, {
         ...assignementDetail,
       });
       setMRCCallback(!mrcCallback);
       setMachineCallback(!machineCallback);
       sweetAlert("success", res.data.msg);
     } else if (onSIMEdit) {
-      const res = await axios.put(`/machine/assigne_sim/${id}`, {
+      const res = await axios.put(`${apiUrl}/machine/assigne_sim/${id}`, {
         ...assignementDetail,
       });
       setSIMCardCallback(!simCardcallback);

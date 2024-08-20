@@ -16,9 +16,11 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../config";
 
 function MRCDistribution() {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [mrcs] = state.MRCAPI.mrcs;
   const [allBranchs] = state.branchAPI.branchs;
@@ -50,7 +52,7 @@ function MRCDistribution() {
   const onSubmitMRCDistribution = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put("/mrc/distribution_by_range", {
+      const res = await axios.put(`${apiUrl}/mrc/distribution_by_range`, {
         ...mrcDistribution,
       });
       sweetAlert("success", res.data.msg);

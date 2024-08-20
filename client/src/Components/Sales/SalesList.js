@@ -5,9 +5,11 @@ import Swal from "sweetalert2";
 import { GlobalState } from "../../GlobalState";
 import { CCard, CCardBody, CDataTable, CLink, CTooltip } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import { getConfig } from "../../config";
 
 function SalesList() {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [Sales] = state.SalesAPI.Sales;
   const [salesToDisplay, setSalesToDisplay] = useState([]);
@@ -50,7 +52,9 @@ function SalesList() {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.put(`/sales/cancel_unapprove_sale/${saleId}`);
+          const res = await axios.put(
+            `${apiUrl}/sales/cancel_unapprove_sale/${saleId}`
+          );
           setCallbackSales(!callbackSales);
           setCallbackMachines(!callbackMachines);
           setCallbackBusiness(!callbackBusiness);

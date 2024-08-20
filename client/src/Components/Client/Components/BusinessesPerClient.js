@@ -5,8 +5,10 @@ import { CLink, CTooltip } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { getConfig } from "../../../config";
 function BusinessesPerClient({ clientId }) {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [allAusinesses] = state.BusinessAPI.businesses;
   const [OwnerBusinesses, setOwnerBusinesses] = useState([]);
@@ -44,7 +46,7 @@ function BusinessesPerClient({ clientId }) {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.delete(`/business/delete/${_id}`);
+          const res = await axios.delete(`${apiUrl}/business/delete/${_id}`);
           Swal.fire("Deleted!", res.data.msg, "success");
           setCallback(!callback);
         }

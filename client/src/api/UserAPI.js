@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { getConfig } from "../config";
 
 function UserAPI(token) {
+  const { apiUrl } = getConfig();
   const [isLogged, setIsLogged] = useState(false);
   const [User, setUser] = useState();
 
@@ -9,7 +11,7 @@ function UserAPI(token) {
     if (token) {
       const getUser = async () => {
         try {
-          const res = await axios.get("/user/profile", {
+          const res = await axios.get(`${apiUrl}/user/profile`, {
             headers: { Authorization: token },
           });
 

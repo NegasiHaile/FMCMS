@@ -13,9 +13,11 @@ import {
   CTooltip,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import { getConfig } from "../../config";
 
 const BusinessesList = () => {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [allAusinesses] = state.BusinessAPI.businesses;
   const [businesses, setBusinesses] = useState(allAusinesses);
@@ -61,7 +63,7 @@ const BusinessesList = () => {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.delete(`/business/delete/${_id}`);
+          const res = await axios.delete(`${apiUrl}/business/delete/${_id}`);
           Swal.fire("Deleted!", res.data.msg, "success");
           setCallback(!callback);
         }

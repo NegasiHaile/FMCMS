@@ -24,6 +24,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../config";
 
 const mrcDetail = {
   MRC: "",
@@ -31,6 +32,7 @@ const mrcDetail = {
 
 function MrcsList() {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [allMRCs] = state.MRCAPI.mrcs;
   const [mrcs, setMRCs] = useState([]);
@@ -69,12 +71,12 @@ function MrcsList() {
     e.preventDefault();
     try {
       if (onEdit) {
-        const res = await axios.put(`/mrc/edit`, { ...mrc });
+        const res = await axios.put(`${apiUrl}/mrc/edit`, { ...mrc });
         setShowModal(!showModal);
         setMRCCallBack(!mrcCallBack);
         sweetAlert("success", res.data.msg);
       } else {
-        const res = await axios.post("/mrc/register", { ...mrc });
+        const res = await axios.post(`${apiUrl}/mrc/register`, { ...mrc });
         setShowModal(!showModal);
         setMRCCallBack(!mrcCallBack);
         sweetAlert("success", res.data.msg);
@@ -96,7 +98,7 @@ function MrcsList() {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.delete(`/mrc/delete/${id}`);
+          const res = await axios.delete(`${apiUrl}/mrc/delete/${id}`);
           Swal.fire("Deleted!", res.data.msg, "success");
 
           setMRCCallBack(!mrcCallBack);
@@ -156,38 +158,40 @@ function MrcsList() {
               Actions: (mrc) => (
                 <>
                   <td className="d-flex justify-content-between">
-                    {mrc.status === "free" && user.userRole === "main-store" && (
-                      <>
-                        {" "}
-                        <CLink
-                          className="text-success"
-                          onClick={() => {
-                            setMRC({ ...mrc });
-                            setOnEdit(true);
-                            setShowModal(!showModal);
-                          }}
-                        >
-                          <CTooltip content={`Edit - ${mrc.MRC} - MRC.`}>
-                            <CIcon name="cil-pencil" />
-                          </CTooltip>
-                        </CLink>
-                        <span className="text-muted">|</span>{" "}
-                      </>
-                    )}
-                    {mrc.branch === "none" && user.userRole === "main-store" && (
-                      <>
-                        <CLink
-                          className="text-danger"
-                          onClick={() => deleteMRC(mrc._id)}
-                        >
-                          <CTooltip content={`Delete - ${mrc.MRC} - MRC.`}>
-                            <CIcon name="cil-trash" />
-                          </CTooltip>
-                        </CLink>
+                    {mrc.status === "free" &&
+                      user.userRole === "main-store" && (
+                        <>
+                          {" "}
+                          <CLink
+                            className="text-success"
+                            onClick={() => {
+                              setMRC({ ...mrc });
+                              setOnEdit(true);
+                              setShowModal(!showModal);
+                            }}
+                          >
+                            <CTooltip content={`Edit - ${mrc.MRC} - MRC.`}>
+                              <CIcon name="cil-pencil" />
+                            </CTooltip>
+                          </CLink>
+                          <span className="text-muted">|</span>{" "}
+                        </>
+                      )}
+                    {mrc.branch === "none" &&
+                      user.userRole === "main-store" && (
+                        <>
+                          <CLink
+                            className="text-danger"
+                            onClick={() => deleteMRC(mrc._id)}
+                          >
+                            <CTooltip content={`Delete - ${mrc.MRC} - MRC.`}>
+                              <CIcon name="cil-trash" />
+                            </CTooltip>
+                          </CLink>
 
-                        <span className="text-muted">|</span>
-                      </>
-                    )}
+                          <span className="text-muted">|</span>
+                        </>
+                      )}
                     {
                       <p>
                         <FilterMachine mrcId={mrc._id} filterBy="mrc" />

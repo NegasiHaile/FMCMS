@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { GlobalState } from "../../GlobalState";
 import {
   CButton,
   CCard,
@@ -16,10 +15,11 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { useParams } from "react-router-dom";
+import { getConfig } from "../../config";
 
 function RequestMachineReturn() {
-  const state = useContext(GlobalState);
   const params = useParams();
+  const { apiUrl } = getConfig();
   const [retuenMachineReason, setretuenMachineReason] = useState({
     salesId: params.salesId,
     returnReason: "",
@@ -48,7 +48,7 @@ function RequestMachineReturn() {
     formData.append("acceptanceFile", retuenMachineReason.acceptanceFile);
     try {
       const res = await axios.post(
-        "/business/return_machine_request",
+        `${apiUrl}/business/return_machine_request`,
         formData
       );
       alert(res.data.msg);

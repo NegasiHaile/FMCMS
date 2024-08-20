@@ -25,6 +25,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import Swal from "sweetalert2";
+import { getConfig } from "../../config";
 
 const branchDetail = {
   branchName: "",
@@ -40,6 +41,7 @@ const branchDetail = {
 
 function BranchsList() {
   const state = useContext(GlobalState);
+  const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
   const [token] = state.token;
   const [branch, setBranch] = useState(branchDetail);
@@ -83,7 +85,7 @@ function BranchsList() {
   const onSubmitOpenBranch = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/branch/open_new", { ...branch });
+      const res = await axios.post(`${apiUrl}/branch/open_new`, { ...branch });
       sweetAlert("success", res.data.msg);
       setShowModal(!showModal);
       setCallback(!callback);
@@ -96,7 +98,7 @@ function BranchsList() {
     e.preventDefault();
     try {
       const res = await axios.put(
-        `/branch/edit/${activeBranch}`,
+        `${apiUrl}/branch/edit/${activeBranch}`,
         { ...branch },
         {
           headers: { Authorization: token },
@@ -122,7 +124,7 @@ function BranchsList() {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.delete(`/branch/delete/${_id}`, {
+          const res = await axios.delete(`${apiUrl}/branch/delete/${_id}`, {
             headers: { Authorization: token },
           });
           Swal.fire("Deleted!", res.data.msg, "success");
