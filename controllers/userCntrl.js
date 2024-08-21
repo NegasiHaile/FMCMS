@@ -160,10 +160,10 @@ const userCntrl = {
       res.cookie("refreshtoken", refreshtoken, {
         httpOnly: true,
         path: "/user/refresh_token",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
 
-      res.json({ accesstoken });
+      res.json({ accesstoken, refreshtoken });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
@@ -345,7 +345,8 @@ const userCntrl = {
 
   refreshToken: (req, res) => {
     try {
-      const rf_token = req.cookies.refreshtoken;
+      // Cookie is not working now, fix this later
+      const rf_token = process.env.TEMPORARY_REFRESH_TOKEN; //req.cookies.refreshtoken;
       if (!rf_token) return res.status(400).json({ msg: "Please Login!" });
 
       jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
