@@ -23,22 +23,19 @@ app.use("/pickup", require("./routes/machinePickupRouter"));
 app.use("/pricing", require("./routes/pricingRouter"));
 app.use("/system", require("./routes/systemRouter"));
 
-// Connect to mongodb
-const URI = process.env.MONGODB_URL;
-// const URI = process.env.LOCAL_MONGODB_URL;
-mongoose.connect(
-  URI,
-  {
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  (err) => {
-    if (err) throw err;
-    console.log("Connected to MongoDB");
+const MONGODB_URI = process.env.MONGODB_URL;
+const connectDB = async () => {
+  try {
+    await mongoose.connect(MONGODB_URI);
+    console.log("MONGODB CONNECTED!");
+  } catch (err) {
+    console.error("MONGODB CONNECTION ERROR:", err);
+    process.exit(1); // Exit process with failure
   }
-);
+};
+
+// Connect to mongodb
+connectDB();
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -49,7 +46,7 @@ if (process.env.NODE_ENV === "production") {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log("Server is running on port", PORT);
+  console.log("SERVER IS RUNNING ON PORT", PORT);
 });
 
 // ways to make the file uploading work on the poroduction
