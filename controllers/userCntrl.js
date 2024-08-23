@@ -143,11 +143,11 @@ const userCntrl = {
           $regex: new RegExp(email, "i"),
         },
       });
-
-      if (!user) return res.status(400).json({ msg: "User does not exist." });
-
       const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) return res.status(400).json({ msg: "Incorrect password." });
+      if (!user || !isMatch)
+        return res
+          .status(400)
+          .json({ msg: "Oops! Incorect user credentials!" });
 
       if (user.status !== "ON")
         return res.status(400).json({
@@ -161,6 +161,8 @@ const userCntrl = {
         httpOnly: true,
         path: "/user/refresh_token",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
       });
 
       res.json({ accesstoken });

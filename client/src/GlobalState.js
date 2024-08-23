@@ -33,6 +33,7 @@ export const DataProvider = ({ children }) => {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
           },
+          credentials: "include",
         });
 
         setToken(res.data.accesstoken);

@@ -46,6 +46,7 @@ const Login = () => {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
           },
+          credentials: "include",
         }
       );
       console.log("LogedInUSER:", usr);
