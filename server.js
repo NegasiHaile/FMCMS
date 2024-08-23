@@ -9,7 +9,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://fmcms.vercel.app", "http://localhost:3000"],
+    origin: "https://fmcms.vercel.app",
     credentials: true,
     optionsSuccessStatus: 200,
   })

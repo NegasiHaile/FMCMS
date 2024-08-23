@@ -161,8 +161,8 @@ const userCntrl = {
         httpOnly: true,
         path: "/user/refresh_token",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
       });
 
       res.json({ accesstoken });

@@ -49,7 +49,6 @@ const Login = () => {
           credentials: "include",
         }
       );
-      console.log("LogedInUSER:", usr);
 
       localStorage.setItem("firstLogin", true);
 
