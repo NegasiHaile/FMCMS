@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { format } from "timeago.js";
+// import { format } from "timeago.js";
 import { GlobalState } from "../../GlobalState";
 import {
   CBadge,
@@ -135,7 +135,8 @@ const TheHeaderDropdownMaint = () => {
                           : pickup.status}
                       </small>
                       <small className=" float-right mt-1">
-                        {format(pickup.updatedAt)}
+                        3 days ago
+                        {/* {format(pickup.updatedAt)} */}
                       </small>
                     </div>
                     <div

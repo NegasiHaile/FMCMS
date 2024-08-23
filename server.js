@@ -6,9 +6,18 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 
 const app = express();
+
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://fmcms.vercel.app"],
+    credentials: true,
+    optionsSuccessStatus: 200,
+  })
+);
+
 app.use(express.json());
+
 app.use(cookieParser());
-app.use(cors());
 
 //Routes
 app.use("/user", require("./routes/userRouter"));

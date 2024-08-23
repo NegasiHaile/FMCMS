@@ -37,7 +37,18 @@ const Login = () => {
     e.preventDefault();
     setBtnLoading(true);
     try {
-      await axios.post(`${apiUrl}/user/login`, { ...user });
+      const usr = await axios.post(
+        `${apiUrl}/user/login`,
+        { ...user },
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("LogedInUSER:", usr);
 
       localStorage.setItem("firstLogin", true);
 

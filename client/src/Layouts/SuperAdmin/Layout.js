@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import SuperAdminSidbar from "./Sidebar";
 
 import SuperAdminHeader from "./Header";
@@ -8,19 +8,18 @@ import SuperAdminContent from "./Contents";
 import PrivateFooter from "../../Components/Footer/PrivateFooter";
 
 const SuperAdminLayout = () => {
-
   return (
     <div className="c-app c-default-layout">
-      <SuperAdminSidbar/>
+      <SuperAdminSidbar />
       <div className="c-wrapper">
-        <SuperAdminHeader/>
+        <SuperAdminHeader />
         <div className="c-body">
-          <SuperAdminContent/>
+          <SuperAdminContent />
         </div>
-        <PrivateFooter/>
+        <PrivateFooter />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SuperAdminLayout
+export default SuperAdminLayout;

@@ -4,7 +4,7 @@ import { GlobalState } from "../../GlobalState";
 import BadRouting from "../Utils/routing/BadRouting";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { format } from "timeago.js";
+// import { format } from "timeago.js";
 import { CButton, CCard, CCardBody, CLink, CRow, CCol } from "@coreui/react";
 import { getConfig } from "../../config";
 
@@ -140,7 +140,10 @@ function SalesDetail() {
                     {formatDate(salesDetail.createdAt)}
                   </span>
                   <p>
-                    <small>{format(salesDetail.createdAt)}</small>
+                    <small>
+                      1 month ago
+                      {/* {format(salesDetail.createdAt)} */}
+                    </small>
                   </p>
                 </h6>
               </CCol>
@@ -151,7 +154,10 @@ function SalesDetail() {
                     {salesDetail.status}
                   </span>
                   <p>
-                    <small> {format(salesDetail.updatedAt)}</small>
+                    <small>
+                      3 monthes ago
+                      {/* {format(salesDetail.updatedAt)} */}
+                    </small>
                   </p>
                 </h6>
 

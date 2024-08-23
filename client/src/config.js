@@ -8,7 +8,7 @@ const config = {
 };
 
 export const getConfig = () => {
-  return process.env.NODE_ENV == "production"
+  return process.env.NODE_ENV === "production"
     ? config.production
     : config.development;
 };

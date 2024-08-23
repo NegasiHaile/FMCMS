@@ -10,8 +10,12 @@ function MaintenanceAPI() {
 
   useEffect(() => {
     const getMaintenances = async () => {
-      const res = await axios.get(`${apiUrl}/maintenance/list`);
-      setMaintenances(res.data);
+      try {
+        const res = await axios.get(`${apiUrl}/maintenance/list`);
+        setMaintenances(res.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     getMaintenances();

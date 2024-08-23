@@ -32,8 +32,7 @@
     "react-to-print": "^2.15.1",
     "redux": "^4.0.5",
     "sass": "^1.32.8",
-    "sweetalert2": "^11.0.19",
-    "timeago.js": "^4.0.2"
+    "sweetalert2": "^11.0.19"
   },
   "devDependencies": {
     "@babel/core": "^7.13.14",
@@ -68,5 +67,6 @@
   "engines": {
     "node": ">=10",
     "npm": ">=6"
-  }
+  },
+  "proxy": "http://localhost:5000/"
 }

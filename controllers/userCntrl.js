@@ -163,7 +163,7 @@ const userCntrl = {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
 
-      res.json({ accesstoken, refreshtoken });
+      res.json({ accesstoken });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
@@ -182,7 +182,7 @@ const userCntrl = {
 
   logout: async (req, res) => {
     try {
-      res.clearCookie("refreshtoken", { path: "/users/refresh_token" });
+      res.clearCookie("refreshtoken", { path: "/user/refresh_token" });
       return res.json({ msg: "Logged out" });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
@@ -346,7 +346,7 @@ const userCntrl = {
   refreshToken: (req, res) => {
     try {
       // Cookie is not working now, fix this later
-      const rf_token = process.env.TEMPORARY_REFRESH_TOKEN; //req.cookies.refreshtoken;
+      const rf_token = req.cookies.refreshtoken;
       if (!rf_token) return res.status(400).json({ msg: "Please Login!" });
 
       jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
