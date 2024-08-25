@@ -29,15 +29,15 @@
   left: 50%;
   top: 50%;
   z-index: 1;
-  width: 120px;
-  height: 120px;
+  width: 60px;
+  height: 60px;
   margin: -76px 0 0 -76px;
-  border: 16px solid #c8c8c8;
+  border: 5px solid #c8c8c8;
   border-radius: 50%;
-  border-top: 16px solid #999900;
-  border-bottom: 16px solid #999900;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
+  border-top: 5px solid #999900;
+  // border-bottom: 5px solid #878767;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
 }
 .jptr-btn {
   background-color: #999900;
