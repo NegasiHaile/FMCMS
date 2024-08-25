@@ -94,7 +94,7 @@ const Login = () => {
                 <CCol md="11" className="mt-3">
                   <h5 className="text-center text-muted">WELCOME</h5>
                   <p className="text-center  text-muted">
-                    JuPiTeR-Trading-FMCMS Sign in!
+                    Demer-FMCMS sign in!
                   </p>
                 </CCol>
                 <CCol md="11" className="my-5">

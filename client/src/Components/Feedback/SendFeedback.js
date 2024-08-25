@@ -78,7 +78,7 @@ function SendFeedback() {
         {/* show pdf conditionally (if we have one)  */}
         {viewPdf && (
           <>
-            <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.9.359/build/pdf.worker.min.js">
+            <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js">
               <Viewer
                 fileUrl={viewPdf}
                 plugins={[defaultLayoutPluginInstance]}

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { GlobalState } from "../../GlobalState";
 import { useParams } from "react-router-dom";
-
 import BusinessOverview from "./BusinessOverview";
 
 import {
@@ -166,7 +165,7 @@ const BusinessRegistration = () => {
     <CRow>
       <CCol xs="12" className="mb-4">
         <CCard>
-          <CCardHeader>Enter the detail of the business.</CCardHeader>
+          <CCardHeader>Enter business detail.</CCardHeader>
           <CCardBody>
             <CTabs>
               <CNav variant="tabs">
@@ -182,7 +181,7 @@ const BusinessRegistration = () => {
                 </CNavItem>
                 <CNavItem>
                   <CNavLink>
-                    <CIcon name="cil-contact"></CIcon> Others
+                    <CIcon name="cil-contact"></CIcon> Document
                   </CNavLink>
                 </CNavItem>
 
@@ -333,7 +332,7 @@ const BusinessRegistration = () => {
                       </CCol>
 
                       <CCol xs="12">
-                        Contacts of the business.
+                        Bussines contact detail.
                         <hr />
                       </CCol>
 
@@ -438,7 +437,7 @@ const BusinessRegistration = () => {
                         </CCol>
                       )}
                       <CCol xs="12">
-                        Upload neccessary files of business
+                        Upload neccessary files of the business.
                         <hr />
                       </CCol>
                       <CCol sm="12" md="6">

@@ -67,7 +67,7 @@ const RegisterEmployee = (props) => {
       icon: type,
       text: text,
       confirmButtonColor: "#1E263C",
-      showConfirmButton: false,
+      showConfirmButton: true,
       // timer: 1500,
     });
   };

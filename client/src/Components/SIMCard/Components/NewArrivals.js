@@ -58,7 +58,7 @@ function NewArrivals({ newArrivals }) {
             color="danger"
             onClick={() => approveSIMCardFromBranchStore("all", user.branch)}
           >
-            Approve all one
+            Approve all
           </CButton>
         )}
       </div>
@@ -89,7 +89,7 @@ function NewArrivals({ newArrivals }) {
                     color="dark"
                     onClick={() => approveSIMCardFromBranchStore(SIMCard._id)}
                   >
-                    Approve this
+                    Approve
                   </CButton>
                 </td>
               </tr>
