@@ -64,7 +64,7 @@ function BusinessOverview(props) {
           </span>
           <span className="d-flex justify-content-between">
             <span>Sub City: </span>
-            <span>{business.SubCity}</span>
+            <span>{business.subCity}</span>
           </span>
           <span className="d-flex justify-content-between">
             <span>Kebele: </span>
