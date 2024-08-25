@@ -64,7 +64,7 @@ function BusinessOverview(props) {
           </span>
           <span className="d-flex justify-content-between">
             <span>Sub City: </span>
-            <span>{business.SubCity}</span>
+            <span>{business.subCity}</span>
           </span>
           <span className="d-flex justify-content-between">
             <span>Kebele: </span>
@@ -117,7 +117,7 @@ function BusinessOverview(props) {
             {/* show pdf conditionally (if we have one)  */}
             {viewPdf && (
               <>
-                <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.9.359/build/pdf.worker.min.js">
+                <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js">
                   <Viewer
                     fileUrl={viewPdf}
                     plugins={[defaultLayoutPluginInstance]}

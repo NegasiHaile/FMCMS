@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { GlobalState } from "../../GlobalState";
 import { useParams } from "react-router-dom";
-
 import BusinessOverview from "./BusinessOverview";
 
 import {
@@ -110,6 +109,8 @@ const BusinessRegistration = () => {
   const onSubmitSaveBusinessDetail = async (e) => {
     e.preventDefault();
 
+    alert("Here we go!");
+
     const formData = new FormData();
     formData.append("ownerID", business.ownerID);
     formData.append("TIN", business.TIN);
@@ -130,35 +131,42 @@ const BusinessRegistration = () => {
     formData.append("sw_Tech", business.sw_Tech);
     formData.append("credentials", business.credentials);
 
-    try {
-      if (onEdit) {
-        const res = await axios.put(
-          `${apiUrl}/business/edit/${params.businessId}`,
-          formData
-        );
-        SweetAlert("success", res.data.msg);
-        setCallback(!callback);
-      } else {
-        var newBusiness = businesses.filter(
-          (filteredBusiness) =>
-            filteredBusiness.TIN === business.TIN ||
-            filteredBusiness.VAT === business.VAT ||
-            filteredBusiness.tradeName === business.tradeName
-        );
-
-        if (newBusiness.length === 0) {
-          const res = await axios.post(`${apiUrl}/business/register`, formData);
+    if (business.TIN && business.tradeName && business.VAT) {
+      try {
+        if (onEdit) {
+          const res = await axios.put(
+            `${apiUrl}/business/edit/${params.businessId}`,
+            formData
+          );
           SweetAlert("success", res.data.msg);
           setCallback(!callback);
         } else {
-          SweetAlert(
-            "error",
-            `TIN, business name or the VAT; one of them are taken by another business please check the details! `
+          var newBusiness = businesses.filter(
+            (filteredBusiness) =>
+              filteredBusiness.TIN === business.TIN ||
+              filteredBusiness.VAT === business.VAT ||
+              filteredBusiness.tradeName === business.tradeName
           );
+
+          if (newBusiness.length === 0) {
+            const res = await axios.post(
+              `${apiUrl}/business/register`,
+              formData
+            );
+            SweetAlert("success", res.data.msg);
+            setCallback(!callback);
+          } else {
+            SweetAlert(
+              "error",
+              `TIN, business name or the VAT; one of them are taken by another business please check the details! `
+            );
+          }
         }
+      } catch (error) {
+        SweetAlert("error", error.response.data.msg);
       }
-    } catch (error) {
-      SweetAlert("error", error.response.data.msg);
+    } else {
+      SweetAlert("error", "TIN, Trade Name and VAT are required!");
     }
   };
 
@@ -166,7 +174,7 @@ const BusinessRegistration = () => {
     <CRow>
       <CCol xs="12" className="mb-4">
         <CCard>
-          <CCardHeader>Enter the detail of the business.</CCardHeader>
+          <CCardHeader>Enter business detail.</CCardHeader>
           <CCardBody>
             <CTabs>
               <CNav variant="tabs">
@@ -182,7 +190,7 @@ const BusinessRegistration = () => {
                 </CNavItem>
                 <CNavItem>
                   <CNavLink>
-                    <CIcon name="cil-contact"></CIcon> Others
+                    <CIcon name="cil-contact"></CIcon> Document
                   </CNavLink>
                 </CNavItem>
 
@@ -193,7 +201,7 @@ const BusinessRegistration = () => {
                 </CNavItem>
               </CNav>
               <CForm
-                onSubmit={onSubmitSaveBusinessDetail}
+                // onSubmit={onSubmitSaveBusinessDetail}
                 action="POST"
                 encType="multipart/form-data"
               >
@@ -235,8 +243,6 @@ const BusinessRegistration = () => {
                             placeholder="Enter bussiness TIN."
                             value={business.TIN}
                             onChange={onChangeInput}
-                            minLength="10"
-                            maxLength="10"
                             required
                           />
                         </CFormGroup>
@@ -333,7 +339,7 @@ const BusinessRegistration = () => {
                       </CCol>
 
                       <CCol xs="12">
-                        Contacts of the business.
+                        Bussines contact detail.
                         <hr />
                       </CCol>
 
@@ -437,21 +443,20 @@ const BusinessRegistration = () => {
                           </CFormGroup>
                         </CCol>
                       )}
-                      <CCol xs="12">
-                        Upload neccessary files of business
-                        <hr />
-                      </CCol>
+
                       <CCol sm="12" md="6">
                         <CFormGroup>
                           <CLabel htmlFor="formFile">
-                            File size not more than (5MB)
+                            Upload neccessary files of the business (PDF file
+                            size less than 5MB)
                           </CLabel>
                           <CInput
                             id="TL_Image"
                             type="file"
-                            accept=".pdf, .docx"
+                            accept=".pdf"
                             name="TL_Image"
                             onChange={onChangeFileInput}
+                            style={{ height: "50px", cursor: "pointer" }}
                           />
                         </CFormGroup>
                       </CCol>
@@ -470,6 +475,7 @@ const BusinessRegistration = () => {
                           size="sm"
                           className="px-4"
                           color="dark"
+                          onClick={(e) => onSubmitSaveBusinessDetail(e)}
                         >
                           <CIcon name="cil-save" />
                           {onEdit ? " Save Cahnges " : " Save business detail "}
