@@ -436,21 +436,20 @@ const BusinessRegistration = () => {
                           </CFormGroup>
                         </CCol>
                       )}
-                      <CCol xs="12">
-                        Upload neccessary files of the business.
-                        <hr />
-                      </CCol>
+
                       <CCol sm="12" md="6">
                         <CFormGroup>
                           <CLabel htmlFor="formFile">
-                            File size not more than (5MB)
+                            Upload neccessary files of the business (PDF file
+                            size less than 5MB)
                           </CLabel>
                           <CInput
                             id="TL_Image"
                             type="file"
-                            accept=".pdf, .docx"
+                            accept=".pdf"
                             name="TL_Image"
                             onChange={onChangeFileInput}
+                            style={{ height: "50px", cursor: "pointer" }}
                           />
                         </CFormGroup>
                       </CCol>

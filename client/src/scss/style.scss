@@ -83,3 +83,19 @@
     transform: rotate(360deg);
   }
 }
+
+input[type="file"]::file-selector-button {
+  align-items: center;
+  margin-right: 20px;
+  border: none;
+  background: #999900;
+  padding: 7px 15px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: #7c7c2b;
+}
