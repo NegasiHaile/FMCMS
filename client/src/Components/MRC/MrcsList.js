@@ -219,8 +219,7 @@ function MrcsList() {
                     <CInput
                       id="MRC"
                       name="MRC"
-                      maxLength="10"
-                      minLength="10"
+                      minLength="5"
                       placeholder="Enter branch unique name."
                       value={mrc.MRC}
                       onChange={onChangeInput}

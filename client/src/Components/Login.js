@@ -67,8 +67,9 @@ const Login = () => {
     }
   };
   const circleLogo = {
-    borderRadius: "50%",
+    // borderRadius: "50%",
     height: "75px",
+    marginRight: "30px",
   };
   return (
     <>
@@ -83,15 +84,10 @@ const Login = () => {
               <CRow className="justify-content-center mt-3 mb-4">
                 <CCol md="11">
                   <CRow className="justify-content-center">
-                    <img
-                      style={circleLogo}
-                      className=" bg-white p-2 border"
-                      alt="Logo"
-                      src="/logo/smalllogo.png"
-                    />
+                    <img style={circleLogo} alt="Logo" src="logo.svg" />
                   </CRow>
                 </CCol>
-                <CCol md="11" className="mt-3">
+                <CCol md="11">
                   <h5 className="text-center text-muted">WELCOME</h5>
                   <p className="text-center  text-muted">
                     Demer-FMCMS sign in!
