@@ -54,7 +54,7 @@ const BranchAdminHeader = () => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CImg name="logo" height="30" src="/logo/fulllogo.png" alt="Logo" />
+        <CImg name="logo" height="40" src="logo.svg" alt="Logo" />
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
@@ -93,8 +93,7 @@ const BranchAdminHeader = () => {
             <CIcon name="cil-dollar" alt="Machine Inventory" />
             &nbsp;Pricing
           </CLink>
-          <CLink className="c-subheader-nav-link" 
-            to="/system/setting">
+          <CLink className="c-subheader-nav-link" to="/system/setting">
             <CIcon name="cil-settings" alt="Settings" />
             &nbsp;Settings
           </CLink>
