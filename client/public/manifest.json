@@ -1,9 +1,9 @@
 {
-  "short_name": "Jupiter-Tading-FMCMS",
-  "name": "Jupiter trading fiscal machine controlling and managment system",
+  "short_name": "FMCMS",
+  "name": "Demere fiscal machine controlling and managment system",
   "icons": [
     {
-      "src": "./assets/img/smalllogo.png",
+      "src": "./logo/demer-logo-yellow.svg",
       "sizes": "100x100",
       "type": "image/png"
     }
