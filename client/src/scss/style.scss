@@ -10,9 +10,17 @@
 // If you want to add something do it here
 @import "custom";
 
+.text-demer {
+  color: #999900;
+}
+.text-demer:hover {
+  color: #c0c000;
+}
+
 .jptr-bg {
   background-color: #999900;
 }
+
 .jptr_checkBox {
   //   position: absolute;
   top: 0;
@@ -29,15 +37,15 @@
   left: 50%;
   top: 50%;
   z-index: 1;
-  width: 60px;
-  height: 60px;
+  width: 120px;
+  height: 120px;
   margin: -76px 0 0 -76px;
-  border: 5px solid #c8c8c8;
+  border: 5px solid #d4d4bc;
   border-radius: 50%;
-  border-top: 5px solid #999900;
-  // border-bottom: 5px solid #878767;
-  -webkit-animation: spin 1s linear infinite;
-  animation: spin 1s linear infinite;
+  // border-top: 6px solid #999900;
+  border-bottom: 5px solid #999900;
+  -webkit-animation: spin 0.5s linear infinite;
+  animation: spin 0.5s linear infinite;
 }
 .jptr-btn {
   background-color: #999900;

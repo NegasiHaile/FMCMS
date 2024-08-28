@@ -140,7 +140,7 @@ const Login = () => {
                     </CInputGroup>
                     <CCol className="col-12 mt-5 d-flex justify-content-end">
                       <Link to="/forgotpassword" className="text-info">
-                        Forgotten password?
+                        Forgot password?
                       </Link>
                     </CCol>
                     <CRow className="mt-2">
@@ -163,17 +163,17 @@ const Login = () => {
                         </CButton>
                       </CCol>
                       <CCol className="col-12 mt-3">
-                        <p className="mb-0 text-center">
+                        <p className="text-center">
                           <br />
                           <small>
-                            &copy; Copyright 2021{" "}
+                            &copy; Copyright 2024{" "}
                             <a
-                              href="http://jupiter-tradingeth.com/"
+                              href="http://demer.com/"
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-info"
                             >
-                              Jupiter-Trading
+                              DeMeR.com
                             </a>
                             .
                             <br /> All rights reserved.
