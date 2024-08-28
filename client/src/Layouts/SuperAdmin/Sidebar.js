@@ -37,7 +37,7 @@ const BranchAdminSidbar = () => {
           <CImg
             className="c-sidebar-brand-full"
             name="logo-negative"
-            src="logo.svg"
+            src="/logo.svg"
             height={45}
             style={{
               zIndex: "10",
@@ -65,7 +65,7 @@ const BranchAdminSidbar = () => {
           className="c-sidebar-brand-minimized"
           name="sygnet"
           height={25}
-          src="logo.svg"
+          src="/logo.svg"
           style={{ marginLeft: "-50px" }}
         />
       </CSidebarBrand>

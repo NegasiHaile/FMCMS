@@ -218,7 +218,7 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
             <CCardBody>
               <CRow className="mt-3 p-4">
                 <CCol className="d-flex justify-content-center" lg="12">
-                  <CImg height="50px" src="/logo/fulllogo.png" />
+                  <CImg height="50px" src="/logo.svg" />
                 </CCol>
                 <CCol className="col-12 my-2  border-bottom">
                   <h3 className="text-center text-muted bold">

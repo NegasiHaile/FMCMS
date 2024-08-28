@@ -54,7 +54,7 @@ const BranchAdminHeader = () => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CImg name="logo" height="40" src="logo.svg" alt="Logo" />
+        <CImg name="logo" height="40" src="/logo.svg" alt="Logo" />
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">

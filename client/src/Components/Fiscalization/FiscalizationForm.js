@@ -11,7 +11,7 @@ class ComponentToPrint extends React.Component {
           <CCardBody>
             <CRow>
               <CCol className="d-flex justify-content-center" lg="12">
-                <CImg height="60px" src="/logo/fulllogo.png" />
+                <CImg height="60px" src="/logo.svg" />
               </CCol>
               <CCol className="col-12 mt-4  border-bottom">
                 <h2 className="text-center text-muted bold">

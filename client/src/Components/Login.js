@@ -84,7 +84,7 @@ const Login = () => {
               <CRow className="justify-content-center mt-3 mb-4">
                 <CCol md="11">
                   <CRow className="justify-content-center">
-                    <img style={circleLogo} alt="Logo" src="logo.svg" />
+                    <img style={circleLogo} alt="Logo" src="/logo.svg" />
                   </CRow>
                 </CCol>
                 <CCol md="11">

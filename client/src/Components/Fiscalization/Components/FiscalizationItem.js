@@ -92,7 +92,7 @@ function FiscalizationItem() {
           <CCardBody>
             <CRow className="mt-3 p-4">
               <CCol className="d-flex justify-content-center" lg="12">
-                <CImg height="50px" src="/logo/fulllogo.png" />
+                <CImg height="50px" src="/logo.svg" />
               </CCol>
               <CCol className="col-12 mt-2  border-bottom">
                 <h4 className="text-center text-muted bold">

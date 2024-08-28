@@ -140,7 +140,7 @@ function MachinePickupDetail() {
             <CCardBody>
               <CRow className="mt-3 p-4">
                 <CCol className="d-flex justify-content-center" lg="12">
-                  <CImg height="60px" src="/logo/fulllogo.png" />
+                  <CImg height="60px" src="/logo.svg" />
                 </CCol>
                 <CCol className="col-12 mt-3  border-bottom">
                   <h3 className="text-center text-muted">

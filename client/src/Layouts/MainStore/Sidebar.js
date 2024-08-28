@@ -31,7 +31,7 @@ const Sidebar = () => {
         <CImg
           className="c-sidebar-brand-full"
           name="logo-negative"
-          src="/logo/fulllogo.png"
+          src="/logo.svg"
           height={30}
         />
         <CImg
