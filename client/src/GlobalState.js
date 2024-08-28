@@ -27,21 +27,27 @@ export const DataProvider = ({ children }) => {
     const firstLogin = localStorage.getItem("firstLogin");
     if (firstLogin) {
       const refreshToken = async () => {
-        const res = await axios.get(`${apiUrl}/user/refresh_token`, {
-          withCredentials: true,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        });
+        try {
+          const res = await axios.get(`${apiUrl}/user/refresh_token`, {
+            withCredentials: true,
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          });
+          setToken(res.data.accesstoken);
 
-        setToken(res.data.accesstoken);
-
-        setTimeout(() => {
-          refreshToken();
-        }, 10 * 60 * 1000);
+          // setTimeout(() => {
+          //   refreshToken();
+          // }, 10 * 60 * 1000);
+        } catch {
+          await axios.get(`${apiUrl}/user/logout`);
+          localStorage.removeItem("firstLogin");
+          window.location.href = "/";
+        }
       };
+
       refreshToken();
     }
   }, []);
