@@ -52,7 +52,7 @@ const BranchAdminDashboard = () => {
     <Suspense
       fallback={
         <div className="d-flex justify-content-center">
-          <div class="lds-ripple">
+          <div className="lds-ripple">
             <div></div>
             <div></div>
           </div>

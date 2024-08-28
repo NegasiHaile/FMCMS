@@ -169,7 +169,7 @@ function BranchsList() {
         <CCardBody>
           {loader ? (
             <div className="d-flex justify-content-center">
-              <div class="lds-ripple">
+              <div className="lds-ripple">
                 <div></div>
                 <div></div>
               </div>

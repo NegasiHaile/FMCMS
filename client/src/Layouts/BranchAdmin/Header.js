@@ -53,7 +53,7 @@ const SuperAdminHeader = () => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CImg name="logo" height="30" src="/logo/fulllogo.png" alt="Logo" />
+        <CImg name="logo" height="30" src="/logo.svg" alt="Logo" />
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
