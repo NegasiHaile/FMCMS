@@ -52,9 +52,10 @@ function ForgotPassword() {
           <CCol md="6">
             <div className="clearfix mb-2">
               <h2 className="float-left display-4 mr-4">FMCMS</h2>
-              <h5 className="pt-2">Oops! Forgotten your password?</h5>
+              <h5 className="pt-2">Oops! Forgot your password?</h5>
               <p className="text-muted float-left">
-                Enter your email below & hit the Submit button.
+                Enter email associeated with your FMCMS account <br /> in the
+                field below and submit!
               </p>
             </div>
             <CForm onSubmit={onsubmitForgotPassword}>

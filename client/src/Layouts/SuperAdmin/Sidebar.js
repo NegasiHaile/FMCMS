@@ -39,7 +39,7 @@ const BranchAdminSidbar = () => {
           />
 
           <h5
-            className="lh-lg"
+            className="c-sidebar-brand-full"
             style={{
               color: "#999900",
               lineHeight: "14px",
@@ -58,8 +58,9 @@ const BranchAdminSidbar = () => {
         <CImg
           className="c-sidebar-brand-minimized"
           name="sygnet"
-          height={50}
+          height={25}
           src="logo.svg"
+          style={{ marginLeft: "-60px" }}
         />
       </CSidebarBrand>
       <CSidebarNav>

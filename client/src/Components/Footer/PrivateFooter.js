@@ -5,15 +5,11 @@ const PrivateFooter = () => {
   return (
     <CFooter fixed={false}>
       <div>
-        <span className="ml-1">&copy; 2021.</span>
-        <a
-          href="http://jupiter-tradingeth.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Jupiter-Trading
+        <span className="ml-1">&copy; 2021-2024 </span>
+        <a href="http://demer.com/" target="_blank" rel="noopener noreferrer">
+          Demer
         </a>
-        <span className="ml-1"> FMCMS.</span>
+        <span className="ml-1">FMCMS.</span>
       </div>
       <div className="mfs-auto">
         <span className="mr-1">Powered by</span>
@@ -22,7 +18,7 @@ const PrivateFooter = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          HorizonTECH-ICT-Solution
+          Demer solutions
         </a>
       </div>
     </CFooter>
