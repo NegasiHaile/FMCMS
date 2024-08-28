@@ -27,7 +27,13 @@ const BranchAdminSidbar = () => {
       className=""
     >
       <CSidebarBrand className="d-md-down-none text-decoration-none" to="/">
-        <CCol className={"d-flex align-items-center py-1"}>
+        <CCol
+          className={"d-flex align-items-center py-1 zIndex-0"}
+          style={{
+            overflow: "hidden",
+            marginLeft: "-10px",
+          }}
+        >
           <CImg
             className="c-sidebar-brand-full"
             name="logo-negative"
@@ -47,7 +53,7 @@ const BranchAdminSidbar = () => {
               // backgroundColor: "red",
               marginLeft: "-3px",
               fontFamily: "cursive",
-              // zIndex: "0",
+              zIndex: "0",
               textDecoration: "none",
             }}
           >
@@ -60,7 +66,7 @@ const BranchAdminSidbar = () => {
           name="sygnet"
           height={25}
           src="logo.svg"
-          style={{ marginLeft: "-60px" }}
+          style={{ marginLeft: "-50px" }}
         />
       </CSidebarBrand>
       <CSidebarNav>
