@@ -1,7 +1,7 @@
 {
-  "name": "jupiter-trading-fmcms",
+  "name": "fmcms",
   "version": "0.0.1",
-  "description": "Jupiter Tarading Fiscal Machine Controlling Managment System",
+  "description": "Fiscal Machine Controlling Managment System",
   "author": {
     "name": "Negasi Haile",
     "url": "https://github.com/NegasiHaile"

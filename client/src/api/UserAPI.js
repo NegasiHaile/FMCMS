@@ -24,7 +24,7 @@ function UserAPI(token) {
 
       getUser();
     }
-  }, [token]);
+  }, [token, apiUrl]);
 
   return {
     isLogged: [isLogged, setIsLogged],

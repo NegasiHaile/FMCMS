@@ -13,7 +13,7 @@ function MachineAPI() {
     };
 
     getMachines();
-  }, [callback]);
+  }, [apiUrl, callback]);
   return {
     machines: [machines, setMachines],
     callback: [callback, setCallback],

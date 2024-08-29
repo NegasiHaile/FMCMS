@@ -15,7 +15,7 @@ function BusinessAPI() {
     };
 
     getBusinesses();
-  }, [callback]);
+  }, [apiUrl, callback]);
   return {
     businesses: [businesses, setBusinesses],
     callback: [callback, setCallback],

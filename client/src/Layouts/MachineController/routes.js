@@ -53,10 +53,6 @@ const MaintenanceList = lazy(() =>
 const ReturningList = lazy(() =>
   import("../../Components/Machine/ReturningList/ReturningList")
 );
-// Importing of Machine Returning ralted pages
-const MachineReturningLists = lazy(() =>
-  import("../../Components/MachineReturn/MachineReturningLists")
-);
 
 // Importing MRC related routes
 const MrcsList = lazy(() => import("../../Components/MRC/MrcsList"));

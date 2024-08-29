@@ -65,11 +65,6 @@ const ReturningPickup = lazy(() =>
 const ReturningList = lazy(() =>
   import("../../Components/Machine/ReturningList/ReturningList")
 );
-// Importing of Machine Returning ralted pages
-const MachineReturningLists = lazy(() =>
-  import("../../Components/MachineReturn/MachineReturningLists")
-);
-
 // Importing of Sales ralted pages
 const SalesList = lazy(() => import("../../Components/Sales/SalesList"));
 const SalesDetail = lazy(() => import("../../Components/Sales/SalesDetail"));

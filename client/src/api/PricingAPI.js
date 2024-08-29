@@ -13,7 +13,7 @@ function PricingAPI() {
     };
 
     getpricings();
-  }, [callback]);
+  }, [apiUrl, callback]);
   return {
     pricings: [pricings, setPricings],
     callback: [callback, setCallback],
