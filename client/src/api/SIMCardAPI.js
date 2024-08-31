@@ -13,7 +13,7 @@ function SIMCardAPI() {
     };
 
     getSIMCards();
-  }, [callback]);
+  }, [apiUrl, callback]);
   return {
     simCards: [simCards, setSIMCards],
     callback: [callback, setCallback],

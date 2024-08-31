@@ -15,7 +15,7 @@ function MachinePickUpAPI() {
     };
 
     getMachinePickups();
-  }, [callback]);
+  }, [apiUrl, callback]);
   return {
     machinePickups: [machinePickups, setMachinePickups],
     callback: [callback, setCallback],

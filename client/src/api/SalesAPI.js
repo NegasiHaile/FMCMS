@@ -13,7 +13,7 @@ function SalesAPI() {
     };
 
     getSales();
-  }, [callback]);
+  }, [apiUrl, callback]);
   return {
     Sales: [Sales, setSales],
     callback: [callback, setCallback],

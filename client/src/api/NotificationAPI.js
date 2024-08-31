@@ -13,7 +13,7 @@ function NotificationAPI() {
     };
 
     getNotifications();
-  }, [callback]);
+  }, [apiUrl, callback]);
   return {
     notifications: [notifications, setNotifications],
     callback: [callback, setCallback],

@@ -13,7 +13,7 @@ function UsersAPI() {
     };
 
     getUsersInType();
-  }, [callback]);
+  }, [apiUrl, callback]);
 
   return {
     users: [users, setUsers],

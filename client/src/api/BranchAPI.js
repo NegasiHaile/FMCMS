@@ -15,7 +15,7 @@ function BranchAPI() {
     };
 
     getBranchs();
-  }, [callback]);
+  }, [apiUrl, callback]);
   return {
     branchs: [branchs, setBranchs],
     callback: [callback, setCallback],

@@ -19,7 +19,7 @@ function MaintenanceAPI() {
     };
 
     getMaintenances();
-  }, [callback]);
+  }, [apiUrl, callback]);
   return {
     maintenances: [maintenances, setMaintenances],
     callback: [callback, setCallback],

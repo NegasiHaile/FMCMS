@@ -13,7 +13,7 @@ function MRCAPI() {
     };
 
     getMRCs();
-  }, [callback]);
+  }, [apiUrl, callback]);
   return {
     mrcs: [mrcs, setMRCs],
     callback: [callback, setCallback],

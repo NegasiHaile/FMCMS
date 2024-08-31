@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { GlobalState } from "../../GlobalState";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   CHeader,
@@ -23,9 +22,6 @@ import TheHeaderDropdown from "../../Components/HeaderDropDowns/TheHeaderDropdow
 import TheHeaderDropdownMaint from "../../Components/HeaderDropDowns/TheHeaderDropdownMaint";
 
 const BranchAdminHeader = () => {
-  const state = useContext(GlobalState);
-  const [user] = state.UserAPI.User;
-
   const dispatch = useDispatch();
   const sidebarShow = useSelector((state) => state.sidebarShow);
 
