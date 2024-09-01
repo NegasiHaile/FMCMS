@@ -1,8 +1,12 @@
 ## Fiscal Machine Controlling and Management System (FMCMS)
 
-[![FMCMS Demo Video](https://user-images.githubusercontent.com/60927507/149324901-e408c4c6-33c2-4f9b-99ed-931dfb77c134.png)](https://youtu.be/lUvN1EfmIU0?si=Zpylsx8HdbOezd36)
+[![FMCMS Demo Video](./client//public//Others//screenshot-machine-detail.png)](https://youtu.be/lUvN1EfmIU0?si=Zpylsx8HdbOezd36)
+
+<!-- https://user-images.githubusercontent.com/60927507/149324901-e408c4c6-33c2-4f9b-99ed-931dfb77c134.png -->
 
 ## System users
+
+This system features 10 type of user roles with their own privileges.
 
 1. Super Admin (Who initiates the system)
 2. Main Store (Manage overall machines)
@@ -13,6 +17,7 @@
 7. Machine Controller (Manage client’s machines)
 8. Technician (Macke maintenance and fiscalization)
 9. Customer Service (Deliver machines)
+10. Client (Machine buyers)
 
 ## Subsystems
 
@@ -21,7 +26,7 @@
 3. Machine withdrawal
 4. Mailing system
 
-## Functionalities
+## System features
 
 1. Create Branch
 2. Add employee (Register new employee and push to one of the branches).
@@ -76,7 +81,7 @@ C. Withdrawal
       4, Make the email openable from any app
       3, Close the reCAPTCHA system
 
-# Roles
+## Roles
 
 1. Super Admin
 
