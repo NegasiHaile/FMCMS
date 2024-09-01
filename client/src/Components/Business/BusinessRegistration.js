@@ -109,8 +109,6 @@ const BusinessRegistration = () => {
   const onSubmitSaveBusinessDetail = async (e) => {
     e.preventDefault();
 
-    alert("Here we go!");
-
     const formData = new FormData();
     formData.append("ownerID", business.ownerID);
     formData.append("TIN", business.TIN);

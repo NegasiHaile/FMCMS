@@ -61,7 +61,7 @@ app.listen(PORT, () => {
 // ways to make the file uploading work on the poroduction
 // create FILE_MAIN_URL in .env file and assign it with the following values
 // a, https://localhost:3000/  for local development and then switch it to
-// b, https://fmcms-jupiter-trading.herokuapp.com/ for production
+// b, https://fmcms-demer-trading.herokuapp.com/ for production
 // THEN after all add the process.env.FILE_MAIN_URL before the file URL as follow
 // {`process.env.FILE_MAIN_URL${business.TL_Image}`}
 // And before everything the file has to be configured to be uploaded in to the./uploads folder

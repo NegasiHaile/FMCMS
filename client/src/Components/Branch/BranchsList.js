@@ -151,7 +151,7 @@ function BranchsList() {
     <>
       <CCard className=" shadow-sm">
         <CCardHeader className="d-flex justify-content-between">
-          <CLabel>Jupiter Branhcs</CLabel>
+          <CLabel>Branhcs</CLabel>
           {user.userRole === "super-admin" && (
             <CButton
               size="sm"

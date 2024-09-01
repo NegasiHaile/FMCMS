@@ -100,7 +100,7 @@ function BusinessOverview(props) {
           <hr></hr>
 
           <span className="d-flex justify-content-between">
-            <span>Jupiter Branch: </span>
+            <span>Branch: </span>
             <span>{business.branch}</span>
           </span>
           <span className="d-flex justify-content-between">

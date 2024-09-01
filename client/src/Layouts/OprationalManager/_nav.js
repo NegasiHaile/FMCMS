@@ -45,7 +45,8 @@ const _nav = [
     name: "Withdrawal List",
     to: "/machine/return/list",
     icon: "cil-recycle",
-  }, {
+  },
+  {
     _tag: "CSidebarNavTitle",
     _children: ["MRC/SIM-Management"],
   },
@@ -94,7 +95,7 @@ const _nav = [
   // },
   {
     _tag: "CSidebarNavItem",
-    name: "Jupiter Branchs",
+    name: "Branchs",
     to: "/branchs/list",
     icon: "cil-bank",
   },

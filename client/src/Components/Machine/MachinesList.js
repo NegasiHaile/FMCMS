@@ -196,7 +196,7 @@ const MachinesList = () => {
     <>
       <CCard className=" shadow-sm">
         <CCardHeader className="d-flex justify-content-between">
-          <CLabel>Jupiter all machine list</CLabel>
+          <CLabel>All machine list</CLabel>
           {user.userRole === "main-store" && (
             <CButton
               size="sm"

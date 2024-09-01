@@ -85,7 +85,7 @@ const _nav = [
   //   to: "/feedbacks",
   //   icon: "cil-speech",
   // },
-  
+
   {
     _tag: "CSidebarNavItem",
     name: "Sales List",
@@ -94,7 +94,7 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Jupiter Branchs",
+    name: "Branchs",
     to: "/branchs/list",
     icon: "cil-bank",
   },

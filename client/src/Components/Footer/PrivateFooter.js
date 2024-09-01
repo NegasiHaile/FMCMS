@@ -5,7 +5,7 @@ const PrivateFooter = () => {
   return (
     <CFooter fixed={false}>
       <div>
-        <span className="ml-1">&copy; 2021-2024 </span>
+        <span className="ml-1">&copy; Copyright 2021-2024 </span>
         <a href="http://demer.com/" target="_blank" rel="noopener noreferrer">
           Demer
         </a>

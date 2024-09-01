@@ -205,14 +205,14 @@ function ResetPassword() {
                       </div>
                       <p className="mb-0 text-center">
                         <small>
-                          &copy; Copyright 2021{" "}
+                          &copy; Copyright 2021-2024{" "}
                           <a
-                            href="http://jupiter-tradingeth.com/"
+                            href="http://demer.com/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-info"
                           >
-                            Jupiter-Trading
+                            Demer
                           </a>
                           .
                           <br /> All rights reserved.
