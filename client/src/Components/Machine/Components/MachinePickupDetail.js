@@ -710,8 +710,8 @@ function MachinePickupDetail() {
                     This machine with <b> {pickup[0].serialNumber}</b> serial
                     number is assigned to the company{" "}
                     <b> {pickup[0].tradeName}</b> and fiscalized with above
-                    machine detail in <b> {pickup[0].branchName}</b> of jupiter
-                    tradingeth, and recieved for {pickup[0].category}{" "}
+                    machine detail in <b> {pickup[0].branchName}</b>, and
+                    recieved for {pickup[0].category}{" "}
                     {pickup[0].category === "annual" ||
                     pickup[0].category === "incident"
                       ? " maintenance "

@@ -91,8 +91,8 @@ const Header = () => {
             &nbsp;Inventory
           </CLink>
           <CLink className="c-subheader-nav-link" to="/Branch/List">
-            <CIcon name="cil-Building" alt="Jupiter-Brancs" />
-            &nbsp;Jupiter-Branchs
+            <CIcon name="cil-Building" alt="rancs" />
+            &nbsp; Branchs
           </CLink>
         </div>
       </CSubheader>

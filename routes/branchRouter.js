@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const branchsCntrl = require("../controllers/branchCntrl");
 
-router.post("/open_new", branchsCntrl.openNewBranch); // creating a branch of jupiter
+router.post("/open_new", branchsCntrl.openNewBranch); // creating a branch
 router.get("/list", branchsCntrl.getBranchs); // get list of branchs
 router.get("/detail/:branchId", branchsCntrl.getBranchDetail);
 

@@ -92,7 +92,7 @@ const SuperAdminHeader = () => {
           </CLink> */}
           <CLink className="c-subheader-nav-link" to="/branchs/list">
             <CIcon name="cil-Building" alt="Branchs" />
-            &nbsp;Jupiter-Branchs
+            &nbsp; Branchs
           </CLink>
         </div>
       </CSubheader>

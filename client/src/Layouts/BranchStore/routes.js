@@ -6,7 +6,7 @@ const ChangePassword = lazy(() =>
   import("../../Components/UserAccount/ChangePassword")
 );
 
-// Jupiter branchs
+// branchs
 const BranchsList = lazy(() => import("../../Components/Branch/BranchsList"));
 const BranchIndetail = lazy(() =>
   import("../../Components/Branch/BranchIndetail")

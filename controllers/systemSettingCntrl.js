@@ -32,9 +32,9 @@ const systemSettingCntrl = {
             emailToMail: req.body.senderEmail,
             primaryMailer: primaryEmail.email,
             primaryMailerPassword: primaryEmail.password,
-            subject: "JuPiTeR FMCMS Email verification!",
+            subject: "Demer FMCMS Email verification!",
             text: "",
-            html: `<h4> Email veification link for the JuPiTer Tadingeth FMCMS sender email. </h4>
+            html: `<h4> Email veification link for the Demer FMCMS sender email. </h4>
         <p> Click 
         <a href="${process.env.SENDER_EMAIL_VERIFICATION_URL}/${verificationToken}"
         target="_blank"

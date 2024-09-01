@@ -94,7 +94,7 @@ function SystemSetting() {
     setSenderEmail("");
     setEmailPassword("");
     Swal.fire({
-      text: "Are you sure you want to make this email as a primary email of this FMCMS jupiter trading?",
+      text: "Are you sure you want to make this email as a primary email of this FMCMS application?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3C4B64",

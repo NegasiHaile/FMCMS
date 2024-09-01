@@ -64,8 +64,8 @@ const userCntrl = {
       //   primaryMailer: primaryEmail.email,
       //   primaryMailerPassword: primaryEmail.password,
       //   passwordToMail: newpassword,
-      //   subject: "Password to your JuPiTeR FMCMS Account",
-      //   text: "Password for your jupiter FMCMS account: ",
+      //   subject: "Password to your DEMER FMCMS Account",
+      //   text: "Password for your DEMER FMCMS account: ",
       // };
       // sendMailToUser(mailDetail);
       res.json({
@@ -252,8 +252,8 @@ const userCntrl = {
           emailToMail: email,
           primaryMailer: primaryEmail.email,
           primaryMailerPassword: primaryEmail.password,
-          subject: "FMCMS-JuPiTeR-Trading password reset link",
-          html: `<h4> Password reset request for your FMCMS-JuPiTeR-Trading account. </h4>
+          subject: "DEMER-FMCMS password reset link",
+          html: `<h4> Password reset request for your DEMER-FMCMS account. </h4>
         <p> Click 
         <a href="${process.env.RESET_PASSWORD_URL}/${resetToken}"
         target="_blank"

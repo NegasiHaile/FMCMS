@@ -88,7 +88,7 @@ const _nav = [
   // },
   {
     _tag: "CSidebarNavItem",
-    name: "Jupiter Branchs",
+    name: "Branchs",
     to: "/Branch/List",
     icon: "cil-bank",
   },

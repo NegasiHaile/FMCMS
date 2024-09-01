@@ -8,6 +8,7 @@ import {
   CButton,
   CCard,
   CCardBody,
+  CCardFooter,
   CImg,
   CRow,
   CCol,
@@ -86,9 +87,19 @@ function FiscalizationItem() {
   };
 
   return (
-    <div style={{ minWidth: "900px", border: "solid 0px #D8DBE0" }}>
+    <div
+      style={{
+        minWidth: "900px",
+        border: "solid 0px #D8DBE0",
+      }}
+    >
       {salesDetail ? (
-        <CCard className="w-100 border-0">
+        <CCard
+          className="w-100 border-0"
+          style={{
+            minHeight: "100vh",
+          }}
+        >
           <CCardBody>
             <CRow className="mt-3 p-4">
               <CCol className="d-flex justify-content-center" lg="12">
@@ -225,19 +236,6 @@ function FiscalizationItem() {
               </CCol>
 
               <CCol className="col-12 mt-4">
-                <h4 className="text-decoration-underline">
-                  Fiscalization Summery
-                </h4>
-                <h6 className="border-bottom " style={{ lineHeight: "1.6" }}>
-                  This machine with <b> {salesDetail.machineSerialNumber}</b>{" "}
-                  serial number is assigned to the company{" "}
-                  <b> {salesDetail.tradeName}</b> and fiscalized with the above
-                  detail in <b> {salesDetail.branchName} </b> of jupiter
-                  tradingeth on {new Date().toLocaleString()}
-                </h6>{" "}
-              </CCol>
-
-              <CCol className="col-12 mt-4">
                 <CRow className="mt-4 border rounded mx-1 py-4">
                   <CCol className="col-6 my-2">
                     <CRow className="mb-2">
@@ -337,7 +335,18 @@ function FiscalizationItem() {
                   </CCol>
                 </CRow>
               </CCol>
-
+              <CCol className="col-12 mt-4">
+                <h4 className="text-decoration-underline">
+                  Fiscalization Summery
+                </h4>
+                <h6 style={{ lineHeight: "1.6" }}>
+                  This machine with <b> {salesDetail.machineSerialNumber}</b>{" "}
+                  serial number is sold to
+                  <b> {salesDetail.tradeName}</b> and fiscalized with the above
+                  detail in <b> {salesDetail.branchName} </b> on{" "}
+                  {new Date().toLocaleString()}
+                </h6>
+              </CCol>
               {((user.userRole === "customer-service" &&
                 salesDetail.fiscalization === "done") ||
                 salesDetail.status === "completed") && (
@@ -399,6 +408,17 @@ function FiscalizationItem() {
               )}
             </CRow>
           </CCardBody>
+          <CCardFooter className="text-center">
+            <span className="ml-1">&copy; Copyright 2021-2024 </span>
+            <a
+              href="http://demer.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Demer
+            </a>
+            <span className="ml-1">FMCMS.</span>
+          </CCardFooter>
         </CCard>
       ) : (
         <BadRouting text="Bad routing, or fiscalization for this sales is not ready yet!" />
