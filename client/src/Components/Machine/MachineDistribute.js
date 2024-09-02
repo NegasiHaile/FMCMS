@@ -83,7 +83,7 @@ const MachineDistribute = () => {
                     value={distributingMachine.machineId}
                     required
                   >
-                    <option value="">Select machine identity...</option>
+                    <option value="">Select machine ID...</option>
                     {allMachines
                       .filter(
                         (machine) =>

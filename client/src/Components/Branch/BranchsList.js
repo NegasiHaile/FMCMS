@@ -151,7 +151,7 @@ function BranchsList() {
     <>
       <CCard className=" shadow-sm">
         <CCardHeader className="d-flex justify-content-between">
-          <CLabel>Branhcs</CLabel>
+          <CLabel className="text-uppercase">Branches</CLabel>
           {user.userRole === "super-admin" && (
             <CButton
               size="sm"
@@ -243,7 +243,9 @@ function BranchsList() {
           onClose={() => setShowModal(!showModal)}
         >
           <CModalHeader closeButton>
-            <CModalTitle>Openning new branch form</CModalTitle>
+            <CModalTitle className="text-uppercase">
+              Create new branch
+            </CModalTitle>
           </CModalHeader>
           <CForm onSubmit={onSubmitOpenBranch}>
             <CModalBody>

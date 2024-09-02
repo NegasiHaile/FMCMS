@@ -91,7 +91,7 @@ const BusinessesList = () => {
           user.userRole === "technician" ? (
             <h6 className="text-muted">Businesses under this branch.</h6>
           ) : (
-            <h6 className="text-muted">List of all businesses.</h6>
+            <h6 className="text-uppercase">List of all businesses.</h6>
           )}
           {user.userRole === "client" && (
             <CButton size="sm" color="secondary" to={`/business/register`}>

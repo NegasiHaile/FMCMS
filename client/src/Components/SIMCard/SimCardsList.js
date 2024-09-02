@@ -139,7 +139,7 @@ function SimCardsList() {
   return (
     <CCard className=" shadow-sm">
       <CCardHeader className="d-flex justify-content-between">
-        <CLabel>SIM cards list</CLabel>
+        <CLabel className="text-uppercase">SIM cards list</CLabel>
         {user.userRole === "main-store" && (
           <CButton
             size="sm"

@@ -197,7 +197,7 @@ const ChangePassword = () => {
                   <CInput
                     className="r-b-none"
                     type={retypeNewPasswordSecure ? "password" : "text"}
-                    placeholder="Repeat new password"
+                    placeholder="Confirm new password"
                     autoComplete="new-password"
                     name="retypeNewPassword"
                     onChange={onChangeInput}
