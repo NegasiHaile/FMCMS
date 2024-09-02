@@ -76,7 +76,7 @@ function MachineDistribution() {
   return (
     <CCard sm="12" md="10" lg="8">
       <CCardHeader>
-        <h6>Ditribut machines to sub branchs</h6>
+        <h6 className="text-uppercase">Ditribut machines to sub branchs</h6>
       </CCardHeader>
       <CForm onSubmit={onSubmitMachineDistribution}>
         <CCardBody>

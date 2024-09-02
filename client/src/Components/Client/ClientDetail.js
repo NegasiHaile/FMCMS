@@ -28,12 +28,7 @@ function ClientDetail() {
       {client.length > 0 ? (
         <CCard className=" shadow-sm">
           <CCardHeader className="d-flex justify-content-between">
-            <CLabel className="text-muted">
-              Detail of Client{" "}
-              <small className="text-primary">
-                {client[0].fName} {client[0].mName}
-              </small>
-            </CLabel>
+            <CLabel className="text-uppercase">Detail of Client</CLabel>
             {(user.userRole === "sales" || user.userRole === "client") && (
               <CButton
                 size="sm"

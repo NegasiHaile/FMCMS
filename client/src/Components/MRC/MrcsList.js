@@ -125,7 +125,7 @@ function MrcsList() {
     <>
       <CCard className=" shadow-sm">
         <CCardHeader className="d-flex justify-content-between">
-          <CLabel>MRC List</CLabel>
+          <CLabel className="text-uppercase">MRC List</CLabel>
           {user.userRole === "main-store" && (
             <CButton
               size="sm"

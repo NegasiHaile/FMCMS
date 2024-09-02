@@ -108,12 +108,9 @@ const RegisterEmployee = (props) => {
     <>
       <CCard>
         <CCardHeader className="d-flex justify-content-between">
-          <CLabel>
-            Employee Registration
-            <small> Form</small>
-          </CLabel>
+          <CLabel className="text-uppercase">Register Employee</CLabel>
           <CButton to="/Employee/List" size="sm" variant="outline" color="dark">
-            <CIcon name="cil-list-numbered" /> Employee List
+            <CIcon name="cil-list-numbered" /> Users List
           </CButton>
         </CCardHeader>
         <CCardBody>

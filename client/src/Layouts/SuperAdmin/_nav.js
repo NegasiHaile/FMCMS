@@ -28,17 +28,17 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Employees-Management"],
+    _children: ["User-Management"],
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Add Employee",
+    name: "Add User",
     to: "/Employee/Register",
     icon: "cil-user-plus",
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Get Employees",
+    name: "Users List",
     to: "/Employee/List",
     icon: "cil-group",
   },

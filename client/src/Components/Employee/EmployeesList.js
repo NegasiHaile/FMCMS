@@ -150,14 +150,16 @@ const EmployeeList = () => {
       <CCard className=" shadow-sm">
         {user.userRole === "super-admin" && (
           <CCardHeader className="d-flex justify-content-between">
-            <CLabel>List of employees {employees.length}</CLabel>
+            <CLabel className="text-uppercase">
+              List of employees: <b>{employees.length}</b>
+            </CLabel>
             <CButton
               to="/Employee/register"
               size="sm"
               variant="outline"
               color="dark"
             >
-              <CIcon name="cil-plus" /> Add Employee
+              <CIcon name="cil-plus" /> Add User
             </CButton>
           </CCardHeader>
         )}

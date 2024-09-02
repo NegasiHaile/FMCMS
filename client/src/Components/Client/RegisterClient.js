@@ -160,7 +160,7 @@ function RegisterClient() {
               Clients/Business-owners under this branch.
             </h6>
           ) : (
-            <h6 className="text-muted">List of all clients.</h6>
+            <h6 className="text-uppercase">List of all clients</h6>
           )}
           {user.userRole === "sales" && (
             <CButton
