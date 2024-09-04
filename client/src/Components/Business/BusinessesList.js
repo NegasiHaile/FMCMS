@@ -19,27 +19,27 @@ const BusinessesList = () => {
   const state = useContext(GlobalState);
   const { apiUrl } = getConfig();
   const [user] = state.UserAPI.User;
-  const [allAusinesses] = state.BusinessAPI.businesses;
-  const [businesses, setBusinesses] = useState(allAusinesses);
+  const [allBusinesses] = state.BusinessAPI.businesses;
+  const [businesses, setBusinesses] = useState(allBusinesses);
   const [callback, setCallback] = state.BusinessAPI.callback;
 
   useEffect(() => {
     if (user.userRole === "super-admin" || user.userRole === "main-store") {
-      setBusinesses(allAusinesses);
+      setBusinesses(allBusinesses);
     } else if (user.userRole === "client") {
       setBusinesses(
-        allAusinesses.filter(
+        allBusinesses.filter(
           (filteredBussiness) => filteredBussiness.ownerID == user._id
         )
       );
     } else {
       setBusinesses(
-        allAusinesses.filter(
+        allBusinesses.filter(
           (filteredBussiness) => filteredBussiness.branch == user.branch
         )
       );
     }
-  }, [user, allAusinesses]);
+  }, [user, allBusinesses]);
   const sweetAlert = (type, text) => {
     Swal.fire({
       position: "center",
