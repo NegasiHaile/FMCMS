@@ -4,6 +4,42 @@
 
 <!-- https://user-images.githubusercontent.com/60927507/149324901-e408c4c6-33c2-4f9b-99ed-931dfb77c134.png -->
 
+## Getting started
+
+### 1. Clone the project
+
+```
+git clone https://github.com/NegasiHaile/FMCMS
+```
+
+### 2. Install server dependecies
+
+To install the backend project dependencies run the following command in the root project.
+
+```
+npm install .
+```
+
+### 3. Install client dependencies
+
+To install the the React project dependencies fellow the following two steps.
+
+```
+cd client
+```
+
+```
+npm install .
+```
+
+### 4. Run the projects
+
+Run this in the root project
+
+```
+npm run dev
+```
+
 ## System users
 
 This system features 10 type of user roles with their own privileges.
