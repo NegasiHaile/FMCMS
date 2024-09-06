@@ -27,13 +27,21 @@ jobs:
         with:
           node-version: "18.x"
 
-      - name: Install server and client dependencies
+      - name: Install server dependencies
         working-directory: ./
-        run: npm run install-all
+        run: npm install
 
-      - name: Lint server and client
+      - name: Install client dependencies
+        working-directory: ./client
+        run: npm install
+
+      - name: Lint server
         working-directory: ./
-        run: npm run lint-all
+        run: npm run lint
+
+      - name: Lint client
+        working-directory: ./client
+        run: npm run lint
 
       - name: Run server tests
         working-directory: ./
