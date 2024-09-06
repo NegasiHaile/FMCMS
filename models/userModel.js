@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const ObjectID = mongoose.Schema.Types.ObjectID;
+// const ObjectID = mongoose.Schema.Types.ObjectID;
 
 const userSchema = new mongoose.Schema(
   {
@@ -67,7 +67,7 @@ const userSchema = new mongoose.Schema(
     },
     expireToken: {
       type: String,
-    }
+    },
   },
   { timestamps: true }
 );

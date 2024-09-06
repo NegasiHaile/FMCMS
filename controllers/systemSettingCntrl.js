@@ -120,7 +120,6 @@ const systemSettingCntrl = {
           " is successfully verified, Now you can make this primary email!",
       });
     } else {
-      console.log("Verification token not found!");
       res.status(400).json({
         msg: "Invalid or expired session!",
       });
@@ -171,9 +170,11 @@ const sendMailToUser = async (mailDetail) => {
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.log("Email not sent : " + error);
+      return { msg: "Email not sent : " + error.message };
     } else {
-      console.log("Email sent to: " + mailDetail.emailToMail + info.response);
+      return {
+        msg: "Email sent to: " + mailDetail.emailToMail + info.response,
+      };
     }
   });
 };

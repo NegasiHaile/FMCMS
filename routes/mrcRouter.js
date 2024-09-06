@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const mrcCntrl = require("../controllers/mrcCntrl");
-const auth = require("../middleware/auth");
+// const auth = require("../middleware/auth");
 
 // router.post("/register", upload.single("file"), userCntrl.register);
 router.post("/register", mrcCntrl.registerMRCs);

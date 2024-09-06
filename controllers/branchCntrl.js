@@ -5,7 +5,6 @@ const Businesses = require("../models/clientBusinessModel");
 
 const branchsCntrl = {
   openNewBranch: async (req, res) => {
-    console.log("Her you go!");
     try {
       const {
         branchName,
