@@ -14,7 +14,7 @@
     "client-install": "cd client && npm install",
     "install-all": "concurrently \"npm run server-install\" \"npm run client-install\"",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "HorizonTech",
@@ -37,6 +37,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "eslint": "^9.9.1",
     "nodemon": "^3.1.4"
   }
 }
