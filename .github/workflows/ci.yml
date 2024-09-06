@@ -1,0 +1,64 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Install server dependencies
+        working-directory: ./
+        run: npm install
+
+      - name: Install client dependencies
+        working-directory: ./client
+        run: npm install
+
+      - name: Lint server
+        working-directory: ./
+        run: npm run lint
+
+      - name: Lint client
+        working-directory: ./client
+        run: npm run lint
+
+      - name: Run server tests
+        working-directory: ./
+        run: npm test
+
+      - name: Run client tests
+        working-directory: ./client
+        run: npm test
+
+      - name: Build client
+        working-directory: ./client
+        run: npm run build
+
+      - name: Deploy to Vercel
+        if: github.ref == 'refs/heads/master'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          npm install -g vercel
+          vercel --prod --token $VERCEL_TOKEN
