@@ -14,7 +14,9 @@
     "client-install": "cd client && npm install",
     "install-all": "concurrently \"npm run server-install\" \"npm run client-install\"",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint-client": "cd client && npm run lint",
+    "lint-all": "concurrently \"npm run lint\" \"npm run lint-client\""
   },
   "keywords": [],
   "author": "HorizonTech",

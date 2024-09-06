@@ -10,7 +10,7 @@ export default [
       "no-unused-vars": "warn",
       "no-undef": "error",
       "no-console": "warn",
-      semi: ["error", "always"],
+      semi: ["warn", "always"],
     },
 
     settings: {
