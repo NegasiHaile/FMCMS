@@ -27,21 +27,13 @@ jobs:
         with:
           node-version: "18.x"
 
-      - name: Install server dependencies
+      - name: Install server and client dependencies
         working-directory: ./
-        run: npm install
+        run: npm run install-all
 
-      - name: Install client dependencies
-        working-directory: ./client
-        run: npm install
-
-      - name: Lint server
+      - name: Lint server and client
         working-directory: ./
-        run: npm run lint
-
-      - name: Lint client
-        working-directory: ./client
-        run: npm run lint
+        run: npm run lint-all
 
       - name: Run server tests
         working-directory: ./
@@ -55,10 +47,10 @@ jobs:
         working-directory: ./client
         run: npm run build
 
-      - name: Deploy to Vercel
-        if: github.ref == 'refs/heads/master'
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: |
-          npm install -g vercel
-          vercel --prod --token $VERCEL_TOKEN
+      # - name: Deploy to Vercel
+      #   if: github.ref == 'refs/heads/master'
+      #   env:
+      #     VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      #   run: |
+      #     npm install -g vercel
+      #     vercel --prod --token $VERCEL_TOKEN
