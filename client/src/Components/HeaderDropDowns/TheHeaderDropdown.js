@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { GlobalState } from "../../GlobalState";
 import axios from "axios";
 import {
-  CBadge,
   CDropdown,
   CDropdownItem,
   CDropdownMenu,

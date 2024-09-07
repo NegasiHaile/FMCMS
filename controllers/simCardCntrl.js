@@ -3,11 +3,10 @@ const simcards = require("../models/simCardModel");
 const simCardCntrl = {
   addSIMCard: async (req, res) => {
     try {
-      const newSIMCard = new simcards(
-        ({ simNumber, branch, problemStatus } = req.body)
-      );
+      const payload = req.body;
+      const newSIMCard = new simcards({ ...payload });
 
-      const simCard = await simcards.findOne({ simNumber: simNumber });
+      const simCard = await simcards.findOne({ simNumber: payload.simNumber });
 
       if (simCard)
         return res
@@ -37,10 +36,8 @@ const simCardCntrl = {
   },
   editSIMCard: async (req, res) => {
     try {
-      await simcards.findOneAndUpdate(
-        { _id: req.params.id },
-        ({ simNumber, branch, problemStatus } = req.body)
-      );
+      const payload = req.body;
+      await simcards.findOneAndUpdate({ _id: req.params.id }, { ...payload });
       res.json({
         msg: "SIM card has been successfuly edited!",
       });

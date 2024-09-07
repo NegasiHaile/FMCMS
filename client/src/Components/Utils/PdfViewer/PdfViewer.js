@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import { CRow, CCol } from "@coreui/react";
 import { Viewer } from "@react-pdf-viewer/core"; // install this library
@@ -12,9 +13,6 @@ import { Worker } from "@react-pdf-viewer/core"; // install this library
 function PdfViewer({ thePdfFile }) {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
-  // for onchange event
-  const [pdfFileError, setPdfFileError] = useState("");
-
   // for submit event
   const [viewPdf, setViewPdf] = useState(thePdfFile);
 
@@ -26,11 +24,11 @@ function PdfViewer({ thePdfFile }) {
       reader.readAsDataURL(thePdfFile);
       reader.onloadend = (e) => {
         setViewPdf(e.target.result);
-        setPdfFileError("");
+        // setPdfFileError("");
       };
     } else {
       setViewPdf(thePdfFile);
-      setPdfFileError("Please select valid pdf file");
+      // setPdfFileError("Please select valid pdf file");
     }
   });
   return (

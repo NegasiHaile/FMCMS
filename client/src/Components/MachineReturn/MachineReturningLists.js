@@ -5,9 +5,7 @@ import { CCard, CCardBody, CDataTable } from "@coreui/react";
 
 function MachineReturningLists() {
   const state = useContext(GlobalState);
-  const [user] = state.UserAPI.User;
   const [allreturning] = state.ReturnMachineAPI.returnMachines;
-  console.log(allreturning);
   const salesTableAttributes = [
     // "branchId",
     "id",

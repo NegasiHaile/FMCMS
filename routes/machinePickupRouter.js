@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const machinePickupCntrl = require("../controllers/machinePickupCntrl");
 const fileUpload = require("../middleware/fileUpload");
-const auth = require("../middleware/auth");
+// const auth = require("../middleware/auth");
 
 router.post("/machine", machinePickupCntrl.addPickup);
 router.get("/list", machinePickupCntrl.getList);

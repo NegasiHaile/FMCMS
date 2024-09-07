@@ -11,7 +11,6 @@ import {
   CModalTitle,
   CModalBody,
   CModalFooter,
-  CLabel,
   CForm,
   CRow,
   CCol,
@@ -90,7 +89,6 @@ function Pricing() {
   const formatingDate = (dateString) => {
     return new Date(dateString).toLocaleString();
   };
-  const pricingTableFields = ["pricingName", "price", "createdAt"];
   return (
     <>
       <CCard className=" shadow-sm">

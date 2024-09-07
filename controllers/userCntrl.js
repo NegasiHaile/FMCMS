@@ -2,7 +2,7 @@ const Users = require("../models/userModel");
 const SenderEmails = require("../models/senderEmailModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const generator = require("generate-password");
+// const generator = require("generate-password");
 const nodemailer = require("nodemailer");
 
 const userCntrl = {
@@ -14,7 +14,7 @@ const userCntrl = {
         mName,
         lName,
         gender,
-        photo,
+        // photo,
         branch,
         city,
         subCity,
@@ -28,9 +28,9 @@ const userCntrl = {
       const newpassword = "123456"; // generatePassword();
 
       const user = await Users.findOne({ email });
-      const primaryEmail = await SenderEmails.findOne({
-        primary: true,
-      });
+      // const primaryEmail = await SenderEmails.findOne({
+      //   primary: true,
+      // });
 
       if (user)
         return res
@@ -94,24 +94,8 @@ const userCntrl = {
 
   editUser: async (req, res) => {
     try {
-      await Users.findOneAndUpdate(
-        { _id: req.params.id },
-        ({
-          fName,
-          mName,
-          lName,
-          gender,
-          // photo,
-          branch,
-          city,
-          subCity,
-          kebele,
-          woreda,
-          phoneNumber,
-          email,
-          userRole,
-        } = req.body)
-      );
+      const payload = req.body;
+      await Users.findOneAndUpdate({ _id: req.params.id }, { ...payload });
       res.json({ msg: "User datail edited successfuly!" });
     } catch (error) {
       res.status(500).json({ meg: error.msg });
@@ -371,15 +355,15 @@ const createRefreshToken = (user) => {
   return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "7d" });
 };
 
-const generatePassword = () => {
-  const generatedpassword = generator.generate({
-    length: 8,
-    numbers: true,
-    symbols: false,
-    uppercase: false,
-  });
-  return generatedpassword;
-};
+// const generatePassword = () => {
+//   const generatedpassword = generator.generate({
+//     length: 8,
+//     numbers: true,
+//     symbols: false,
+//     uppercase: false,
+//   });
+//   return generatedpassword;
+// };
 
 const sendMailToUser = (mailDetail) => {
   var transporter = nodemailer.createTransport({
@@ -406,9 +390,11 @@ const sendMailToUser = (mailDetail) => {
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.log("Email not sent : " + error);
+      return { msg: "Email not sent : " + error };
     } else {
-      console.log("Email sent to: " + mailDetail.emailToMail + info.response);
+      return {
+        msg: "Email sent to: " + mailDetail.emailToMail + info.response,
+      };
     }
   });
 };

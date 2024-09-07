@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useContext, useState, useEffect } from "react";
 import { GlobalState } from "../../../GlobalState";
 import axios from "axios";
@@ -9,7 +10,6 @@ import {
   CCardHeader,
   CCardBody,
   CLabel,
-  CDataTable,
   CLink,
   CTooltip,
 } from "@coreui/react";

@@ -24,8 +24,6 @@ function ReturningList() {
   const [user] = state.UserAPI.User;
   const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
   const [returns, setReturns] = useState([]);
-  const [callbackMachinePickup, setCallbackMachinePickup] =
-    state.MachinePickUpAPI.callback;
 
   useEffect(() => {
     if (pickupMachines.length > 0) {

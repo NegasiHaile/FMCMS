@@ -36,8 +36,6 @@ function SendFeedback() {
         setPdfFile(null);
         setPdfFileError("Please select valid pdf file");
       }
-    } else {
-      console.log("select your file");
     }
   };
 

@@ -51,7 +51,7 @@ function BusinessDetail() {
   const [businesses] = state.BusinessAPI.businesses;
   const [business, setBusiness] = useState("");
   const [branchs] = state.branchAPI.branchs;
-  const [users, setUsers] = state.UsersAPI.users;
+  const users = state.UsersAPI.users;
   const [allSales] = state.SalesAPI.Sales;
   const [newSales, setNewSales] = useState([]);
   const [callback, setCallback] = state.MachineAPI.callback;

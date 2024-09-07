@@ -128,7 +128,7 @@ function RegisterClient() {
     }
   };
 
-  const deleteClient = async (_id, fName, mName) => {
+  const deleteClient = async (_id) => {
     try {
       Swal.fire({
         title: "Delete?",

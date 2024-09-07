@@ -2,7 +2,6 @@ const clientBusinesses = require("../models/clientBusinessModel");
 const Machines = require("../models/machineModel");
 const Sales = require("../models/salesModel");
 const Notifications = require("../models/notificationModel");
-const path = require("path");
 const fs = require("fs");
 
 const clientBusinessCntrl = {
@@ -15,7 +14,7 @@ const clientBusinessCntrl = {
           VAT,
           companyName,
           tradeName,
-          TL_Image,
+          // TL_Image,
           city,
           subCity,
           kebele,
@@ -83,7 +82,7 @@ const clientBusinessCntrl = {
       const bsnss = await clientBusinesses.findById(req.params.businessId);
       if (bsnss.machine !== "assigned") {
         const pathToFile = "./client/public/" + bsnss.TL_Image;
-        fs.unlink(pathToFile, async (err) => {
+        fs.unlink(pathToFile, async () => {
           await clientBusinesses.findByIdAndDelete(req.params.businessId);
           return res.json({
             msg: "Business detail has been deleted succesfully!",
@@ -101,24 +100,7 @@ const clientBusinessCntrl = {
   eidtBusinesDetail: async (req, res) => {
     // edit detail if if the owner have not submit valid credintals
     try {
-      var bsnsEditDetail = ({
-        ownerID,
-        TIN,
-        companyName,
-        tradeName,
-        TL_Image,
-        city,
-        subCity,
-        kebele,
-        woreda,
-        buildingName,
-        officeNumber,
-        telephone,
-        email,
-        fax,
-        branch,
-        sw_Tech,
-      } = req.body);
+      let bsnsEditDetail = req.body;
       const bsnss = await clientBusinesses.findById(req.params.businessId);
       if (bsnss.credentials === "Rejected") {
         bsnsEditDetail.credentials = "Pending";
@@ -167,9 +149,13 @@ const clientBusinessCntrl = {
   },
   rejectCredentials: async (req, res) => {
     try {
-      const newNotifications = new Notifications(
-        ({ senderId, receiverId, subject, theMessage } = req.body)
-      );
+      let { senderId, receiverId, subject, theMessage } = req.body;
+      const newNotifications = new Notifications({
+        senderId,
+        receiverId,
+        subject,
+        theMessage,
+      });
       await clientBusinesses.findOneAndUpdate(
         { _id: req.params.businessId },
         { credentials: "Rejected" }
@@ -178,7 +164,9 @@ const clientBusinessCntrl = {
       res.json({
         msg: "Request has been rejected successfuly!",
       });
-    } catch (error) {}
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
   },
   getBusinesesPerOwner: async (req, res) => {
     // this fetchs all the businesses of an owner
@@ -193,9 +181,10 @@ const clientBusinessCntrl = {
   assignSoftwareTech: async (req, res) => {
     // fetch the detail of a single business
     try {
+      const { sw_Tech } = req.body;
       await clientBusinesses.findOneAndUpdate(
         { _id: req.params.businessId },
-        ({ sw_Tech } = req.body)
+        { sw_Tech }
       );
       res.json({ msg: "Business has been assigned a software technician!" });
     } catch (error) {
@@ -205,9 +194,10 @@ const clientBusinessCntrl = {
   assignHardwareTech: async (req, res) => {
     // fetch the detail of a single business
     try {
+      const { hw_Tech } = req.body;
       await clientBusinesses.findOneAndUpdate(
         { _id: req.params.businessId },
-        ({ hw_Tech } = req.body)
+        { hw_Tech }
       );
       res.json({ msg: "Business has been assigned a hardware technician!" });
     } catch (error) {
@@ -216,7 +206,7 @@ const clientBusinessCntrl = {
   },
   requestMachine: async (req, res) => {
     try {
-      const { machineId, businessId, status } = req.body;
+      const { businessId } = req.body;
       const newrequest = new Sales({
         machineId: req.params.machineId,
         businessId,
@@ -252,14 +242,13 @@ const clientBusinessCntrl = {
   },
   returnMachineRequest: async (req, res) => {
     try {
-      const { salesId, returnReason, acceptanceFile } = req.body;
-      const newReturnMachine = new ReturnMachines({
-        salesId,
-        returnReason,
-        acceptanceFile: "/uploads/" + req.file.filename,
-      });
-      console.log(salesId + " " + returnReason + " " + acceptanceFile);
-      await newReturnMachine.save();
+      // const { salesId, returnReason } = req.body;
+      // const newReturnMachine = new ReturnMachines({
+      //   salesId,
+      //   returnReason,
+      //   acceptanceFile: "/uploads/" + req.file.filename,
+      // });
+      // await newReturnMachine.save();
       res.json({ msg: "Request has been sent successfully!" });
     } catch (err) {
       return res.status(500).json({ msg: err.message });

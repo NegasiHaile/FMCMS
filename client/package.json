@@ -36,7 +36,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.13.14",
-    "auto-changelog": "~2.2.1"
+    "@eslint/js": "^9.9.1",
+    "auto-changelog": "~2.2.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.35.2",
+    "globals": "^15.9.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -45,10 +49,8 @@
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "eject": "react-scripts eject",
+    "lint": "eslint .",
     "changelog": "auto-changelog --starting-version 3.0.0 --commit-limit false --hide-credit"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",

@@ -7,17 +7,24 @@ const simcards = require("../models/simCardModel");
 const machineCntrl = {
   register: async (req, res) => {
     try {
-      const newMachine = new Machines(
-        ({
-          serialNumber,
-          machineModel,
-          brand,
-          price,
-          branch,
-          salesStatus,
-          problemStatus,
-        } = req.body)
-      );
+      const {
+        serialNumber,
+        machineModel,
+        brand,
+        price,
+        branch,
+        salesStatus,
+        problemStatus,
+      } = req.body;
+      const newMachine = new Machines({
+        serialNumber,
+        machineModel,
+        brand,
+        price,
+        branch,
+        salesStatus,
+        problemStatus,
+      });
 
       const machine = await Machines.findOne({ serialNumber: serialNumber });
 
@@ -167,9 +174,15 @@ const machineCntrl = {
       // }
       // else {
 
-      const newSales = new Sales(
-        ({ branch, businessId, machineId, status } = req.body)
-      );
+      const { branch, businessId, machineId, status } = req.body;
+
+      // Create a new instance of Sales with the destructured variables
+      const newSales = new Sales({
+        branch,
+        businessId,
+        machineId,
+        status,
+      });
 
       await newSales.save();
 

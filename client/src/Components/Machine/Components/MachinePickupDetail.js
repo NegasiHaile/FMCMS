@@ -129,7 +129,9 @@ function MachinePickupDetail() {
           sweetAlert("error", error.response.data.msg);
         }
       });
-    } catch (error) {}
+    } catch (error) {
+      sweetAlert("error", error.message);
+    }
   };
 
   return (

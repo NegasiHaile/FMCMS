@@ -15,7 +15,7 @@ function BusinessOverview(props) {
 
   // for onchange event
   // const [pdfFile, setPdfFile] = useState(business.TL_Image);
-  const [pdfFileError, setPdfFileError] = useState("");
+  // const [pdfFileError, setPdfFileError] = useState("");
 
   // for submit event
   const [viewPdf, setViewPdf] = useState(business.TL_Image);
@@ -28,11 +28,11 @@ function BusinessOverview(props) {
       reader.readAsDataURL(business.TL_Image);
       reader.onloadend = (e) => {
         setViewPdf(e.target.result);
-        setPdfFileError("");
+        // setPdfFileError("");
       };
     } else {
       setViewPdf(business.TL_Image);
-      setPdfFileError("Please select valid pdf file");
+      // setPdfFileError("Please select valid pdf file");
     }
   });
 

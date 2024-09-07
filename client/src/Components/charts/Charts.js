@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useContext } from "react";
 import { CCard, CCardBody, CCardGroup, CCardHeader } from "@coreui/react";
 import {
@@ -82,7 +83,6 @@ const Charts = (props) => {
           new Date(sale.createdAt).getFullYear() == props.theYear
       ).length
     );
-    console.log("The doughnutSalesStatus :" + doughnutSalesStatus);
     for (let i = 0; i <= elements; i++) {
       barReceivedMachines.push(
         pickupMachines.filter(
@@ -117,7 +117,6 @@ const Charts = (props) => {
   };
 
   const dataPerBranch = () => {
-    console.log(" Branch Before : " + linemachineSales);
     let elements = months.length - 1;
     for (let i = 0; i <= elements; i++) {
       lineClientsBusinesses.push(

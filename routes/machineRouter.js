@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const machineCntrl = require("../controllers/machineCntrl");
-const auth = require("../middleware/auth");
+// const auth = require("../middleware/auth");
 
 router.post("/register", machineCntrl.register);
 

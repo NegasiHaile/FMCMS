@@ -1,7 +1,6 @@
 const Sales = require("../models/salesModel");
 const machines = require("../models/machineModel");
 const clientBusinesses = require("../models/clientBusinessModel");
-const branchs = require("../models/branchModel");
 
 const salesCntrl = {
   getSales: async (req, res) => {

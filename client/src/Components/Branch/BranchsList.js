@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { GlobalState } from "../../GlobalState";
 
-import Loader from "../Utils/Commons/Loader";
+// import Loader from "../Utils/Commons/Loader";
 import {
   CButton,
   CCard,
@@ -112,29 +112,29 @@ function BranchsList() {
     }
   };
 
-  const deleteBranch = async (_id, branchName) => {
-    try {
-      Swal.fire({
-        title: "Delete?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#1E263C",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          const res = await axios.delete(`${apiUrl}/branch/delete/${_id}`, {
-            headers: { Authorization: token },
-          });
-          Swal.fire("Deleted!", res.data.msg, "success");
-          setCallback(!callback);
-        }
-      });
-    } catch (error) {
-      sweetAlert("error", error.response.data.msg);
-    }
-  };
+  // const deleteBranch = async (_id, branchName) => {
+  //   try {
+  //     Swal.fire({
+  //       title: "Delete?",
+  //       text: "You won't be able to revert this!",
+  //       icon: "warning",
+  //       showCancelButton: true,
+  //       confirmButtonColor: "#1E263C",
+  //       cancelButtonColor: "#d33",
+  //       confirmButtonText: "Yes, delete it!",
+  //     }).then(async (result) => {
+  //       if (result.isConfirmed) {
+  //         const res = await axios.delete(`${apiUrl}/branch/delete/${_id}`, {
+  //           headers: { Authorization: token },
+  //         });
+  //         Swal.fire("Deleted!", res.data.msg, "success");
+  //         setCallback(!callback);
+  //       }
+  //     });
+  //   } catch (error) {
+  //     sweetAlert("error", error.response.data.msg);
+  //   }
+  // };
 
   const branchTableFields = [
     "branchName",

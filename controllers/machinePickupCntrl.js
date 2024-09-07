@@ -2,45 +2,15 @@ const MachinePickups = require("../models/machinePickupModel");
 const Sales = require("../models/salesModel");
 const machines = require("../models/machineModel");
 const simcards = require("../models/simCardModel");
-const clientBusinesses = require("../models/clientBusinessModel");
-const branchs = require("../models/branchModel");
-const path = require("path");
 const fs = require("fs");
 
 const machinePickupCntrl = {
   addPickup: async (req, res) => {
     try {
       const mchn = await machines.findById(req.body.machineId);
+      const payload = req.body;
       if (mchn.availableIn === "client-hand") {
-        const newPickup = new MachinePickups(
-          ({
-            branchId,
-            salesId,
-            businessId,
-            machineId,
-            memoryKey,
-            drawer,
-            paper,
-            terminal,
-            terminalAdapte,
-            machineMaterial,
-            SBookTerminal,
-            SbookMachine,
-            paperRoller,
-            paperCover,
-            machineAdapter,
-            FDForm,
-            sealNumber,
-            MRCNumber,
-            category,
-            subCategory,
-            clientReportedProblems,
-            TechnicianReportedProblems,
-            infoChange,
-            issueDate,
-            pickedupBy,
-          } = req.body)
-        );
+        const newPickup = new MachinePickups({ ...payload });
 
         await newPickup.save();
         res.json({ msg: "Machine receiving detail saved successfuly!" });
@@ -179,35 +149,8 @@ const machinePickupCntrl = {
 
   eidtPickup: async (req, res) => {
     try {
-      const pickupEditingDetail = new MachinePickups(
-        ({
-          branchId,
-          salesId,
-          businessId,
-          machineId,
-          memoryKey,
-          drawer,
-          paper,
-          terminal,
-          terminalAdapte,
-          machineMaterial,
-          SBookTerminal,
-          SbookMachine,
-          paperRoller,
-          paperCover,
-          machineAdapter,
-          FDForm,
-          sealNumber,
-          MRCNumber,
-          category,
-          subCategory,
-          clientReportedProblems,
-          technicianReportedProblems,
-          infoChange,
-          issueDate,
-          pickedupBy,
-        } = req.body)
-      );
+      const payload = req.body;
+      const pickupEditingDetail = new MachinePickups({ ...payload }``);
       await MachinePickups.findOneAndUpdate(
         { _id: req.params.id },
         pickupEditingDetail
@@ -245,7 +188,7 @@ const machinePickupCntrl = {
         category,
         subCategory,
         returnReason,
-        returnCertificate,
+        // returnCertificate,
         pickedupBy,
       } = req.body;
 
@@ -298,7 +241,7 @@ const machinePickupCntrl = {
       ) {
         const pathToFile =
           "./client/public/" + withdrawalItem.returnCertificate;
-        fs.unlink(pathToFile, async (err) => {
+        fs.unlink(pathToFile, async () => {
           // if (err) {
           //   return res.status(400).json({
           //     msg: "Erorr in deleting of the pdf file!",
@@ -321,31 +264,7 @@ const machinePickupCntrl = {
 
   eidtMachine_withdrawal: async (req, res) => {
     try {
-      var withdrawalDetail = ({
-        branchId,
-        salesId,
-        businessId,
-        machineId,
-        memoryKey,
-        drawer,
-        paper,
-        terminal,
-        terminalAdapte,
-        machineMaterial,
-        SBookTerminal,
-        SbookMachine,
-        paperRoller,
-        paperCover,
-        machineAdapter,
-        FDForm,
-        sealNumber,
-        MRCNumber,
-        category,
-        subCategory,
-        returnReason,
-        returnCertificate,
-        pickedupBy,
-      } = req.body);
+      var withdrawalDetail = req.body;
 
       const withdrawalItem = await MachinePickups.findById(req.params.id);
       if (!withdrawalItem)
@@ -353,7 +272,7 @@ const machinePickupCntrl = {
       if (req.file) {
         const oldFilePath =
           "./client/public/" + withdrawalItem.returnCertificate;
-        fs.unlink(oldFilePath, async (err) => {
+        fs.unlink(oldFilePath, async () => {
           // if (err) {
           //   throw err;
           // } else {

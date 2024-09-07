@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   CButton,
   CCol,
@@ -8,9 +8,9 @@ import {
   CInputGroupAppend,
   CInputGroupPrepend,
   CInputGroupText,
-  CRow
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+  CRow,
+} from "@coreui/react";
+import CIcon from "@coreui/icons-react";
 
 const Page500 = () => {
   return (
@@ -21,7 +21,9 @@ const Page500 = () => {
             <span className="clearfix">
               <h1 className="float-left display-3 mr-4">500</h1>
               <h4 className="pt-3">Houston, we have a problem!</h4>
-              <p className="text-muted float-left">The page you are looking for is temporarily unavailable.</p>
+              <p className="text-muted float-left">
+                The page you are looking for is temporarily unavailable.
+              </p>
             </span>
             <CInputGroup className="input-prepend">
               <CInputGroupPrepend>
@@ -29,7 +31,11 @@ const Page500 = () => {
                   <CIcon name="cil-magnifying-glass" />
                 </CInputGroupText>
               </CInputGroupPrepend>
-              <CInput size="16" type="text" placeholder="What are you looking for?" />
+              <CInput
+                size="16"
+                type="text"
+                placeholder="What are you looking for?"
+              />
               <CInputGroupAppend>
                 <CButton color="info">Search</CButton>
               </CInputGroupAppend>
@@ -38,7 +44,7 @@ const Page500 = () => {
         </CRow>
       </CContainer>
     </div>
-  )
-}
+  );
+};
 
-export default Page500
+export default Page500;

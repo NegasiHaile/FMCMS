@@ -113,7 +113,6 @@ function MrcsList() {
     "MRC",
     "status",
     "createdAt",
-    ,
     {
       key: "Actions",
       label: "Actions",

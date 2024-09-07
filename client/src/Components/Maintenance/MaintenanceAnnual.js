@@ -22,10 +22,8 @@ function MaintenanceAnnual() {
   });
 
   const onChangeInput = (e) => {
-    try {
-      const { name, value } = e.target;
-      setUpld({ ...upld, [name]: value });
-    } catch {}
+    const { name, value } = e.target;
+    setUpld({ ...upld, [name]: value });
   };
   const onChangeFileInput = (e) => {
     setUpld({ ...upld, acceptanceFile: e.target.files[0] });

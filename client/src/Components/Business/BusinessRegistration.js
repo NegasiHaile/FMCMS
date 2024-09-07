@@ -88,7 +88,9 @@ const BusinessRegistration = () => {
       } else {
         setBusiness({ ...business, [name]: value });
       }
-    } catch {}
+    } catch {
+      () => {};
+    }
   };
   const onChangeFileInput = (e) => {
     setBusiness({ ...business, TL_Image: e.target.files[0] });

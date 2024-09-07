@@ -3,7 +3,8 @@ const MRCs = require("../models/mrcModel");
 const salesCntrl = {
   registerMRCs: async (req, res) => {
     try {
-      const newMRC = new MRCs(({ MRC } = req.body));
+      const { MRC } = req.body;
+      const newMRC = new MRCs({ MRC });
 
       if (MRC.length == 10) {
         const mrc = await MRCs.findOne({ MRC: MRC });
@@ -33,9 +34,10 @@ const salesCntrl = {
   },
   editMRC: async (req, res) => {
     try {
+      const { MRC, branch, status } = req.body;
       await MRCs.findOneAndUpdate(
         { _id: req.body._id },
-        ({ MRC, branch, status } = req.body)
+        { MRC, branch, status }
       );
       res.json({
         msg: "MRC has been successfuly edited!",

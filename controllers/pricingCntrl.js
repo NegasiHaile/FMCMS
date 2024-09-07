@@ -3,12 +3,11 @@ const Pricings = require("../models/pricingModel");
 const pricingCntrl = {
   registerPrcing: async (req, res) => {
     try {
-      const newPeicing = new Pricings(
-        ({ pricingName, price, description } = req.body)
-      );
+      const payload = req.body;
+      const newPeicing = new Pricings({ ...payload });
 
       const checkPricingName = await Pricings.findOne({
-        pricingName: pricingName,
+        pricingName: payload.pricingName,
       });
 
       if (checkPricingName)
@@ -31,10 +30,8 @@ const pricingCntrl = {
   },
   editPricing: async (req, res) => {
     try {
-      await Pricings.findOneAndUpdate(
-        { _id: req.params.id },
-        ({ pricingName, price, description } = req.body)
-      );
+      const payload = req.body;
+      await Pricings.findOneAndUpdate({ _id: req.params.id }, { ...payload });
       res.json({ msg: "Pricing is edited successfully!" });
     } catch (err) {
       return res.status(500).json({ msg: err.message });

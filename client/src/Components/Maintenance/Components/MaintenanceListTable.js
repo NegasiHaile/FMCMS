@@ -4,7 +4,6 @@ import {
   CCard,
   CCardHeader,
   CCardBody,
-  CCardFooter,
   CRow,
   CCol,
   CSelect,
@@ -12,7 +11,6 @@ import {
   CInputGroupPrepend,
   CInputGroupText,
   CInput,
-  CButton,
   CDataTable,
   CLink,
   CTooltip,
@@ -97,9 +95,6 @@ function MaintenanceListTable() {
           }
         } else {
           if (maintenanceDateFrom) {
-            console.log(
-              new Date(maintenanceDateFrom) > new Date(maintenanceDateTo)
-            );
             setMaintenances(
               pickupMachines.filter(
                 (filteredPickUp) =>
@@ -213,12 +208,11 @@ function MaintenanceListTable() {
                 </CInputGroupPrepend>
                 <CInput
                   type="date"
-                  placeholder="Select date"
                   id="maintenanceDateFrom"
                   name="maintenanceDateFrom"
                   value={maintenanceDateFrom}
                   onChange={(e) => setMaintenanceDateFrom(e.target.value)}
-                  placeholder="From"
+                  placeholder="From date"
                 />
               </CInputGroup>
             </CCol>
@@ -229,7 +223,6 @@ function MaintenanceListTable() {
                 </CInputGroupPrepend>
                 <CInput
                   type="date"
-                  placeholder="Select date"
                   id="maintenanceDateTo"
                   name="maintenanceDateTo"
                   value={maintenanceDateTo}

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { GlobalState } from "../../../GlobalState";
@@ -7,7 +8,7 @@ import Swal from "sweetalert2";
 import FilterMRC from "../../Utils/Filters/FilterMRC";
 import FilterSIMCard from "../../Utils/Filters/FilterSIMCard";
 
-import { CButton, CCard, CDataTable, CLink, CTooltip } from "@coreui/react";
+import { CDataTable, CLink, CTooltip } from "@coreui/react";
 import { getConfig } from "../../../config";
 
 function BusinessMachines({ businessId }) {
@@ -160,7 +161,7 @@ function BusinessMachines({ businessId }) {
         />
       ) : (
         <h5 className="text-muted text-center">
-          This business haven't a machine yet!
+          This business have not a machine yet!
         </h5>
       )}
     </div>

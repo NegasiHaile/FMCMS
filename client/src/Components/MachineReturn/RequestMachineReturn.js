@@ -27,10 +27,8 @@ function RequestMachineReturn() {
   });
 
   const onChangeInput = (e) => {
-    try {
-      const { name, value } = e.target;
-      setretuenMachineReason({ ...retuenMachineReason, [name]: value });
-    } catch {}
+    const { name, value } = e.target;
+    setretuenMachineReason({ ...retuenMachineReason, [name]: value });
   };
 
   const onChangeFileInput = (e) => {

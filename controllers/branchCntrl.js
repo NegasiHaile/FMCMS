@@ -1,25 +1,38 @@
 const Branchs = require("../models/branchModel");
 const Users = require("../models/userModel");
 const Machines = require("../models/machineModel");
+const Businesses = require("../models/clientBusinessModel");
 
 const branchsCntrl = {
   openNewBranch: async (req, res) => {
     try {
-      const newBranch = new Branchs(
-        ({
-          branchName,
-          city,
-          subCity,
-          kebele,
-          woreda,
-          buildingName,
-          officeNumber,
-          telephone,
-          email,
-          fax,
-          Description,
-        } = req.body)
-      );
+      const {
+        branchName,
+        city,
+        subCity,
+        kebele,
+        woreda,
+        buildingName,
+        officeNumber,
+        telephone,
+        email,
+        fax,
+        Description,
+      } = req.body;
+
+      const newBranch = new Branchs({
+        branchName,
+        city,
+        subCity,
+        kebele,
+        woreda,
+        buildingName,
+        officeNumber,
+        telephone,
+        email,
+        fax,
+        Description,
+      });
 
       const branch = await Branchs.findOne({ branchName: branchName });
 
@@ -51,9 +64,22 @@ const branchsCntrl = {
   },
   editBranchDetail: async (req, res) => {
     try {
+      const {
+        branchName,
+        city,
+        subCity,
+        kebele,
+        woreda,
+        buildingName,
+        officeNumber,
+        telephone,
+        email,
+        fax,
+        Description,
+      } = req.body;
       await Branchs.findOneAndUpdate(
         { _id: req.params.branchId },
-        ({
+        {
           branchName,
           city,
           subCity,
@@ -65,7 +91,7 @@ const branchsCntrl = {
           email,
           fax,
           Description,
-        } = req.body)
+        }
       );
       res.json({ msg: "Branch detail has been edited successfully!" });
     } catch (error) {

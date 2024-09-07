@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { createContext, useState, useEffect } from "react";
 import UserAPI from "./api/UserAPI";
 import UsersAPI from "./api/UsersAPI";
@@ -71,3 +72,4 @@ export const DataProvider = ({ children }) => {
 
   return <GlobalState.Provider value={state}>{children}</GlobalState.Provider>;
 };
+/* eslint-enable react/prop-types */

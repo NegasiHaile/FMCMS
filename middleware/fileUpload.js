@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const fileFilter = (req, file, cb) => {
+const fileFilter = (res, file, cb) => {
   const allowedFileTypes = ["application/pdf", "application/docx"];
   if (allowedFileTypes.includes(file.mimetype)) {
     cb(null, true);
@@ -20,7 +20,7 @@ const fileFilter = (req, file, cb) => {
     return res.status(400).json({
       msg: "Only pdf and docx file formats are allowed!",
     });
-    cb(null, false);
+    // cb(null, false);
   }
 };
 

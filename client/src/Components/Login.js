@@ -37,7 +37,7 @@ const Login = () => {
     e.preventDefault();
     setBtnLoading(true);
     try {
-      const usr = await axios.post(
+      await axios.post(
         `${apiUrl}/user/login`,
         { ...user },
         {

@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-import { GlobalState } from "../../GlobalState";
 import {
   CButton,
   CCol,
@@ -25,9 +25,7 @@ import CIcon from "@coreui/icons-react";
 import { getConfig } from "../../config";
 
 function ResetPassword() {
-  const state = useContext(GlobalState);
   const { apiUrl } = getConfig();
-  const [allUsers] = state.UsersAPI.users;
   const params = useParams();
   const [newPassword, setNewPassword] = useState("");
   const [retypeNewPassword, setRetypeNewPassword] = useState("");
@@ -37,10 +35,10 @@ function ResetPassword() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const [account, setAccount] = useState([]);
+  // const [account, setAccount] = useState([]);
 
   useEffect(() => {
-    setAccount(allUsers[0]);
+    // setAccount(allUsers[0]);
   }, [params.resetToken]);
 
   const sweetAlert = (type, text) => {
