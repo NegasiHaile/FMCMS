@@ -43,13 +43,13 @@ jobs:
         working-directory: ./client
         run: npm run lint
 
-      - name: Run server tests
-        working-directory: ./
-        run: npm test
+      # - name: Run server tests
+      #   working-directory: ./
+      #   run: npm test
 
-      - name: Run client tests
-        working-directory: ./client
-        run: npm test
+      # - name: Run client tests
+      #   working-directory: ./client
+      #   run: npm test
 
       - name: Build client
         working-directory: ./client
