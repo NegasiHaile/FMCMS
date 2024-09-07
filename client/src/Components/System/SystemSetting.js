@@ -15,7 +15,6 @@ import {
   CTooltip,
   CModal,
   CModalHeader,
-  CModalTitle,
   CModalBody,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
@@ -46,8 +45,6 @@ function SystemSetting() {
     try {
       const res = await axios.get(`${apiUrl}/system/fetch_sender_email`);
       setSenderEmails(res.data);
-      console.log(res.data);
-      console.log(senderEmails.length);
     } catch (error) {
       sweetAlert("error", error.response.data.msg);
     }

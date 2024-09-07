@@ -61,7 +61,6 @@ function FiscalizationItem() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setSalesDetail({ ...salesDetail, [name]: value });
-    console.log(salesDetail);
   };
   const sweetAlert = (type, text) => {
     Swal.fire({

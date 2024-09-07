@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { GlobalState } from "../../GlobalState";
 import CIcon from "@coreui/icons-react";
 import { useParams } from "react-router-dom";
@@ -18,7 +18,7 @@ function ClientDetail() {
   const state = useContext(GlobalState);
   const [user] = state.UserAPI.User;
   const [users] = state.UsersAPI.users;
-  const [client, setClient] = useState(
+  const client = useState(
     users.filter((filteredClient) => filteredClient._id == params.id)
   );
 

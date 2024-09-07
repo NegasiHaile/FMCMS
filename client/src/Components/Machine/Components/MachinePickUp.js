@@ -82,7 +82,6 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     // const year = newDate.getFullYear();
     newDate.setFullYear(newDate.getFullYear() + 1);
     pickup.annualNextMaintenanceDate = newDate.toISOString().substring(0, 10);
-    console.log(newDate);
   }, [pickupId, pickup.issueDate]);
   useEffect(() => {
     if (pickupId != "undefined") {
@@ -187,7 +186,6 @@ function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
     pickup.infoChange.splice(index, 1);
     setInfoChangeItem(pickup);
     setInfoChangeItem(InfoChangeItemFields);
-    console.log(pickup);
   };
   const findTotalPrice = (infoChange) => {
     var total = 0.0;

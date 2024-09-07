@@ -23,7 +23,7 @@ const PickupDetail = () => {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-const style = { overflowX: "scroll" }
+  const style = { overflowX: "scroll" };
   return (
     <div>
       <div

@@ -25,7 +25,6 @@ function FiscalizationsPerMachine({ machineId }) {
           // && filteredSale.fiscalization != "none"
         )
       );
-      console.log("Inside if :" + JSON.stringify(fsclz_per_machine));
     }
   }, [machineId, Sales]);
 

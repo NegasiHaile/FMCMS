@@ -33,7 +33,7 @@ const ResetPassword = lazy(() =>
   import("./Components/UserAccount/ResetPassword")
 );
 
-const Page404 = lazy(() => import("./Components/Utils/page404/Page404"));
+// const Page404 = lazy(() => import("./Components/Utils/page404/Page404"));
 const Page500 = lazy(() => import("./Components/Utils/page500/Page500"));
 
 const Loader = lazy(() => import("./Components/Utils/Commons/Loader"));

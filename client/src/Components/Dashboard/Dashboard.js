@@ -1,7 +1,5 @@
 import React, { Suspense, useContext, useState } from "react";
 
-import CIcon from "@coreui/icons-react";
-
 import { GlobalState } from "../../GlobalState";
 
 import { CSelect } from "@coreui/react";
@@ -10,7 +8,6 @@ import Charts from "../charts/Charts";
 import EmployeesList from "../Employee/EmployeesList";
 
 import WidgetsDropdown from "../widgets/WidgetsDropdown.js";
-import WidgetsBrand from "../widgets/WidgetsBrand.js";
 
 import RecentEvents from "./Tables/RecentEvents";
 
@@ -31,7 +28,6 @@ const BranchAdminDashboard = () => {
     for (let i = 2020; i <= new Date().getFullYear(); i++) {
       workyears.push(i);
     }
-    console.log("the work years:" + workyears);
     return workyears;
   };
   const cahtappstyle = {
@@ -43,11 +39,11 @@ const BranchAdminDashboard = () => {
     bottom: "50px",
     zIndex: "1",
   };
-  const chaticonstyle = {
-    padding: "0px 11px",
-    color: "#fff",
-    textAlign: "center",
-  };
+  // const chaticonstyle = {
+  //   padding: "0px 11px",
+  //   color: "#fff",
+  //   textAlign: "center",
+  // };
   return (
     <Suspense
       fallback={

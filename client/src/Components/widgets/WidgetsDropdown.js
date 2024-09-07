@@ -382,7 +382,7 @@ const WidgetsDropdown = (props) => {
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Info' Change: </span>{" "}
+                <span>Information Change: </span>{" "}
                 <span>
                   {props.branchId
                     ? pickupMachines.filter(
@@ -420,7 +420,7 @@ const WidgetsDropdown = (props) => {
                 className="d-flex justify-content-between"
                 disabled
               >
-                <span>Tempo' Store: </span>{" "}
+                <span>Temporary Store: </span>{" "}
                 <span>
                   {props.branchId
                     ? pickupMachines.filter(

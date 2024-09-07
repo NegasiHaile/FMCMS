@@ -97,9 +97,6 @@ function MaintenanceListTable() {
           }
         } else {
           if (maintenanceDateFrom) {
-            console.log(
-              new Date(maintenanceDateFrom) > new Date(maintenanceDateTo)
-            );
             setMaintenances(
               pickupMachines.filter(
                 (filteredPickUp) =>
