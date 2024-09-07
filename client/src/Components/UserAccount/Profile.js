@@ -13,7 +13,6 @@ function Profile() {
     if (params.id) {
       const user = users.find((filteredUser) => filteredUser._id === params.id);
       setUserDetail(user);
-    } else {
     }
   }, [params.id, users]);
 

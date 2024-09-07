@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useContext, useEffect } from "react";
 import { GlobalState } from "../../GlobalState";
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -10,7 +10,6 @@ import { getConfig } from "../../../config";
 function SenderEmailVerification() {
   const params = useParams();
   const { apiUrl } = getConfig();
-  const [verifiying, setVefiying] = useState([]);
 
   useEffect(() => {}, [params.verificationToken]);
 

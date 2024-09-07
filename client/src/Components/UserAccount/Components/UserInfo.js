@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useContext, useState, useEffect } from "react";
 import { GlobalState } from "../../../GlobalState";
 import { CRow, CCard, CCardHeader, CCardBody, CCol } from "@coreui/react";
@@ -11,7 +12,6 @@ function UserInfo({ id }) {
     if (id) {
       const user = users.find((filteredUser) => filteredUser._id === id);
       setUserDetail(user);
-    } else {
     }
   }, [id, users]);
   const filterBranchUsing_id = (id) => {

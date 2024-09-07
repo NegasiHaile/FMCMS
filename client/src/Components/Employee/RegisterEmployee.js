@@ -35,7 +35,7 @@ const userAttributes = {
   email: "",
   userRole: "",
 };
-const RegisterEmployee = (props) => {
+const RegisterEmployee = () => {
   const params = useParams();
   const state = useContext(GlobalState);
   const { apiUrl } = getConfig();

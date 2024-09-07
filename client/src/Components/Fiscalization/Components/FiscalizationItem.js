@@ -433,7 +433,6 @@ function FiscalizationOperations() {
   const [user] = state.UserAPI.User;
   const [Sales] = state.SalesAPI.Sales;
   const [salesDetail, setSalesDetail] = useState("");
-  const [mrcs] = state.MRCAPI.mrcs;
   const [callbackMachines, setCallbackMachines] = state.MachineAPI.callback;
   const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
 

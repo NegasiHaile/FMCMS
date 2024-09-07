@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useContext, useState, useEffect } from "react";
 import { GlobalState } from "../../../GlobalState";
 
@@ -6,7 +7,6 @@ import {
   CCardBody,
   CCardGroup,
   CCardHeader,
-  CDataTable,
   CLink,
   CTooltip,
 } from "@coreui/react";
@@ -14,7 +14,6 @@ import CIcon from "@coreui/icons-react";
 
 function RecentEvents(props) {
   const state = useContext(GlobalState);
-  const [user] = state.UserAPI.User;
 
   const [Sales] = state.SalesAPI.Sales;
   const [pickupMachines] = state.MachinePickUpAPI.machinePickups;
@@ -58,18 +57,18 @@ function RecentEvents(props) {
   const trnctMaxWidth = {
     maxWidth: "130px",
   };
-  const recentRecievingstableAttr = [
-    "serialNumber",
-    "category",
-    "status",
-    {
-      key: "Actions",
-      label: "Actions",
-      // _style: { width: "1%" },
-      sorter: false,
-      filter: false,
-    },
-  ];
+  // const recentRecievingstableAttr = [
+  //   "serialNumber",
+  //   "category",
+  //   "status",
+  //   {
+  //     key: "Actions",
+  //     label: "Actions",
+  //     // _style: { width: "1%" },
+  //     sorter: false,
+  //     filter: false,
+  //   },
+  // ];
   return (
     <CCardGroup columns className="cols-2 mb-3">
       <CCard>

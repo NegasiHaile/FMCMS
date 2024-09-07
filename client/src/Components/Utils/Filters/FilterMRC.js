@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { GlobalState } from "../../../GlobalState";
 function FilterMRC(props) {
   const state = useContext(GlobalState);

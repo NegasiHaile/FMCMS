@@ -43,7 +43,8 @@ const MachinesList = () => {
   const [callbackSales, setCallbackSales] = state.SalesAPI.callback;
   const [activemachine, setActivemachine] = useState("none");
   const [showModal, setShowModal] = useState(false);
-  const [distributingMachineId, setDistributingMachineId] = useState("none");
+  // const [distributingMachineId, setDistributingMachineId] = useState("none");
+  const distributingMachineId = useState("none");
   const [showMachineDistributeModal, setShowMachineDistributeModal] =
     useState(false);
   const [newArivalsModal, setNewArivalsModal] = useState(false);
@@ -130,7 +131,7 @@ const MachinesList = () => {
     }
   };
 
-  const deletemachine = async (_id, serialNumber) => {
+  const deletemachine = async (_id) => {
     // e.preventDefault();
     try {
       Swal.fire({

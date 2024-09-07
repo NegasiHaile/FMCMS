@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { GlobalState } from "../../../GlobalState";
@@ -19,7 +20,7 @@ import {
   CTooltip,
 } from "@coreui/react";
 import { getConfig } from "../../../config";
-function MachinePickUp({ user, salesDetail, pickupType, pickupId }) {
+function MachinePickUp({ user, salesDetail, pickupId }) {
   const pickupDetail = {
     branchId: user.branch,
     salesId: salesDetail.saleId,

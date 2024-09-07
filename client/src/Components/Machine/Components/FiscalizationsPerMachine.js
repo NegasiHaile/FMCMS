@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useContext, useState, useEffect } from "react";
 import { GlobalState } from "../../../GlobalState";
 import BadRouting from "../../Utils/routing/BadRouting";
@@ -13,7 +14,6 @@ import CIcon from "@coreui/icons-react";
 
 function FiscalizationsPerMachine({ machineId }) {
   const state = useContext(GlobalState);
-  const [user] = state.UserAPI.User;
   const [Sales] = state.SalesAPI.Sales;
   const [fsclz_per_machine, setFsclz_per_machine] = useState([]);
 

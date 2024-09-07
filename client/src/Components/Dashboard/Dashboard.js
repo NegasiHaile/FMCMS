@@ -30,15 +30,7 @@ const BranchAdminDashboard = () => {
     }
     return workyears;
   };
-  const cahtappstyle = {
-    position: "fixed",
-    backgroundColor: "#999900",
-    border: "none",
-    borderRadius: "50px",
-    right: "5px",
-    bottom: "50px",
-    zIndex: "1",
-  };
+
   // const chaticonstyle = {
   //   padding: "0px 11px",
   //   color: "#fff",

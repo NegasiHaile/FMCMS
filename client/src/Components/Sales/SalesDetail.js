@@ -26,7 +26,6 @@ function SalesDetail() {
         (filteredSale) => filteredSale.saleId === params.id
       );
       setSalesDetail(sale);
-    } else {
     }
   }, [params.id, Sales]);
 

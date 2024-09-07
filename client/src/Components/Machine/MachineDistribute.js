@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { GlobalState } from "../../GlobalState";
 import {
@@ -103,7 +103,7 @@ const MachineDistribute = () => {
                   </CSelect>
                   <small className="text-muted">
                     If the machine is not in the above list it may be
-                    distributed or it's problem status is damaged!
+                    distributed or it is problem status is damaged!
                   </small>
                 </CFormGroup>
               </CCol>
@@ -132,7 +132,7 @@ const MachineDistribute = () => {
                   </CSelect>
                   <small className="text-muted">
                     If the business is not in the list above it may be assigned
-                    a mchine or you aren't accepted it yet!
+                    a mchine or you are not accepted it yet!
                   </small>
                 </CFormGroup>
               </CCol>

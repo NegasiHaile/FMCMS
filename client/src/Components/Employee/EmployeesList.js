@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 import { GlobalState } from "../../GlobalState";
 
-import Loader from "../Utils/Commons/Loader";
+// import Loader from "../Utils/Commons/Loader";
 import {
   CButton,
   CCard,

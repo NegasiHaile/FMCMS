@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useContext } from "react";
 import { GlobalState } from "../../../GlobalState";
 import { CButton } from "@coreui/react";
@@ -9,10 +10,9 @@ function PrintButton(props) {
     <>
       {user.userRole === "customer-service" ? (
         <CButton
-          className="mr-2"
+          className="mr-2 jptr-btn"
           size="sm"
           onClick={props.handlePrint}
-          className="jptr-btn"
         >
           <CIcon name="cil-print"></CIcon> Print this out!
         </CButton>
