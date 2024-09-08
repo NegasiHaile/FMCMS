@@ -27,13 +27,20 @@ const WidgetsDropdown = (props) => {
   const height70 = {
     height: "70px",
   };
+
+  console.log("props:", props);
+  console.log("allMRCs:", allMRCs.length);
+  console.log("allSIMCards:", allSIMCards.length);
+  console.log("allMachines:", allMachines.length);
+
+  const isUserBranchSpecific = props.branchId && props.branchId !== "none";
   // render
   return (
     <CRow>
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           style={bgC8884D8}
-          header={(props.branchId
+          header={(isUserBranchSpecific
             ? allMachines.filter((machine) => machine.branch === props.branchId)
                 .length
             : allMachines.length
@@ -65,7 +72,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>New Arrivals: </span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? allMachines.filter(
                         (machine) =>
                           machine.branch === props.branchId &&
@@ -83,7 +90,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>Unsold: </span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? allMachines.filter(
                         (machine) =>
                           machine.branch === props.branchId &&
@@ -100,7 +107,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>Sold: </span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? allMachines.filter(
                         (machine) =>
                           machine.branch === props.branchId &&
@@ -118,7 +125,7 @@ const WidgetsDropdown = (props) => {
                 <span>Damaged: </span>{" "}
                 <span>
                   {" "}
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? allMachines.filter(
                         (machine) =>
                           machine.branch === props.branchId &&
@@ -136,7 +143,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>Maintainig: </span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? allMachines.filter(
                         (machine) =>
                           machine.branch === props.branchId &&
@@ -155,7 +162,7 @@ const WidgetsDropdown = (props) => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-info"
-          header={(props.branchId
+          header={(props.branchId && props.branchId !== "none"
             ? allMRCs.filter((MRC) => MRC.branch === props.branchId).length
             : allMRCs.length
           ).toString()}
@@ -187,7 +194,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>Free: </span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? allMRCs.filter(
                         (MRC) =>
                           MRC.branch === props.branchId && MRC.status === "free"
@@ -201,7 +208,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>Taken: </span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? allMRCs.filter(
                         (MRC) =>
                           MRC.branch === props.branchId &&
@@ -218,7 +225,7 @@ const WidgetsDropdown = (props) => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-warning"
-          header={(props.branchId
+          header={(props.branchId && props.branchId !== "none"
             ? allSIMCards.filter((SIMCard) => SIMCard.branch === props.branchId)
                 .length
             : allSIMCards.length
@@ -250,7 +257,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>New Arrivals: </span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? allSIMCards.filter(
                         (SIMCard) =>
                           SIMCard.branch === props.branchId &&
@@ -267,7 +274,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>Free: </span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? allSIMCards.filter(
                         (SIMCard) =>
                           SIMCard.branch === props.branchId &&
@@ -283,7 +290,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>Taken: </span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? allSIMCards.filter(
                         (SIMCard) =>
                           SIMCard.branch === props.branchId &&
@@ -300,7 +307,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>Discarded: </span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? allSIMCards.filter(
                         (SIMCard) =>
                           SIMCard.branch === props.branchId &&
@@ -319,7 +326,7 @@ const WidgetsDropdown = (props) => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-danger"
-          header={(props.branchId
+          header={(props.branchId && props.branchId !== "none"
             ? pickupMachines.filter(
                 (pickup) => pickup.branchId === props.branchId
               ).length
@@ -351,7 +358,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>Annual:</span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? pickupMachines.filter(
                         (pickup) =>
                           pickup.branchId === props.branchId &&
@@ -368,7 +375,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>Incident:</span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? pickupMachines.filter(
                         (pickup) =>
                           pickup.branchId === props.branchId &&
@@ -385,7 +392,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>Information Change: </span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? pickupMachines.filter(
                         (pickup) =>
                           pickup.branchId === props.branchId &&
@@ -406,7 +413,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>Widrawal: </span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? pickupMachines.filter(
                         (pickup) =>
                           pickup.branchId === props.branchId &&
@@ -423,7 +430,7 @@ const WidgetsDropdown = (props) => {
               >
                 <span>Temporary Store: </span>{" "}
                 <span>
-                  {props.branchId
+                  {isUserBranchSpecific
                     ? pickupMachines.filter(
                         (pickup) =>
                           pickup.branchId === props.branchId &&
