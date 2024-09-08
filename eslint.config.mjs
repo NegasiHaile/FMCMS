@@ -4,7 +4,7 @@ import pluginJs from "@eslint/js";
 export default [
   { files: ["**/*.js"], languageOptions: { sourceType: "commonjs" } },
   { languageOptions: { globals: globals.node } },
-  { ignores: ["client/"] },
+  { ignores: ["server.js", "client/"] },
   {
     rules: {
       "no-unused-vars": "warn",
