@@ -13,11 +13,7 @@ const PrivateFooter = () => {
       </div>
       <div className="mfs-auto">
         <span className="mr-1">Powered by</span>
-        <a
-          href="https://Horizontechict.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://demer.com" target="_blank" rel="noopener noreferrer">
           Demer solutions
         </a>
       </div>
