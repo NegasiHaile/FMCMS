@@ -166,10 +166,7 @@ const EmployeeList = () => {
         <CCardBody>
           <CDataTable
             size="sm"
-            items={employees.filter(
-              (user) =>
-                user.userRole !== "super-admin" && user.userRole !== "client"
-            )}
+            items={employees.filter((user) => user.userRole !== "client")}
             fields={employeeTableFields}
             tableFilter
             columnFilter
