@@ -11,5 +11,11 @@
       "src": "/routes/(.*)",
       "dest": "/routes/$1"
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "master": false,
+      "main": false
+    }
+  }
 }
