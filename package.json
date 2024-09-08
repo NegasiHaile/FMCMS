@@ -19,7 +19,7 @@
     "lint-all": "concurrently \"npm run lint\" \"npm run lint-client\""
   },
   "keywords": [],
-  "author": "HorizonTech",
+  "author": "Demer",
   "license": "ISC",
   "dependencies": {
     "all": "0.0.0",
