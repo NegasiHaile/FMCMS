@@ -28,11 +28,6 @@ const WidgetsDropdown = (props) => {
     height: "70px",
   };
 
-  console.log("props:", props);
-  console.log("allMRCs:", allMRCs.length);
-  console.log("allSIMCards:", allSIMCards.length);
-  console.log("allMachines:", allMachines.length);
-
   const isUserBranchSpecific = props.branchId && props.branchId !== "none";
   // render
   return (
