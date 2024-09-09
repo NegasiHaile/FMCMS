@@ -12,6 +12,7 @@
     "client": "cd client && npm run start",
     "server-install": "npm install",
     "client-install": "cd client && npm install",
+    "client-test": "cd client && npm run test",
     "install-all": "concurrently \"npm run server-install\" \"npm run client-install\"",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "lint": "eslint .",
