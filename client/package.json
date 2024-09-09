@@ -40,12 +40,13 @@
     "auto-changelog": "~2.2.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.35.2",
-    "globals": "^15.9.0"
+    "globals": "^15.9.0",
+    "jest": "^27.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "eject": "react-scripts eject",
