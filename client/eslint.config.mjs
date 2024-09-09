@@ -7,11 +7,6 @@ export default [
   { languageOptions: { globals: globals.browser } },
   { ignores: ["src/config.js", "src/serviceWorker.js"] },
   {
-    env: {
-      jest: true,
-    },
-  },
-  {
     rules: {
       "no-unused-vars": "warn",
       "no-undef": "error",
